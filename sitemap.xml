@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://hsuchihting.github.io/Practice-Note/20200106/1702288669/</loc>
+    
+    <lastmod>2020-01-06T11:21:20.522Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://hsuchihting.github.io/Practice-Note/20191227/3911274210/</loc>
     
-    <lastmod>2019-12-27T08:47:00.131Z</lastmod>
+    <lastmod>2020-01-06T11:03:35.585Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hsuchihting.github.io/Powershell/20191225/611397980/</loc>
+    
+    <lastmod>2020-01-06T11:02:55.197Z</lastmod>
     
   </url>
   
@@ -12,13 +26,6 @@
     <loc>https://hsuchihting.github.io/hexo/20191217/1291925723/</loc>
     
     <lastmod>2019-12-26T16:48:51.536Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hsuchihting.github.io/Powershell/20191225/611397980/</loc>
-    
-    <lastmod>2019-12-26T16:48:47.259Z</lastmod>
     
   </url>
   
