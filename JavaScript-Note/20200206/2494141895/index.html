@@ -57,7 +57,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JS1-1.png?alt&#x3D;media&amp;token&#x3D;95974db7-9979-4a3c-83d2-25fe0e218cc6">
 <meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JS%201-2.png?alt&#x3D;media&amp;token&#x3D;72be0bdf-22b2-472f-b5df-0344b8ffea64">
 <meta property="article:published_time" content="2020-02-06T06:27:04.000Z">
-<meta property="article:modified_time" content="2020-02-08T13:26:59.214Z">
+<meta property="article:modified_time" content="2020-02-08T15:24:27.800Z">
 <meta property="article:author" content="Tim">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
@@ -250,7 +250,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-02-08 21:26:59" itemprop="dateModified" datetime="2020-02-08T21:26:59+08:00">2020-02-08</time>
+                <time title="修改時間：2020-02-08 23:24:27" itemprop="dateModified" datetime="2020-02-08T23:24:27+08:00">2020-02-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -309,16 +309,16 @@
 <h2 id="textContent-的作法"><a href="#textContent-的作法" class="headerlink" title="textContent 的作法"></a>textContent 的作法</h2><p>要用 JS 控制網頁的文字，有一個 <code>textContent</code> 的語法，而這個語法編寫如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.getElementById(&#39;title1&#39;).textContent &#x3D; &#39;Hello World&#39;;</span><br></pre></td></tr></table></figure>
 
-<p>白話文解釋：<strong>網頁主體(document)</strong>，宣告用 <strong>使用 id 元件(getElementById)</strong> 加上設定的 <strong>id名稱</strong> 將原本的文字，使用 <strong>文字內容(textContent)</strong> 的語法變成 <strong>指定文字(這裡是寫 Hello World)</strong></p>
+<p>白話文解釋：<strong>網頁主體( document )</strong>，宣告用 <strong>使用 id 元件( getElementById )</strong> 加上設定的 <strong>id 名稱</strong> 將原本的文字，使用 <strong>文字內容( textContent )</strong> 的語法變成 <strong>指定文字(這裡是寫 Hello World )</strong></p>
 <p>不過這邊有一個地方要注意，如果把 <code>&lt;script&gt;</code> 標籤寫在 head 裡面的時候，會發現網頁不會有效果，反而一直停在原本的寫的畫面。然後打開 Chrome 檢查會看到 console 裡面會顯示下圖：</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JS1-1.png?alt=media&token=95974db7-9979-4a3c-83d2-25fe0e218cc6" alt="把 `&lt;script&gt;` 標籤寫在 `header` 時，console 會跳錯"></p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JS1-1.png?alt=media&token=95974db7-9979-4a3c-83d2-25fe0e218cc6" alt="把 `&lt;script&gt;` 標籤寫在 `header` 時，`console` 會跳錯"></p>
 <p>原因是網頁是從上往下閱讀，但如果發現在 head 就讀到 <code>&lt;script&gt;</code> 標籤時，因為找不到內容而無法順利顯示 JS ，所以常常會把 JS 寫在最後面就是這個原因。</p>
 <p><strong>原本 HTML 程式碼如下：</strong></p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>JavaScript practice Day1<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span> <span class="attr">id</span>=<span class="string">"title1"</span>&gt;</span>This is Title<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/all.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>正常來說畫面應該會是下圖所示：</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JS%201-2.png?alt=media&token=72be0bdf-22b2-472f-b5df-0344b8ffea64" alt="通常會讓程式碼讀取完後，再跑 script 指令"></p>
-<p>可以點一下<a href="http://https://codepen.io/hnzxewqw/pen/OJJraKe" target="_blank" rel="noopener">這裡</a>把 JS 的註解打開，然後重新整理就會看到透過 JS 就把原本的文字：This is Title，變成：Hello World 囉~!!</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JS%201-2.png?alt=media&token=72be0bdf-22b2-472f-b5df-0344b8ffea64" alt="通常會讓程式碼讀取完後，再跑 `script` 指令"></p>
+<p>可以點一下<a href="http://https://codepen.io/hnzxewqw/pen/OJJraKe" target="_blank" rel="noopener">這裡</a>把 JS 的註解打開，然後重新整理就會看到透過 JS 就把原本的文字：<strong>This is Title</strong>，變成：<strong>Hello World</strong> 囉~!!</p>
 <p>文獻參考<br> <a href="https://zh.wikipedia.org/wiki/JavaScript#%E8%82%87%E5%A7%8B%E6%96%BC%E7%B6%B2%E6%99%AF" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/JavaScript#%E8%82%87%E5%A7%8B%E6%96%BC%E7%B6%B2%E6%99%AF</a></p>
 
     </div>

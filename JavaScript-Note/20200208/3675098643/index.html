@@ -59,7 +59,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;2-3.png?alt&#x3D;media&amp;token&#x3D;45dd0919-fe5e-4f2c-b724-be5d7d4a177a">
 <meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;2-4.png?alt&#x3D;media&amp;token&#x3D;1a3b1b87-7226-4b1f-8b69-c43e5ce155b0">
 <meta property="article:published_time" content="2020-02-08T13:11:42.000Z">
-<meta property="article:modified_time" content="2020-02-08T13:26:48.194Z">
+<meta property="article:modified_time" content="2020-02-08T15:35:34.340Z">
 <meta property="article:author" content="Tim">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
@@ -246,7 +246,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2020-02-08 21:11:42 / 修改時間：21:26:48" itemprop="dateCreated datePublished" datetime="2020-02-08T21:11:42+08:00">2020-02-08</time>
+              <time title="創建時間：2020-02-08 21:11:42 / 修改時間：23:35:34" itemprop="dateCreated datePublished" datetime="2020-02-08T21:11:42+08:00">2020-02-08</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -275,8 +275,7 @@
         <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JavaScript%20note-01.jpg?alt=media&token=7bee0261-72ac-4de4-9f5a-f39d58735b7d" alt="JavaScript Note"></p>
 <p>在學習 JavaScript 之前，都會聽到一堆專有名詞，結果專有名詞的白話文還是聽不懂，就覺得很可怕，心中產生排斥，但我發現如果心中產生排斥感，就會稍微拒絕學習該領域的東西，經過 HTML &amp; CSS、jQuery、RWD、Sass、Bootstrap4…等課程後，就比較沒這麼排斥這些「專有名詞」，這幾個月在前端領域中不斷的蒐集資料，也慢慢知道幾位大神級人物，這次的學習也有參考 Kuro 大大的在 <a href="http://https://ithelp.ithome.com.tw/users/20065504/ironman/1259" target="_blank" rel="noopener">2018 鐵人賽</a>撰寫成<a href="http://https://www.tenlong.com.tw/products/9789864344130" target="_blank" rel="noopener">書籍</a>的內容搭配<a href="http://https://www.hexschool.com/" target="_blank" rel="noopener">六角學院</a>的<a href="http://https://www.hexschool.com/courses/javascript.html" target="_blank" rel="noopener">課程</a>來看，廣度學習下，比較能知道課程跟書本內容在講什麼了。</p>
 <h2 id="認識變數-Variable"><a href="#認識變數-Variable" class="headerlink" title="認識變數 Variable"></a>認識變數 Variable</h2><p>簡單來說變數是用來儲存資料和進行運算的基本單位，可以將變數想像為一個盒子，用來存放資料。<br>更多詳盡的定義可以看<a href="http://https://ithelp.ithome.com.tw/articles/10190873" target="_blank" rel="noopener">這篇</a></p>
-<h2 id="使用變數"><a href="#使用變數" class="headerlink" title="使用變數"></a>使用變數</h2><hr>
-<p>使用變數時，需要先使用 <code>var</code> 這個語法，告訴電腦說：我現在要宣告一個變數囉!!<br>再來打上想要的<strong>變數名稱</strong>，就會變成這樣 <code>var varName</code>。</p>
+<h2 id="使用變數"><a href="#使用變數" class="headerlink" title="使用變數"></a>使用變數</h2><p>使用變數時，需要先使用 <code>var</code> 這個語法，告訴電腦說：我現在要宣告一個變數囉!!<br>再來打上想要的<strong>變數名稱</strong>，就會變成這樣 <code>var varName</code>。</p>
 <blockquote>
 <p>EX. </p>
 <ol>
@@ -288,25 +287,40 @@
 <blockquote>
 <p><em>通常使用變數會在 HTML 中會建立一個 id 來使用。</em></p>
 </blockquote>
-<h2 id="變數的值"><a href="#變數的值" class="headerlink" title="變數的值"></a>變數的值</h2><hr>
-<p>宣告要使用變數，還有命名之後，要給變數一個值，電腦才會知道這個變數的內容是什麼，呈現的內容稱作為<strong>值</strong>：</p>
+<h2 id="變數的值"><a href="#變數的值" class="headerlink" title="變數的值"></a>變數的值</h2><p>宣告要使用變數，還有命名之後，要給變數一個值，電腦才會知道這個變數的內容是什麼，呈現的內容稱作為<strong>值</strong>：</p>
 <h3 id="Number-數字"><a href="#Number-數字" class="headerlink" title="Number (數字)"></a>Number (數字)</h3><p>也就是一般的數字 <strong>0 ~ 9</strong></p>
 <blockquote>
-<p>沿用上方例子，<code>var number = 8;</code>,文字解釋為，宣告一個變數，其名稱為 number，數字值為 8。<br>可參考連結 <a href="https://codepen.io/hnzxewqw/pen/abbXXmX" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/abbXXmX</a></p>
+<p>沿用上方例子，<code>var number = 8;</code>,文字解釋為，宣告一個變數，其名稱為 number，數字值為 8。</p>
+</blockquote>
+<p>可以使用這段語法將變數名稱呈現在網頁上</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> number = <span class="number">8</span></span><br><span class="line"><span class="comment">//建立變數</span></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'number'</span>).textContent = number</span><br><span class="line"><span class="comment">//透過 textContent 控制 id 的內容，結果要等於變數名稱</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>可參考連結 <a href="https://codepen.io/hnzxewqw/pen/abbXXmX" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/abbXXmX</a></p>
 </blockquote>
 <p><em>對了，可以用變數來做加減乘除喔~</em></p>
 <h3 id="String-字串"><a href="#String-字串" class="headerlink" title="String (字串)"></a>String (字串)</h3><p>也就是文字，打中文也可以，但<strong>建議打英文</strong>，不然如果專案是國際專案，會變成亂碼。<br>打字串的時候要加上<strong>單引號</strong>或<strong>雙引號</strong>，不然電腦會不知道這個值是什麼。</p>
 <blockquote>
-<p>沿用上方例子，<code>var myName = &quot;Tim&quot;;</code>,文字解釋為，宣告一個變數，其名稱為 myName，字串值為 Tim。<br>可參考連結 <a href="https://codepen.io/hnzxewqw/pen/qBBggaG" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/qBBggaG</a></p>
+<p>沿用上方例子，<code>var myName = &quot;Tim&quot;;</code>,文字解釋為，宣告一個變數，其名稱為 myName，字串值為 Tim。</p>
+</blockquote>
+<p>可以使用這段語法將變數名稱呈現在網頁上</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myName = <span class="string">"Tim"</span>;</span><br><span class="line"><span class="comment">//建立變數，字串值要加上引號</span></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'myName'</span>).textContent = myName</span><br><span class="line"><span class="comment">//透過 textContent 控制 id 的內容，結果要等於變數名稱</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>可參考連結 <a href="https://codepen.io/hnzxewqw/pen/qBBggaG" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/qBBggaG</a></p>
 </blockquote>
 <h3 id="Boolean-布林"><a href="#Boolean-布林" class="headerlink" title="Boolean (布林)"></a>Boolean (布林)</h3><p>只有兩種值，true 跟 false</p>
 <blockquote>
 <p>可參考連結 <a href="https://codepen.io/hnzxewqw/pen/OJJddpb" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/OJJddpb</a></p>
 </blockquote>
-<h2 id="什麼是-undefined"><a href="#什麼是-undefined" class="headerlink" title="什麼是 undefined"></a>什麼是 undefined</h2><hr>
-<p>還沒有給變數數值的時候會顯示的回傳資料，如果程式碼這樣寫：<code>var number;</code><br>因為沒有給任何定義的數值，所以會回傳 undefined。</p>
-<h2 id="變數的命名規則"><a href="#變數的命名規則" class="headerlink" title="變數的命名規則"></a>變數的命名規則</h2><hr>
-<h3 id="開頭不能用數字"><a href="#開頭不能用數字" class="headerlink" title="開頭不能用數字"></a>開頭不能用數字</h3><p>宣告變數的名稱若開頭數字，會格式錯誤，如下圖：</p>
+<p><em>之後使用  if 判斷式會滿常被使用</em></p>
+<h2 id="什麼是-undefined"><a href="#什麼是-undefined" class="headerlink" title="什麼是 undefined"></a>什麼是 undefined</h2><p>還沒有給變數數值的時候會顯示的回傳資料，如果程式碼這樣寫：<code>var number;</code><br>因為沒有給任何定義的數值，所以會回傳 undefined。<br>舉例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> number;</span><br><span class="line"><span class="comment">//沒有給值，所以會是 undefined</span></span><br></pre></td></tr></table></figure>
+<p>或是這樣也是一樣的結果</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(number); <span class="comment">//因為前面沒有變數的值，結果會是 undefined</span></span><br><span class="line"><span class="keyword">var</span> number = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="變數的命名規則"><a href="#變數的命名規則" class="headerlink" title="變數的命名規則"></a>變數的命名規則</h2><h3 id="開頭不能用數字"><a href="#開頭不能用數字" class="headerlink" title="開頭不能用數字"></a>開頭不能用數字</h3><p>宣告變數的名稱若開頭數字，會格式錯誤，如下圖：</p>
 <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/2-1.png?alt=media&token=1446ae99-7b7e-498e-903a-2baa4636fa75" alt="開頭不能用數字"></p>
 <h3 id="不能包含-或是-等符號"><a href="#不能包含-或是-等符號" class="headerlink" title="不能包含 - 或是 . 等符號"></a>不能包含 - 或是 . 等符號</h3><p>宣告變數的名稱若使用 “-“ 或 “.”，會格式錯誤，如下圖：</p>
 <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/2-2.png?alt=media&token=ead6b977-c4c7-4c55-a8e5-90059331a700" alt="不能包含 - 或是 . 等符號"></p>
