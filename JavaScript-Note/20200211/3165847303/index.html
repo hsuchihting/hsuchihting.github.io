@@ -46,21 +46,22 @@
   };
 </script>
 
-  <meta name="description" content="提姆的前端筆記">
-<meta property="og:type" content="website">
-<meta property="og:title" content="TimCodingBlog">
-<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;tags&#x2F;HTML&#x2F;index.html">
+  <meta name="description" content="認識函式 function 與使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 筆記 - 認識函式 function 與使用">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;JavaScript-Note&#x2F;20200211&#x2F;3165847303&#x2F;index.html">
 <meta property="og:site_name" content="TimCodingBlog">
-<meta property="og:description" content="提姆的前端筆記">
+<meta property="og:description" content="認識函式 function 與使用">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
+<meta property="article:published_time" content="2020-02-11T08:32:14.000Z">
+<meta property="article:modified_time" content="2020-02-11T08:35:20.548Z">
 <meta property="article:author" content="Tim">
-<meta property="article:tag" content="TimCodingBlog">
-<meta property="article:tag" content=" 前端工程師">
-<meta property="article:tag" content=" Frond-end developer">
-<meta property="article:tag" content=" F2E">
+<meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
 
-<link rel="canonical" href="https://hsuchihting.github.io/tags/HTML/">
+<link rel="canonical" href="https://hsuchihting.github.io/JavaScript-Note/20200211/3165847303/">
 
 
 <script id="page-configurations">
@@ -68,11 +69,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false
+    isPost: true
   };
 </script>
 
-  <title>標籤: HTML | TimCodingBlog</title>
+  <title>JS 筆記 - 認識函式 function 與使用 | TimCodingBlog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
     <script>
@@ -212,73 +213,112 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">HTML
-          <small>標籤</small>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/JavaScript-Note/20200211/3165847303/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/tim.jpg">
+      <meta itemprop="name" content="Tim">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          JS 筆記 - 認識函式 function 與使用
         </h2>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-02-11 16:32:14 / 修改時間：16:35:20" itemprop="dateCreated datePublished" datetime="2020-02-11T16:32:14+08:00">2020-02-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript-Note/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript Note</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">認識函式 function 與使用</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h2 class="collection-header">2020</h2>
+        <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JavaScript%20note-01.jpg?alt=media&token=7bee0261-72ac-4de4-9f5a-f39d58735b7d" alt="JavaScript Note"></p>
+<p>到目前為止，發現 JS 的寫法非常直觀，跟 HTML 與 CSS 的思維不太一樣，之前學過一陣子 jQuery，會覺得思維模式有點不同，直觀卻又要很仔細，而且感受到<strong>電腦很笨</strong>，要一個口令一個動作，這次就要來學習如何告訴電腦我要的指令。</p>
+<hr>
+<h1 id="什麼是函式-funciton"><a href="#什麼是函式-funciton" class="headerlink" title="什麼是函式 funciton"></a>什麼是函式 funciton</h1><p>簡單來說「函式」指的是將一或多段程式指令包裝起來，可以重複使用，也方便維護。<a href="http://https://ithelp.ithome.com.tw/articles/10191549" target="_blank" rel="noopener">(參考來源)</a></p>
+<p>這邊我覺得有一個有趣的事情，英文 function 有<strong>功能</strong>的意思，也的確在撰寫的時候好像透過幾段程式指令告訴電腦我要做什麼，所以可能是因為這樣，被翻譯成函式吧!?<br><em>因為從小數學很爛，所以看到什麼 “式” 都會特別緊張</em></p>
+<hr>
+<h2 id="函式的寫法"><a href="#函式的寫法" class="headerlink" title="函式的寫法"></a>函式的寫法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">name</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用 function 做<strong>宣告</strong>，後面<strong>自定義</strong>一個名稱，加上<strong>小括弧</strong>(以後可以放參數用)，再把要寫入函式的程式碼用一個大括弧包起來</p>
+<hr>
+<h3 id="實際來寫一個練習："><a href="#實際來寫一個練習：" class="headerlink" title="實際來寫一個練習："></a>實際來寫一個練習：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">number</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Tim'</span>) <span class="comment">//字串要加引號</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">323</span>) <span class="comment">//數字不用加引號</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但這樣只是建立好一個函式而已，不會被執行，若要執行函式，要多寫一行程式碼，會如下呈現：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">number</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Tim'</span>) <span class="comment">//字串要加引號</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">323</span>) <span class="comment">//數字不用加引號  </span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">number(); <span class="comment">//執行函式</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>函式可以重複執行，如果要重複執行一樣的函式，只要再打上一樣的指令就可了，如下程式碼：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">number</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Tim'</span>) <span class="comment">//字串要加引號</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">323</span>) <span class="comment">//數字不用加引號    </span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">number(); <span class="comment">//執行函式</span></span><br><span class="line">number(); <span class="comment">//重複執行函式</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h3><p>function 函式可以當作設定好的功能，等需要執行的時候再找到做好的功能拿出來使用就可以囉！</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-01-06T18:46:20+08:00"
-              content="2020-01-06">
-          01-06
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
 
-      <h3 class="post-title">
-          <a class="post-title-link" href="/Practice-Note/20200106/1702288669/" itemprop="url">
-            <span itemprop="name">寫一個 search bar</span>
-          </a>
-      </h3>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/JavaScript-Note/20200208/3675098643/" rel="prev" title="JS 筆記 - 認識變數 variable 與使用方法">
+      <i class="fa fa-chevron-left"></i> JS 筆記 - 認識變數 variable 與使用方法
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
   </article>
-    <div class="collection-year">
-      <h2 class="collection-header">2019</h2>
-    </div>
+  
+  
+  
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-12-27T16:12:54+08:00"
-              content="2019-12-27">
-          12-27
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/Practice-Note/20191227/3911274210/" itemprop="url">
-            <span itemprop="name">Todolist 練習筆記</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-    </div>
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
@@ -329,6 +369,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什麼是函式-funciton"><span class="nav-number">1.</span> <span class="nav-text">什麼是函式 funciton</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函式的寫法"><span class="nav-number">1.1.</span> <span class="nav-text">函式的寫法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#實際來寫一個練習："><span class="nav-number">1.1.1.</span> <span class="nav-text">實際來寫一個練習：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#心得"><span class="nav-number">1.1.2.</span> <span class="nav-text">心得</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
