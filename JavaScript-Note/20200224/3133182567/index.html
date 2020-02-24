@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="全域變數與區域變數">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 筆記 - 全域變數與區域變數">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;JavaScript-Note&#x2F;20200224&#x2F;3133182567&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="全域變數與區域變數">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JS5-1.png?alt&#x3D;media&amp;token&#x3D;f24b0d8d-0249-441b-b21d-3eecf623056c">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JS5-2.png?alt&#x3D;media&amp;token&#x3D;ccaee45f-ba98-44af-8b9f-b0a67451fb70">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JS5-3.png?alt&#x3D;media&amp;token&#x3D;e0284e6d-6f47-4b05-989d-6f1d3ee815ab">
+<meta property="article:published_time" content="2020-02-24T05:48:38.000Z">
+<meta property="article:modified_time" content="2020-02-24T05:59:54.174Z">
+<meta property="article:author" content="Tim">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
+
+<link rel="canonical" href="https://hsuchihting.github.io/JavaScript-Note/20200224/3133182567/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>JS 筆記 - 全域變數與區域變數 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/JavaScript-Note/20200224/3133182567/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/tim.jpg">
+      <meta itemprop="name" content="Tim">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          JS 筆記 - 全域變數與區域變數
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-02-24 13:48:38 / 修改時間：13:59:54" itemprop="dateCreated datePublished" datetime="2020-02-24T13:48:38+08:00">2020-02-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript-Note/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript Note</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">全域變數與區域變數</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JavaScript%20note-01.jpg?alt=media&token=7bee0261-72ac-4de4-9f5a-f39d58735b7d" alt="JavaScript Note"></p>
+<p>初學者記法：變數簡單分成兩種，一種在<strong>函式內</strong>、一種在<strong>函式外</strong>，聽起來簡單，但觀念大不同，來紀錄一下。</p>
+<h2 id="區域變數"><a href="#區域變數" class="headerlink" title="區域變數"></a>區域變數</h2><p>簡單來說就是在函式內的變數，函式是這樣寫的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fName</span>(<span class="params">aName</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> number = aName *<span class="number">10</span>; <span class="comment">//區域變數</span></span><br><span class="line">  <span class="built_in">console</span>.log(number); <span class="comment">//驗證變數</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fName(); <span class="comment">//沒有輸入參數，執行函式</span></span><br></pre></td></tr></table></figure>
+
+<p>上面的寫法會得到的結果是 NaN，因為並沒有帶入其他參數，所以找不到任何的值。</p>
+<p>如果參數帶入 10，會變成這樣寫：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fName</span>(<span class="params">aName</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> number = aName * <span class="number">10</span>; <span class="comment">//區域變數</span></span><br><span class="line">  <span class="built_in">console</span>.log(number); <span class="comment">//驗證變數</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fName(<span class="number">10</span>); <span class="comment">//帶入參數，執行函式</span></span><br></pre></td></tr></table></figure>
+
+<p>執行函式的帶入<strong>參數</strong>後，會帶到<strong>區域變數</strong>，驗證結果會變成 100。</p>
+<p>※區域變數會在執行之後<strong>自動銷毀</strong>，並<strong>同步釋放記憶體</strong>，以免瀏覽器跑很慢，讓使用者體驗不佳。</p>
+<hr>
+<p>以上為原則，但有原則就會有例外，</p>
+<h3 id="狀況：開發中也會遇到需要抓之前的變數"><a href="#狀況：開發中也會遇到需要抓之前的變數" class="headerlink" title="狀況：開發中也會遇到需要抓之前的變數"></a>狀況：開發中也會遇到需要抓之前的變數</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fName</span>(<span class="params">aName</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> number = aName * <span class="number">10</span>; <span class="comment">//區域變數</span></span><br><span class="line">  <span class="built_in">console</span>.log(number); <span class="comment">//驗證變數</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fName(<span class="number">10</span>); <span class="comment">//帶入參數，執行函式</span></span><br><span class="line"><span class="built_in">console</span>.log(number)</span><br></pre></td></tr></table></figure>
+
+<p>這時候 Chrome 開發工具就會顯示下圖：</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JS5-1.png?alt=media&token=f24b0d8d-0249-441b-b21d-3eecf623056c" alt="區域變數"></p>
+<p>告訴我們抓不到數值，原因是上述提到，區域變數執行結束後會自動銷毀，然後這邊我記錄的是，<strong>在執行 console.log 的時候，上面一定要是宣告變數了才能驗證，不然會沒有結果。*</strong>(目前學到的概念是這樣，若有誤還請指正或未來修正)*</p>
+<hr>
+<p>但開發中遇到的狀況絕不會這麼單純，如果仍然要設定一個變數值，在區域變數外抓取的話可以這樣寫：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> number</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fName</span>(<span class="params">aName</span>) </span>&#123;</span><br><span class="line">  number = <span class="number">10</span>; <span class="comment">//區域變數</span></span><br><span class="line">  <span class="built_in">console</span>.log(number); <span class="comment">//驗證變數</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fName(); <span class="comment">//執行函式</span></span><br><span class="line"><span class="built_in">console</span>.log(number);</span><br></pre></td></tr></table></figure>
+
+<p>在區域函數外新增一個 var 變數(全域變數)，當最後面的 console.log 執行變數驗證時，它會回去區域變數找到變數的設定值，在套進外面的 console.log 內。<br>得到的畫面如下圖：</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JS5-2.png?alt=media&token=ccaee45f-ba98-44af-8b9f-b0a67451fb70" alt="找外面的全域變數"></p>
+<hr>
+<h2 id="全域變數"><a href="#全域變數" class="headerlink" title="全域變數"></a>全域變數</h2><p>簡單來說是在區域變數外的就是叫做全域變數，不過也有參考 <a href="http://https://ithelp.ithome.com.tw/articles/10191549" target="_blank" rel="noopener">Kuro 老師的說法</a>：</p>
+<blockquote>
+<p>在 JavaScript 這門語言中，沒有所謂「全域變數」這種東西。更準確地說，我們所說的「全域變數」其實指的是「全域物件」(或者叫「頂層物件」) 的屬性。以瀏覽器來說，「全域物件」指的就是 <code>window</code>。</p>
+</blockquote>
+<p>這個說法更精準也更正確。</p>
+<p><strong>練習一個全域變數的函式：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> number; <span class="comment">//全域變數，沒有給予數值</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fName</span>(<span class="params">aName</span>) </span>&#123;</span><br><span class="line">  number = aName + <span class="number">1</span>; <span class="comment">//區域變數</span></span><br><span class="line">  <span class="built_in">console</span>.log(number); <span class="comment">//驗證變數</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fName(<span class="number">10</span>); <span class="comment">//執行函式</span></span><br><span class="line"><span class="built_in">console</span>.log(number);</span><br></pre></td></tr></table></figure>
+
+<p>設定一個全域變數在<strong>最外面</strong>，前面提到在區域變數執行後會註銷該變數效果，但這次裡面的區域變數把 <code>var</code> 變數宣告拿掉，這時他會去抓取執行函式裡面的參數值，在讓全域變數去找到區域變數所套入的數值，在 Chrome 開發工具就會顯示如下圖：</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JS5-3.png?alt=media&token=e0284e6d-6f47-4b05-989d-6f1d3ee815ab" alt="全域變數"></p>
+<p>引用 Kuro 老師的文章有彙整以下結論：</p>
+<blockquote>
+<h3 id="什麼叫做全域物件的「屬性」呢？"><a href="#什麼叫做全域物件的「屬性」呢？" class="headerlink" title="什麼叫做全域物件的「屬性」呢？"></a>什麼叫做全域物件的「屬性」呢？</h3></blockquote>
+<blockquote>
+<p>舉個例子，我們在最外層透過 var 建立一個變數 a，像這樣：</p>
+<p><code>var a = 10;</code><br>一直以來我們都稱它叫「全域變數」對吧？<br>這個時候，請你在後面加一行：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="built_in">console</span>.log( <span class="built_in">window</span>.a );    <span class="comment">// ?</span></span><br></pre></td></tr></table></figure>
+<p>看到了什麼？<br>這時你應該會看到剛剛指定給 a 的 10 這個數字才對。</p>
+<p>那麼就可以來下個結論：</p>
+<p>變數有效範圍 (<code>scope</code>) 的最小切分單位是 <code>function</code> (ES6 的 <code>let</code> 與 <code>const</code> 例外)<br>即使是寫在函式內，沒有 var 的變數會變成「全域變數」<br>全域變數指的是全域物件 (頂層物件) 的「屬性」</p>
+</blockquote>
+<hr>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><ol>
+<li>區域變數與全域變數的觀念要弄清楚，不然後面真的會學得很痛苦。JavaScript 有太多名稱要去記，當然不是死背，但需要一一消化跟了解。</li>
+<li>Chrome 的開發工具真的很貼心，都會顯示程式碼哪裡有錯誤，就不用很辛苦的慢慢去看程式碼。</li>
+</ol>
+<p>參考文章 <a href="https://ithelp.ithome.com.tw/articles/10191549" target="_blank" rel="noopener">https://ithelp.ithome.com.tw/articles/10191549</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/JavaScript-Note/20200218/2420857626/" rel="prev" title="JS 筆記 - 在函式 function 加入參數">
+      <i class="fa fa-chevron-left"></i> JS 筆記 - 在函式 function 加入參數
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#區域變數"><span class="nav-number">1.</span> <span class="nav-text">區域變數</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#狀況：開發中也會遇到需要抓之前的變數"><span class="nav-number">1.1.</span> <span class="nav-text">狀況：開發中也會遇到需要抓之前的變數</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全域變數"><span class="nav-number">2.</span> <span class="nav-text">全域變數</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什麼叫做全域物件的「屬性」呢？"><span class="nav-number">2.1.</span> <span class="nav-text">什麼叫做全域物件的「屬性」呢？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#心得"><span class="nav-number">3.</span> <span class="nav-text">心得</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim"
+      src="/images/tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hsiangfeng.github.io/" title="https:&#x2F;&#x2F;hsiangfeng.github.io&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tim</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
