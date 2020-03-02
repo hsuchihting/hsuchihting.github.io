@@ -46,21 +46,22 @@
   };
 </script>
 
-  <meta name="description" content="提姆的前端筆記">
-<meta property="og:type" content="website">
-<meta property="og:title" content="TimCodingBlog">
-<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;categories&#x2F;JavaScript-Note&#x2F;index.html">
+  <meta name="description" content="什麼是 return?">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 筆記 - 函式 function 搭配 return">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;JavaScript-Note&#x2F;20200302&#x2F;3851113860&#x2F;index.html">
 <meta property="og:site_name" content="TimCodingBlog">
-<meta property="og:description" content="提姆的前端筆記">
+<meta property="og:description" content="什麼是 return?">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
+<meta property="article:published_time" content="2020-03-02T14:49:39.000Z">
+<meta property="article:modified_time" content="2020-03-02T14:54:27.363Z">
 <meta property="article:author" content="Tim">
-<meta property="article:tag" content="TimCodingBlog">
-<meta property="article:tag" content=" 前端工程師">
-<meta property="article:tag" content=" Frond-end developer">
-<meta property="article:tag" content=" F2E">
+<meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
 
-<link rel="canonical" href="https://hsuchihting.github.io/categories/JavaScript-Note/">
+<link rel="canonical" href="https://hsuchihting.github.io/JavaScript-Note/20200302/3851113860/">
 
 
 <script id="page-configurations">
@@ -68,11 +69,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false
+    isPost: true
   };
 </script>
 
-  <title>分類: JavaScript Note | TimCodingBlog</title>
+  <title>JS 筆記 - 函式 function 搭配 return | TimCodingBlog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
     <script>
@@ -212,150 +213,101 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">JavaScript Note
-          <small>分類</small>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/JavaScript-Note/20200302/3851113860/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2020Tim.jpg">
+      <meta itemprop="name" content="Tim">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          JS 筆記 - 函式 function 搭配 return
         </h2>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-03-02 22:49:39 / 修改時間：22:54:27" itemprop="dateCreated datePublished" datetime="2020-03-02T22:49:39+08:00">2020-03-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript-Note/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript Note</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">什麼是 return?</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h2 class="collection-header">2020</h2>
-    </div>
+        <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JavaScript%20note-01.jpg?alt=media&token=7bee0261-72ac-4de4-9f5a-f39d58735b7d" alt="JavaScript Note"></p>
+<blockquote>
+<p>函式 function 搭配 return 是一個常用且好用的小技巧。</p>
+</blockquote>
+<hr>
+<h2 id="return-回傳"><a href="#return-回傳" class="headerlink" title="return 回傳"></a>return 回傳</h2><p>透過 <code>return</code> 回傳的屬性，可以運算比較複雜的內容，當商品或是後台採購品項較多時，就不用一直打程式碼，前提是參數內的數值要同一個才可以，比如下方例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params">price</span>) </span>&#123; </span><br><span class="line">  <span class="keyword">return</span> addTax(price * <span class="number">0.8</span>); <span class="comment">// 商品價格要打八折時</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params">price</span>) </span>&#123; <span class="comment">// 當商品要開立發票時</span></span><br><span class="line">  <span class="keyword">return</span> addTax * <span class="number">1.05</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(count(<span class="number">500</span>);)</span><br><span class="line"><span class="comment">//return 會把 count 的參數 500，套回 function 中，會得到下面結果</span></span><br><span class="line"><span class="comment">// 500 * 0.8</span></span><br><span class="line"><span class="comment">// 500 * 1.05</span></span><br></pre></td></tr></table></figure>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-02T22:49:39+08:00"
-              content="2020-03-02">
-          03-02
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/JavaScript-Note/20200302/3851113860/" itemprop="url">
-            <span itemprop="name">JS 筆記 - 函式 function 搭配 return</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-02-24T13:48:38+08:00"
-              content="2020-02-24">
-          02-24
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/JavaScript-Note/20200224/3133182567/" itemprop="url">
-            <span itemprop="name">JS 筆記 - 全域變數與區域變數</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-02-18T16:12:38+08:00"
-              content="2020-02-18">
-          02-18
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/JavaScript-Note/20200218/2420857626/" itemprop="url">
-            <span itemprop="name">JS 筆記 - 在函式 function 加入參數</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-02-11T16:32:14+08:00"
-              content="2020-02-11">
-          02-11
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/JavaScript-Note/20200211/3165847303/" itemprop="url">
-            <span itemprop="name">JS 筆記 - 認識函式 function 與使用</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-02-08T21:11:42+08:00"
-              content="2020-02-08">
-          02-08
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/JavaScript-Note/20200208/3675098643/" itemprop="url">
-            <span itemprop="name">JS 筆記 - 認識變數 variable 與使用方法</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-02-06T14:27:04+08:00"
-              content="2020-02-06">
-          02-06
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/JavaScript-Note/20200206/2494141895/" itemprop="url">
-            <span itemprop="name">JS 筆記 - 建立 JS 環境、alert、textContent</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
+<p><code>return</code> 是幫助資料回傳的一個語法，讓 function 中的語法除了更簡潔外，也更可以提高程式碼閱讀性! 也可以透過判斷式的內容，讓 <code>return</code> 讓函式停止執行。</p>
 
     </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/JavaScript-Note/20200224/3133182567/" rel="prev" title="JS 筆記 - 全域變數與區域變數">
+      <i class="fa fa-chevron-left"></i> JS 筆記 - 全域變數與區域變數
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
@@ -406,6 +358,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#return-回傳"><span class="nav-number">1.</span> <span class="nav-text">return 回傳</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
