@@ -46,21 +46,23 @@
   };
 </script>
 
-  <meta name="description" content="提姆的前端筆記">
-<meta property="og:type" content="website">
-<meta property="og:title" content="TimCodingBlog">
-<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;archives&#x2F;2020&#x2F;index.html">
+  <meta name="description" content="生命週期是什麼啦!?">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue 筆記 - vue 的生命週期">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;vue-js-Note&#x2F;20200318&#x2F;1480837360&#x2F;index.html">
 <meta property="og:site_name" content="TimCodingBlog">
-<meta property="og:description" content="提姆的前端筆記">
+<meta property="og:description" content="生命週期是什麼啦!?">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vue_lifecycle_hooks.png?alt&#x3D;media&amp;token&#x3D;9cde8325-aa24-4714-994a-f088b67d102c">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;lifecycle.png?alt&#x3D;media&amp;token&#x3D;868328e3-92d1-4323-a80f-929beb4e2a9f">
+<meta property="article:published_time" content="2020-03-18T08:02:27.000Z">
+<meta property="article:modified_time" content="2020-03-18T08:04:58.088Z">
 <meta property="article:author" content="Tim">
-<meta property="article:tag" content="TimCodingBlog">
-<meta property="article:tag" content=" 前端工程師">
-<meta property="article:tag" content=" Frond-end developer">
-<meta property="article:tag" content=" F2E">
+<meta property="article:tag" content="vue.js">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vue_lifecycle_hooks.png?alt&#x3D;media&amp;token&#x3D;9cde8325-aa24-4714-994a-f088b67d102c">
 
-<link rel="canonical" href="https://hsuchihting.github.io/archives/2020/">
+<link rel="canonical" href="https://hsuchihting.github.io/vue-js-Note/20200318/1480837360/">
 
 
 <script id="page-configurations">
@@ -68,11 +70,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false
+    isPost: true
   };
 </script>
 
-  <title>歸檔 | TimCodingBlog</title>
+  <title>Vue 筆記 - vue 的生命週期 | TimCodingBlog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
     <script>
@@ -212,232 +214,135 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共有 15 篇文章。 繼續努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/vue-js-Note/20200318/1480837360/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2020Tim.jpg">
+      <meta itemprop="name" content="Tim">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          Vue 筆記 - vue 的生命週期
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-03-18 16:02:27 / 修改時間：16:04:58" itemprop="dateCreated datePublished" datetime="2020-03-18T16:02:27+08:00">2020-03-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue-js-Note/" itemprop="url" rel="index">
+                    <span itemprop="name">vue.js Note</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">生命週期是什麼啦!?</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h2 class="collection-header">2020</h2>
-    </div>
+        <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vue_lifecycle_hooks.png?alt=media&token=9cde8325-aa24-4714-994a-f088b67d102c" alt="vue lifecycle hooks"></p>
+<h2 id="何謂生命週期"><a href="#何謂生命週期" class="headerlink" title="何謂生命週期?"></a>何謂生命週期?</h2><blockquote>
+<p><strong>官方文件說明：</strong></p>
+<p>每個 Vue 實例在被創建時都要經過一系列的初始化過程——例如，需要設置數據監聽、編譯模板、將實例掛載到 DOM 並在數據變化時更新 DOM 等。同時在這個過程中也會運行一些叫做生命週期鉤子(hook)的<strong>函數</strong>，這給了用戶在不同階段添加自己的代碼的機會。</p>
+</blockquote>
+<p>當宣告一個 vue 實體後，會開始進入生命週期，下方說明圖可以得知分成幾個部分：</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/lifecycle.png?alt=media&token=868328e3-92d1-4323-a80f-929beb4e2a9f" alt="vue 官方生命週期圖片"></p>
+<ul>
+<li><p><strong>beforecreate</strong><br>元件實體剛被建立，屬性計算之前。</p>
+</li>
+<li><p><strong>created</strong><br>元件實體已經建立，屬性也綁定了，但 DOM 還沒有生成。</p>
+</li>
+<li><p><strong>beforeMount</strong><br>模板編譯 (template)或掛載至 HTML 之前。</p>
+</li>
+<li><p><strong>mounted</strong><br>模板編譯 (template)或掛載至 HTML 之後。</p>
+</li>
+<li><p><strong>beforeUpdate</strong><br>元件 (element) 被更新前。</p>
+</li>
+<li><p><strong>updated</strong><br>元件 (element) 被更新後。</p>
+</li>
+<li><p><strong>activated</strong></p>
+</li>
+<li><p><em>keep-alived*</em> 用，元件被<strong>啟動</strong>時呼叫。</p>
+</li>
+<li><p><strong>deactivated</strong></p>
+</li>
+<li><p><em>keep-alived*</em> 用，元件被<strong>移除</strong>時呼叫。</p>
+</li>
+<li><p><strong>beforeDistroy</strong><br>元件被銷毀前呼叫。</p>
+</li>
+<li><p><strong>destroyed</strong><br>元件被銷毀後呼叫。</p>
+</li>
+</ul>
+<blockquote>
+<p>beforeDistroy，destroyed 較少使用。</p>
+</blockquote>
+<p>以上它們的資料型態全都是 function。</p>
+<h2 id="常用的生命週期狀態"><a href="#常用的生命週期狀態" class="headerlink" title="常用的生命週期狀態"></a>常用的生命週期狀態</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">	el: <span class="string">'#app'</span>,</span><br><span class="line">	data: &#123;</span><br><span class="line">  <span class="comment">//資料選項</span></span><br><span class="line">	&#125;,</span><br><span class="line">	beforeCreate() &#123;</span><br><span class="line">	<span class="comment">//實體初始化。</span></span><br><span class="line">	&#125;,</span><br><span class="line">	created() &#123;</span><br><span class="line">	<span class="comment">//實體建立完成。資料 $data 已可取得，但 $el 屬性還未被建立。</span></span><br><span class="line">	&#125;,</span><br><span class="line">	beforeMount() &#123;</span><br><span class="line">	<span class="comment">//執行元素掛載之前。</span></span><br><span class="line">	&#125;,</span><br><span class="line">	mounted() &#123;</span><br><span class="line">	<span class="comment">//元素已掛載， $el 被建立。</span></span><br><span class="line">	&#125;,</span><br><span class="line">	beforeUpdate() &#123;</span><br><span class="line">	<span class="comment">//當資料變化時被呼叫，還不會描繪 View。</span></span><br><span class="line">	&#125;,</span><br><span class="line">	updated() &#123;</span><br><span class="line">	<span class="comment">//DOM 的更新已經完成，View 被顯示在畫面上。</span></span><br><span class="line">	&#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-18T16:02:27+08:00"
-              content="2020-03-18">
-          03-18
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/vue-js-Note/20200318/1480837360/" itemprop="url">
-            <span itemprop="name">Vue 筆記 - vue 的生命週期</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-18T13:38:01+08:00"
-              content="2020-03-18">
-          03-18
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/vue-js-Note/20200318/2845412352/" itemprop="url">
-            <span itemprop="name">Vue 筆記 - Vue 的實體與特性</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-17T16:33:21+08:00"
-              content="2020-03-17">
-          03-17
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/JavaScript-Note/20200317/144503038/" itemprop="url">
-            <span itemprop="name">JS 筆記 - ES6 功能：在 JavaScript 中快速組字串</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-16T21:20:43+08:00"
-              content="2020-03-16">
-          03-16
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/vue-js-Note/20200316/3744633474/" itemprop="url">
-            <span itemprop="name">Vue 筆記 - Vue 的基本認識與介紹</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-16T14:29:46+08:00"
-              content="2020-03-16">
-          03-16
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/JavaScript-Note/20200316/526717564/" itemprop="url">
-            <span itemprop="name">JS 筆記 - 利用函式 function 寫一個計算題</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-09T12:09:27+08:00"
-              content="2020-03-09">
-          03-09
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/JavaScript-Note/20200309/1212075218/" itemprop="url">
-            <span itemprop="name">JS 筆記 - function 函式 Hoisting 提升觀念</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-02T22:49:39+08:00"
-              content="2020-03-02">
-          03-02
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/JavaScript-Note/20200302/3851113860/" itemprop="url">
-            <span itemprop="name">JS 筆記 - 函式 function 搭配 return</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-02-24T13:48:38+08:00"
-              content="2020-02-24">
-          02-24
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/JavaScript-Note/20200224/3133182567/" itemprop="url">
-            <span itemprop="name">JS 筆記 - 全域變數與區域變數</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-02-18T16:12:38+08:00"
-              content="2020-02-18">
-          02-18
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/JavaScript-Note/20200218/2420857626/" itemprop="url">
-            <span itemprop="name">JS 筆記 - 在函式 function 加入參數</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-02-11T16:32:14+08:00"
-              content="2020-02-11">
-          02-11
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/JavaScript-Note/20200211/3165847303/" itemprop="url">
-            <span itemprop="name">JS 筆記 - 認識函式 function 與使用</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
+<p>參考資料:</p>
+<p><a href="https://cn.vuejs.org/v2/guide/instance.html#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA-Vue-%E5%AE%9E%E4%BE%8B" target="_blank" rel="noopener">vue 官網</a></p>
+<p><a href="http://blog.tonycube.com/2017/04/vuejs-8-lifecycle.html" target="_blank" rel="noopener">Vue.js (8) - Vue 實體與生命週期</a></p>
+<p><a href="https://medium.com/pierceshih/vue-js-%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-day14-vue%E7%94%9F%E5%91%BD%E9%80%B1%E6%9C%9F-65bc934dfd47" target="_blank" rel="noopener">「Vue.js 學習筆記 Day14」- Vue生命週期</a></p>
 
     </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/vue-js/" rel="tag"># vue.js</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/vue-js-Note/20200318/2845412352/" rel="prev" title="Vue 筆記 - Vue 的實體與特性">
+      <i class="fa fa-chevron-left"></i> Vue 筆記 - Vue 的實體與特性
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
   </div>
-  
-  
-  
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2020/page/2/">2</a><a class="extend next" rel="next" href="/archives/2020/page/2/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
-  </nav>
-
 
 
           </div>
@@ -488,6 +393,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#何謂生命週期"><span class="nav-number">1.</span> <span class="nav-text">何謂生命週期?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用的生命週期狀態"><span class="nav-number">2.</span> <span class="nav-text">常用的生命週期狀態</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
