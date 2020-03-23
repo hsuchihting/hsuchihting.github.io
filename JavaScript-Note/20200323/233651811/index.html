@@ -46,22 +46,22 @@
   };
 </script>
 
-  <meta name="description" content="function 函式 Hoisting 提升觀念">
+  <meta name="description" content="Array 陣列 的基本認識">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JS 筆記 - function 函式 Hoisting 提升觀念">
-<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;JavaScript-Note&#x2F;20200309&#x2F;1212075218&#x2F;index.html">
+<meta property="og:title" content="JS 筆記 - Array 陣列 的基本認識">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;JavaScript-Note&#x2F;20200323&#x2F;233651811&#x2F;index.html">
 <meta property="og:site_name" content="TimCodingBlog">
-<meta property="og:description" content="function 函式 Hoisting 提升觀念">
+<meta property="og:description" content="Array 陣列 的基本認識">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
-<meta property="article:published_time" content="2020-03-09T04:09:27.000Z">
-<meta property="article:modified_time" content="2020-03-16T13:21:07.770Z">
+<meta property="article:published_time" content="2020-03-23T15:36:00.000Z">
+<meta property="article:modified_time" content="2020-03-23T15:40:08.137Z">
 <meta property="article:author" content="Tim">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
 
-<link rel="canonical" href="https://hsuchihting.github.io/JavaScript-Note/20200309/1212075218/">
+<link rel="canonical" href="https://hsuchihting.github.io/JavaScript-Note/20200323/233651811/">
 
 
 <script id="page-configurations">
@@ -73,7 +73,7 @@
   };
 </script>
 
-  <title>JS 筆記 - function 函式 Hoisting 提升觀念 | TimCodingBlog</title>
+  <title>JS 筆記 - Array 陣列 的基本認識 | TimCodingBlog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
     <script>
@@ -218,7 +218,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/JavaScript-Note/20200309/1212075218/">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/JavaScript-Note/20200323/233651811/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/2020Tim.jpg">
@@ -231,7 +231,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          JS 筆記 - function 函式 Hoisting 提升觀念
+          JS 筆記 - Array 陣列 的基本認識
         </h2>
 
         <div class="post-meta">
@@ -240,16 +240,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
+              
 
-              <time title="創建時間：2020-03-09 12:09:27" itemprop="dateCreated datePublished" datetime="2020-03-09T12:09:27+08:00">2020-03-09</time>
+              <time title="創建時間：2020-03-23 23:36:00 / 修改時間：23:40:08" itemprop="dateCreated datePublished" datetime="2020-03-23T23:36:00+08:00">2020-03-23</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-03-16 21:21:07" itemprop="dateModified" datetime="2020-03-16T21:21:07+08:00">2020-03-16</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -263,7 +257,7 @@
             </span>
 
           
-            <div class="post-description">function 函式 Hoisting 提升觀念</div>
+            <div class="post-description">Array 陣列 的基本認識</div>
 
         </div>
       </header>
@@ -275,23 +269,50 @@
 
       
         <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JavaScript%20note-01.jpg?alt=media&token=7bee0261-72ac-4de4-9f5a-f39d58735b7d" alt="JavaScript Note"></p>
-<p>瀏覽器在讀取程式碼基本上都是從上到下讀取，在變數的寫法，會是這樣的結果。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//undefind</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//1</span></span><br></pre></td></tr></table></figure>
-
-<p>上方變數的撰寫跟讀取的結果，會是由上到下讀取，所以在第一行 <code>console.log</code> 因為找不到變數所以結果會是 undefind，第三個 <code>console.log</code> 因為有讀到第二行的變數，所以找到了 a 的值為1。</p>
-<h2 id="那-function-呢"><a href="#那-function-呢" class="headerlink" title="那 function 呢?"></a>那 function 呢?</h2><p>加入一個 function，先看程式碼：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//undefind</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//1</span></span><br><span class="line"></span><br><span class="line">count();<span class="comment">//會得到什麼?</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> <span class="built_in">console</span>.log(<span class="string">'hello!'</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>count 結果會是：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">count();<span class="comment">// hello!</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> <span class="built_in">console</span>.log(<span class="string">'hello!'</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>function 有一個 Hoisting 的向上提升的概念，就是瀏覽器會先把 function 設定為優先讀取，在瀏覽器的讀取順序會變成這樣：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> <span class="built_in">console</span>.log(<span class="string">'hello!'</span>); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">count();<span class="comment">// hello!</span></span><br></pre></td></tr></table></figure>
-
-<p>故在執行 function 的時候，function 名稱寫在上面或下面是沒有差的，但為了讓自己習慣所有程式碼都遵循由上到下讀取的方式，我還是會寫成剛上方一樣的方式，維持一個習慣寫法，也比較不會讓自己搞混！</p>
-<h2 id="補充"><a href="#補充" class="headerlink" title="補充"></a>補充</h2><p>Hositing 就是將<strong>變數</strong>&amp;<strong>函數</strong>提升到所有程式碼最前面，然後先存進記憶體中，後面在做賦值等動作。由此可知 Hositing 主要跟記憶體有關係，而 Hositing 只是一個觀念。</p>
+<p>進入一個新的名稱，陣列 (Array) 與物件 (Object)，看到新名稱就心慌慌，但搞清楚後就有點豁然開朗，來記錄目前所學的這兩個新語法。</p>
+<h2 id="Array-陣列"><a href="#Array-陣列" class="headerlink" title="Array 陣列"></a>Array 陣列</h2><blockquote>
+<p>Array 原本的英文意思是數列，有興趣的可以去查字典或是 Google 看看。透過英文原本的意思，再回到程式來看，會比較知道為什麼要取這樣的名字，其實沿用原本英文的意義，這樣就會好懂些！</p>
+</blockquote>
+<blockquote>
+<p>陣列內可以是<strong>原始的資料類型</strong>、<strong>其他陣列</strong>、<strong>函式</strong>等等。 要注意的是，陣列是個<strong>有順序性的集合</strong>，且只能透過 <code>[]</code> 來存取。</p>
+</blockquote>
+<h3 id="一切從變數開始"><a href="#一切從變數開始" class="headerlink" title="一切從變數開始"></a>一切從變數開始</h3><p>JavaScript 的世界，是從<strong>變數</strong>開始，然後用 <code>console.log</code> 做驗證。所以在陣列的觀念中也是從變數延伸，但如果變數很多的時候，不可能把所有的變數都一股腦丟給對方，這樣收到一堆變數會很崩潰。所以陣列的出現就是將<strong>相同的變數</strong>集合成一個數列，於是陣列就這樣出現了，透過英文的意思來聯想會比較好記!。</p>
 <hr>
-<p>文章參考:</p>
-<p><a href="https://hsiangfeng.github.io/javascript/20190419/3635730318/" target="_blank" rel="noopener">https://hsiangfeng.github.io/javascript/20190419/3635730318/</a></p>
-<p><a href="https://developer.mozilla.org/zh-TW/docs/Glossary/Hoisting" target="_blank" rel="noopener">https://developer.mozilla.org/zh-TW/docs/Glossary/Hoisting</a></p>
+<p>複習一下變數的寫法是，用 「var」 宣告變數，自定義「變數名稱」，給予變數的「值」，如下所示：</p>
+<p><code>var man = &quot;menName&quot;;</code></p>
+<p>但工作上不可能只有一排變數，如果以家庭為例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> father = <span class="string">"Tom"</span>;</span><br><span class="line"><span class="keyword">var</span> mother = <span class="string">"Mary"</span>;</span><br><span class="line"><span class="keyword">var</span> son = <span class="string">"John"</span>;</span><br><span class="line"><span class="keyword">var</span> daughter = <span class="string">"Linda"</span>;</span><br></pre></td></tr></table></figure>
+
+<p>如上就有四個變數，但如果<strong>變數項目增加，但內容不同</strong>該怎麼辦? 像是有 4 張椅子，有紅色，有藍色，就會變下方這樣：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> father = <span class="string">"Tom"</span>;</span><br><span class="line"><span class="keyword">var</span> mother = <span class="string">"Mary"</span>;</span><br><span class="line"><span class="keyword">var</span> son = <span class="string">"John"</span>;</span><br><span class="line"><span class="keyword">var</span> daughter = <span class="string">"Linda"</span>;</span><br><span class="line"><span class="keyword">var</span> chair = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">var</span> chair1 = <span class="string">"red"</span>;</span><br><span class="line"><span class="keyword">var</span> chair2 = <span class="string">"blue"</span>;</span><br></pre></td></tr></table></figure>
+
+<p>這樣程式碼就變多了，如果要套很多資料，也不好撰寫，可能要寫好幾次，這時候就需要陣列。</p>
+<hr>
+<h3 id="陣列的寫法"><a href="#陣列的寫法" class="headerlink" title="陣列的寫法"></a>陣列的寫法</h3><p>一樣是用變數宣告，<strong>自定義</strong>陣列名稱，但陣列要用<strong>中括號</strong> <code>[]</code> 呈現，結束要用<strong>分號</strong> <code>;</code> 收尾，寫法如下：</p>
+<p><code>var array = [&quot;a&quot;];</code></p>
+<p>所以椅子有四張，有紅色，有藍色可以這樣寫成陣列，有<strong>相同的名稱</strong>，有<strong>不同的參數</strong>，要用<strong>逗號</strong> <code>,</code> 分開，呈現如下：</p>
+<p><code>var chair =[&quot;red&quot; , &quot;blue&quot;];</code></p>
+<hr>
+<h3 id="陣列的排序"><a href="#陣列的排序" class="headerlink" title="陣列的排序"></a>陣列的排序</h3><p>一般排序的邏輯會從 1 開始，但陣列的世界是從 0 開始，所以今天如果家裡有四個地方要增加桌子，就要增加四個變數，但這樣太多行了，如果使用陣列，並且知道哪個房間有幾張桌子，可以這樣寫，目前實務上也比較常見這樣的寫法，要抓取陣列資料會這樣寫：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> desk = [<span class="number">4</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="built_in">console</span>.log(desk[<span class="number">0</span>]); <span class="comment">// 因為排序第一是 4，所以結果會出現 4</span></span><br></pre></td></tr></table></figure>
+
+<p>以此類推，如果在 console 裡面的中括號，寫其他順序，會出現相對應的結果。</p>
+<p>也可以這樣寫：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> desk = [<span class="number">4</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> desk1 = desk[<span class="number">0</span>];</span><br><span class="line"><span class="built_in">console</span>.log(desk[<span class="number">0</span>]); <span class="comment">// 結果會出現 4</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="length-長度"><a href="#length-長度" class="headerlink" title="length 長度"></a>length 長度</h3><p>要查陣列的資料長度可以使用 length 這個語法，英文原意也是長度的意思。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> desk = [<span class="number">4</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> desk1 = desk[<span class="number">0</span>];</span><br><span class="line"><span class="built_in">console</span>.log(desk[<span class="number">0</span>]); <span class="comment">// 結果會出現 4</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(desk.length); <span class="comment">//結果會出現 4，代表有陣列的長度有四個</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="push-增加陣列的語法"><a href="#push-增加陣列的語法" class="headerlink" title=".push 增加陣列的語法"></a>.push 增加陣列的語法</h3><p>若想要在陣列外新增元素時，可以透過 <code>number.push()</code> 這個語法增加，_透過 <code>.</code> 代表要增加後面的屬性_：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> number = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">number.length; <span class="comment">// 會顯示 3，指有三個陣列資料</span></span><br><span class="line"></span><br><span class="line">number.push(<span class="number">4</span>);</span><br><span class="line"><span class="built_in">console</span>.log(number); <span class="comment">// [1, 2, 3, 4] 新增第四個陣列資料</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="splice-刪除陣列語法"><a href="#splice-刪除陣列語法" class="headerlink" title=".splice 刪除陣列語法"></a>.splice 刪除陣列語法</h3><p>有增加就有刪除，可以透過 number.splice(起始位置,資料數量) 這個語法刪除:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> number = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">number.length; <span class="comment">// 會顯示 3，指有三個陣列資料</span></span><br><span class="line"></span><br><span class="line">number.splice(<span class="number">0</span>, <span class="number">2</span>); <span class="comment">//從第一筆資料刪除，刪除兩筆資料</span></span><br><span class="line">number; <span class="comment">// [3]</span></span><br></pre></td></tr></table></figure>
+
+<p>參考資料 <a href="https://ithelp.ithome.com.tw/articles/10190962" target="_blank" rel="noopener">https://ithelp.ithome.com.tw/articles/10190962</a></p>
 
     </div>
 
@@ -310,13 +331,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/JavaScript-Note/20200302/3851113860/" rel="prev" title="JS 筆記 - 函式 function 搭配 return">
-      <i class="fa fa-chevron-left"></i> JS 筆記 - 函式 function 搭配 return
+    <a href="/vue-js-Note/20200318/1480837360/" rel="prev" title="Vue 筆記 - vue 的生命週期">
+      <i class="fa fa-chevron-left"></i> Vue 筆記 - vue 的生命週期
     </a></div>
-      <div class="post-nav-item">
-    <a href="/JavaScript-Note/20200316/526717564/" rel="next" title="JS 筆記 - 利用函式 function 寫一個計算題">
-      JS 筆記 - 利用函式 function 寫一個計算題 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -376,7 +394,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#那-function-呢"><span class="nav-number">1.</span> <span class="nav-text">那 function 呢?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#補充"><span class="nav-number">2.</span> <span class="nav-text">補充</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Array-陣列"><span class="nav-number">1.</span> <span class="nav-text">Array 陣列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一切從變數開始"><span class="nav-number">1.1.</span> <span class="nav-text">一切從變數開始</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#陣列的寫法"><span class="nav-number">1.2.</span> <span class="nav-text">陣列的寫法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#陣列的排序"><span class="nav-number">1.3.</span> <span class="nav-text">陣列的排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#length-長度"><span class="nav-number">1.4.</span> <span class="nav-text">length 長度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#push-增加陣列的語法"><span class="nav-number">1.5.</span> <span class="nav-text">.push 增加陣列的語法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#splice-刪除陣列語法"><span class="nav-number">1.6.</span> <span class="nav-text">.splice 刪除陣列語法</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
