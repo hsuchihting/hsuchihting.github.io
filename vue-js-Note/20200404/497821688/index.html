@@ -63,8 +63,12 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vueCli-07.png?alt&#x3D;media&amp;token&#x3D;0a20cd4f-972a-417f-b7ea-abe05544a006">
 <meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vueCli-08.png?alt&#x3D;media&amp;token&#x3D;7660ab32-fdbc-4251-a9f0-68613a6e6333">
 <meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vueCli-09.png?alt&#x3D;media&amp;token&#x3D;5d4e95e0-cc41-447d-814f-cf35444bb366">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vueCli-10.png?alt&#x3D;media&amp;token&#x3D;75d77f86-2238-4812-8b57-3c542a8a9412">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vueCli-11.png?alt&#x3D;media&amp;token&#x3D;59c88031-8e83-489d-b540-37d43d0fca64">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vueCli-12.png?alt&#x3D;media&amp;token&#x3D;77fff162-bca9-4b8c-b41e-0bea18fd807a">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vueCli-13.png?alt&#x3D;media&amp;token&#x3D;4a7a4db1-7697-41fa-b7b4-f30f0119eba2">
 <meta property="article:published_time" content="2020-04-04T06:28:04.000Z">
-<meta property="article:modified_time" content="2020-04-04T06:52:43.898Z">
+<meta property="article:modified_time" content="2020-04-04T07:23:26.101Z">
 <meta property="article:author" content="Tim">
 <meta property="article:tag" content="vue.js">
 <meta property="article:tag" content="vue CLI">
@@ -252,7 +256,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2020-04-04 14:28:04 / 修改時間：14:52:43" itemprop="dateCreated datePublished" datetime="2020-04-04T14:28:04+08:00">2020-04-04</time>
+              <time title="創建時間：2020-04-04 14:28:04 / 修改時間：15:23:26" itemprop="dateCreated datePublished" datetime="2020-04-04T14:28:04+08:00">2020-04-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -321,6 +325,20 @@
 <p>這時候按照上方條件輸入後就會跳出下方畫面</p>
 <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vueCli-09.png?alt=media&token=5d4e95e0-cc41-447d-814f-cf35444bb366" alt="done"></p>
 <p>打開瀏覽器輸入所得到的 localhost 的位址，若出現下方畫面，就是代表建立完成一個新的 SPA 專案囉!</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vueCli-10.png?alt=media&token=75d77f86-2238-4812-8b57-3c542a8a9412" alt="Vue SPA 專案建立完成"></p>
+<h2 id="專案架構"><a href="#專案架構" class="headerlink" title="專案架構"></a>專案架構</h2><p>生成的專案架構大概會向下方這樣：</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vueCli-11.png?alt=media&token=59c88031-8e83-489d-b540-37d43d0fca64" alt="專案架構"></p>
+<p>開發主要會動到的檔案，大多集中在 src 目錄，以及 public 裡的 index.html 。</p>
+<h2 id="Vue-的單一元件檔"><a href="#Vue-的單一元件檔" class="headerlink" title="Vue 的單一元件檔"></a>Vue 的單一元件檔</h2><p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vueCli-12.png?alt=media&token=77fff162-bca9-4b8c-b41e-0bea18fd807a" alt="Vue 的單一元件檔"></p>
+<p>一個獨立的 vue 檔案，也就是一個 component，通常會包含</p>
+<ul>
+<li>HTML</li>
+<li>JavaScript</li>
+<li>CSS</li>
+</ul>
+<p>這三個部分，分別由 <code>&lt;template&gt;</code>  、  <code>&lt;script&gt;</code>  與 <code>&lt;style&gt;</code> 這三個標籤來表示。</p>
+<p>而 <code>.vue</code> 檔案也可以透過 <code>import</code> 其他 <code>.vue</code>  檔案，來將其他 component 引入作為自己的子元件。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vueCli-13.png?alt=media&token=4a7a4db1-7697-41fa-b7b4-f30f0119eba2" alt="components"></p>
 
     </div>
 
@@ -403,7 +421,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-Vue-CLI-建立專案"><span class="nav-number">1.</span> <span class="nav-text">使用 Vue CLI 建立專案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝"><span class="nav-number">1.1.</span> <span class="nav-text">安裝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#開啟專案"><span class="nav-number">1.2.</span> <span class="nav-text">開啟專案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#選擇套件"><span class="nav-number">1.3.</span> <span class="nav-text">選擇套件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常用套件選擇"><span class="nav-number">1.3.1.</span> <span class="nav-text">常用套件選擇</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSS-預處理器"><span class="nav-number">1.3.2.</span> <span class="nav-text">CSS 預處理器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#選擇規範"><span class="nav-number">1.3.3.</span> <span class="nav-text">選擇規範</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lint-存檔"><span class="nav-number">1.3.4.</span> <span class="nav-text">Lint 存檔</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#存檔在-package-json"><span class="nav-number">1.3.5.</span> <span class="nav-text">存檔在 package.json</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不要儲存相關設定"><span class="nav-number">1.3.6.</span> <span class="nav-text">不要儲存相關設定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安裝完成"><span class="nav-number">1.3.7.</span> <span class="nav-text">安裝完成</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-Vue-CLI-建立專案"><span class="nav-number">1.</span> <span class="nav-text">使用 Vue CLI 建立專案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝"><span class="nav-number">1.1.</span> <span class="nav-text">安裝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#開啟專案"><span class="nav-number">1.2.</span> <span class="nav-text">開啟專案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#選擇套件"><span class="nav-number">1.3.</span> <span class="nav-text">選擇套件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常用套件選擇"><span class="nav-number">1.3.1.</span> <span class="nav-text">常用套件選擇</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSS-預處理器"><span class="nav-number">1.3.2.</span> <span class="nav-text">CSS 預處理器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#選擇規範"><span class="nav-number">1.3.3.</span> <span class="nav-text">選擇規範</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lint-存檔"><span class="nav-number">1.3.4.</span> <span class="nav-text">Lint 存檔</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#存檔在-package-json"><span class="nav-number">1.3.5.</span> <span class="nav-text">存檔在 package.json</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不要儲存相關設定"><span class="nav-number">1.3.6.</span> <span class="nav-text">不要儲存相關設定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安裝完成"><span class="nav-number">1.3.7.</span> <span class="nav-text">安裝完成</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#專案架構"><span class="nav-number">2.</span> <span class="nav-text">專案架構</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue-的單一元件檔"><span class="nav-number">3.</span> <span class="nav-text">Vue 的單一元件檔</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
