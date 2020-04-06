@@ -2,9 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://hsuchihting.github.io/JavaScript-Note/20200406/690135993/</loc>
+    
+    <lastmod>2020-04-06T13:56:38.324Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://hsuchihting.github.io/vue-js-Note/20200404/497821688/</loc>
     
-    <lastmod>2020-04-04T07:23:26.101Z</lastmod>
+    <lastmod>2020-04-06T13:51:36.493Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hsuchihting.github.io/Practice-Note/20200106/1702288669/</loc>
+    
+    <lastmod>2020-04-04T07:44:34.616Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hsuchihting.github.io/vue-js-Note/20200318/1480837360/</loc>
+    
+    <lastmod>2020-04-04T07:43:51.871Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hsuchihting.github.io/vue-js-Note/20200318/2845412352/</loc>
+    
+    <lastmod>2020-04-04T07:43:51.871Z</lastmod>
     
   </url>
   
@@ -47,20 +75,6 @@
     <loc>https://hsuchihting.github.io/jQuery-Note/20200326/177388252/</loc>
     
     <lastmod>2020-03-31T12:50:17.892Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hsuchihting.github.io/vue-js-Note/20200318/1480837360/</loc>
-    
-    <lastmod>2020-03-18T08:04:58.088Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hsuchihting.github.io/vue-js-Note/20200318/2845412352/</loc>
-    
-    <lastmod>2020-03-18T05:47:22.756Z</lastmod>
     
   </url>
   
@@ -138,13 +152,6 @@
     <loc>https://hsuchihting.github.io/hexo/20191217/1291925723/</loc>
     
     <lastmod>2020-02-15T13:02:51.554Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hsuchihting.github.io/Practice-Note/20200106/1702288669/</loc>
-    
-    <lastmod>2020-01-06T11:21:20.522Z</lastmod>
     
   </url>
   
