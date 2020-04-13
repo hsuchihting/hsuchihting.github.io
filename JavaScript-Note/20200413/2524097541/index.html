@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2020Tim-32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2020Tim-16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="判斷時很常出現的運算子">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 筆記 - 控制判斷 (比較運算子、邏輯運算子)">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;JavaScript-Note&#x2F;20200413&#x2F;2524097541&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="判斷時很常出現的運算子">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
+<meta property="article:published_time" content="2020-04-13T11:19:11.000Z">
+<meta property="article:modified_time" content="2020-04-13T11:49:35.861Z">
+<meta property="article:author" content="Tim">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
+
+<link rel="canonical" href="https://hsuchihting.github.io/JavaScript-Note/20200413/2524097541/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>JS 筆記 - 控制判斷 (比較運算子、邏輯運算子) | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/JavaScript-Note/20200413/2524097541/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2020Tim.jpg">
+      <meta itemprop="name" content="Tim">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          JS 筆記 - 控制判斷 (比較運算子、邏輯運算子)
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-04-13 19:19:11 / 修改時間：19:49:35" itemprop="dateCreated datePublished" datetime="2020-04-13T19:19:11+08:00">2020-04-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript-Note/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript Note</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">判斷時很常出現的運算子</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JavaScript%20note-01.jpg?alt=media&token=7bee0261-72ac-4de4-9f5a-f39d58735b7d" alt="JavaScript Note"></p>
+<p>此次內容是 JavaScript 的控制判斷，<strong>比較運算子</strong>跟<strong>邏輯運算子</strong>的筆記。<br>用途會是在驗證資料是否有與原本設定的條件相同，例如：今天填寫一個表單，如果勾選「是」，就可以繼續往下填寫之類的控制判斷。</p>
+<hr>
+<h2 id="運算子"><a href="#運算子" class="headerlink" title="運算子"></a>運算子</h2><h3 id="比較運算子"><a href="#比較運算子" class="headerlink" title="比較運算子 =="></a>比較運算子 <code>==</code></h3><p>用來比較 a 與 b 是否為正確或不正確，例如：設定兩個變數比較他們的關係。<br>會發現有兩個地方不同， <code>=</code> 跟 <code>==</code>， <code>=</code> 的用法是給予變數一個值； <code>==</code> 他是用比較兩個數值之間的關係是否為 true 還是 false。</p>
+<p>然後有兩種寫法：</p>
+<blockquote>
+<p><code>==</code> 等於</p>
+<p><code>!==</code> 不等於</p>
+</blockquote>
+<p>簡單的範例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="number">1</span>;</span><br><span class="line">a == b; <span class="comment">//結果會得到 true</span></span><br></pre></td></tr></table></figure>
+
+<p>反之 <code>!==</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="number">1</span>;</span><br><span class="line">a !== b; <span class="comment">//結果會得到 false</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>加上情境，倘若今天一間餐廳有當月壽星禮，可以這樣做控制判斷</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myBirthdayMonth = <span class="number">3</span>; <span class="comment">//我的生日月份</span></span><br><span class="line"><span class="keyword">var</span> nowMonth = <span class="number">12</span>; <span class="comment">//本月壽星</span></span><br><span class="line"><span class="keyword">var</span> birthdayMonthCheck = myBirthdayMonth == nowMonth; <span class="comment">//判斷我是否為本月壽星</span></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"birthdayId"</span>).textContent = birthdayMonthCheck; <span class="comment">//本月為 12 月，我是 3 月壽星，故結果會得到 false</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="嚴謹模式"><a href="#嚴謹模式" class="headerlink" title="嚴謹模式 ==="></a>嚴謹模式 <code>===</code></h3><p>因為 <code>==</code> 比較不嚴謹，如果有些資料要確認型別，就會用到 <code>===</code>，假如下方程式碼：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> == <span class="string">"1"</span>;</span><br><span class="line"><span class="comment">//會得到結果是 true，可是一邊是數字，另一邊是字串，資料型別不同啊?</span></span><br></pre></td></tr></table></figure>
+
+<p>因為 <code>==</code> 會在比較時發現值如果數字跟字串長一樣的時候，會自動轉型，被比較成一樣，所以如果剛好遇到類似的數值跟字串內容會一樣時，為了讓資料更明確的比較，就會用到嚴謹模式 <code>===</code>，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> === <span class="string">"1"</span>;</span><br><span class="line"><span class="comment">//得到的結果就會是 false</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="大於-gt-、小於-lt-、大於等於-gt-、小於等於-gt"><a href="#大於-gt-、小於-lt-、大於等於-gt-、小於等於-gt" class="headerlink" title="大於 &gt;、小於 &lt;、大於等於 &gt;=、小於等於 =&gt;"></a>大於 <code>&gt;</code>、小於 <code>&lt;</code>、大於等於 <code>&gt;=</code>、小於等於 <code>=&gt;</code></h3><p>用法就跟字面一樣，可以自己玩一下，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span> &gt; <span class="number">2</span>;</span><br><span class="line"><span class="number">7</span> &lt; <span class="number">8</span>;</span><br><span class="line"><span class="number">13</span> &gt;= <span class="number">13</span>;</span><br><span class="line"><span class="number">15</span> &lt;= <span class="number">21</span>;</span><br></pre></td></tr></table></figure>
+
+<p>以上結果都會得到 true <del>(廢話)</del></p>
+<hr>
+<h2 id="邏輯運算式-amp-amp-and-、-or-、-not"><a href="#邏輯運算式-amp-amp-and-、-or-、-not" class="headerlink" title="邏輯運算式 &amp;&amp; (and)、|| (or)、! (not)"></a>邏輯運算式 &amp;&amp; (and)、|| (or)、! (not)</h2><p>要滿足預設的兩個條件要用 and，這樣寫： <code>&amp;&amp;</code>，只要滿足其中一個條件用 or ，這樣寫： <code>||</code>，如果要表示「不是」則是用 <code>!</code>。</p>
+<hr>
+<h3 id="amp-amp-所有條件皆符合"><a href="#amp-amp-所有條件皆符合" class="headerlink" title="&amp;&amp; 所有條件皆符合"></a>&amp;&amp; 所有條件皆符合</h3><p>以搭飛機為例，出入境都需要<strong>機票</strong>跟<strong>護照</strong>的話，程式碼如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> passport = <span class="literal">true</span>; <span class="comment">//有帶護照</span></span><br><span class="line"><span class="keyword">var</span> ticket = <span class="literal">true</span>; <span class="comment">//有帶機票</span></span><br><span class="line"><span class="keyword">var</span> pass = passport == <span class="literal">true</span> &amp;&amp; ticket == <span class="literal">true</span>; <span class="comment">// 出入境條件</span></span><br><span class="line"><span class="built_in">console</span>.log(pass); <span class="comment">// 結果會是 true</span></span><br></pre></td></tr></table></figure>
+
+<p>如果沒有機票的話，程式碼如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> passport = <span class="literal">true</span>; <span class="comment">//有帶護照</span></span><br><span class="line"><span class="keyword">var</span> ticket = <span class="literal">false</span>; <span class="comment">//沒帶機票</span></span><br><span class="line"><span class="keyword">var</span> pass = passport == <span class="literal">true</span> &amp;&amp; ticket == <span class="literal">true</span>; <span class="comment">// 出入境條件</span></span><br><span class="line"><span class="built_in">console</span>.log(pass); <span class="comment">// 結果會是 false</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在條件上可以自行定義多寡，但建議一到兩個就好，最多三個，不然程式碼會太長。</p>
+</blockquote>
+<hr>
+<h3 id="符合一項條件"><a href="#符合一項條件" class="headerlink" title="|| 符合一項條件"></a>|| 符合一項條件</h3><p>以餐廳優惠為例，餐廳很多都有當月壽星禮，程式碼如下：</p>
+<p>剛好是當月壽星：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//餐廳折扣優惠</span></span><br><span class="line"><span class="keyword">var</span> myBirthdMonth = <span class="literal">true</span>; <span class="comment">//當月壽星禮</span></span><br><span class="line"><span class="keyword">var</span> fbTag = <span class="literal">true</span>; <span class="comment">//臉書打卡</span></span><br><span class="line"><span class="keyword">var</span> discount = myBirthdMonth == <span class="literal">true</span> || fbTag == <span class="literal">true</span>; <span class="comment">// 符合折扣條件</span></span><br><span class="line"><span class="built_in">console</span>.log(discount); <span class="comment">// 結果會是 true</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="不是"><a href="#不是" class="headerlink" title="! 不是"></a>! 不是</h3><p>Not 會把原本的意思改成不是的意思，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span> &lt; <span class="number">3</span>; <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line">!(<span class="number">2</span> &lt; <span class="number">3</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/CSS-Note/20200410/3203726250/" rel="prev" title="CSS 筆記 - 使用 overflow 顯示一個捲軸">
+      <i class="fa fa-chevron-left"></i> CSS 筆記 - 使用 overflow 顯示一個捲軸
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/JavaScript-Note/20200413/690135993/" rel="next" title="JS 筆記 - Object & Array 物件與陣列的綜合應用">
+      JS 筆記 - Object & Array 物件與陣列的綜合應用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#運算子"><span class="nav-number">1.</span> <span class="nav-text">運算子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#比較運算子"><span class="nav-number">1.1.</span> <span class="nav-text">比較運算子 &#x3D;&#x3D;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#嚴謹模式"><span class="nav-number">1.2.</span> <span class="nav-text">嚴謹模式 &#x3D;&#x3D;&#x3D;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大於-gt-、小於-lt-、大於等於-gt-、小於等於-gt"><span class="nav-number">1.3.</span> <span class="nav-text">大於 &gt;、小於 &lt;、大於等於 &gt;&#x3D;、小於等於 &#x3D;&gt;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#邏輯運算式-amp-amp-and-、-or-、-not"><span class="nav-number">2.</span> <span class="nav-text">邏輯運算式 &amp;&amp; (and)、|| (or)、! (not)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#amp-amp-所有條件皆符合"><span class="nav-number">2.1.</span> <span class="nav-text">&amp;&amp; 所有條件皆符合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#符合一項條件"><span class="nav-number">2.2.</span> <span class="nav-text">|| 符合一項條件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不是"><span class="nav-number">2.3.</span> <span class="nav-text">! 不是</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim"
+      src="/images/2020Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hsiangfeng.github.io/" title="https:&#x2F;&#x2F;hsiangfeng.github.io&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tim</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
