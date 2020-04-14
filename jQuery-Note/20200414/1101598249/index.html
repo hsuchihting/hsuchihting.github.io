@@ -55,7 +55,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1506784365847-bbad939e9335?ixlib&#x3D;rb-1.2.1&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1348&amp;q&#x3D;80">
 <meta property="article:published_time" content="2020-04-14T13:56:22.000Z">
-<meta property="article:modified_time" content="2020-04-14T14:01:15.660Z">
+<meta property="article:modified_time" content="2020-04-14T14:04:16.596Z">
 <meta property="article:author" content="Tim">
 <meta property="article:tag" content="JavaScript">
 <meta property="article:tag" content="jQuery">
@@ -243,7 +243,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2020-04-14 21:56:22 / 修改時間：22:01:15" itemprop="dateCreated datePublished" datetime="2020-04-14T21:56:22+08:00">2020-04-14</time>
+              <time title="創建時間：2020-04-14 21:56:22 / 修改時間：22:04:16" itemprop="dateCreated datePublished" datetime="2020-04-14T21:56:22+08:00">2020-04-14</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -273,13 +273,13 @@
 <p>還記得之前挑戰<a href="https://w3c.hexschool.com/blog/bde2f503" target="_blank" rel="noopener">旅館訂房網站</a>頁面，手刻月曆真是花了很長的時間，不過也首次見識到 flex 排版的威力。</p>
 <p>後來才知道有月曆跟時間的套件…就來記錄一下使用的方式。</p>
 <h2 id="匯入套件"><a href="#匯入套件" class="headerlink" title="匯入套件"></a>匯入套件</h2><p>如果想要修改月曆配色，可以使用 cdn 或<a href="https://jqueryui.com/resources/download/jquery-ui-1.12.1.zip" target="_blank" rel="noopener">官網</a>下載套件或是 <strong>jQuery UI CSS cdn</strong></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel="stylesheet" href="./jquery-ui-1.12.1/jquery-ui.css"&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"./jquery-ui-1.12.1/jquery-ui.css"</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="datepicker"><a href="#datepicker" class="headerlink" title="datepicker"></a>datepicker</h2><p>datepicker cdnjs <a href="https://cdnjs.com/libraries/datepicker" target="_blank" rel="noopener">https://cdnjs.com/libraries/datepicker</a></p>
 <p>我這次是選擇用 jQuery UI 的 <a href="https://jqueryui.com/datepicker/" target="_blank" rel="noopener">datepicker 套件</a>，進入頁面後可以在右側欄選擇喜歡的月曆的出現形式，使用的前提是要搭配 <code>input</code>，<code>type=&quot;text&quot;</code>，雖然原本 input 就有預設 <code>date</code> 類型，但樣式太醜，所以才用此套件。</p>
 <p><strong>官網範例程式碼</strong></p>
 <p>HTML</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;Date: &lt;input type&#x3D;&quot;text&quot; id&#x3D;&quot;datepicker&quot;&gt;&lt;&#x2F;p&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Date: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"datepicker"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>javascript</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  $( <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    $( <span class="string">"#datepicker"</span> ).datepicker();</span><br><span class="line">  &#125;);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
@@ -395,14 +395,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
