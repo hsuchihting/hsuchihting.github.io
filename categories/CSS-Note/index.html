@@ -46,23 +46,21 @@
   };
 </script>
 
-  <meta name="description" content="overflow 不只有圖片取代文字">
+  <meta name="description" content="提姆的前端筆記">
 <meta property="og:type" content="website">
-<meta property="og:title" content="CSS 筆記 - 使用 overflow 顯示一個捲軸">
-<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;CSS&#x2F;CSS01.html">
+<meta property="og:title" content="TimCodingBlog">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;categories&#x2F;CSS-Note&#x2F;index.html">
 <meta property="og:site_name" content="TimCodingBlog">
-<meta property="og:description" content="overflow 不只有圖片取代文字">
+<meta property="og:description" content="提姆的前端筆記">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1580501170888-80668882ca0c?ixlib&#x3D;rb-1.2.1&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1350&amp;q&#x3D;80">
-<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;overflow-01.png?alt&#x3D;media&amp;token&#x3D;7ed8d6b1-24f8-4cb9-8670-c3f3e911c1ad">
-<meta property="article:published_time" content="2020-04-09T16:31:18.000Z">
-<meta property="article:modified_time" content="2020-04-14T14:02:45.765Z">
 <meta property="article:author" content="Tim">
-<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="TimCodingBlog">
+<meta property="article:tag" content=" 前端工程師">
+<meta property="article:tag" content=" Frond-end developer">
+<meta property="article:tag" content=" F2E">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1580501170888-80668882ca0c?ixlib&#x3D;rb-1.2.1&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1350&amp;q&#x3D;80">
 
-<link rel="canonical" href="https://hsuchihting.github.io/CSS/CSS01">
+<link rel="canonical" href="https://hsuchihting.github.io/categories/CSS-Note/">
 
 
 <script id="page-configurations">
@@ -74,8 +72,7 @@
   };
 </script>
 
-  <title>CSS 筆記 - 使用 overflow 顯示一個捲軸 | TimCodingBlog
-  </title>
+  <title>分類: CSS Note | TimCodingBlog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
     <script>
@@ -211,93 +208,54 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
           <div class="content">
             
 
-  <div class="posts-expand">
-    
-    
-    
-    <div class="post-block" lang="zh-TW">
-      <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <div class="posts-collapse">
+      <div class="collection-title">
+        <h2 class="collection-header">CSS Note
+          <small>分類</small>
+        </h2>
+      </div>
 
-<h2 class="post-title" itemprop="name headline">CSS 筆記 - 使用 overflow 顯示一個捲軸
-</h2>
+      
+    <div class="collection-year">
+      <h2 class="collection-header">2020</h2>
+    </div>
 
-<div class="post-meta">
-    <div class="post-description">overflow 不只有圖片取代文字</div>
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2020-04-10T00:31:18+08:00"
+              content="2020-04-10">
+          04-10
+        </time>
+      </div>
+
+      <h3 class="post-title">
+          <a class="post-title-link" href="/CSS-Note/20200410/3203726250/" itemprop="url">
+            <span itemprop="name">CSS 筆記 - 使用 overflow 顯示一個捲軸與自訂顏色</span>
+          </a>
+      </h3>
+
+    </header>
+  </article>
+
+    </div>
+  </div>
+  
+  
   
 
-</div>
+  
 
-</header>
-
-      
-      
-      
-      <div class="post-body">
-          <p><img src="https://images.unsplash.com/photo-1580501170888-80668882ca0c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="scroll"></p>
-<blockquote>
-<p>Scroll 英文叫做滾動，在網頁中是捲軸。</p>
-</blockquote>
-<p>這次一樣是紀錄工作遇到的問題，目前的專案是一個後臺開發，遇到一個 table 版面，資料會從 API 回傳數據後填入，所以會有很多筆，但因為版面的關係，PM 希望 table 表格可以自己使用捲軸，這次用到 CSS 的 overflow 的語法。</p>
-<h2 id="overflow"><a href="#overflow" class="headerlink" title="overflow"></a>overflow</h2><p>之前過用 <code>overflow:hidden;</code> 是用<a href="https://medium.com/@smallmoney1224/%E5%BE%9E0%E9%96%8B%E5%A7%8B%E8%A4%87%E7%BF%92-html-css-javascript-%E5%9C%96%E7%89%87%E5%8F%96%E4%BB%A3%E6%96%87%E5%AD%97-with-h1-logo-be56c85159a4" target="_blank" rel="noopener">圖片取代文字</a>而已…</p>
-<p>透過這次專案稍微研究一下 overflow 相關資料，才知道有以下屬性：</p>
-<p>overflow 屬性用來定義元素超過某個範圍的時候該如何呈現，例如圖片超過預設區域的大小、文字長度超出原本的範圍等，這時候可以透過 CSS overflow 屬性來制定該區塊是否顯示 scrollbar（卷軸）或者是否要隱藏該元素。</p>
-<ul>
-<li><p><code>overflow: auto;</code> 預設會自動使用 x, y 捲軸</p>
-<ul>
-<li>overflow-x 產生 X 軸。</li>
-<li>overflew-y 產生 Y 軸。</li>
-</ul>
-</li>
-<li><p><code>overflow:visible;</code> 顯示的文字或圖片會直接超出範圍，不使用捲軸。</p>
-</li>
-<li><p><code>overflow:hidden;</code> 自動隱藏超出的文字或圖片。</p>
-</li>
-<li><p><code>overflow:scroll;</code> 自動產生捲軸。</p>
-</li>
-<li><p><code>overflow:inherit;</code> 繼承自父元素的可見性</p>
-</li>
-</ul>
-<p>這次要做的專案就是在特定範圍高度內要產生一個 scroll 捲軸，但在嘗試的時候發現以下幾件事情：</p>
-<ol>
-<li>一定要寫在<code>&lt;div&gt;</code> 上，不是寫在 <code>&lt;table&gt;</code> 上。</li>
-<li>要限制高度，資料超過就會自動產生 scroll，但有些版面不會。</li>
-</ol>
-<p>例如畫面類似這樣的樣式：</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/overflow-01.png?alt=media&token=7ed8d6b1-24f8-4cb9-8670-c3f3e911c1ad" alt="sample"></p>
-<p><strong>HTML</strong></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wrap"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"topbox"</span>&gt;</span></span><br><span class="line">    this is header</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"boxBottom"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"boxLeft"</span>&gt;</span> // overflow 要下在這一層</span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>...lorem...<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"boxRight"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://images.unsplash.com/photo-1558981806-ec527fa84c39?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80"</span> <span class="attr">alt</span>=<span class="string">""</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>overflow 下在這個地方 (因 CSS 有點長，只擷取片段程式碼)。</p>
-<p><strong>CSS</strong></p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.boxLeft</span> &#123;</span><br><span class="line">  height: 400px; //限定高度</span><br><span class="line">  overflow-y: auto; //自動產生 y 軸捲軸</span><br><span class="line">  <span class="selector-tag">p</span> &#123;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">1.5</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">1em</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>這樣就可以達到想要的效果了。</p>
-<p>可以把其他屬性複製起來，套用在 overflow 的地方，看一下效果!</p>
-<p>codepen <a href="https://codepen.io/hnzxewqw/pen/LYpYQRK" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/LYpYQRK</a></p>
-<h2 id="同場加映-修改-ScrollBar-樣式"><a href="#同場加映-修改-ScrollBar-樣式" class="headerlink" title="同場加映 - 修改 ScrollBar 樣式"></a>同場加映 - 修改 ScrollBar 樣式</h2><p>可以參考 <a href="https://codepen.io/akinjide/pen/BpggrZ" target="_blank" rel="noopener">CodePen</a> 上的範例。</p>
-<hr>
-<p>參考文章：</p>
-<p><a href="https://pjchender.github.io/2018/08/30/css-%E6%BB%91%E9%BC%A0%E9%81%B8%E8%BB%B8%E6%BB%BE%E5%8B%95-scroll/" target="_blank" rel="noopener">[CSS] 滑鼠選軸滾動 scroll</a></p>
-<p><a href="https://www.wibibi.com/info.php?tid=157" target="_blank" rel="noopener">CSS overflow 屬性用法</a></p>
-<p><a href="https://medium.com/@smallmoney1224/%E5%BE%9E0%E9%96%8B%E5%A7%8B%E8%A4%87%E7%BF%92-html-css-javascript-%E5%9C%96%E7%89%87%E5%8F%96%E4%BB%A3%E6%96%87%E5%AD%97-with-h1-logo-be56c85159a4" target="_blank" rel="noopener">從 0 開始複習，HTML、CSS、JavaScript 圖片取代文字 with H1 logo</a></p>
-
-      </div>
-      
-      
-      
-    </div>
-    
-
-    
-    
-    
-  </div>
 
 
           </div>
@@ -348,7 +306,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#overflow"><span class="nav-number">1.</span> <span class="nav-text">overflow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同場加映-修改-ScrollBar-樣式"><span class="nav-number">2.</span> <span class="nav-text">同場加映 - 修改 ScrollBar 樣式</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -364,14 +321,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
