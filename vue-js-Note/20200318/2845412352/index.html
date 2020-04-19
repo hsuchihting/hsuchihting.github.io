@@ -55,7 +55,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vue%20cover.png?alt&#x3D;media&amp;token&#x3D;5f8b5aa0-eb3e-4d21-a715-07c5442dafbc">
 <meta property="article:published_time" content="2020-03-18T05:38:01.000Z">
-<meta property="article:modified_time" content="2020-04-04T07:43:51.871Z">
+<meta property="article:modified_time" content="2020-04-19T13:18:30.245Z">
 <meta property="article:author" content="Tim">
 <meta property="article:tag" content="vue.js">
 <meta name="twitter:card" content="summary">
@@ -248,7 +248,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-04-04 15:43:51" itemprop="dateModified" datetime="2020-04-04T15:43:51+08:00">2020-04-04</time>
+                <time title="修改時間：2020-04-19 21:18:30" itemprop="dateModified" datetime="2020-04-19T21:18:30+08:00">2020-04-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -278,7 +278,7 @@
 <h2 id="Vue-的實體"><a href="#Vue-的實體" class="headerlink" title="Vue 的實體"></a>Vue 的實體</h2><p>Vue 的實體是透過 new 這個關鍵字來建立的。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  <span class="comment">//實體屬性</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<h2 id="Vue-的起手式"><a href="#Vue-的起手式" class="headerlink" title="Vue 的起手式"></a>Vue 的起手式</h2><p>在 body 中的第一個 div 標籤中給一個 id，並且在實體中，先寫入一個 el (element 的意思)，會與 HTML 中 id 標籤名稱相同，下方給一個 data 的物件。</p>
+<h2 id="Vue-的起手式"><a href="#Vue-的起手式" class="headerlink" title="Vue 的起手式"></a>Vue 的起手式</h2><p>在 body 中的第一個 <code>&lt;div&gt;</code> 標籤中給一個 <code>id</code>，並且在實體中，先寫入一個 el (element 的意思)，會與 HTML 中 <code>id</code> 標籤名稱相同，下方給一個 <code>data</code> 的物件。</p>
 <blockquote>
 <p>注意：在實體屬性中，是物件的表示方式。</p>
 </blockquote>
@@ -288,7 +288,7 @@
 <h2 id="Vue-的實體基本屬性"><a href="#Vue-的實體基本屬性" class="headerlink" title="Vue 的實體基本屬性"></a>Vue 的實體基本屬性</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">"#app"</span>, <span class="comment">//用來掛載 Vue 實體元素</span></span><br><span class="line">  data: &#123; &#125;, <span class="comment">//要綁定的資料</span></span><br><span class="line">  props: &#123; &#125;, <span class="comment">//接收外部資料的屬性</span></span><br><span class="line">  methods: &#123; &#125;, <span class="comment">//定義 vue 實體內使用的函式</span></span><br><span class="line">  watch: &#123; &#125;, <span class="comment">//觀察實體內資料變動</span></span><br><span class="line">  computed: &#123; &#125;, <span class="comment">//自動計算的屬性</span></span><br><span class="line">  template: <span class="string">"..."</span>, <span class="comment">//提供 Vue 變更後的樣板</span></span><br><span class="line">  component: &#123; &#125; <span class="comment">//定義子元素</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <h2 id="el-與-data-的詳述"><a href="#el-與-data-的詳述" class="headerlink" title="el 與 data 的詳述"></a>el 與 data 的詳述</h2><h3 id="el"><a href="#el" class="headerlink" title="el"></a>el</h3><p>用來把 vue 實體與網頁 DOM 元素做綁定的關鍵實體，當 vue 實體<strong>沒有 <code>el</code> 屬性</strong>時，就只能透過 <strong>vm.$mount()</strong>手動編譯。</p>
-<h3 id="data"><a href="#data" class="headerlink" title="data"></a>data</h3><p>用來存放與實體綁定的資料，當實體建立後，可能過 vm.$<code>data</code> 取得 <code>data</code> 內的資料，實體內則是用 this.xxx 取得。在子元件時，需要用 function() 的形式回傳。</p>
+<h3 id="data"><a href="#data" class="headerlink" title="data"></a>data</h3><p>用來存放與實體綁定的資料，當實體建立後，可能過 <code>vm.\$</code>data`` 取得 <code>data</code> 內的資料，實體內則是用 <code>this.xxx</code> 取得。在子元件時，需要用 <code>function()</code> 的形式回傳。</p>
 <blockquote>
 <p>data 內的屬性開頭名稱不可以為 <code>$</code> 或 <code>_</code>。</p>
 </blockquote>
@@ -298,11 +298,11 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">      el: <span class="string">'#app'</span>,</span><br><span class="line">      data: &#123;</span><br><span class="line">        message: <span class="string">'hello! Vue!'</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 
 <ul>
-<li> 概念有點像 ES6，變數中給予什麼內容，透過大括號會呈現在網頁上。</li>
+<li><code></code> 概念有點像 ES6，變數中給予什麼內容，透過大括號會呈現在網頁上。</li>
 <li>使用 <code>v-model</code> 建立資料，對應到 <code>data</code> 的 <code>message</code> 的內容，就會渲染在網頁上。</li>
 </ul>
 <p>因為 <code>input</code> 跟 <code>p</code> 段落都是使用相同的資料，所以在 <code>input</code> 輸入新的資料， <code>p</code> 段落會跟著更新。</p>
-<p>Codepen: <a href="https://codepen.io/hnzxewqw/pen/gOpKRwV" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/gOpKRwV</a></p>
+<p><a href="https://codepen.io/hnzxewqw/pen/gOpKRwV" target="_blank" rel="noopener">CodePen</a></p>
 
     </div>
 
@@ -403,7 +403,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
