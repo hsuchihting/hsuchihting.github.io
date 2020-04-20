@@ -46,26 +46,22 @@
   };
 </script>
 
-  <meta name="description" content="vue 的基本認識">
+  <meta name="description" content="包含 v-if 與 v-show 的比較">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vue 筆記 - Vue 的基本認識與介紹">
-<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;vue-js-Note&#x2F;20200316&#x2F;3744633474&#x2F;index.html">
+<meta property="og:title" content="Vue 筆記 - 動態產生多筆資料於網頁上 v-for、v-if">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;vue-js-Note&#x2F;20200419&#x2F;2762058618&#x2F;index.html">
 <meta property="og:site_name" content="TimCodingBlog">
-<meta property="og:description" content="vue 的基本認識">
+<meta property="og:description" content="包含 v-if 與 v-show 的比較">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vue%20cover.png?alt&#x3D;media&amp;token&#x3D;5f8b5aa0-eb3e-4d21-a715-07c5442dafbc">
-<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vueAll.png?alt&#x3D;media&amp;token&#x3D;e8437854-f74d-46b2-b759-5de585a4855a">
-<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vue-MVVM.png?alt&#x3D;media&amp;token&#x3D;3bbf1341-6a9d-4bf5-bc3a-39be4c310883">
-<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vue-%E7%B3%BB%E7%B5%B1%E5%85%83%E4%BB%B6.png?alt&#x3D;media&amp;token&#x3D;16a76656-6caa-4fc1-ab53-8170037e615d">
-<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vue%20soft.png?alt&#x3D;media&amp;token&#x3D;b1a3a480-e1cf-4bd7-8a64-2bdad58cc0c7">
-<meta property="article:published_time" content="2020-03-16T13:20:43.000Z">
-<meta property="article:modified_time" content="2020-03-16T14:27:17.290Z">
+<meta property="article:published_time" content="2020-04-19T13:24:14.000Z">
+<meta property="article:modified_time" content="2020-04-20T14:36:43.495Z">
 <meta property="article:author" content="Tim">
 <meta property="article:tag" content="vue.js">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vue%20cover.png?alt&#x3D;media&amp;token&#x3D;5f8b5aa0-eb3e-4d21-a715-07c5442dafbc">
 
-<link rel="canonical" href="https://hsuchihting.github.io/vue-js-Note/20200316/3744633474/">
+<link rel="canonical" href="https://hsuchihting.github.io/vue-js-Note/20200419/2762058618/">
 
 
 <script id="page-configurations">
@@ -77,7 +73,7 @@
   };
 </script>
 
-  <title>Vue 筆記 - Vue 的基本認識與介紹 | TimCodingBlog</title>
+  <title>Vue 筆記 - 動態產生多筆資料於網頁上 v-for、v-if | TimCodingBlog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
     <script>
@@ -222,7 +218,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/vue-js-Note/20200316/3744633474/">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/vue-js-Note/20200419/2762058618/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/2020Tim.jpg">
@@ -235,7 +231,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          Vue 筆記 - Vue 的基本認識與介紹
+          Vue 筆記 - 動態產生多筆資料於網頁上 v-for、v-if
         </h2>
 
         <div class="post-meta">
@@ -244,10 +240,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2020-03-16 21:20:43 / 修改時間：22:27:17" itemprop="dateCreated datePublished" datetime="2020-03-16T21:20:43+08:00">2020-03-16</time>
+              <time title="創建時間：2020-04-19 21:24:14" itemprop="dateCreated datePublished" datetime="2020-04-19T21:24:14+08:00">2020-04-19</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-04-20 22:36:43" itemprop="dateModified" datetime="2020-04-20T22:36:43+08:00">2020-04-20</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -261,7 +263,7 @@
             </span>
 
           
-            <div class="post-description">vue 的基本認識</div>
+            <div class="post-description">包含 v-if 與 v-show 的比較</div>
 
         </div>
       </header>
@@ -273,26 +275,25 @@
 
       
         <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vue%20cover.png?alt=media&token=5f8b5aa0-eb3e-4d21-a715-07c5442dafbc" alt="vue.js"></p>
-<h2 id="Vue-的介紹"><a href="#Vue-的介紹" class="headerlink" title="Vue 的介紹"></a>Vue 的介紹</h2><p>vue 音同 「view」，是一個簡單輕量的 JS 漸進式框架，也可以與其他前端框架的函式庫並存共用，有趣的是原本 vue 不是以框架為前提的建構，原本是 library 出發，但後面就慢慢變成了 framework 了。Vue 不支持 IE8 及以下版本，因為 Vue 使用了 IE8 無法模擬的 ECMAScript 5 特性。但它支持所有兼容 ECMAScript 5 的瀏覽器。</p>
-<h3 id="vue-DevTools"><a href="#vue-DevTools" class="headerlink" title="vue DevTools"></a>vue DevTools</h3><p>推薦一個 Chrome 插件，在你的瀏覽器上安裝 <a href="https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd?hl=zh-tw" target="_blank" rel="noopener">Vue Devtools</a>。可以透過這個工具來檢查 vue 開發時遇到的錯誤。</p>
-<h2 id="關注點分離"><a href="#關注點分離" class="headerlink" title="關注點分離"></a>關注點分離</h2><p>開發者只要專注在<strong>畫面元素</strong>，以及對應的<strong>資料變化</strong>即可， vue 是用資料來控制的畫面的，與原本學習 JavaScript 的概念有點不同。是以操作物件模型為基礎的開發模式，直接描述<strong>狀態</strong>與 <strong>DOM 元素</strong>的對應關係，改變的是<strong>資料</strong>，並不是直接操作 DOM 元素。</p>
-<h2 id="漸進式框架"><a href="#漸進式框架" class="headerlink" title="漸進式框架"></a>漸進式框架</h2><p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vueAll.png?alt=media&token=e8437854-f74d-46b2-b759-5de585a4855a" alt="vue 漸進式框架"></p>
-<p>後續還有 vue-router、vuex、Vue-Cli…等等。</p>
-<h2 id="採用-MVVM-模式"><a href="#採用-MVVM-模式" class="headerlink" title="採用 MVVM 模式"></a>採用 MVVM 模式</h2><p>什麼是 MVVM?</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vue-MVVM.png?alt=media&token=3bbf1341-6a9d-4bf5-bc3a-39be4c310883" alt="MVVM"></p>
-<p>也就是前面提到的關注點分離的概念，Model, View-Model, View，透過修改資料的內容，便立即反映到畫面上，只要透過 vue 的實體與 HTML 的實體連結，就可以輕易地控制網頁元素。</p>
-<h2 id="系統元件簡介"><a href="#系統元件簡介" class="headerlink" title="系統元件簡介"></a>系統元件簡介</h2><p>系統元件是 Vue 的另一個重要概念，因為它是一種抽象，允許我們使用小型、獨立和通常可複用的組件構建大型應用，幾乎任意類型的應用界面都可以抽象為一個組件樹：</p>
-<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vue-%E7%B3%BB%E7%B5%B1%E5%85%83%E4%BB%B6.png?alt=media&token=16a76656-6caa-4fc1-ab53-8170037e615d" alt="系統元件"></p>
-<p>在一個大型應用中，有必要將整個應用程序劃分為組件，以使開發時更容易管理。</p>
-<h2 id="版本間的差異"><a href="#版本間的差異" class="headerlink" title="版本間的差異"></a>版本間的差異</h2><p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vue%20soft.png?alt=media&token=b1a3a480-e1cf-4bd7-8a64-2bdad58cc0c7" alt="版本差異"></p>
-<p>在 <a href="https://cn.vuejs.org/v2/guide/installation.html" target="_blank" rel="noopener">vue 官方網站</a>會看到兩種版本可以下載，一個是<strong>開發版本</strong>，一個是<strong>產品版本</strong>，通常會兩個都下載，但在開發時會使用開發的版本，等開發完畢變成產品要上線前，會更換成產品版本，原因是產品版本是經過壓縮後的大小。</p>
-<h2 id="透過-CDN-加入專案"><a href="#透過-CDN-加入專案" class="headerlink" title="透過 CDN 加入專案"></a>透過 CDN 加入專案</h2><p>對於<strong>製作原型</strong>或<strong>學習</strong>，你可以這樣使用最新版本：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src="https://cdn.jsdelivr.<span class="built_in">net</span>/npm/vue/dist/vue.js"&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p><code>data</code> 中除了之前所放入的屬性與資料內容外，也可以放入 JSON 的資料結構。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">"#app"</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    list: [</span><br><span class="line">      &#123;</span><br><span class="line">        name: <span class="string">"Min"</span>,</span><br><span class="line">        age: <span class="number">56</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        name: <span class="string">"Tim"</span>,</span><br><span class="line">        age: <span class="number">55</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        name: <span class="string">"Joshua"</span>,</span><br><span class="line">        age: <span class="number">20</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    ],</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<p>對於生產環境，我們推薦鏈接到一個明確的版本號和構建文件，以避免新版本造成的不可預期的破壞：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src="https://cdn.jsdelivr.<span class="built_in">net</span>/npm/vue@<span class="number">2</span>.<span class="number">6</span>.<span class="number">11</span>"&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a>v-for</h2><p>這次要透過列表的方式將 JSON 資料呈現在網頁上，傳統 jQuery 可能要寫很多的 <code>li</code> 才能實現此畫面，透過 Vue 只要寫這樣：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"item in list"</span>&gt;</span>&#123;&#123;item.name&#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>參考文章 <a href="https://cn.vuejs.org/v2/guide/installation.html" target="_blank" rel="noopener">https://cn.vuejs.org/v2/guide/installation.html</a></p>
+<p>說明：<br>透過 v-for 指令 ( 同等於 JS 的 for 迴圈篩選資料 ) 來取得資料，item 為自訂義的資料名稱，也就是指的是 <code>data</code> 中每一筆的物件資料，list 指的就是 JSON 本身，白話文可以解釋成：透過 <code>v-for</code> 從 list 篩選出每一筆的 item 資料內容，大括號指的是資料中的屬性。</p>
+<h3 id="加入索引-index"><a href="#加入索引-index" class="headerlink" title="加入索引 index"></a>加入索引 index</h3><p>如果要加入索引，可以這樣寫：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"(item, index) in list"</span> <span class="attr">:key</span>=<span class="string">"index"</span>&gt;</span></span><br><span class="line">    &#123;&#123; index +1 &#125;&#125; - &#123;&#123; item.name &#125;&#125; 是 &#123;&#123;item.age&#125;&#125; 歲</span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>要記得索引是從 0 開始，如果要讓使用者從 1 開始，要設定成 <code>index +1</code>。</p>
+<p><a href="https://codepen.io/hnzxewqw/pen/PoPzNma" target="_blank" rel="noopener">CodePen:</a></p>
+<blockquote>
+<p>其實現在編輯器相當人性，只要在 <code>li</code> 輸入 <code>v-for</code>，按下 tab，就會跳出預設的格式，再修改成自己要的對應名稱即可。</p>
+</blockquote>
+<h2 id="v-if"><a href="#v-if" class="headerlink" title="v-if"></a>v-if</h2><p>簡單來說就是在 html 標籤中加入判斷式，以上方例子為例，倘若今天要判斷年紀超過 20 歲的人物顯示在網頁上。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"(item, index) in list"</span> <span class="attr">:key</span>=<span class="string">"index"</span> <span class="attr">v-if</span>=<span class="string">"item.age&gt;20"</span>&gt;</span></span><br><span class="line">    &#123;&#123; index +1 &#125;&#125; - &#123;&#123; item.name &#125;&#125; 是 &#123;&#123;item.age&#125;&#125; 歲</span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="補充觀念"><a href="#補充觀念" class="headerlink" title="補充觀念"></a>補充觀念</h3><p>官網不推薦同時使用 <code>v-if</code> 和 <code>v-for</code>，原因是 <code>v-for</code> 的權重比較高。可看官網的<a href="https://cn.vuejs.org/v2/style-guide/#%E9%81%BF%E5%85%8D-v-if-%E5%92%8C-v-for-%E7%94%A8%E5%9C%A8%E4%B8%80%E8%B5%B7%E5%BF%85%E8%A6%81" target="_blank" rel="noopener">指令說明</a>與<a href="https://cn.vuejs.org/v2/guide/list.html#v-for-object" target="_blank" rel="noopener">渲染列表說明</a>，通常 v-if 會與 v-show 一起使用，這後面會提到。</p>
 
     </div>
 
@@ -311,12 +312,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/JavaScript-Note/20200316/526717564/" rel="prev" title="JS 筆記 - 利用函式 function 寫一個計算題">
-      <i class="fa fa-chevron-left"></i> JS 筆記 - 利用函式 function 寫一個計算題
+    <a href="/vue-js-Note/20200419/2954354756/" rel="prev" title="Vue 筆記 - 資料綁定與模板 v-model、v-text、v-html">
+      <i class="fa fa-chevron-left"></i> Vue 筆記 - 資料綁定與模板 v-model、v-text、v-html
     </a></div>
       <div class="post-nav-item">
-    <a href="/JavaScript-Note/20200317/144503038/" rel="next" title="JS 筆記 - ES6 功能：在 JavaScript 中快速組字串">
-      JS 筆記 - ES6 功能：在 JavaScript 中快速組字串 <i class="fa fa-chevron-right"></i>
+    <a href="/JavaScript-Note/20200420/4050508230/" rel="next" title="JS 筆記 - 控制判斷(if、else if、switch)">
+      JS 筆記 - 控制判斷(if、else if、switch) <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -377,7 +378,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue-的介紹"><span class="nav-number">1.</span> <span class="nav-text">Vue 的介紹</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vue-DevTools"><span class="nav-number">1.1.</span> <span class="nav-text">vue DevTools</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#關注點分離"><span class="nav-number">2.</span> <span class="nav-text">關注點分離</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漸進式框架"><span class="nav-number">3.</span> <span class="nav-text">漸進式框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#採用-MVVM-模式"><span class="nav-number">4.</span> <span class="nav-text">採用 MVVM 模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系統元件簡介"><span class="nav-number">5.</span> <span class="nav-text">系統元件簡介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本間的差異"><span class="nav-number">6.</span> <span class="nav-text">版本間的差異</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#透過-CDN-加入專案"><span class="nav-number">7.</span> <span class="nav-text">透過 CDN 加入專案</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#v-for"><span class="nav-number">1.</span> <span class="nav-text">v-for</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加入索引-index"><span class="nav-number">1.1.</span> <span class="nav-text">加入索引 index</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-if"><span class="nav-number">2.</span> <span class="nav-text">v-if</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#補充觀念"><span class="nav-number">2.1.</span> <span class="nav-text">補充觀念</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
