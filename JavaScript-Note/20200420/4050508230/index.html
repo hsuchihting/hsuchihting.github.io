@@ -55,7 +55,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
 <meta property="article:published_time" content="2020-04-20T14:29:29.000Z">
-<meta property="article:modified_time" content="2020-04-20T14:36:43.493Z">
+<meta property="article:modified_time" content="2020-04-20T14:49:37.539Z">
 <meta property="article:author" content="Tim">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
@@ -242,7 +242,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2020-04-20 22:29:29 / 修改時間：22:36:43" itemprop="dateCreated datePublished" datetime="2020-04-20T22:29:29+08:00">2020-04-20</time>
+              <time title="創建時間：2020-04-20 22:29:29 / 修改時間：22:49:37" itemprop="dateCreated datePublished" datetime="2020-04-20T22:29:29+08:00">2020-04-20</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -282,7 +282,7 @@
 <p>else 不用滿足條件，可以直接顯示結果，是滿好用的語法</p>
 </blockquote>
 <hr>
-<h3 id="Switch"><a href="#Switch" class="headerlink" title="Switch"></a>Switch</h3><p><code>Switch</code> 的用法跟 <code>if</code>、 <code>else if</code> 有點像，差別是 <code>if</code> 會把所有的程式碼都讀取過，相對渲染會比較慢，效能相對較低，而 <code>Switch</code> 會全部都讀過，但會只先看條件，看到有相符的型別才會再進去讀取相關內容，讀取後執行其他程式碼就不會再存取了，相對效能較高。</p>
+<h2 id="Switch"><a href="#Switch" class="headerlink" title="Switch"></a>Switch</h2><p><code>Switch</code> 的用法跟 <code>if</code>、 <code>else if</code> 有點像，差別是 <code>if</code> 會把所有的程式碼都讀取過，相對渲染會比較慢，效能相對較低，而 <code>Switch</code> 會全部都讀過，但會只先看條件，看到有相符的型別才會再進去讀取相關內容，讀取後執行其他程式碼就不會再存取了，相對效能較高。</p>
 <p>switch 的程式碼如下：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (key) &#123; <span class="comment">//設定一個表達式，且包含條件</span></span><br><span class="line">  <span class="keyword">case</span> value: <span class="comment">//要先寫一個 case 然後加上**變數名稱**(字串要加引號，不用小括弧)，給一個冒號：寫裡面的內容，結尾用分號 ; ，結束有點像 CSS</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">break</span>; <span class="comment">//每個 case 都要用一個 break 做結束。</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">default</span>: <span class="comment">//defalt 用法有點像 else，就如果沒有滿足的條件就會執行這個內容，但其位置可以任意放置，但我會習慣放在最後面，這樣寫程式碼比較有邏輯一點</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">break</span>; <span class="comment">// 結束也要用一個 break 當作結束。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -381,7 +381,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#if"><span class="nav-number">1.</span> <span class="nav-text">if</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#else-if、else"><span class="nav-number">2.</span> <span class="nav-text">else if、else</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Switch"><span class="nav-number">2.1.</span> <span class="nav-text">Switch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加入-function-到-Switch"><span class="nav-number">2.2.</span> <span class="nav-text">加入 function 到 Switch</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#if"><span class="nav-number">1.</span> <span class="nav-text">if</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#else-if、else"><span class="nav-number">2.</span> <span class="nav-text">else if、else</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Switch"><span class="nav-number">3.</span> <span class="nav-text">Switch</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加入-function-到-Switch"><span class="nav-number">3.1.</span> <span class="nav-text">加入 function 到 Switch</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
