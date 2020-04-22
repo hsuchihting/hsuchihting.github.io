@@ -55,7 +55,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vue%20cover.png?alt&#x3D;media&amp;token&#x3D;5f8b5aa0-eb3e-4d21-a715-07c5442dafbc">
 <meta property="article:published_time" content="2020-04-21T15:21:46.000Z">
-<meta property="article:modified_time" content="2020-04-21T15:25:34.253Z">
+<meta property="article:modified_time" content="2020-04-22T15:34:43.068Z">
 <meta property="article:author" content="Tim">
 <meta property="article:tag" content="vue.js">
 <meta name="twitter:card" content="summary">
@@ -240,10 +240,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2020-04-21 23:21:46 / 修改時間：23:25:34" itemprop="dateCreated datePublished" datetime="2020-04-21T23:21:46+08:00">2020-04-21</time>
+              <time title="創建時間：2020-04-21 23:21:46" itemprop="dateCreated datePublished" datetime="2020-04-21T23:21:46+08:00">2020-04-21</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-04-22 23:34:43" itemprop="dateModified" datetime="2020-04-22T23:34:43+08:00">2020-04-22</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -285,7 +291,7 @@
 <p>其實現在編輯器相當人性，只要在 <code>li</code> 輸入 <code>v-for</code>，按下 tab，就會跳出預設的格式，再修改成自己要的對應名稱即可。</p>
 </blockquote>
 <h2 id="v-if"><a href="#v-if" class="headerlink" title="v-if"></a>v-if</h2><p>簡單來說就是在 HTML 標籤中加入判斷式，以上方例子為例，倘若今天要判斷年紀超過 20 歲的人物顯示在網頁上。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"(item, index) in list"</span> <span class="attr">:key</span>=<span class="string">"index"</span> <span class="attr">v-if</span>=<span class="string">"item.age&gt;20"</span>&gt;</span></span><br><span class="line">    &#123;&#123; index +1 &#125;&#125; - &#123;&#123; item.name &#125;&#125; 是 &#123;&#123;item.age&#125;&#125; 歲</span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"(item, index) in list"</span> <span class="attr">:key</span>=<span class="string">"index"</span> <span class="attr">v-if</span>=<span class="string">"item.age &gt; 20"</span>&gt;</span></span><br><span class="line">    &#123;&#123; index +1 &#125;&#125; - &#123;&#123; item.name &#125;&#125; 是 &#123;&#123;item.age&#125;&#125; 歲</span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="補充觀念"><a href="#補充觀念" class="headerlink" title="補充觀念"></a>補充觀念</h3><p>官網不推薦同時使用 <code>v-if</code> 和 <code>v-for</code>，原因是 <code>v-for</code> 的權重比較高。可看官網的<a href="https://cn.vuejs.org/v2/style-guide/#%E9%81%BF%E5%85%8D-v-if-%E5%92%8C-v-for-%E7%94%A8%E5%9C%A8%E4%B8%80%E8%B5%B7%E5%BF%85%E8%A6%81" target="_blank" rel="noopener">指令說明</a>與<a href="https://cn.vuejs.org/v2/guide/list.html#v-for-object" target="_blank" rel="noopener">渲染列表說明</a>，通常 <code>v-if</code> 會與 <code>v-show</code> 一起使用，這後面會提到。</p>
 <h3 id="v-for-列表渲染"><a href="#v-for-列表渲染" class="headerlink" title="v-for 列表渲染"></a>v-for 列表渲染</h3><p>在 <code>li</code> 建立 <code>v-for</code> 指令，讓 <code>li</code> 產生多個清單，再透過雙向綁定的方法，使得 HTML 的程式碼很乾淨。</p>
@@ -311,7 +317,7 @@
 <blockquote>
 <p>雖然 vue 裡面沒有寫東西，但因為要套用指令效果，所以在 <code>script</code> 中還是要寫入 vue。</p>
 </blockquote>
-<h3 id="v-for-key"><a href="#v-for-key" class="headerlink" title="v-for + key"></a>v-for + key</h3><p>加上 key 是考量到效能，在預設狀況下，Vue.js 會盡量重複使用已經渲染好的元素，若不設定 key，不會重新渲染，只會部分更新。故當元素更新時(例如:改變順序)有可識別唯一性的 key <strong>可以確保列表有重新渲染</strong>。</p>
+<h3 id="v-for-key"><a href="#v-for-key" class="headerlink" title="v-for + key"></a>v-for + key</h3><p>加上 key 是考量到效能，在預設狀況下，Vue.js 會盡量重複使用已經渲染好的元素，若不設定 key，不會重新渲染，只會部分更新。故當元素更新時 ( 例如:改變順序 ) 有可識別唯一性的 key <strong>可以確保列表有重新渲染</strong>。</p>
 <p>HTML</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">h1</span>&gt;</span>filtered by age less then 40: <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"(s, index) in filteredSales"</span> <span class="attr">:key</span>=<span class="string">"s.name"</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">h3</span>&gt;</span>&#123;&#123; index &#125;&#125; &#123;&#123; s.name &#125;&#125;: <span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">div</span>&gt;</span>age: &#123;&#123; s.age &#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">div</span>&gt;</span>company: &#123;&#123; s.company &#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">div</span>&gt;</span>email: &#123;&#123; s.email &#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"></span><br><span class="line"> <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -320,7 +326,7 @@
 
 <h2 id="v-if-v-else-amp-v-show"><a href="#v-if-v-else-amp-v-show" class="headerlink" title="v-if / v-else &amp; v-show"></a>v-if / v-else &amp; v-show</h2><p>大部分 <code>v-if</code> 跟 <code>v-show</code> 會拿來一起使用或比較，兩者最大的差別是在對 DOM 元素的操作。</p>
 <h3 id="v-if-1"><a href="#v-if-1" class="headerlink" title="v-if"></a>v-if</h3><p>會依照條件決定<strong>是否將元件渲染在網頁上</strong>，並決定事件與資料的監聽是否要綁定至元件或直接銷毀元件。</p>
-<p>透過 v-if 加入判斷，倘若條件相符，就顯示於網頁上。</p>
+<p>透過 <code>v-if</code> 加入判斷，倘若條件相符，就顯示於網頁上。</p>
 <p>HTML</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-if</span>=<span class="string">"option1"</span>&gt;</span>Yes<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-if</span>=<span class="string">"option2"</span>&gt;</span>Yes<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-else</span>&gt;</span>No<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -433,7 +439,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
