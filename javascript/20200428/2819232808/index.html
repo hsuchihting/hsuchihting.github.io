@@ -56,7 +56,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;momentClock.jpg?alt&#x3D;media&amp;token&#x3D;7fb1360f-9e69-4d6c-83e3-b009ffb45fe8">
 <meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;moment.keyword.png?alt&#x3D;media&amp;token&#x3D;d9854c12-5b0f-49d3-948c-050a5931b7ff">
 <meta property="article:published_time" content="2020-04-28T14:44:28.000Z">
-<meta property="article:modified_time" content="2020-04-28T14:52:03.397Z">
+<meta property="article:modified_time" content="2020-04-28T14:55:05.432Z">
 <meta property="article:author" content="Tim">
 <meta property="article:tag" content="JavaScript">
 <meta property="article:tag" content="Moment.js">
@@ -244,7 +244,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2020-04-28 22:44:28 / 修改時間：22:52:03" itemprop="dateCreated datePublished" datetime="2020-04-28T22:44:28+08:00">2020-04-28</time>
+              <time title="創建時間：2020-04-28 22:44:28 / 修改時間：22:55:05" itemprop="dateCreated datePublished" datetime="2020-04-28T22:44:28+08:00">2020-04-28</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -295,9 +295,10 @@
 </ol>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"js/moment.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 
-<p>然後加入這段其實就可以使用 moment.js 套件了，對了!要跟 jQuery 一樣放在 <code>head</code> 裡面，不然會找不到核心， <code>console</code> 會跳錯!</p>
+<p>然後加入這段其實就可以使用 moment.js 套件了，</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">moment();</span><br></pre></td></tr></table></figure>
 
+<p>對了!要跟 jQuery 一樣放在 <code>head</code> 裡面，不然會找不到核心， <code>console</code> 會跳錯！是可以在 <code>console</code> 裡面看到時間了…</p>
 <p>但是，最重要的是要讓它在 HTML 上呈現阿…</p>
 <h2 id="進入正題"><a href="#進入正題" class="headerlink" title="進入正題"></a>進入正題</h2><p>這次要做一個電子時鐘，有小時，有分鐘，有秒數，所以這邊會使用到 <code>setInterval()</code> 的用法，是固定延遲了某段時間之後，才去執行對應的程式碼，然後「不斷循環」。與 <code>setTimeout()</code> 不同之處是 <code>setTimeout()</code> 只會執行一次就結束，而 <code>setInterval()</code> 則是會在間隔固定的時間不斷重複。</p>
 <blockquote>
