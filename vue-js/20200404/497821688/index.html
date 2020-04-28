@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2020Tim-32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2020Tim-16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="快速建立 SPA 專案">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue 筆記 - 使用 vue CLI 建立 SPA 專案">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;vue-js&#x2F;20200404&#x2F;497821688&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="快速建立 SPA 專案">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vueCli-00.png?alt&#x3D;media&amp;token&#x3D;fbc73968-437f-40fb-9b00-34d8b2dd69fb">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vueCli-01.png?alt&#x3D;media&amp;token&#x3D;f6b99f3b-4dc2-474f-bdcd-eecb95900e6f">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vueCli-02.png?alt&#x3D;media&amp;token&#x3D;1a6f8eb0-9472-4c59-880a-8bcac07ec9e7">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vueCli-03.png?alt&#x3D;media&amp;token&#x3D;aad50ffc-e0ae-4d64-b3a0-d617c38dbb5c">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vueCli-04.png?alt&#x3D;media&amp;token&#x3D;250a1ec3-c6e0-4d67-9e3a-9a02be4c5de7">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vueCli-05.png?alt&#x3D;media&amp;token&#x3D;dc9e47e0-f121-4bde-9e7a-7487cdcddc58">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vueCli-06.png?alt&#x3D;media&amp;token&#x3D;b65c1bb9-0ba2-4546-9656-842ad026b77a">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vueCli-07.png?alt&#x3D;media&amp;token&#x3D;0a20cd4f-972a-417f-b7ea-abe05544a006">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vueCli-08.png?alt&#x3D;media&amp;token&#x3D;7660ab32-fdbc-4251-a9f0-68613a6e6333">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vueCli-09.png?alt&#x3D;media&amp;token&#x3D;5d4e95e0-cc41-447d-814f-cf35444bb366">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vueCli-10.png?alt&#x3D;media&amp;token&#x3D;75d77f86-2238-4812-8b57-3c542a8a9412">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vueCli-11.png?alt&#x3D;media&amp;token&#x3D;59c88031-8e83-489d-b540-37d43d0fca64">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vueCli-12_%E5%B7%A5%E4%BD%9C%E5%8D%80%E5%9F%9F%201.png?alt&#x3D;media&amp;token&#x3D;4238ffea-3f4a-47be-bb6a-2187c9466e8a">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vueCli-13.png?alt&#x3D;media&amp;token&#x3D;4a7a4db1-7697-41fa-b7b4-f30f0119eba2">
+<meta property="article:published_time" content="2020-04-04T06:28:04.000Z">
+<meta property="article:modified_time" content="2020-04-28T14:49:24.869Z">
+<meta property="article:author" content="Tim">
+<meta property="article:tag" content="vue.js">
+<meta property="article:tag" content="vue CLI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vueCli-00.png?alt&#x3D;media&amp;token&#x3D;fbc73968-437f-40fb-9b00-34d8b2dd69fb">
+
+<link rel="canonical" href="https://hsuchihting.github.io/vue-js/20200404/497821688/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Vue 筆記 - 使用 vue CLI 建立 SPA 專案 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/vue-js/20200404/497821688/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2020Tim.jpg">
+      <meta itemprop="name" content="Tim">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          Vue 筆記 - 使用 vue CLI 建立 SPA 專案
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-04-04 14:28:04" itemprop="dateCreated datePublished" datetime="2020-04-04T14:28:04+08:00">2020-04-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-04-28 22:49:24" itemprop="dateModified" datetime="2020-04-28T22:49:24+08:00">2020-04-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue-js/" itemprop="url" rel="index">
+                    <span itemprop="name">vue.js</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">快速建立 SPA 專案</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vueCli-00.png?alt=media&token=fbc73968-437f-40fb-9b00-34d8b2dd69fb" alt="Vue CLI"></p>
+<p>面對現在正流行的 SPA 專案，若要用原生碼或傳統作法也不是不行，就會變整個專案很大一包，而且程式碼冗長，開發與維護都相當不容易。透過 Vue CLI 建立一個專案，不僅方便快速，且因為 MVVM 的特性，在開發不僅可以專注於資料上，且維護也較為容易。</p>
+<h2 id="使用-Vue-CLI-建立專案"><a href="#使用-Vue-CLI-建立專案" class="headerlink" title="使用 Vue CLI 建立專案"></a>使用 Vue CLI 建立專案</h2><p>VueCLI: A simple CLI (command-line interface) for scaffolding Vue.js projects.<br>整合了 webpack、vue-loader 與其他周邊開發套件 如 Vuex / sass-loader 等的建構工具。</p>
+<h3 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h3><p>VueCLI 需要先安裝 npm 或 yarn，然後透過指令來進行安裝。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g @vue/cli</span><br></pre></td></tr></table></figure>
+
+<p>或</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn global add @vue/cli</span><br></pre></td></tr></table></figure>
+
+<p>我個人是使用 npm 比較習慣，所以我就輸入 npm 指令進行安裝，安裝完畢後再輸入下方指令確認版本號。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue -V</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：-V 的 V 要大寫，不然會跳錯，目前版本號為 <code>@vue/cli 4.2.3</code></p>
+</blockquote>
+<h3 id="開啟專案"><a href="#開啟專案" class="headerlink" title="開啟專案"></a>開啟專案</h3><p>首先開啟命令列或終端機，輸入</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue create [專案名稱]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>也就是 vue create newProject，括弧不用打</p>
+</blockquote>
+<p>或者已經在專案目錄中了，那就輸入</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue create .</span><br></pre></td></tr></table></figure>
+<p>cli 就會提示你是否直接在這個目錄中建立專案，選擇 y，並選擇手動建立專案 (Manually select features)，如下圖。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vueCli-01.png?alt=media&token=f6b99f3b-4dc2-474f-bdcd-eecb95900e6f" alt="建立專案"></p>
+<h3 id="選擇套件"><a href="#選擇套件" class="headerlink" title="選擇套件"></a>選擇套件</h3><h4 id="常用套件選擇"><a href="#常用套件選擇" class="headerlink" title="常用套件選擇"></a>常用套件選擇</h4><p>選 Babel、Vuex、CSS Pre-processors 以及 Linter / Formatter。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vueCli-02.png?alt=media&token=1a6f8eb0-9472-4c59-880a-8bcac07ec9e7" alt="選擇套件"></p>
+<h4 id="CSS-預處理器"><a href="#CSS-預處理器" class="headerlink" title="CSS 預處理器"></a>CSS 預處理器</h4><p>Sass / SCSS (with node-sass)</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vueCli-03.png?alt=media&token=aad50ffc-e0ae-4d64-b3a0-d617c38dbb5c" alt="CSS 預處理器"></p>
+<h4 id="選擇規範"><a href="#選擇規範" class="headerlink" title="選擇規範"></a>選擇規範</h4><p>此範例我們選 SASS 與 ESLint + Airbnb config，當然也可以按照自己習慣調整。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vueCli-04.png?alt=media&token=250a1ec3-c6e0-4d67-9e3a-9a02be4c5de7" alt="選擇規範"></p>
+<blockquote>
+<p>開發若使用此功能，就會很容易陰部符合規範時一直跳錯，是滿煩的，但為了工作上的 coding style 其實還是有必要的。</p>
+</blockquote>
+<h4 id="Lint-存檔"><a href="#Lint-存檔" class="headerlink" title="Lint 存檔"></a>Lint 存檔</h4><p>只以這次為主。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vueCli-05.png?alt=media&token=dc9e47e0-f121-4bde-9e7a-7487cdcddc58" alt="Lint"></p>
+<h4 id="存檔在-package-json"><a href="#存檔在-package-json" class="headerlink" title="存檔在 package.json"></a>存檔在 package.json</h4><p>本次專案相關設定就會從這邊取出，如果要設定相關內容也從 package.json 修改，就可以讓整個專案吃到了，相當方便。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vueCli-06.png?alt=media&token=b65c1bb9-0ba2-4546-9656-842ad026b77a" alt="package.json"></p>
+<h4 id="不要儲存相關設定"><a href="#不要儲存相關設定" class="headerlink" title="不要儲存相關設定"></a>不要儲存相關設定</h4><p>最後會詢問，是否要儲存相關設定，在未來的專案使用，建議選擇 no，相關設定要看未來專案選擇。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vueCli-07.png?alt=media&token=0a20cd4f-972a-417f-b7ea-abe05544a006" alt="請選擇不要"></p>
+<p>選擇完畢後就會安裝所選擇的套件，這時就可以去倒杯水，回到座位看到下方畫面，代表完成了。</p>
+<h4 id="安裝完成"><a href="#安裝完成" class="headerlink" title="安裝完成"></a>安裝完成</h4><p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vueCli-08.png?alt=media&token=7660ab32-fdbc-4251-a9f0-68613a6e6333" alt="Vue CLI 安裝完成"></p>
+<p>這時候按照上方條件輸入後就會跳出下方畫面</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vueCli-09.png?alt=media&token=5d4e95e0-cc41-447d-814f-cf35444bb366" alt="done"></p>
+<p>打開瀏覽器輸入所得到的 localhost 的位址，若出現下方畫面，就是代表建立完成一個新的 SPA 專案囉!</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vueCli-10.png?alt=media&token=75d77f86-2238-4812-8b57-3c542a8a9412" alt="Vue SPA 專案建立完成"></p>
+<h2 id="專案架構"><a href="#專案架構" class="headerlink" title="專案架構"></a>專案架構</h2><p>生成的專案架構大概會向下方這樣：</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vueCli-11.png?alt=media&token=59c88031-8e83-489d-b540-37d43d0fca64" alt="專案架構"></p>
+<p>開發主要會動到的檔案，大多集中在 src 目錄，以及 public 裡的 index.html 。</p>
+<h2 id="Vue-的單一元件檔"><a href="#Vue-的單一元件檔" class="headerlink" title="Vue 的單一元件檔"></a>Vue 的單一元件檔</h2><p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vueCli-12_%E5%B7%A5%E4%BD%9C%E5%8D%80%E5%9F%9F%201.png?alt=media&token=4238ffea-3f4a-47be-bb6a-2187c9466e8a" alt="Vue 的單一元件檔"></p>
+<p>一個獨立的 vue 檔案，也就是一個 component，通常會包含</p>
+<ul>
+<li>HTML</li>
+<li>JavaScript</li>
+<li>CSS</li>
+</ul>
+<p>這三個部分，分別由 <code>&lt;template&gt;</code>  、  <code>&lt;script&gt;</code>  與 <code>&lt;style&gt;</code> 這三個標籤來表示。</p>
+<p>而 <code>.vue</code> 檔案也可以透過 <code>import</code> 其他 <code>.vue</code>  檔案，來將其他 component 引入作為自己的子元件。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vueCli-13.png?alt=media&token=4a7a4db1-7697-41fa-b7b4-f30f0119eba2" alt="components"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/vue-js/" rel="tag"># vue.js</a>
+              <a href="/tags/vue-CLI/" rel="tag"># vue CLI</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/javascript/20200404/784099098/" rel="prev" title="JS 筆記 - ES6：使用 let 與 const 宣告變數">
+      <i class="fa fa-chevron-left"></i> JS 筆記 - ES6：使用 let 與 const 宣告變數
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/CSS/20200410/3203726250/" rel="next" title="CSS 筆記 - 使用 overflow 顯示一個捲軸與自訂顏色">
+      CSS 筆記 - 使用 overflow 顯示一個捲軸與自訂顏色 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-Vue-CLI-建立專案"><span class="nav-number">1.</span> <span class="nav-text">使用 Vue CLI 建立專案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝"><span class="nav-number">1.1.</span> <span class="nav-text">安裝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#開啟專案"><span class="nav-number">1.2.</span> <span class="nav-text">開啟專案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#選擇套件"><span class="nav-number">1.3.</span> <span class="nav-text">選擇套件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常用套件選擇"><span class="nav-number">1.3.1.</span> <span class="nav-text">常用套件選擇</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSS-預處理器"><span class="nav-number">1.3.2.</span> <span class="nav-text">CSS 預處理器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#選擇規範"><span class="nav-number">1.3.3.</span> <span class="nav-text">選擇規範</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lint-存檔"><span class="nav-number">1.3.4.</span> <span class="nav-text">Lint 存檔</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#存檔在-package-json"><span class="nav-number">1.3.5.</span> <span class="nav-text">存檔在 package.json</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不要儲存相關設定"><span class="nav-number">1.3.6.</span> <span class="nav-text">不要儲存相關設定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安裝完成"><span class="nav-number">1.3.7.</span> <span class="nav-text">安裝完成</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#專案架構"><span class="nav-number">2.</span> <span class="nav-text">專案架構</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue-的單一元件檔"><span class="nav-number">3.</span> <span class="nav-text">Vue 的單一元件檔</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim"
+      src="/images/2020Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hsiangfeng.github.io/" title="https:&#x2F;&#x2F;hsiangfeng.github.io&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tim</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
