@@ -46,22 +46,24 @@
   };
 </script>
 
-  <meta name="description" content="什麼是 return?">
+  <meta name="description" content="for + array 取得陣列值的方法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JS 筆記 - 函式 function 搭配 return">
-<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;javascript&#x2F;20200302&#x2F;3851113860&#x2F;index.html">
+<meta property="og:title" content="JS 筆記 - for 迴圈 + array 陣列的使用方法">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;javascript&#x2F;20200504&#x2F;976232810&#x2F;index.html">
 <meta property="og:site_name" content="TimCodingBlog">
-<meta property="og:description" content="什麼是 return?">
+<meta property="og:description" content="for + array 取得陣列值的方法">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
-<meta property="article:published_time" content="2020-03-02T14:49:39.000Z">
-<meta property="article:modified_time" content="2020-04-28T14:47:02.228Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;ithelp.ithome.com.tw&#x2F;upload&#x2F;images&#x2F;20191204&#x2F;20119300jgqAQaQYFq.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;ithelp.ithome.com.tw&#x2F;upload&#x2F;images&#x2F;20191204&#x2F;20119300TnN8QLw9b2.png">
+<meta property="article:published_time" content="2020-05-04T12:50:06.000Z">
+<meta property="article:modified_time" content="2020-05-04T12:55:33.036Z">
 <meta property="article:author" content="Tim">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
 
-<link rel="canonical" href="https://hsuchihting.github.io/javascript/20200302/3851113860/">
+<link rel="canonical" href="https://hsuchihting.github.io/javascript/20200504/976232810/">
 
 
 <script id="page-configurations">
@@ -73,7 +75,7 @@
   };
 </script>
 
-  <title>JS 筆記 - 函式 function 搭配 return | TimCodingBlog</title>
+  <title>JS 筆記 - for 迴圈 + array 陣列的使用方法 | TimCodingBlog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
     <script>
@@ -218,7 +220,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/javascript/20200302/3851113860/">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/javascript/20200504/976232810/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/2020Tim.jpg">
@@ -231,7 +233,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          JS 筆記 - 函式 function 搭配 return
+          JS 筆記 - for 迴圈 + array 陣列的使用方法
         </h2>
 
         <div class="post-meta">
@@ -240,16 +242,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
+              
 
-              <time title="創建時間：2020-03-02 22:49:39" itemprop="dateCreated datePublished" datetime="2020-03-02T22:49:39+08:00">2020-03-02</time>
+              <time title="創建時間：2020-05-04 20:50:06 / 修改時間：20:55:33" itemprop="dateCreated datePublished" datetime="2020-05-04T20:50:06+08:00">2020-05-04</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-04-28 22:47:02" itemprop="dateModified" datetime="2020-04-28T22:47:02+08:00">2020-04-28</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -263,7 +259,7 @@
             </span>
 
           
-            <div class="post-description">什麼是 return?</div>
+            <div class="post-description">for + array 取得陣列值的方法</div>
 
         </div>
       </header>
@@ -275,14 +271,35 @@
 
       
         <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JavaScript%20note-01.jpg?alt=media&token=7bee0261-72ac-4de4-9f5a-f39d58735b7d" alt="JavaScript Note"></p>
-<blockquote>
-<p>函式 function 搭配 return 是一個常用且好用的小技巧。</p>
-</blockquote>
-<hr>
-<h2 id="return-回傳"><a href="#return-回傳" class="headerlink" title="return 回傳"></a>return 回傳</h2><p>透過 <code>return</code> 回傳的屬性，可以運算比較複雜的內容，當商品或是後台採購品項較多時，就不用一直打程式碼，前提是參數內的數值要同一個才可以，比如下方例子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params">price</span>) </span>&#123; </span><br><span class="line">  <span class="keyword">return</span> addTax(price * <span class="number">0.8</span>); <span class="comment">// 商品價格要打八折時</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params">price</span>) </span>&#123; <span class="comment">// 當商品要開立發票時</span></span><br><span class="line">  <span class="keyword">return</span> addTax * <span class="number">1.05</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(count(<span class="number">500</span>);)</span><br><span class="line"><span class="comment">//return 會把 count 的參數 500，套回 function 中，會得到下面結果</span></span><br><span class="line"><span class="comment">// 500 * 0.8</span></span><br><span class="line"><span class="comment">// 500 * 1.05</span></span><br></pre></td></tr></table></figure>
+<h2 id="透過迴圈來取得陣列裡的資料"><a href="#透過迴圈來取得陣列裡的資料" class="headerlink" title="透過迴圈來取得陣列裡的資料"></a>透過迴圈來取得陣列裡的資料</h2><p>當得到龐大的陣列資料時，透過迴圈來存取資料會輕鬆又省事，所以陣列跟迴圈常常會搭配使用。</p>
+<h4 id="情境"><a href="#情境" class="headerlink" title="情境"></a>情境</h4><p>倘若今天要查詢兩間店家的老闆姓名，拿到兩個陣列資料，程式碼如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> shops = [</span><br><span class="line">  &#123;</span><br><span class="line">    captain: <span class="string">"Tim"</span>,</span><br><span class="line">    coke: <span class="number">10</span>,</span><br><span class="line">    cookie: <span class="number">25</span>,</span><br><span class="line">    egg: <span class="number">170</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    captain: <span class="string">"Min"</span>,</span><br><span class="line">    coke: <span class="number">77</span>,</span><br><span class="line">    cookie: <span class="number">44</span>,</span><br><span class="line">    egg: <span class="number">58</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br><span class="line"><span class="comment">//陣列資料</span></span><br></pre></td></tr></table></figure>
 
-<p><code>return</code> 是幫助資料回傳的一個語法，讓 function 中的語法除了更簡潔外，也更可以提高程式碼閱讀性! 也可以透過判斷式的內容，讓 <code>return</code> 讓函式停止執行。</p>
+<p>之前學過透過陣列存取資料的方法為：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(shops.length); <span class="comment">//結果會得到 2</span></span><br></pre></td></tr></table></figure>
+
+<p>不過有時候在工作上得到資料無法預期有多少的資料，可以用下方寫法找出有多少筆資料：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> captainTotal = shops.length;</span><br><span class="line"><span class="built_in">console</span>.log(captainTotal); <span class="comment">//結果會得到 2</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="使用迴圈存取陣列資料"><a href="#使用迴圈存取陣列資料" class="headerlink" title="使用迴圈存取陣列資料"></a>使用迴圈存取陣列資料</h3><p>透過迴圈存取陣列資料，程式碼如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> shops = [</span><br><span class="line">  &#123;</span><br><span class="line">    captain: <span class="string">"Tim"</span>,</span><br><span class="line">    coke: <span class="number">10</span>,</span><br><span class="line">    cookie: <span class="number">25</span>,</span><br><span class="line">    egg: <span class="number">170</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    captain: <span class="string">"Min"</span>,</span><br><span class="line">    coke: <span class="number">77</span>,</span><br><span class="line">    cookie: <span class="number">44</span>,</span><br><span class="line">    egg: <span class="number">58</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br><span class="line"><span class="comment">//陣列資料</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; captainTotal; i++) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(shops[<span class="number">0</span>].captain);</span><br><span class="line">  <span class="comment">//帶入陣列長度的變數。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但迴圈這樣帶會有一個問題，上面得知 <code>captainsTotal</code> 的資料長度是 2，但是這樣迴圈會直接抓兩次第一個陣列的 <code>captain</code> 兩次，會變這樣：</p>
+<p><img src="https://ithelp.ithome.com.tw/upload/images/20191204/20119300jgqAQaQYFq.png" alt="https://ithelp.ithome.com.tw/upload/images/20191204/20119300jgqAQaQYFq.png"></p>
+<p>但今天的目標是要把兩個物件內的店長姓名找出來，所以會變成下方程式碼：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; captainTotal; i++) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(shops[i].captain);</span><br><span class="line">  <span class="comment">//帶入陣列長度的變數。</span></span><br><span class="line">  <span class="comment">//陣列裡改成 i</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>因為 <code>captainTotal</code> 資料有兩筆，所以迴圈會跑兩次，要記得在陣列中起始的數字為 0，不是 1，所以會跑兩次的原因是這樣。<br>這樣就會找到兩個物件中店長的名字，如下方畫面：</p>
+</blockquote>
+<p><img src="https://ithelp.ithome.com.tw/upload/images/20191204/20119300TnN8QLw9b2.png" alt="https://ithelp.ithome.com.tw/upload/images/20191204/20119300TnN8QLw9b2.png"></p>
+<hr>
+<h3 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h3><ol>
+<li>如果陣列中的物件資料非常多，使用迴圈存取資料真的準確又方便。</li>
+<li>存取陣列資料的寫法需要多熟悉。</li>
+<li>迴圈條件中的值，可以換成<strong>設定的變數名稱</strong>。</li>
+</ol>
 
     </div>
 
@@ -301,13 +318,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/javascript/20200224/3133182567/" rel="prev" title="JS 筆記 - 全域變數與區域變數">
-      <i class="fa fa-chevron-left"></i> JS 筆記 - 全域變數與區域變數
+    <a href="/c/20200428/284475535/" rel="prev" title="C# 筆記 - 類別">
+      <i class="fa fa-chevron-left"></i> C# 筆記 - 類別
     </a></div>
-      <div class="post-nav-item">
-    <a href="/javascript/20200309/1212075218/" rel="next" title="JS 筆記 - function 函式 Hoisting 提升觀念">
-      JS 筆記 - function 函式 Hoisting 提升觀念 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -367,7 +381,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#return-回傳"><span class="nav-number">1.</span> <span class="nav-text">return 回傳</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#透過迴圈來取得陣列裡的資料"><span class="nav-number">1.</span> <span class="nav-text">透過迴圈來取得陣列裡的資料</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#情境"><span class="nav-number">1.0.1.</span> <span class="nav-text">情境</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用迴圈存取陣列資料"><span class="nav-number">1.1.</span> <span class="nav-text">使用迴圈存取陣列資料</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#結語"><span class="nav-number">1.2.</span> <span class="nav-text">結語</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
