@@ -46,21 +46,23 @@
   };
 </script>
 
-  <meta name="description" content="提姆的前端筆記">
-<meta property="og:type" content="website">
-<meta property="og:title" content="TimCodingBlog">
-<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;categories&#x2F;Powershell&#x2F;index.html">
+  <meta name="description" content="for + if 篩選資料超方便">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 筆記 - for 迴圈 + if 的使用練習">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;javascript&#x2F;20200513&#x2F;3002099079&#x2F;index.html">
 <meta property="og:site_name" content="TimCodingBlog">
-<meta property="og:description" content="提姆的前端筆記">
+<meta property="og:description" content="for + if 篩選資料超方便">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;ithelp.ithome.com.tw&#x2F;upload&#x2F;images&#x2F;20191204&#x2F;20119300zW6h2AwZcg.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;ithelp.ithome.com.tw&#x2F;upload&#x2F;images&#x2F;20191204&#x2F;20119300EXa4P0aumU.png">
+<meta property="article:published_time" content="2020-05-13T13:50:42.000Z">
+<meta property="article:modified_time" content="2020-05-13T13:55:41.096Z">
 <meta property="article:author" content="Tim">
-<meta property="article:tag" content="TimCodingBlog">
-<meta property="article:tag" content=" 前端工程師">
-<meta property="article:tag" content=" Frond-end developer">
-<meta property="article:tag" content=" F2E">
+<meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;ithelp.ithome.com.tw&#x2F;upload&#x2F;images&#x2F;20191204&#x2F;20119300zW6h2AwZcg.jpg">
 
-<link rel="canonical" href="https://hsuchihting.github.io/categories/Powershell/">
+<link rel="canonical" href="https://hsuchihting.github.io/javascript/20200513/3002099079/">
 
 
 <script id="page-configurations">
@@ -68,11 +70,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false
+    isPost: true
   };
 </script>
 
-  <title>分類: Powershell | TimCodingBlog</title>
+  <title>JS 筆記 - for 迴圈 + if 的使用練習 | TimCodingBlog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
     <script>
@@ -212,50 +214,115 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">Powershell
-          <small>分類</small>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/javascript/20200513/3002099079/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2020Tim.jpg">
+      <meta itemprop="name" content="Tim">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          JS 筆記 - for 迴圈 + if 的使用練習
         </h2>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-05-13 21:50:42 / 修改時間：21:55:41" itemprop="dateCreated datePublished" datetime="2020-05-13T21:50:42+08:00">2020-05-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">for + if 篩選資料超方便</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h2 class="collection-header">2019</h2>
+        <p><img src="https://ithelp.ithome.com.tw/upload/images/20191204/20119300zW6h2AwZcg.jpg" alt="https://ithelp.ithome.com.tw/upload/images/20191204/20119300zW6h2AwZcg.jpg"></p>
+<p>之前學過 if，是有條件下的篩選機制，如果是多樣本但只要取出條件下的數值，配上迴圈就會非常好用，下方帶入一個主題：</p>
+<h3 id="有三間賣炸雞的餐廳要被評鑑銷售量，套餐要超過-100-筆訂單的就可獲得獎品。"><a href="#有三間賣炸雞的餐廳要被評鑑銷售量，套餐要超過-100-筆訂單的就可獲得獎品。" class="headerlink" title="有三間賣炸雞的餐廳要被評鑑銷售量，套餐要超過 100 筆訂單的就可獲得獎品。"></a>有三間賣炸雞的餐廳要被評鑑銷售量，套餐要超過 100 筆訂單的就可獲得獎品。</h3><p>三家炸雞店的資料如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> shops = [</span><br><span class="line">  &#123;</span><br><span class="line">    captain: <span class="string">"Tim"</span>,</span><br><span class="line">    chicken: <span class="number">150</span>,</span><br><span class="line">    coke: <span class="number">200</span>,</span><br><span class="line">    fries: <span class="number">70</span>,</span><br><span class="line">    <span class="keyword">set</span>: 99,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    captain: <span class="string">"Min"</span>,</span><br><span class="line">    chicken: <span class="number">99</span>,</span><br><span class="line">    coke: <span class="number">77</span>,</span><br><span class="line">    fries: <span class="number">55</span>,</span><br><span class="line">    <span class="keyword">set</span>: 101,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    captain: <span class="string">"Mike"</span>,</span><br><span class="line">    chicken: <span class="number">105</span>,</span><br><span class="line">    coke: <span class="number">111</span>,</span><br><span class="line">    fries: <span class="number">75</span>,</span><br><span class="line">    <span class="keyword">set</span>: 130,</span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br><span class="line">//陣列資料</span><br></pre></td></tr></table></figure>
+
+<p>因為只有三筆資料，可以很輕易地用眼睛看出來誰的套餐超過 100 套，但如果資料一多，就要使用迴圈了。<br>先用 <code>length</code> 查一下資料長度：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> setTotal = shops.length;</span><br><span class="line"><span class="built_in">console</span>.log(setTotal); <span class="comment">//結果會得到 3</span></span><br></pre></td></tr></table></figure>
+
+<p>使用迴圈來找超過一百套的店家吧！</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; setTotal; i++) &#123;</span><br><span class="line">  <span class="keyword">if</span> (shops[i].set &gt; <span class="number">100</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(shops[i].captain + <span class="string">"的套餐在本月賣超過 100 套，以資鼓勵"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>建立迴圈，從第一筆資料找起，條件為當變數小於 setTotal 資料數，更新的內容。關於迴圈可以看<a href="https://ithelp.ithome.com.tw/articles/10229230" target="_blank" rel="noopener">這篇</a></li>
+<li>使用 if，在 shops 中，找到 set 套餐大於 100 套的店家。</li>
+<li>找到這些店長的名字。</li>
+</ol>
+<p>畫面結果如下：</p>
+<p><img src="https://ithelp.ithome.com.tw/upload/images/20191204/20119300EXa4P0aumU.png" alt="https://ithelp.ithome.com.tw/upload/images/20191204/20119300EXa4P0aumU.png"></p>
+<hr>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><ol>
+<li>練習 JS 至今，要建立一些情境才能更明確的來練習該內容，會比較有方向，也練習如果未來面對開發的需求，會遇到的條件，滿有意思的！</li>
+<li>陣列與物件很常被使用，要多多練習。</li>
+</ol>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-12-25T15:42:31+08:00"
-              content="2019-12-25">
-          12-25
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
 
-      <h3 class="post-title">
-          <a class="post-title-link" href="/Powershell/20191225/611397980/" itemprop="url">
-            <span itemprop="name">美化 Powershell</span>
-          </a>
-      </h3>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/javascript/20200513/3866185586/" rel="prev" title="JS 筆記 - 透過 JavaScript 生成一個檔案並下載">
+      <i class="fa fa-chevron-left"></i> JS 筆記 - 透過 JavaScript 生成一個檔案並下載
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
   </article>
+  
+  
+  
 
-    </div>
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
@@ -306,6 +373,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#有三間賣炸雞的餐廳要被評鑑銷售量，套餐要超過-100-筆訂單的就可獲得獎品。"><span class="nav-number">1.</span> <span class="nav-text">有三間賣炸雞的餐廳要被評鑑銷售量，套餐要超過 100 筆訂單的就可獲得獎品。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#結語"><span class="nav-number"></span> <span class="nav-text">結語</span></a></div>
       </div>
       <!--/noindex-->
 
