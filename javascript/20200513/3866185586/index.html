@@ -55,7 +55,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1563906267088-b029e7101114?ixlib&#x3D;rb-1.2.1&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1950&amp;q&#x3D;80">
 <meta property="article:published_time" content="2020-05-13T13:44:25.000Z">
-<meta property="article:modified_time" content="2020-05-13T13:52:22.180Z">
+<meta property="article:modified_time" content="2020-05-18T14:47:32.817Z">
 <meta property="article:author" content="Tim">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
@@ -240,10 +240,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2020-05-13 21:44:25 / 修改時間：21:52:22" itemprop="dateCreated datePublished" datetime="2020-05-13T21:44:25+08:00">2020-05-13</time>
+              <time title="創建時間：2020-05-13 21:44:25" itemprop="dateCreated datePublished" datetime="2020-05-13T21:44:25+08:00">2020-05-13</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-05-18 22:47:32" itemprop="dateModified" datetime="2020-05-18T22:47:32+08:00">2020-05-18</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -272,7 +278,7 @@
 <p>看到上方這張圖片，如果喜歡的話會怎麼儲存呢?</p>
 <p>沒錯~就是在圖片上點選右鍵並且選擇「另存圖片」下載它，那該怎麼做?</p>
 <h2 id="在-a-連結中即可實現"><a href="#在-a-連結中即可實現" class="headerlink" title="在 a 連結中即可實現"></a>在 a 連結中即可實現</h2><p>W3School 的範例程式碼：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/images/myw3schoolsimage.jpg"</span> <span class="attr">download</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/images/myw3schoolsimage.jpg"</span> <span class="attr">download</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>只要在 <code>image</code> 資料中的檔案，透過 <code>a</code> 連結，最後加上 <code>download</code> 屬性就可以完成這個功能。</p>
 <p>但是今天 PM 跑來說：<br>「客戶那邊要求在表單下方要有一個按鈕，表單所產生的 data 的資料，按下按鈕可以下載，然後這個檔案要用 excel 打開。」</p>
@@ -319,11 +325,23 @@
 </li>
 </ol>
 <blockquote>
-<p>疑問：<br>一開始已經有綁定 <code>click</code> 事件，但 function 內還要綁定一個 <code>click</code> 函式，嘗試過若少一個事件就無法執行下載，目前還搞不清楚，等研究好答案再補充這個問題。</p>
+<p>補充：<br>外部建立 <code>click</code> 的監聽事件，是呼叫 function 用，而 function 內的 <code>click();</code>，是針對透過 JS 建立的 <code>a</code> 連結所產生的點擊事件，所以兩個是不同的！</p>
 </blockquote>
 <h4 id="假資料"><a href="#假資料" class="headerlink" title="假資料"></a>假資料</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getRandomData</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> header = <span class="string">"RandomHeader"</span>;</span><br><span class="line">  <span class="keyword">var</span> data = <span class="string">""</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; <span class="number">2</span>; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (j &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        data = data + <span class="string">","</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      data = data + <span class="string">"Item"</span> + i + <span class="string">"_"</span> + j;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> header + data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>codepen: <a href="https://codepen.io/hnzxewqw/pen/WNQKMKG" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/WNQKMKG</a></p>
+<h2 id="用-JS-寫一個載入檔案-load-File-功能"><a href="#用-JS-寫一個載入檔案-load-File-功能" class="headerlink" title="用 JS 寫一個載入檔案 load File 功能"></a>用 JS 寫一個載入檔案 load File 功能</h2><p>有下載檔案，一定也有透過本地端載入檔案到網頁上的功能，在 HTML 5 有建立一個 load 的語法，但會有預設的樣式，</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">id</span>=<span class="string">"myfile"</span> <span class="attr">name</span>=<span class="string">"myfile"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Codepen <a href="https://codepen.io/hnzxewqw/pen/dyYQzOy" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/dyYQzOy</a></p>
+<p>但這次專案中是使用 button 按鈕來取得檔案，要有美美的按鈕，所以改寫一下，</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">id</span>=<span class="string">"file"</span> <span class="attr">hidden</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn_loadFile"</span>&gt;</span>Load File<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>因為在 input 使用 hidden 屬性，所以原本預設的 input 就會看不見。必須使用 JS 來控制該功能，這邊使用的是 jQuery，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">".btn_loadFile"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  $(<span class="string">":file"</span>).trigger(<span class="string">"click"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>這樣就可以實現檔案下載的功能，又能具備好看的 button。</p>
+<p>CodePen <a href="https://codepen.io/hnzxewqw/pen/zYvMdoy" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/zYvMdoy</a></p>
 <blockquote>
 <p>註 1.<br>網際網路媒體類型（Internet media type，也稱為 MIME 類型（MIME type）或內容類型（content type））是給網際網路上傳輸的內容賦予的分類類型。這邊的情境是<br><a href="https://zh.wikipedia.org/wiki/%E4%BA%92%E8%81%94%E7%BD%91%E5%AA%92%E4%BD%93%E7%B1%BB%E5%9E%8B#Type_application" target="_blank" rel="noopener">application/octet-stream:任意的二進制檔案（通常做為通知瀏覽器下載檔案）</a>，還有很多種類型的介紹，請見維基百科。</p>
 </blockquote>
@@ -345,8 +363,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/jQuery/20200508/3013406974/" rel="prev" title="jQuery 筆記 - 使用 toggleFade 產生按鈕互動">
-      <i class="fa fa-chevron-left"></i> jQuery 筆記 - 使用 toggleFade 產生按鈕互動
+    <a href="/jQuery/20200508/3013406974/" rel="prev" title="jQuery 筆記 - 使用 fadeToggle 產生按鈕互動">
+      <i class="fa fa-chevron-left"></i> jQuery 筆記 - 使用 fadeToggle 產生按鈕互動
     </a></div>
       <div class="post-nav-item">
     <a href="/javascript/20200513/3002099079/" rel="next" title="JS 筆記 - for 迴圈 + if 的使用練習">
@@ -411,7 +429,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#在-a-連結中即可實現"><span class="nav-number">1.</span> <span class="nav-text">在 a 連結中即可實現</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSV-逗號分隔值"><span class="nav-number">2.</span> <span class="nav-text">CSV 逗號分隔值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Blob"><span class="nav-number">3.</span> <span class="nav-text">Blob</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTML"><span class="nav-number">3.0.1.</span> <span class="nav-text">HTML</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JavaScript"><span class="nav-number">3.0.2.</span> <span class="nav-text">JavaScript</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#假資料"><span class="nav-number">3.0.3.</span> <span class="nav-text">假資料</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#在-a-連結中即可實現"><span class="nav-number">1.</span> <span class="nav-text">在 a 連結中即可實現</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSV-逗號分隔值"><span class="nav-number">2.</span> <span class="nav-text">CSV 逗號分隔值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Blob"><span class="nav-number">3.</span> <span class="nav-text">Blob</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTML"><span class="nav-number">3.0.1.</span> <span class="nav-text">HTML</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JavaScript"><span class="nav-number">3.0.2.</span> <span class="nav-text">JavaScript</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#假資料"><span class="nav-number">3.0.3.</span> <span class="nav-text">假資料</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用-JS-寫一個載入檔案-load-File-功能"><span class="nav-number">4.</span> <span class="nav-text">用 JS 寫一個載入檔案 load File 功能</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -427,7 +445,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-count">44</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
