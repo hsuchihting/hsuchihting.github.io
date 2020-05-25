@@ -53,14 +53,14 @@
 <meta property="og:site_name" content="TimCodingBlog">
 <meta property="og:description" content="for + if 篩選資料超方便">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https:&#x2F;&#x2F;ithelp.ithome.com.tw&#x2F;upload&#x2F;images&#x2F;20191204&#x2F;20119300zW6h2AwZcg.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
 <meta property="og:image" content="https:&#x2F;&#x2F;ithelp.ithome.com.tw&#x2F;upload&#x2F;images&#x2F;20191204&#x2F;20119300EXa4P0aumU.png">
 <meta property="article:published_time" content="2020-05-13T13:50:42.000Z">
-<meta property="article:modified_time" content="2020-05-18T14:42:45.118Z">
+<meta property="article:modified_time" content="2020-05-25T14:32:58.540Z">
 <meta property="article:author" content="Tim">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;ithelp.ithome.com.tw&#x2F;upload&#x2F;images&#x2F;20191204&#x2F;20119300zW6h2AwZcg.jpg">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
 
 <link rel="canonical" href="https://hsuchihting.github.io/javascript/20200513/3002099079/">
 
@@ -249,7 +249,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-05-18 22:42:45" itemprop="dateModified" datetime="2020-05-18T22:42:45+08:00">2020-05-18</time>
+                <time title="修改時間：2020-05-25 22:32:58" itemprop="dateModified" datetime="2020-05-25T22:32:58+08:00">2020-05-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -275,7 +275,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><img src="https://ithelp.ithome.com.tw/upload/images/20191204/20119300zW6h2AwZcg.jpg" alt="https://ithelp.ithome.com.tw/upload/images/20191204/20119300zW6h2AwZcg.jpg"></p>
+        <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JavaScript%20note-01.jpg?alt=media&token=7bee0261-72ac-4de4-9f5a-f39d58735b7d" alt="JavaScript Note"></p>
 <p>之前學過 if，是有條件下的篩選機制，如果是多樣本但只要取出條件下的數值，配上迴圈就會非常好用，下方帶入一個主題：</p>
 <h3 id="有三間賣炸雞的餐廳要被評鑑銷售量，套餐要超過-100-筆訂單的就可獲得獎品。"><a href="#有三間賣炸雞的餐廳要被評鑑銷售量，套餐要超過-100-筆訂單的就可獲得獎品。" class="headerlink" title="有三間賣炸雞的餐廳要被評鑑銷售量，套餐要超過 100 筆訂單的就可獲得獎品。"></a>有三間賣炸雞的餐廳要被評鑑銷售量，套餐要超過 100 筆訂單的就可獲得獎品。</h3><p>三家炸雞店的資料如下：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> shops = [</span><br><span class="line">  &#123;</span><br><span class="line">    captain: <span class="string">"Tim"</span>,</span><br><span class="line">    chicken: <span class="number">150</span>,</span><br><span class="line">    coke: <span class="number">200</span>,</span><br><span class="line">    fries: <span class="number">70</span>,</span><br><span class="line">    <span class="keyword">set</span>: 99,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    captain: <span class="string">"Min"</span>,</span><br><span class="line">    chicken: <span class="number">99</span>,</span><br><span class="line">    coke: <span class="number">77</span>,</span><br><span class="line">    fries: <span class="number">55</span>,</span><br><span class="line">    <span class="keyword">set</span>: 101,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    captain: <span class="string">"Mike"</span>,</span><br><span class="line">    chicken: <span class="number">105</span>,</span><br><span class="line">    coke: <span class="number">111</span>,</span><br><span class="line">    fries: <span class="number">75</span>,</span><br><span class="line">    <span class="keyword">set</span>: 130,</span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br><span class="line">//陣列資料</span><br></pre></td></tr></table></figure>
@@ -398,7 +398,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-count">46</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
