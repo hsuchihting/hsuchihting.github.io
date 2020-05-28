@@ -46,21 +46,23 @@
   };
 </script>
 
-  <meta name="description" content="提姆的前端筆記">
-<meta property="og:type" content="website">
-<meta property="og:title" content="TimCodingBlog">
-<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;archives&#x2F;2020&#x2F;page&#x2F;2&#x2F;index.html">
+  <meta name="description" content="動態增加 disabled 來控制按鈕">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery - 使用 jQuery 來啟用&#x2F;停用元素？">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;jQuery&#x2F;20200528&#x2F;2763880390&#x2F;index.html">
 <meta property="og:site_name" content="TimCodingBlog">
-<meta property="og:description" content="提姆的前端筆記">
+<meta property="og:description" content="動態增加 disabled 來控制按鈕">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1575538031230-3e9ebd2fd631?ixlib&#x3D;rb-1.2.1&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1997&amp;q&#x3D;80">
+<meta property="article:published_time" content="2020-05-28T11:43:34.000Z">
+<meta property="article:modified_time" content="2020-05-28T11:50:06.065Z">
 <meta property="article:author" content="Tim">
-<meta property="article:tag" content="TimCodingBlog">
-<meta property="article:tag" content=" 前端工程師">
-<meta property="article:tag" content=" Frond-end developer">
-<meta property="article:tag" content=" F2E">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="jQuery">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1575538031230-3e9ebd2fd631?ixlib&#x3D;rb-1.2.1&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1997&amp;q&#x3D;80">
 
-<link rel="canonical" href="https://hsuchihting.github.io/archives/2020/page/2/">
+<link rel="canonical" href="https://hsuchihting.github.io/jQuery/20200528/2763880390/">
 
 
 <script id="page-configurations">
@@ -68,11 +70,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false
+    isPost: true
   };
 </script>
 
-  <title>歸檔 | TimCodingBlog</title>
+  <title>jQuery - 使用 jQuery 來啟用/停用元素？ | TimCodingBlog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
     <script>
@@ -212,233 +214,124 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        
-        <span class="collection-header">好! 目前共有 51 篇文章。 繼續努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/jQuery/20200528/2763880390/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          jQuery - 使用 jQuery 來啟用/停用元素？
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-05-28 19:43:34 / 修改時間：19:50:06" itemprop="dateCreated datePublished" datetime="2020-05-28T19:43:34+08:00">2020-05-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jQuery/" itemprop="url" rel="index">
+                    <span itemprop="name">jQuery</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">動態增加 disabled 來控制按鈕</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h2 class="collection-header">2020</h2>
-    </div>
+        <p><img src="https://images.unsplash.com/photo-1575538031230-3e9ebd2fd631?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1997&q=80" alt="switch button"></p>
+<h2 id="disabled"><a href="#disabled" class="headerlink" title="disabled"></a>disabled</h2><p>在 HTML 標籤中有一個 <code>disabled</code> 的屬性，只要在表單元素(<code>Button</code>、<code>Input</code>、<code>Optgroup</code>、<code>Option</code>、<code>Select</code> 及 <code>TextArea</code> )的屬性中加入 <code>disabled</code> 屬性的話，該元素就會被停用了。</p>
+<p>直接看範例：</p>
+<iframe height="265"
+style="width: 100%;"
+src="https://codepen.io/tim_hsu/embed/YzyMjVZ?height=265&theme-id=light&default-tab=html,result"></iframe>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<h2 id="jQuery"><a href="#jQuery" class="headerlink" title="jQuery"></a>jQuery</h2><p>既然是 HTML 的一個屬性，可以使用 jQuery 的 <code>attr(key, value)</code> 來變更 <code>disabled</code> 屬性值即可。有以下幾個寫法可以完成這個設定，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//寫法 1</span></span><br><span class="line">$(<span class="string">"input"</span>).attr(<span class="string">"disabled"</span>, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 寫法 2：</span></span><br><span class="line">$(<span class="string">"select"</span>).attr(<span class="string">"disabled"</span>, <span class="string">"disabled"</span>);</span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-05-08T21:55:08+08:00"
-              content="2020-05-08">
-          05-08
-        </time>
-      </div>
+<p>這時用 F12 檢查 HTML 的程式碼，就會出現 <code>disabled=&quot;disabled&quot;;</code> 的屬性，反之，要啟動就僵值改成 <code>false</code>，或是用 <code>removeAttr(&#39;disabled&#39;);</code> 移除屬性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"button"</span>).removeAttr(<span class="string">"disabled"</span>);</span><br></pre></td></tr></table></figure>
 
-      <h3 class="post-title">
-          <a class="post-title-link" href="/jQuery/20200508/3013406974/" itemprop="url">
-            <span itemprop="name">jQuery - 使用 fadeToggle 產生按鈕互動</span>
-          </a>
-      </h3>
+<h2 id="點擊按鈕使表單元素可以使用"><a href="#點擊按鈕使表單元素可以使用" class="headerlink" title="點擊按鈕使表單元素可以使用"></a>點擊按鈕使表單元素可以使用</h2><p>給個情境，有天 PM 跑來說，有個介面一開始客戶要求表單元素都無法使用，點擊一個 NEW 按鈕就可以填入表單，送出按鈕在初始畫面為無法使用，在點擊送出按鈕後又回到初始畫面。</p>
+<p><del>所以畫面的東西都無法使用，那為什麼要做?</del></p>
+<p>獲得資訊有：</p>
+<ol>
+<li>畫面上有表單元素，有 input 跟 button。</li>
+<li>除了 NEW 按鈕外還有一個 submit 的按鈕。</li>
+<li>初始畫面除了 NEW，以外都沒有功能。</li>
+<li>按下 NEW 後，除了 NEW 以外都有功能。</li>
+</ol>
+<p>然後就產生下方樣式，</p>
+<iframe height="300"
+style="width: 100%;"
+src="https://codepen.io/tim_hsu/embed/abvxjGd?height=265&theme-id=light&default-tab=result">
+</iframe>
 
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-05-04T20:50:06+08:00"
-              content="2020-05-04">
-          05-04
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/javascript/20200504/976232810/" itemprop="url">
-            <span itemprop="name">JS 筆記 - for 迴圈 + array 陣列的使用方法</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-28T22:51:04+08:00"
-              content="2020-04-28">
-          04-28
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/c/20200428/284475535/" itemprop="url">
-            <span itemprop="name">C# 筆記 - 類別</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-28T22:44:28+08:00"
-              content="2020-04-28">
-          04-28
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/javascript/20200428/2819232808/" itemprop="url">
-            <span itemprop="name">Moment.js 套件筆記 - 使用 Moment.js 套件做一個電子時鐘</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-27T23:10:57+08:00"
-              content="2020-04-27">
-          04-27
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/vue-js/20200427/1872522243/" itemprop="url">
-            <span itemprop="name">Vue 筆記 - 使用 v-on 處理互動式行為</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-27T23:07:05+08:00"
-              content="2020-04-27">
-          04-27
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/javascript/20200427/496196438/" itemprop="url">
-            <span itemprop="name">JS 筆記 - ES6：展開與其餘參數</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-27T23:01:44+08:00"
-              content="2020-04-27">
-          04-27
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/javascript/20200427/3020170567/" itemprop="url">
-            <span itemprop="name">JS 筆記 - 認識  for 迴圈</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-21T23:21:46+08:00"
-              content="2020-04-21">
-          04-21
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/vue-js/20200421/2762058618/" itemprop="url">
-            <span itemprop="name">Vue 筆記 - 動態產生多筆資料於網頁上 v-for、v-if</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-21T22:13:16+08:00"
-              content="2020-04-21">
-          04-21
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/ASP-NET-MVC/20200421/3396145742/" itemprop="url">
-            <span itemprop="name">ASP.NET MVC 筆記 - 認識 MVC 與建立第一個 ASP.NET MVC</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-21T00:02:26+08:00"
-              content="2020-04-21">
-          04-21
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/vue-js/20200421/4264825025/" itemprop="url">
-            <span itemprop="name">Vue 筆記 - 使用 v-bind 動態新增屬性</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
+<p>CodePen <a href="https://codepen.io/tim_hsu/pen/abvxjGd" target="_blank" rel="noopener">https://codepen.io/tim_hsu/pen/abvxjGd</a></p>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>要思考一開始的狀況，再思考判斷按下按鈕會發生的情況，畢竟 JS 是一次只能做一件事的語法，這次遇到的狀況滿有意思的，似乎也在許多頁面上常常看到。</p>
+<h2 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h2><p><a href="https://abgne.tw/jquery/jquery-tips/jquery-enabled-or-disabled-element.html" target="_blank" rel="noopener">[jQ]如何使用 jQuery 來啟用/停用元素？</a></p>
 
     </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/jQuery/" rel="tag"># jQuery</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Learning-Experience/20200527/2006749370/" rel="prev" title="首次參加六角學院同學會">
+      <i class="fa fa-chevron-left"></i> 首次參加六角學院同學會
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
   </div>
-  
-  
-  
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2020/"><i class="fa fa-angle-left" aria-label="上一頁"></i></a><a class="page-number" href="/archives/2020/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2020/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2020/page/5/">5</a><a class="extend next" rel="next" href="/archives/2020/page/3/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
-  </nav>
-
 
 
           </div>
@@ -489,6 +382,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#disabled"><span class="nav-number">1.</span> <span class="nav-text">disabled</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery"><span class="nav-number">2.</span> <span class="nav-text">jQuery</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#點擊按鈕使表單元素可以使用"><span class="nav-number">3.</span> <span class="nav-text">點擊按鈕使表單元素可以使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#結語"><span class="nav-number">4.</span> <span class="nav-text">結語</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考文章"><span class="nav-number">5.</span> <span class="nav-text">參考文章</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
