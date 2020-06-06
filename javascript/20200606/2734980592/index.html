@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="找找哺乳室">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 筆記 - 透過 OPEN DATA 取得 JSON 資料">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;javascript&#x2F;20200606&#x2F;2734980592&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="找找哺乳室">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JS10-2.png?alt&#x3D;media&amp;token&#x3D;ac87ff47-5a0d-457e-800f-e4faa5809920">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JS10-3.png?alt&#x3D;media&amp;token&#x3D;9e37d549-8b73-4d17-919c-faa30d25d05c">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JS10-4.png?alt&#x3D;media&amp;token&#x3D;afa6d63d-b7ff-4c58-89ce-63cdbb163912">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JS10-5.png?alt&#x3D;media&amp;token&#x3D;02bbaaee-8771-4756-a105-f8c922aaf9c3">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JS10-6.png?alt&#x3D;media&amp;token&#x3D;7dcdbeb5-e730-4ea9-85c8-c803aab04500">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JS10-7.png?alt&#x3D;media&amp;token&#x3D;a9e94084-a284-4eab-b2e2-846fb528c8c6">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JS10-1.png?alt&#x3D;media&amp;token&#x3D;beff9760-cee4-4f9c-bd2d-0f7358ec1576">
+<meta property="article:published_time" content="2020-06-06T06:38:37.000Z">
+<meta property="article:modified_time" content="2020-06-06T06:45:24.206Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
+
+<link rel="canonical" href="https://hsuchihting.github.io/javascript/20200606/2734980592/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>JS 筆記 - 透過 OPEN DATA 取得 JSON 資料 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/javascript/20200606/2734980592/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          JS 筆記 - 透過 OPEN DATA 取得 JSON 資料
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-06-06 14:38:37 / 修改時間：14:45:24" itemprop="dateCreated datePublished" datetime="2020-06-06T14:38:37+08:00">2020-06-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">找找哺乳室</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JavaScript%20note-01.jpg?alt=media&token=7bee0261-72ac-4de4-9f5a-f39d58735b7d" alt="JavaScript Note"></p>
+<p>在取得 Open Data 前，要先認識 JSON 資料。</p>
+<h2 id="什麼是-JSON"><a href="#什麼是-JSON" class="headerlink" title="什麼是 JSON"></a>什麼是 JSON</h2><p>JSON（<strong>J</strong>ava<strong>S</strong>cript <strong>O</strong>bject <strong>N</strong>otation，<strong>JavaScript 物件表示法</strong>，讀法就有點像是英文名字的 JASON）是一種由道格拉斯·克羅克福特構想和設計、輕量級的資料交換語言，該語言以易於讓人閱讀的文字為基礎，用來傳輸由屬性值或者序列性的值組成的資料物件。儘管 JSON 是 JavaScript 的一個子集，但 JSON 是獨立於語言的文字格式，並且採用了類似於 C 語言家族的一些習慣。</p>
+<p>JSON 資料格式與語言無關。即便它源自 JavaScript，但目前很多程式語言都支援 JSON 格式資料的生成和解析。JSON 的官方 MIME 類型是 application/json，副檔名是 .json。</p>
+<p>參考來源：<a href="https://zh.wikipedia.org/wiki/JSON" target="_blank" rel="noopener">維基百科 JSON</a></p>
+<p>簡單來說就是一個<strong>陣列</strong> + <strong>物件</strong>的文字檔案格式。</p>
+<hr>
+<h2 id="取得-OPEN-DATA-資料"><a href="#取得-OPEN-DATA-資料" class="headerlink" title="取得 OPEN DATA 資料"></a>取得 OPEN DATA 資料</h2><p>這次找了一個相關主題：找尋台北市信義區的哺乳室。</p>
+<blockquote>
+<p>身為一個孩子的爸，因為很常在百貨公司找哺乳室，有孩子的人一定了解找不到的窘境，尤其當新手爸媽好不容易有個在外的晚餐時刻，這時孩子解便的時候，就非常需要!</p>
+</blockquote>
+<hr>
+<p>這次我到台北市政府的首頁，找到路徑 &gt;&gt; _首頁&gt;市政資料館&gt;資訊公開_，再找到 _臺北市政府資料開放平台_，如下圖：</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JS10-2.png?alt=media&token=ac87ff47-5a0d-457e-800f-e4faa5809920" alt="臺北市政府資料開放平台"></p>
+<p>點擊後會出現平台首頁：</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JS10-3.png?alt=media&token=9e37d549-8b73-4d17-919c-faa30d25d05c" alt="臺北市政府資料開放平台首頁"></p>
+<p>搜尋哺乳室後，只會出現一個項目，點擊後會出現下方畫面，在選擇 API 選項(紅框處)，如下圖：</p>
+<blockquote>
+<p>目前網站改成直接下載 CVS</p>
+</blockquote>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JS10-4.png?alt=media&token=afa6d63d-b7ff-4c58-89ce-63cdbb163912" alt="臺北市哺集乳室"></p>
+<p>會出現一些資訊告訴我們要怎麼取得資料，像是有 API 位址，資料異動的時間，使用 AJAX 方法要用 GET 取得資料。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JS10-5.png?alt=media&token=02bbaaee-8771-4756-a105-f8c922aaf9c3" alt="API 頁面"></p>
+<blockquote>
+<p>在練習的時候在 chrome 檢查工具有發現有三個格式有打錯，所以 <code>console</code> 無法顯示資料，等有空再去 PR 台北市政府。</p>
+</blockquote>
+<h2 id="使用-Chrome-的擴充套件看-JSON"><a href="#使用-Chrome-的擴充套件看-JSON" class="headerlink" title="使用 Chrome 的擴充套件看 JSON"></a>使用 Chrome 的擴充套件看 JSON</h2><p>複製 API 網址貼到新視窗的時候，會看到原始的 JSON 資料(嗯…)</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JS10-6.png?alt=media&token=7dcdbeb5-e730-4ea9-85c8-c803aab04500" alt="JSON 原始資料"></p>
+<p>這時候可以下載 chrome 商店裡面的套件工具，<a href="https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc?hl=zh-TW" target="_blank" rel="noopener">JSON View</a></p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JS10-7.png?alt=media&token=a9e94084-a284-4eab-b2e2-846fb528c8c6" alt="JSON 安裝套件"></p>
+<p>安裝套件後就會看到 JSON 資料清楚很多!</p>
+<h2 id="從-JSON-找出需要的資料"><a href="#從-JSON-找出需要的資料" class="headerlink" title="從 JSON 找出需要的資料"></a>從 JSON 找出需要的資料</h2><p>先把 JSON 資料整個複製到編輯器中，並用一個變數框起來，如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data=[&#123;</span><br><span class="line">...JSON 資料 <span class="comment">//因為 700 多筆，太長了，就這樣示意</span></span><br><span class="line">&#125;]</span><br></pre></td></tr></table></figure>
+
+<h3 id="HTML-環境"><a href="#HTML-環境" class="headerlink" title="HTML 環境"></a>HTML 環境</h3><p>要透過<strong>網頁</strong>掛載資料，還是需要先設定一下 <code>HTML</code> 環境。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>台北市哺乳室<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/all.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h3><p>透過 JSON 找出台北市<strong>信義區</strong> <strong>百貨賣場</strong>的哺乳室。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> dataTotal = data.length; <span class="comment">//資料長度</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; dataTotal; i++) &#123;</span><br><span class="line">  <span class="keyword">if</span> (data[i].category == <span class="string">"百貨賣場"</span> &amp;&amp; data[i].DIS == <span class="string">"信義區"</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"區域:"</span> + data[i].DIS + <span class="string">" 建築類型:"</span> + data[i].category + <span class="string">" 地點名稱:"</span> + data[i].BerName);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>說明：</p>
+<ol>
+<li>宣告一個變數名稱紀錄 data 長度。</li>
+<li>建立一個 for 迴圈。</li>
+<li>使用 if 判斷 data 資料中的<strong>建築類型 category</strong> 跟 <strong>區域 DIS</strong> 兩個條件要相符。</li>
+<li>在使用 console.log 驗證所找到的資料。<blockquote>
+<p>(名稱在<a href="https://data.taipei/#/dataset/detail?id=5d1d34d8-1b81-4162-87b6-05e0896af958" target="_blank" rel="noopener">資料平台</a>上有說明，現已改為 CSV 檔案)</p>
+</blockquote>
+</li>
+</ol>
+<p>在網頁使用 console 檢查，就會出現以下結果：</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JS10-1.png?alt=media&token=beff9760-cee4-4f9c-bd2d-0f7358ec1576" alt="台北市信義區哺乳室結果"></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>JSON 取得資料沒有太困難，但思維要清楚，不然很容易不知道自己怎麼取得資料，物件跟陣列取得資料的觀念也要清楚明白，不然在後續 AJAX 就會不知道怎麼做。</p>
+<blockquote>
+<p>信義區的百貨哺乳室竟然這麼少!</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/jQuery/20200529/1660679567/" rel="prev" title="jQuery 筆記 - dropdown 選單中的箭頭同步旋轉">
+      <i class="fa fa-chevron-left"></i> jQuery 筆記 - dropdown 選單中的箭頭同步旋轉
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什麼是-JSON"><span class="nav-number">1.</span> <span class="nav-text">什麼是 JSON</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#取得-OPEN-DATA-資料"><span class="nav-number">2.</span> <span class="nav-text">取得 OPEN DATA 資料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-Chrome-的擴充套件看-JSON"><span class="nav-number">3.</span> <span class="nav-text">使用 Chrome 的擴充套件看 JSON</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#從-JSON-找出需要的資料"><span class="nav-number">4.</span> <span class="nav-text">從 JSON 找出需要的資料</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML-環境"><span class="nav-number">4.1.</span> <span class="nav-text">HTML 環境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript"><span class="nav-number">4.2.</span> <span class="nav-text">JavaScript</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#心得"><span class="nav-number">5.</span> <span class="nav-text">心得</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hsiangfeng.github.io/" title="https:&#x2F;&#x2F;hsiangfeng.github.io&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gretema.github.io/" title="https:&#x2F;&#x2F;gretema.github.io&#x2F;" rel="noopener" target="_blank">馬格蕾特的前端勇者日誌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wcc723.github.io/" title="https:&#x2F;&#x2F;wcc723.github.io&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
