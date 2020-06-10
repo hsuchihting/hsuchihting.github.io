@@ -46,21 +46,22 @@
   };
 </script>
 
-  <meta name="description" content="提姆的前端筆記">
-<meta property="og:type" content="website">
-<meta property="og:title" content="TimCodingBlog">
-<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;categories&#x2F;jQuery&#x2F;index.html">
+  <meta name="description" content="有這個濾鏡效果，Photoshop 都省了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS 筆記 - CSS Filter 濾鏡效果">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;css&#x2F;20200610&#x2F;3064004331&#x2F;index.html">
 <meta property="og:site_name" content="TimCodingBlog">
-<meta property="og:description" content="提姆的前端筆記">
+<meta property="og:description" content="有這個濾鏡效果，Photoshop 都省了">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1588618943372-a99e4ac947fe?ixlib&#x3D;rb-1.2.1&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1945&amp;q&#x3D;80">
+<meta property="article:published_time" content="2020-06-10T14:51:20.000Z">
+<meta property="article:modified_time" content="2020-06-10T14:54:50.663Z">
 <meta property="article:author" content="Tim Hsu">
-<meta property="article:tag" content="TimCodingBlog">
-<meta property="article:tag" content=" 前端工程師">
-<meta property="article:tag" content=" Frond-end developer">
-<meta property="article:tag" content=" F2E">
+<meta property="article:tag" content="CSS">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1588618943372-a99e4ac947fe?ixlib&#x3D;rb-1.2.1&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1945&amp;q&#x3D;80">
 
-<link rel="canonical" href="https://hsuchihting.github.io/categories/jQuery/">
+<link rel="canonical" href="https://hsuchihting.github.io/css/20200610/3064004331/">
 
 
 <script id="page-configurations">
@@ -68,11 +69,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false
+    isPost: true
   };
 </script>
 
-  <title>分類: jQuery | TimCodingBlog</title>
+  <title>CSS 筆記 - CSS Filter 濾鏡效果 | TimCodingBlog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
     <script>
@@ -212,170 +213,127 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">jQuery
-          <small>分類</small>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/css/20200610/3064004331/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          CSS 筆記 - CSS Filter 濾鏡效果
         </h2>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-06-10 22:51:20 / 修改時間：22:54:50" itemprop="dateCreated datePublished" datetime="2020-06-10T22:51:20+08:00">2020-06-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/css/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">有這個濾鏡效果，Photoshop 都省了</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h2 class="collection-header">2020</h2>
-    </div>
+        <p><img src="https://images.unsplash.com/photo-1588618943372-a99e4ac947fe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1945&q=80" alt="filter"></p>
+<p>CSS 的 <code>filter</code> 濾鏡功能非常好用，除了不用一直設定 CSS 的屬性外，也是讓效果透過簡單的程式碼就可以解決！如果懶得再用 <code>Photoshop</code> 調整圖片，也是一個不錯的選擇！</p>
+<p>語法相當簡單，就是在想要做特效的標籤中加入 <code>filter:濾鏡效果(參數);</code> 就可以了，例如：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">img</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">400px</span>;</span><br><span class="line">  <span class="attribute">filter</span>: <span class="built_in">blur</span>(<span class="number">3px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<p>濾鏡效果如下：</p>
+<h2 id="drop-shadow-下拉陰影"><a href="#drop-shadow-下拉陰影" class="headerlink" title="drop-shadow 下拉陰影"></a>drop-shadow 下拉陰影</h2><p><code>drop-shadow</code> 會按照元素的原始內容去產生陰影，而 <code>box-shadow</code> 則是以區塊的方式來產生。<br>語法:<code>filter: drop-shadow(8px 8px 10px #000);</code> 其對應位置與 <code>box-shadow</code> 相同。</p>
+<ul>
+<li>格式：(水平 垂直 模糊度 擴散 顏色)</li>
+<li>水平/垂直(px)：設定陰影的位置</li>
+<li>模糊度(px)：設定陰影模糊程度，值越大就越模糊</li>
+<li>擴大(px)：設定陰影模糊放大的程度，一樣是值越大就越就越大</li>
+<li>顏色(色碼)：設定陰影的顏色</li>
+</ul>
+<h2 id="blur-高斯模糊"><a href="#blur-高斯模糊" class="headerlink" title="blur 高斯模糊"></a>blur 高斯模糊</h2><p>高斯模糊的參數單位使用 <code>px</code> 或是 <code>rem</code>，0 為最清晰，數值越高越模糊，不接受百分比 <code>%</code> 做為單位，可以輸入，但不會產生效果。</p>
+<h2 id="grayscale-灰階"><a href="#grayscale-灰階" class="headerlink" title="grayscale 灰階"></a>grayscale 灰階</h2><p>灰階程度，參數單位為小數點 (ex.0.7) 或是 70% 的灰階，皆為相同效果。</p>
+<h2 id="hue-rotate-色相旋轉"><a href="#hue-rotate-色相旋轉" class="headerlink" title="hue-rotate 色相旋轉"></a>hue-rotate 色相旋轉</h2><p>以<code>度(deg)</code>為單位，<code>0 度</code> 與 <code>180 度</code>效果相同，<code>90 度</code>與 <code>270 度</code>效果相同，另外可使用 <code>turn</code> 做為旋轉的幅度，</p>
+<blockquote>
+<p>ex. <code>1</code> 為一圈 <code>360 度</code>， <code>0.5turn</code> 為 <code>180 度</code>，但我懶得轉換運算，所以大多用度來設定。</p>
+</blockquote>
+<h2 id="invert-負片效果"><a href="#invert-負片效果" class="headerlink" title="invert 負片效果"></a>invert 負片效果</h2><p>以小數點或百分比為單位，0.3 跟 30% 的效果相同。50% 的效果會變成全灰。</p>
+<h2 id="opacity-透明度"><a href="#opacity-透明度" class="headerlink" title="opacity 透明度"></a>opacity 透明度</h2><p>以小數點或百分比為單位，0.3 跟 30% 的效果相同。</p>
+<h2 id="saturate-飽和度"><a href="#saturate-飽和度" class="headerlink" title="saturate 飽和度"></a>saturate 飽和度</h2><p>以百分比為單位，0% 為無效果，100% 正常飽和度，200%過飽和度。</p>
+<h2 id="sepia-懷舊"><a href="#sepia-懷舊" class="headerlink" title="sepia 懷舊"></a>sepia 懷舊</h2><p>以小數點或百分比為單位，0.3 跟 30% 的效果相同。</p>
+<h2 id="contrast-對比度"><a href="#contrast-對比度" class="headerlink" title="contrast 對比度"></a>contrast 對比度</h2><p>以小數點或百分比為單位，初始值 100%，大於對比變大，小於對比變小。</p>
+<h2 id="brightness-亮度"><a href="#brightness-亮度" class="headerlink" title="brightness 亮度"></a>brightness 亮度</h2><p>初始值 100%，大於就變亮，小於就變暗。</p>
+<iframe height="265" style="width: 100%;" src="https://codepen.io/hnzxewqw/embed/MWKKVpR?height=265&theme-id=light&default-tab=html,result"></iframe>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-06-09T22:13:24+08:00"
-              content="2020-06-09">
-          06-09
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/jQuery/20200609/184811241/" itemprop="url">
-            <span itemprop="name">jQuery 筆記 - 選擇器的選法與基本動畫效果語法</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-05-29T19:43:13+08:00"
-              content="2020-05-29">
-          05-29
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/jQuery/20200529/1660679567/" itemprop="url">
-            <span itemprop="name">jQuery 筆記 - dropdown 選單中的箭頭同步旋轉</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-05-29T00:11:11+08:00"
-              content="2020-05-29">
-          05-29
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/jQuery/20200529/1818590975/" itemprop="url">
-            <span itemprop="name">jQuery 筆記 - 使用 JS 動態來啟用/停用元素？</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-05-08T21:55:08+08:00"
-              content="2020-05-08">
-          05-08
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/jQuery/20200508/3013406974/" itemprop="url">
-            <span itemprop="name">jQuery 筆記 - 使用 fadeToggle 產生按鈕互動</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-14T21:56:22+08:00"
-              content="2020-04-14">
-          04-14
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/jQuery/20200414/1101598249/" itemprop="url">
-            <span itemprop="name">jQuery 筆記 - datepicker 與 timepicker 套件練習</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-27T21:38:12+08:00"
-              content="2020-03-27">
-          03-27
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/jQuery/20200327/3238077972/" itemprop="url">
-            <span itemprop="name">jQuery 筆記 - Chart.js 基本使用</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-26T21:14:39+08:00"
-              content="2020-03-26">
-          03-26
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/jQuery/20200326/177388252/" itemprop="url">
-            <span itemprop="name">jQuery 筆記 - jQuery 基本認識</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
+<p>參考資料：</p>
+<ul>
+<li><a href="https://wcc723.github.io/css/2013/10/06/css-fliter/" target="_blank" rel="noopener">CSS 沒有極限 - CSS3 Fliter 效果</a></li>
+<li><a href="https://devdocs.io/css/filter" target="_blank" rel="noopener">CSS Demo: filter</a></li>
+<li><a href="https://www.eztrust.com.tw/html/webdesign/show.aspx?num=13&category=B&kind=10" target="_blank" rel="noopener">什麼?? CSS 也有濾鏡可以用! (CSS3 filter)</a></li>
+<li><a href="https://www.oxxostudio.tw/articles/201407/css-webkit-filter.html" target="_blank" rel="noopener">CSS webkit filter</a></li>
+</ul>
 
     </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CSS/" rel="tag"># CSS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/css/20200610/4073219914/" rel="prev" title="CSS 筆記 - 寫一個 iPhone 開關效果">
+      <i class="fa fa-chevron-left"></i> CSS 筆記 - 寫一個 iPhone 開關效果
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
@@ -426,6 +384,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#drop-shadow-下拉陰影"><span class="nav-number">1.</span> <span class="nav-text">drop-shadow 下拉陰影</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#blur-高斯模糊"><span class="nav-number">2.</span> <span class="nav-text">blur 高斯模糊</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grayscale-灰階"><span class="nav-number">3.</span> <span class="nav-text">grayscale 灰階</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hue-rotate-色相旋轉"><span class="nav-number">4.</span> <span class="nav-text">hue-rotate 色相旋轉</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#invert-負片效果"><span class="nav-number">5.</span> <span class="nav-text">invert 負片效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#opacity-透明度"><span class="nav-number">6.</span> <span class="nav-text">opacity 透明度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#saturate-飽和度"><span class="nav-number">7.</span> <span class="nav-text">saturate 飽和度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sepia-懷舊"><span class="nav-number">8.</span> <span class="nav-text">sepia 懷舊</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#contrast-對比度"><span class="nav-number">9.</span> <span class="nav-text">contrast 對比度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#brightness-亮度"><span class="nav-number">10.</span> <span class="nav-text">brightness 亮度</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
