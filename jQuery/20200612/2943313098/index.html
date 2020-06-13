@@ -55,7 +55,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1586015988173-ee1a56ffe8fd?ixlib&#x3D;rb-1.2.1&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1350&amp;q&#x3D;80">
 <meta property="article:published_time" content="2020-06-11T16:07:22.000Z">
-<meta property="article:modified_time" content="2020-06-11T16:10:27.862Z">
+<meta property="article:modified_time" content="2020-06-13T01:52:17.991Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="jQuery">
 <meta name="twitter:card" content="summary">
@@ -240,10 +240,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2020-06-12 00:07:22 / 修改時間：00:10:27" itemprop="dateCreated datePublished" datetime="2020-06-12T00:07:22+08:00">2020-06-12</time>
+              <time title="創建時間：2020-06-12 00:07:22" itemprop="dateCreated datePublished" datetime="2020-06-12T00:07:22+08:00">2020-06-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-06-13 09:52:17" itemprop="dateModified" datetime="2020-06-13T09:52:17+08:00">2020-06-13</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -276,8 +282,7 @@
 
 <h2 id="jQuery-行為"><a href="#jQuery-行為" class="headerlink" title="jQuery 行為"></a>jQuery 行為</h2><p>綁定按鈕，並且給予 <code>click</code> 事件，點擊按鈕時動態增加 <code>.active</code>，並且使 <code>dropdownList</code> 產生收合功能。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  $(<span class="string">'.jq-clickBtn'</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">    e.preventDefault();</span><br><span class="line">    $(<span class="string">'.jq-clickBtn'</span>).toggleClass(<span class="string">'active'</span>);</span><br><span class="line">    $(<span class="string">'.jq-dropdown'</span>).slideToggle();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<iframe height="350" style="width: 100%;" src="https://codepen.io/tim_hsu/embed/mdVPbYr?height=265&theme-id=light&default-tab=result"></iframe>
+<iframe height="265" style="width: 100%;" src="https://codepen.io/hnzxewqw/embed/QWyELzg?height=265&theme-id=light&default-tab=result"></iframe>
     </div>
 
     
