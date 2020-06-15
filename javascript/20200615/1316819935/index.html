@@ -46,22 +46,23 @@
   };
 </script>
 
-  <meta name="description" content="if 跟 switch 使用的差別">
+  <meta name="description" content="DOM 的基本認識">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JS 筆記 - 控制判斷(if、else if、switch)">
-<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;javascript&#x2F;20200420&#x2F;4050508230&#x2F;index.html">
+<meta property="og:title" content="JS 筆記 - 認識 DOM 文件物件模型">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;javascript&#x2F;20200615&#x2F;1316819935&#x2F;index.html">
 <meta property="og:site_name" content="TimCodingBlog">
-<meta property="og:description" content="if 跟 switch 使用的差別">
+<meta property="og:description" content="DOM 的基本認識">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
-<meta property="article:published_time" content="2020-04-20T14:29:29.000Z">
-<meta property="article:modified_time" content="2020-04-28T14:47:31.053Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1519567770579-c2fc5436bcf9?ixlib&#x3D;rb-1.2.1&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1350&amp;q&#x3D;80">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;h0HoGRC.png">
+<meta property="article:published_time" content="2020-06-15T14:16:30.000Z">
+<meta property="article:modified_time" content="2020-06-15T14:21:40.512Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1519567770579-c2fc5436bcf9?ixlib&#x3D;rb-1.2.1&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1350&amp;q&#x3D;80">
 
-<link rel="canonical" href="https://hsuchihting.github.io/javascript/20200420/4050508230/">
+<link rel="canonical" href="https://hsuchihting.github.io/javascript/20200615/1316819935/">
 
 
 <script id="page-configurations">
@@ -73,7 +74,7 @@
   };
 </script>
 
-  <title>JS 筆記 - 控制判斷(if、else if、switch) | TimCodingBlog</title>
+  <title>JS 筆記 - 認識 DOM 文件物件模型 | TimCodingBlog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
     <script>
@@ -218,7 +219,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/javascript/20200420/4050508230/">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/javascript/20200615/1316819935/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/2019Tim.jpg">
@@ -231,7 +232,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          JS 筆記 - 控制判斷(if、else if、switch)
+          JS 筆記 - 認識 DOM 文件物件模型
         </h2>
 
         <div class="post-meta">
@@ -240,16 +241,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
+              
 
-              <time title="創建時間：2020-04-20 22:29:29" itemprop="dateCreated datePublished" datetime="2020-04-20T22:29:29+08:00">2020-04-20</time>
+              <time title="創建時間：2020-06-15 22:16:30 / 修改時間：22:21:40" itemprop="dateCreated datePublished" datetime="2020-06-15T22:16:30+08:00">2020-06-15</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-04-28 22:47:31" itemprop="dateModified" datetime="2020-04-28T22:47:31+08:00">2020-04-28</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -263,7 +258,7 @@
             </span>
 
           
-            <div class="post-description">if 跟 switch 使用的差別</div>
+            <div class="post-description">DOM 的基本認識</div>
 
         </div>
       </header>
@@ -274,38 +269,54 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JavaScript%20note-01.jpg?alt=media&token=7bee0261-72ac-4de4-9f5a-f39d58735b7d" alt="JavaScript Note"></p>
-<h2 id="if"><a href="#if" class="headerlink" title="if"></a>if</h2><p>光看英文單字，if 有如果的意思，在這邊程式碼也是直接使用字面上的感覺。<br>if 的程式碼如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = value;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (name == value) &#123; <span class="comment">//判斷式</span></span><br><span class="line">  ...<span class="comment">//陳述式</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>判斷式<strong>先判斷</strong>小括號內的條件是否<strong>符合</strong>變數給的值，若相同就會執行陳述式，若不同則不會執行，所以 if 的感覺很直覺，想什麼講什麼就是了。</p>
-<p>if 後面的小括號要放<code>比較運算子</code>，也就是 <code>name == value</code>，不能放 <code>name = value</code>，這樣會變成<strong>變數值</strong>。</p>
-<hr>
-<h2 id="else-if、else"><a href="#else-if、else" class="headerlink" title="else if、else"></a>else if、else</h2><p>是延續 <code>if</code> 的屬性，倘若 <code>if</code> 內陳述式的程式碼與判斷式<strong>不相符</strong>，就會直接執行 <code>else if</code> 的陳述式，結尾要用 <code>else</code>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = value;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (condition) &#123; <span class="comment">//判斷式</span></span><br><span class="line">  ... <span class="comment">//陳述式</span></span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>&#123;</span><br><span class="line">  ... <span class="comment">//倘若第一個陳述式沒有滿足條件，就會執行 else 裡面的程式碼</span></span><br><span class="line">  ...</span><br><span class="line">  ...</span><br><span class="line">  ... <span class="comment">// else if 可以很多程式碼</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">  ...<span class="comment">//最後結尾會執行 else 的程式碼</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
+        <p><img src="https://images.unsplash.com/photo-1519567770579-c2fc5436bcf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="tree"></p>
+<p>常常聽到人家講說 DOM 元素，到底是什麼?</p>
+<p>DOM 的英文全名是 <strong>Document Object Model</strong>，中文是「<strong>文件物件模型</strong>」。</p>
 <blockquote>
-<p>else 不用滿足條件，可以直接顯示結果，是滿好用的語法</p>
+<p>是 HTML、XML 和 SVG 文件的程式介面。它提供了一個文件（樹）的結構化表示法，並定義讓程式可以存取並改變文件<strong>架構</strong>、<strong>風格</strong>和<strong>內容</strong>的方法。DOM 提供了文件以擁有屬性與函式的節點與物件組成的結構化表示。節點也可以附加事件處理程序，一旦觸發事件就會執行處理程序。 本質上，它將網頁與腳本或程式語言連結在一起。</p>
 </blockquote>
-<hr>
-<h2 id="Switch"><a href="#Switch" class="headerlink" title="Switch"></a>Switch</h2><p><code>Switch</code> 的用法跟 <code>if</code>、 <code>else if</code> 有點像，差別是 <code>if</code> 會把所有的程式碼都讀取過，相對渲染會比較慢，效能相對較低，而 <code>Switch</code> 會全部都讀過，但會只先看條件，看到有相符的型別才會再進去讀取相關內容，讀取後執行其他程式碼就不會再存取了，相對效能較高。</p>
-<p>switch 的程式碼如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (key) &#123; <span class="comment">//設定一個表達式，且包含條件</span></span><br><span class="line">  <span class="keyword">case</span> value: <span class="comment">//要先寫一個 case 然後加上**變數名稱**(字串要加引號，不用小括弧)，給一個冒號：寫裡面的內容，結尾用分號 ; ，結束有點像 CSS</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">break</span>; <span class="comment">//每個 case 都要用一個 break 做結束。</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">default</span>: <span class="comment">//defalt 用法有點像 else，就如果沒有滿足的條件就會執行這個內容，但其位置可以任意放置，但我會習慣放在最後面，這樣寫程式碼比較有邏輯一點</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">break</span>; <span class="comment">// 結束也要用一個 break 當作結束。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p>參考來源：<a href="https://developer.mozilla.org/zh-TW/docs/Web/API/Document_Object_Model" target="_blank" rel="noopener">https://developer.mozilla.org/zh-TW/docs/Web/API/Document_Object_Model</a></p>
+<p>另外透過 KURO 老師所寫的<a href="https://ithelp.ithome.com.tw/articles/10191666" target="_blank" rel="noopener">重新認識 JavaScript 的文章</a> 一書中解釋 DOM 是滿簡單明瞭的，文中提到：</p>
 <blockquote>
-<p>建立 switch：設立一個表達式，且包含條件，用小括號包起來。<br>case: 後方會開始比對，如果符合就會執行相關連的程式碼。<br>break: 每個 case 後方都會補上一個 break，如果讀取到條件相符，就會停止讀取後方的程式碼。</p>
+<p>DOM 是一個將 HTML 文件以樹狀的結構來表示的模型，而組合起來的樹狀圖，我們稱之為「DOM Tree」。</p>
+</blockquote>
+<p>一開始學習 HTML 時，會學習到基本架構如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>這是h1<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>這是內容<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>這是一個 a 連結<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>瀏覽器是從上到下一行一行的讀取，DOM tree 就是把所有的節點拆開後，彼此的關係會像一棵樹，故取名之，如下圖：</p>
+<p><img src="https://i.imgur.com/h0HoGRC.png" alt="DOM tree"></p>
+<p>以 document 為起點，可以延伸出許多的 HTML 標籤，一個節點就是一個標籤，往下又可以再延伸出「本文(text)節點」與「屬性 (Attribute)的節點」。JavaScript 就是透過 DOM 提供的 API 來對 HTML 做存取與操作。</p>
+<blockquote>
+<p>一些節點註記：</p>
+<ul>
+<li>Element: html, head, body, ul, li…</li>
+<li>Attribute: a, id, type…</li>
+<li>text: h1, p, span…<br>&lt;以上有誤還請不吝指正。&gt;</li>
+</ul>
 </blockquote>
 <hr>
-<h3 id="加入-function-到-Switch"><a href="#加入-function-到-Switch" class="headerlink" title="加入 function 到 Switch"></a>加入 function 到 Switch</h3><blockquote>
-<ol>
-<li>建立變數。</li>
-<li>建立 function。</li>
-<li>帶入 switch，switch 裡面可以帶入多個相同條件的 case。</li>
-</ol>
+<h2 id="DOM-API"><a href="#DOM-API" class="headerlink" title="DOM API"></a>DOM API</h2><p>DOM: JavaScript 用來控制「網頁」的節點與內容的標準，「DOM」有著 W3C 所制定的標準來規範。上方提到的 DOM API 是什麼?</p>
+<p>先解釋一下 API，<strong>應用程式介面</strong>，英文全名是：<strong>Application Programming Interface</strong>。</p>
+<blockquote>
+<p>我個人比較喜歡知道縮寫英文的意思，不然會被英文名詞嚇唬了。超級多英文縮寫名詞啊!</p>
 </blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = value;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">name</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(params);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">switch</span> (key) &#123;</span><br><span class="line">  <span class="keyword">case</span> value: <span class="comment">//case1</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">case</span> value: <span class="comment">//case2</span></span><br><span class="line">    name(params); <span class="comment">//帶入 function</span></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">default</span>:</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以透過下方影片了解 API 的概念。</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/zvKadd9Cflc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<p>實際遇到的<a href="https://hsuchihting.github.io/JavaScript-Note/20200325/2975558676/">jQuery 筆記 - 使用 select 選取 option 的資料，並同步渲染於網頁</a></p>
+<hr>
+<p>想要透過 DOM API 取得節點，透過 JavaScript 可以這樣寫：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根據傳入的值，找到 DOM 中 id 為 'xxx' 的元素。</span></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"xxx"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 針對給定的 tag 名稱，回傳所有符合條件的 NodeList 物件 [註1]</span></span><br><span class="line"><span class="built_in">document</span>.getElementsByTagName(<span class="string">"xxx"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 針對給定的 class 名稱，回傳所有符合條件的 NodeList 物件。</span></span><br><span class="line"><span class="built_in">document</span>.getElementsByClassName(<span class="string">"xxx"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 針對給定的 Selector 條件，回傳第一個 或 所有符合條件的 NodeList。</span></span><br><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">"xxx"</span>);</span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">"xxx"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>而透過 DOM API 選取出來的節點，我們可以透過操作 <code>textContent</code> 屬性來變更它的文字。</p>
+<p>設定一個 HTML 屬性節點為 <code>id</code>，名稱為 <code>greet</code>：</p>
+<p><code>&lt;h1 id=&quot;greet&quot;&gt;&lt;/h1&gt;</code></p>
+<p>可以先透過 <code>document.querySelector()</code> 選取方法來取得節點，然後修改 <code>textContent</code> 屬性：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;<span class="built_in">document</span>.querySelector(<span class="string">'#greet'</span>).textContent = <span class="string">'Hello World!'</span>&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看一下 <a href="https://codepen.io/hnzxewqw/pen/RwPRdjL?editors=1010" target="_blank" rel="noopener">codepen</a></p>
+<p>這樣就可以透過 JavaScript 在網頁上輸出 <strong>“Hello World!”</strong> 囉！</p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>一開始有學到 <code>getByElementById</code> 來賦予 <code>id</code> 的內容，後面會學習到透過 <code>querySelector</code> 能選擇的屬性更多元! jQuery 的 <code>$</code> 錢字號概念就是從 DOM API 取得方式來的。</p>
+<p>參考文章：<a href="https://ithelp.ithome.com.tw/articles/10191666" target="_blank" rel="noopener">https://ithelp.ithome.com.tw/articles/10191666</a></p>
 
     </div>
 
@@ -324,13 +335,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/vue-js/20200419/2954354756/" rel="prev" title="Vue 筆記 - 資料綁定與模板 v-model、v-text、v-html">
-      <i class="fa fa-chevron-left"></i> Vue 筆記 - 資料綁定與模板 v-model、v-text、v-html
+    <a href="/jQuery/20200612/2695853287/" rel="prev" title="jQuery 筆記 - 動態改變字體大小與背景顏色">
+      <i class="fa fa-chevron-left"></i> jQuery 筆記 - 動態改變字體大小與背景顏色
     </a></div>
-      <div class="post-nav-item">
-    <a href="/c/20200420/1210559046/" rel="next" title="C# 筆記 - C# 語言的基本認識">
-      C# 筆記 - C# 語言的基本認識 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -390,7 +398,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#if"><span class="nav-number">1.</span> <span class="nav-text">if</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#else-if、else"><span class="nav-number">2.</span> <span class="nav-text">else if、else</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Switch"><span class="nav-number">3.</span> <span class="nav-text">Switch</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加入-function-到-Switch"><span class="nav-number">3.1.</span> <span class="nav-text">加入 function 到 Switch</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM-API"><span class="nav-number">1.</span> <span class="nav-text">DOM API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#心得"><span class="nav-number">2.</span> <span class="nav-text">心得</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
