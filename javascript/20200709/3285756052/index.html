@@ -46,22 +46,22 @@
   };
 </script>
 
-  <meta name="description" content="Object 物件的基本認識">
+  <meta name="description" content="把找到的資料插入 HTML 標籤的，並顯示於網頁">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JS 筆記 - Object 物件的基本認識">
-<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;javascript&#x2F;20200331&#x2F;3067475316&#x2F;index.html">
+<meta property="og:title" content="JS 筆記 - innerHTML 與 for 迴圈的使用">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;javascript&#x2F;20200709&#x2F;3285756052&#x2F;index.html">
 <meta property="og:site_name" content="TimCodingBlog">
-<meta property="og:description" content="Object 物件的基本認識">
+<meta property="og:description" content="把找到的資料插入 HTML 標籤的，並顯示於網頁">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
-<meta property="article:published_time" content="2020-03-31T12:49:44.000Z">
-<meta property="article:modified_time" content="2020-04-28T14:47:17.581Z">
+<meta property="article:published_time" content="2020-07-09T13:51:39.000Z">
+<meta property="article:modified_time" content="2020-07-09T13:54:54.834Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
 
-<link rel="canonical" href="https://hsuchihting.github.io/javascript/20200331/3067475316/">
+<link rel="canonical" href="https://hsuchihting.github.io/javascript/20200709/3285756052/">
 
 
 <script id="page-configurations">
@@ -73,7 +73,7 @@
   };
 </script>
 
-  <title>JS 筆記 - Object 物件的基本認識 | TimCodingBlog</title>
+  <title>JS 筆記 - innerHTML 與 for 迴圈的使用 | TimCodingBlog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
     <script>
@@ -218,7 +218,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/javascript/20200331/3067475316/">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/javascript/20200709/3285756052/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/2019Tim.jpg">
@@ -231,7 +231,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          JS 筆記 - Object 物件的基本認識
+          JS 筆記 - innerHTML 與 for 迴圈的使用
         </h2>
 
         <div class="post-meta">
@@ -240,16 +240,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
+              
 
-              <time title="創建時間：2020-03-31 20:49:44" itemprop="dateCreated datePublished" datetime="2020-03-31T20:49:44+08:00">2020-03-31</time>
+              <time title="創建時間：2020-07-09 21:51:39 / 修改時間：21:54:54" itemprop="dateCreated datePublished" datetime="2020-07-09T21:51:39+08:00">2020-07-09</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-04-28 22:47:17" itemprop="dateModified" datetime="2020-04-28T22:47:17+08:00">2020-04-28</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -271,13 +265,13 @@
       </span>
       <span class="post-meta-item-text">Disqus：</span>
     
-    <a title="disqus" href="/javascript/20200331/3067475316/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="javascript/20200331/3067475316/" itemprop="commentCount"></span>
+    <a title="disqus" href="/javascript/20200709/3285756052/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="javascript/20200709/3285756052/" itemprop="commentCount"></span>
     </a>
   </span>
   
   
-            <div class="post-description">Object 物件的基本認識</div>
+            <div class="post-description">把找到的資料插入 HTML 標籤的，並顯示於網頁</div>
 
         </div>
       </header>
@@ -289,39 +283,29 @@
 
       
         <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JavaScript%20note-01.jpg?alt=media&token=7bee0261-72ac-4de4-9f5a-f39d58735b7d" alt="JavaScript Note"></p>
-<blockquote>
-<p>一個物件可以是個零至多種屬性的集合，而屬性是鍵 (key) 與值 (value) 之間的關聯。 一個屬性的「值」可以是某個基本型別，也可以是另一個物件，甚至可以是一個函數。<br>*引用 KURO 老師<a href="http://https://ithelp.ithome.com.tw/articles/10190962" target="_blank" rel="noopener">這篇文章</a>對於物件的陳述</p>
-</blockquote>
-<hr>
-<h2 id="物件的寫法"><a href="#物件的寫法" class="headerlink" title="物件的寫法"></a>物件的寫法</h2><p>宣告一個變數 var ，<strong>自定義</strong>一個名稱，直接用一個<strong>大括號</strong> <code>{}</code> 的方式來建立物件，資料結尾要用逗號 <code>,</code> ，也是 JSON 格式的核心語法，寫法如下：</p>
-<p><code>var object ={};</code></p>
-<p>有點像寫 CSS 格式的感覺，用這個聯想就滿好記的。</p>
-<p><code>.header{};</code></p>
-<h3 id="在物件中加上屬性"><a href="#在物件中加上屬性" class="headerlink" title="在物件中加上屬性"></a>在物件中加上屬性</h3><p>在大括號裡面，會給物件一些內容，稱之為<strong>屬性</strong>跟<strong>值</strong>。<br>如果以一個家為例，家裡面有爸爸，名字叫做 Tim，那物件內容就會這樣寫：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> home =&#123;</span><br><span class="line">  dad: <span class="string">"Tim"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這次記錄透過 for 迴圈篩選出資料後，渲染在網頁上，未來 for 迴圈也會很常篩選 JSON 的資料內容，這次的資料如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = [</span><br><span class="line">  &#123;</span><br><span class="line">    team: <span class="string">"bulls"</span>,</span><br><span class="line">    name: <span class="string">"Jordan"</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    team: <span class="string">"lakers"</span>,</span><br><span class="line">    name: <span class="string">"Bryant"</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
 
-<p>增加屬性內容要注意的地方是：給屬性一個<strong>自定義</strong>的名稱，加上<strong>冒號</strong> <code>：</code>，後面一樣要按照變數的資料型態來寫，字串要加上引號，數字則不用，多個物件內容要用<strong>逗點</strong> <code>,</code> ，但最後一個物件項目，無須逗點。如下方程式碼：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> home =&#123;</span><br><span class="line">  dad: <span class="string">"Tim"</span>,</span><br><span class="line">  mom: <span class="string">"Min"</span>,</span><br><span class="line">  son: <span class="string">"Joshua"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這次要透過 for 迴圈要找出每一隊球員的名字，然後渲染在網頁上，這次 html 的內容有設定主題，如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>每個球隊的球員名字<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"list"</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<hr>
-<h3 id="存取物件的屬性"><a href="#存取物件的屬性" class="headerlink" title="存取物件的屬性"></a>存取物件的屬性</h3><p>物件本身不會被執行，要把物件中的屬性做<strong>存取的動作</strong>，才會被執行，假如要存取下方物件中的內容，要在物件名稱後加上點 <code>.</code>，才能取得屬性的值，程式碼可以這樣寫：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> home =&#123;</span><br><span class="line">  dad: <span class="string">"Tim"</span>,</span><br><span class="line">  mom: <span class="string">"Min"</span>,</span><br><span class="line">  son: [<span class="string">"Joshua"</span>,<span class="string">"John"</span>],</span><br><span class="line">  chair:<span class="number">4</span></span><br><span class="line">&#125;</span><br><span class="line">home.dad; <span class="comment">//會得到 Tim 這個結果</span></span><br><span class="line">home.son[<span class="number">0</span>] <span class="comment">//會得到 Joshua 這個結果</span></span><br></pre></td></tr></table></figure>
+<p>先建立基本的元素內容與 for 迴圈：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//變數</span></span><br><span class="line"><span class="keyword">var</span> el = <span class="built_in">document</span>.querySelector(<span class="string">".list"</span>);</span><br><span class="line"><span class="keyword">var</span> dataLen = data.length; <span class="comment">//資料長度</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; dataLen; i++) &#123;</span><br><span class="line">  <span class="comment">// for 迴圈</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>白話文：</p>
-<ol>
-<li>在 home 的物件中，找到 dad 屬性中裡面的值，所以結果會得到 Tim。</li>
-<li>在 home 的物件中，找到 son 陣列裡的第一個值，所以結果會得到 Joshua。</li>
-</ol>
-<hr>
-<h3 id="新增物件屬性"><a href="#新增物件屬性" class="headerlink" title="新增物件屬性"></a>新增物件屬性</h3><p>如果要在物件外，直接新增屬性到物件內的話，可以這樣寫：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> home =&#123;</span><br><span class="line">  dad: <span class="string">"Tim"</span>,</span><br><span class="line">  mom: <span class="string">"Min"</span>,</span><br><span class="line">  son: [<span class="string">"Joshua"</span>,<span class="string">"John"</span>],</span><br><span class="line">  chair:<span class="number">4</span></span><br><span class="line">&#125;</span><br><span class="line">home.dog = <span class="number">1</span>; <span class="comment">//增加屬性 dog，值為 1 的內容到物件內</span></span><br><span class="line">home.dog; <span class="comment">//存取值就會得到 1</span></span><br></pre></td></tr></table></figure>
+<p>為了等等要將文字渲染在網頁上，這邊會多設定一個變數 <code>str</code>，裡面為空白，為了等等篩選資料要填入預設的空字串中，這個部份很重要，是渲染網頁的重要環節：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> el = <span class="built_in">document</span>.querySelector(<span class="string">".list"</span>);</span><br><span class="line"><span class="keyword">var</span> dataLen = data.length; <span class="comment">//資料長度</span></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">""</span>; <span class="comment">//建立一個空字串，要將資料填入的</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; dataLen; i++) &#123;</span><br><span class="line">  <span class="comment">// for 迴圈</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<hr>
-<h3 id="刪除物件屬性"><a href="#刪除物件屬性" class="headerlink" title="刪除物件屬性"></a>刪除物件屬性</h3><p>如果要在物件外，直接刪除物件內屬性，可以這樣寫：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> home =&#123;</span><br><span class="line">  dad: <span class="string">"Tim"</span>,</span><br><span class="line">  mom: <span class="string">"Min"</span>,</span><br><span class="line">  son: [<span class="string">"Joshua"</span>,<span class="string">"John"</span>],</span><br><span class="line">  chair:<span class="number">4</span></span><br><span class="line">&#125;</span><br><span class="line">home.dog = <span class="number">1</span>; <span class="comment">//增加屬性 dog，值為 1 的內容到物件內</span></span><br><span class="line">home.dog; <span class="comment">//存取值就會得到 1</span></span><br><span class="line"><span class="keyword">delete</span> home.dog; <span class="comment">//刪除物件 home 裡面的屬性 dog</span></span><br><span class="line">home.dog; <span class="comment">//存取值會得到 undefined</span></span><br></pre></td></tr></table></figure>
+<p>為了避免等等組字串寫錯，先把空位寫好：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; dataLen; i++) &#123;</span><br><span class="line">  <span class="comment">// for 迴圈</span></span><br><span class="line">  <span class="keyword">var</span> content = <span class="string">"&lt;li&gt;"</span> + 球員名稱 + <span class="string">"&lt;/li&gt;"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><em>其實滿直覺的</em></p>
-<p>參考文章 <a href="https://ithelp.ithome.com.tw/articles/10190962" target="_blank" rel="noopener">https://ithelp.ithome.com.tw/articles/10190962</a></p>
+<p>再將取資料的寫法 <code>data[i].name</code> 替換 球員名稱，透過加總把 變數 content 的內容回傳到 str 中，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; dataLen; i++) &#123;</span><br><span class="line">  <span class="comment">// for 迴圈</span></span><br><span class="line">  <span class="keyword">var</span> content = <span class="string">"&lt;li&gt;"</span> + data[i].name + <span class="string">"&lt;/li&gt;"</span>; <span class="comment">//組字串</span></span><br><span class="line">  str += content;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最後再用寫好的 el 選取到的 list，透過 innerHTML 的方式，把 <code>str</code> 裡的資料渲染到網頁上，最後完成的程式碼就會如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//JSON 資料</span></span><br><span class="line"><span class="keyword">var</span> data = [</span><br><span class="line">  &#123;</span><br><span class="line">    team: <span class="string">"bulls"</span>,</span><br><span class="line">    name: <span class="string">"Jordan"</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    team: <span class="string">"lakers"</span>,</span><br><span class="line">    name: <span class="string">"Bryant"</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="comment">//變數</span></span><br><span class="line"><span class="keyword">var</span> el = <span class="built_in">document</span>.querySelector(<span class="string">".list"</span>);</span><br><span class="line"><span class="keyword">var</span> dataLen = data.length; <span class="comment">//資料長度</span></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">""</span>; <span class="comment">//建立一個空字串，要將資料填入的</span></span><br><span class="line"><span class="comment">// for 迴圈</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; dataLen; i++) &#123;</span><br><span class="line">  <span class="keyword">var</span> content = <span class="string">"&lt;li&gt;"</span> + data[i].name + <span class="string">"&lt;/li&gt;"</span>; <span class="comment">//組字串</span></span><br><span class="line">  str += content; <span class="comment">// 透過加總把 變數 content 的內容回傳到 str 中</span></span><br><span class="line">&#125;</span><br><span class="line">el.innerHTML = str;</span><br><span class="line"><span class="comment">//透過 el 選取到的 list，透過 innerHTML 的方式，把 str 裡的資料渲染到網頁上</span></span><br></pre></td></tr></table></figure>
+
+<p>codepen: <a href="https://codepen.io/hnzxewqw/pen/ExjNRoL" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/ExjNRoL</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>中間寫一兩行就用 <code>console.log</code> 確認一下是否有正確寫對 JS，避免寫了十幾行，才來 debug 會比較辛苦。</p>
 
     </div>
 
@@ -340,13 +324,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/jQuery/20200327/3238077972/" rel="prev" title="jQuery 筆記 - Chart.js 基本使用">
-      <i class="fa fa-chevron-left"></i> jQuery 筆記 - Chart.js 基本使用
+    <a href="/jQuery/20200630/3070987172/" rel="prev" title="jQuery 筆記 - $(this), parent(), siblings(), find() 用法">
+      <i class="fa fa-chevron-left"></i> jQuery 筆記 - $(this), parent(), siblings(), find() 用法
     </a></div>
-      <div class="post-nav-item">
-    <a href="/javascript/20200404/784099098/" rel="next" title="JS 筆記 - ES6：使用 let 與 const 宣告變數">
-      JS 筆記 - ES6：使用 let 與 const 宣告變數 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -413,7 +394,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#物件的寫法"><span class="nav-number">1.</span> <span class="nav-text">物件的寫法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在物件中加上屬性"><span class="nav-number">1.1.</span> <span class="nav-text">在物件中加上屬性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存取物件的屬性"><span class="nav-number">1.2.</span> <span class="nav-text">存取物件的屬性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新增物件屬性"><span class="nav-number">1.3.</span> <span class="nav-text">新增物件屬性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#刪除物件屬性"><span class="nav-number">1.4.</span> <span class="nav-text">刪除物件屬性</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#心得"><span class="nav-number">1.</span> <span class="nav-text">心得</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -573,9 +554,9 @@
       DISQUS.reset({
         reload: true,
         config: {page: {
-            url: "https://hsuchihting.github.io/javascript/20200331/3067475316/",
-            identifier: "javascript/20200331/3067475316/",
-            title: "JS 筆記 - Object 物件的基本認識"
+            url: "https://hsuchihting.github.io/javascript/20200709/3285756052/",
+            identifier: "javascript/20200709/3285756052/",
+            title: "JS 筆記 - innerHTML 與 for 迴圈的使用"
           }
         }
       });
