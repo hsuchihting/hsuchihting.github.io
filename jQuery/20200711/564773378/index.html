@@ -55,7 +55,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1484069560501-87d72b0c3669?ixlib&#x3D;rb-1.2.1&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1350&amp;q&#x3D;80">
 <meta property="article:published_time" content="2020-07-11T02:07:57.000Z">
-<meta property="article:modified_time" content="2020-07-11T02:15:24.617Z">
+<meta property="article:modified_time" content="2020-07-11T02:18:54.159Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="jQuery">
 <meta name="twitter:card" content="summary">
@@ -242,7 +242,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2020-07-11 10:07:57 / 修改時間：10:15:24" itemprop="dateCreated datePublished" datetime="2020-07-11T10:07:57+08:00">2020-07-11</time>
+              <time title="創建時間：2020-07-11 10:07:57 / 修改時間：10:18:54" itemprop="dateCreated datePublished" datetime="2020-07-11T10:07:57+08:00">2020-07-11</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -293,7 +293,7 @@
 <h2 id="jQuery-行為"><a href="#jQuery-行為" class="headerlink" title="jQuery 行為"></a>jQuery 行為</h2><p>步驟寫於下方註解。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">".question h2"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">  e.preventDefault();</span><br><span class="line">  <span class="comment">//在 h2 上動態新增 class</span></span><br><span class="line">  $(<span class="keyword">this</span>).toggleClass(<span class="string">"active"</span>);</span><br><span class="line">  <span class="comment">//h2 在父層元素中，找到 p 元素，並且給它滑動效果</span></span><br><span class="line">  $(<span class="keyword">this</span>).parent().find(<span class="string">"p"</span>).slideToggle();</span><br><span class="line">  <span class="comment">//h2 在父層 .question 元素中，找到其他 .question 同層元素，再找到該同層元素的 p 標籤，並向上收闔</span></span><br><span class="line">  $(<span class="keyword">this</span>).parent().siblings().find(<span class="string">"p"</span>).slideUp();</span><br><span class="line">  <span class="comment">//h2 在父層 .question 元素中，找到其他 .question 同層元素，再找到該同層元素的 h2 標籤，並動態移除 class</span></span><br><span class="line">  $(<span class="keyword">this</span>).parent().siblings().find(<span class="string">"h2"</span>).removeClass(<span class="string">"active"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<iframe height="300" style="width: 100%;"  src="https://codepen.io/tim_hsu/embed/dyGZdrE?height=265&theme-id=light&default-tab=result"></iframe>
+<iframe height="314" style="width: 100%;"  src="https://codepen.io/hnzxewqw/embed/bGEKLdo?height=314&theme-id=light&default-tab=result" ></iframe>
 
 <p>參考資料：</p>
 <ul>
