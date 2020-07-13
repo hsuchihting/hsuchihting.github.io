@@ -55,7 +55,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
 <meta property="article:published_time" content="2020-03-02T14:49:39.000Z">
-<meta property="article:modified_time" content="2020-04-28T14:47:02.228Z">
+<meta property="article:modified_time" content="2020-07-13T15:36:09.298Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
@@ -248,7 +248,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-04-28 22:47:02" itemprop="dateModified" datetime="2020-04-28T22:47:02+08:00">2020-04-28</time>
+                <time title="修改時間：2020-07-13 23:36:09" itemprop="dateModified" datetime="2020-07-13T23:36:09+08:00">2020-07-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -293,10 +293,13 @@
 <p>函式 function 搭配 return 是一個常用且好用的小技巧。</p>
 </blockquote>
 <hr>
-<h2 id="return-回傳"><a href="#return-回傳" class="headerlink" title="return 回傳"></a>return 回傳</h2><p>透過 <code>return</code> 回傳的屬性，可以運算比較複雜的內容，當商品或是後台採購品項較多時，就不用一直打程式碼，前提是參數內的數值要同一個才可以，比如下方例子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params">price</span>) </span>&#123; </span><br><span class="line">  <span class="keyword">return</span> addTax(price * <span class="number">0.8</span>); <span class="comment">// 商品價格要打八折時</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params">price</span>) </span>&#123; <span class="comment">// 當商品要開立發票時</span></span><br><span class="line">  <span class="keyword">return</span> addTax * <span class="number">1.05</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(count(<span class="number">500</span>);)</span><br><span class="line"><span class="comment">//return 會把 count 的參數 500，套回 function 中，會得到下面結果</span></span><br><span class="line"><span class="comment">// 500 * 0.8</span></span><br><span class="line"><span class="comment">// 500 * 1.05</span></span><br></pre></td></tr></table></figure>
+<h2 id="return-回傳"><a href="#return-回傳" class="headerlink" title="return 回傳"></a>return 回傳</h2><p>透過 <code>return</code> 回傳值的屬性，可以運算其的內容，如下方範例，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">n1, n2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> n1 + n2;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(add(<span class="number">1</span>, <span class="number">2</span>)); <span class="comment">//3</span></span><br></pre></td></tr></table></figure>
 
-<p><code>return</code> 是幫助資料回傳的一個語法，讓 function 中的語法除了更簡潔外，也更可以提高程式碼閱讀性! 也可以透過判斷式的內容，讓 <code>return</code> 讓函式停止執行。</p>
+<p>假如說今天有商品或是後台計算方式不同時，只要把相對的方法建立好，再把參數帶回其中，就可以得到想要的結果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params">price</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> addTax(price * <span class="number">0.8</span>); <span class="comment">// 商品價格要打八折時</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params">price</span>) </span>&#123; <span class="comment">// 當商品要開立發票時</span></span><br><span class="line">  <span class="keyword">return</span> addTax * <span class="number">1.05</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(count(<span class="number">500</span>);)</span><br><span class="line"><span class="comment">//return 會把 count 的參數 500，套回 function 中，會得到下面結果</span></span><br><span class="line"><span class="comment">// 500 * 0.8</span></span><br><span class="line"><span class="comment">// 500 * 1.05</span></span><br></pre></td></tr></table></figure>
+
+<p><code>return</code> 是幫助資料回傳的一個語法，讓 function 中的語法除了更簡潔外，也更可以提高程式碼閱讀性!</p>
 
     </div>
 
@@ -404,7 +407,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-count">82</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
