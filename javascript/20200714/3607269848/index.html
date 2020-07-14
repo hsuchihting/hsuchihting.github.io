@@ -46,21 +46,22 @@
   };
 </script>
 
-  <meta name="description" content="提姆的前端筆記">
-<meta property="og:type" content="website">
-<meta property="og:title" content="TimCodingBlog">
-<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;archives&#x2F;2020&#x2F;page&#x2F;3&#x2F;index.html">
+  <meta name="description" content="動態新增 HTML 標籤的寫法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 筆記 - 使用 JavaScript 插入 createElement">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;javascript&#x2F;20200714&#x2F;3607269848&#x2F;index.html">
 <meta property="og:site_name" content="TimCodingBlog">
-<meta property="og:description" content="提姆的前端筆記">
+<meta property="og:description" content="動態新增 HTML 標籤的寫法">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
+<meta property="article:published_time" content="2020-07-14T15:46:12.000Z">
+<meta property="article:modified_time" content="2020-07-14T15:52:44.008Z">
 <meta property="article:author" content="Tim Hsu">
-<meta property="article:tag" content="TimCodingBlog">
-<meta property="article:tag" content=" 前端工程師">
-<meta property="article:tag" content=" Frond-end developer">
-<meta property="article:tag" content=" F2E">
+<meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
 
-<link rel="canonical" href="https://hsuchihting.github.io/archives/2020/page/3/">
+<link rel="canonical" href="https://hsuchihting.github.io/javascript/20200714/3607269848/">
 
 
 <script id="page-configurations">
@@ -68,11 +69,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false
+    isPost: true
   };
 </script>
 
-  <title>歸檔 | TimCodingBlog</title>
+  <title>JS 筆記 - 使用 JavaScript 插入 createElement | TimCodingBlog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
     <script>
@@ -212,237 +213,140 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/javascript/20200714/3607269848/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          JS 筆記 - 使用 JavaScript 插入 createElement
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-07-14 23:46:12 / 修改時間：23:52:44" itemprop="dateCreated datePublished" datetime="2020-07-14T23:46:12+08:00">2020-07-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+            </span>
+
+          
   
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        
-        <span class="collection-header">很好! 目前共有 83 篇文章。 繼續努力。</span>
-      </div>
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/javascript/20200714/3607269848/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="javascript/20200714/3607269848/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">動態新增 HTML 標籤的寫法</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h2 class="collection-header">2020</h2>
-    </div>
+        <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JavaScript%20note-01.jpg?alt=media&token=7bee0261-72ac-4de4-9f5a-f39d58735b7d" alt="JavaScript Note"></p>
+<h2 id="createElement"><a href="#createElement" class="headerlink" title="createElement"></a>createElement</h2><ul>
+<li>方法：使用 DOM 節點來處理。(貼上 DOM 文章連結)</li>
+<li>優點：安全性高。</li>
+<li>缺點：效能差。</li>
+</ul>
+<p>首先在 HTML 裡面新增一個 <code>div</code>：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span>title<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<p><code>createElement</code> 英文字面意思就是「創造功能」，也就是在網頁上透過 JavaScript 新增一個節點功能，如下方程式碼所示，要在文件中新增一個 <code>&lt;em&gt;</code> 的標籤。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="built_in">document</span>.createElement(<span class="string">"em"</span>); <span class="comment">//新增 em 標籤</span></span><br><span class="line">str.textContent = <span class="string">"新增文字"</span>;</span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-06-16T23:06:50+08:00"
-              content="2020-06-16">
-          06-16
-        </time>
-      </div>
+<h2 id="appendChild"><a href="#appendChild" class="headerlink" title="appendChild"></a>appendChild</h2><p>再透過一個語法 <code>appendChild</code>，增加子節點，並增加到變數 <code>str</code> 當中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//增加子節點</span></span><br><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">".title"</span>).appendChild(str);</span><br></pre></td></tr></table></figure>
 
-      <h3 class="post-title">
-          <a class="post-title-link" href="/jQuery/20200616/1889697036/" itemprop="url">
-            <span itemprop="name">jQuery 筆記 - Swiper 套件起手式</span>
-          </a>
-      </h3>
+<blockquote>
+<p>英文直翻也很有意思，append 是附加的意思，Child 是小孩，可以理解成附加一個節點的小孩。</p>
+</blockquote>
+<h2 id="setAttribute"><a href="#setAttribute" class="headerlink" title="setAttribute"></a>setAttribute</h2><p>另外可以透過之前學過的 <code>setAttribute</code> 語法，動態新增一個 <code>class</code> 來優化，使新增的文字變成紅色。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.setAttribute(<span class="string">"class"</span>, <span class="string">"red"</span>); <span class="comment">//在 str 新增屬性</span></span><br></pre></td></tr></table></figure>
 
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-06-15T22:16:30+08:00"
-              content="2020-06-15">
-          06-15
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/javascript/20200615/1316819935/" itemprop="url">
-            <span itemprop="name">JS 筆記 - 認識 DOM 文件物件模型</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-06-12T00:09:56+08:00"
-              content="2020-06-12">
-          06-12
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/jQuery/20200612/2695853287/" itemprop="url">
-            <span itemprop="name">jQuery 筆記 - 動態改變字體大小與背景顏色</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-06-12T00:07:22+08:00"
-              content="2020-06-12">
-          06-12
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/jQuery/20200612/2943313098/" itemprop="url">
-            <span itemprop="name">jQuery 筆記 - 下拉收闔選單寫法</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-06-12T00:05:17+08:00"
-              content="2020-06-12">
-          06-12
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/jQuery/20200612/4108502825/" itemprop="url">
-            <span itemprop="name">jQuery 筆記 - delay() 延遲動畫效果</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-06-12T00:03:19+08:00"
-              content="2020-06-12">
-          06-12
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/jQuery/20200612/3811422616/" itemprop="url">
-            <span itemprop="name">jQuery 筆記 - 讓 checkbox 預設值為選取方法</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-06-10T22:51:20+08:00"
-              content="2020-06-10">
-          06-10
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/css/20200610/3064004331/" itemprop="url">
-            <span itemprop="name">CSS 筆記 - CSS Filter 濾鏡效果</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-06-10T22:45:10+08:00"
-              content="2020-06-10">
-          06-10
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/css/20200610/4073219914/" itemprop="url">
-            <span itemprop="name">CSS 筆記 - 寫一個 iPhone 開關效果</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-06-09T22:13:24+08:00"
-              content="2020-06-09">
-          06-09
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/jQuery/20200609/184811241/" itemprop="url">
-            <span itemprop="name">jQuery 筆記 - 選擇器的選法與基本動畫效果語法</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-06-09T22:03:51+08:00"
-              content="2020-06-09">
-          06-09
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/javascript/20200609/2466460421/" itemprop="url">
-            <span itemprop="name">JS 筆記 - 使用 select 選到該功能並執行其中內容</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
+<p>可參考 <a href="https://hsuchihting.github.io/javascript/20200622/114236291/">setAttribute</a> 介紹。</p>
+<p>codepen: <a href="https://codepen.io/hnzxewqw/pen/oNXYrOL" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/oNXYrOL</a></p>
 
     </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/jQuery/20200713/1248582820/" rel="prev" title="jQuery 筆記 - 移除元素 remove()">
+      <i class="fa fa-chevron-left"></i> jQuery 筆記 - 移除元素 remove()
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
   </div>
-  
-  
-  
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2020/page/2/"><i class="fa fa-angle-left" aria-label="上一頁"></i></a><a class="page-number" href="/archives/2020/">1</a><a class="page-number" href="/archives/2020/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/2020/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2020/page/9/">9</a><a class="extend next" rel="next" href="/archives/2020/page/4/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
-  </nav>
-
 
 
           </div>
           
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -489,6 +393,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#createElement"><span class="nav-number">1.</span> <span class="nav-text">createElement</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#appendChild"><span class="nav-number">2.</span> <span class="nav-text">appendChild</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#setAttribute"><span class="nav-number">3.</span> <span class="nav-text">setAttribute</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -641,6 +546,26 @@
   }
   // defer loading until the whole page loading is completed
   window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/javascript/20200714/3607269848/",
+            identifier: "javascript/20200714/3607269848/",
+            title: "JS 筆記 - 使用 JavaScript 插入 createElement"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
 </script>
 
 </body>
