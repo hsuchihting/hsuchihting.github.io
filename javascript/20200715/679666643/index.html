@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="使用排序並渲染於網頁上">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JSP 筆記 - 陣列排序 Sort()與 C3.js 視覺資料處理">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;javascript&#x2F;20200715&#x2F;679666643&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="使用排序並渲染於網頁上">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;TfmELDc.png">
+<meta property="article:published_time" content="2020-07-15T13:00:59.000Z">
+<meta property="article:modified_time" content="2020-07-15T13:01:50.901Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="C3.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;TfmELDc.png">
+
+<link rel="canonical" href="https://hsuchihting.github.io/javascript/20200715/679666643/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>JSP 筆記 - 陣列排序 Sort()與 C3.js 視覺資料處理 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/javascript/20200715/679666643/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          JSP 筆記 - 陣列排序 Sort()與 C3.js 視覺資料處理
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-07-15 21:00:59 / 修改時間：21:01:50" itemprop="dateCreated datePublished" datetime="2020-07-15T21:00:59+08:00">2020-07-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/javascript/20200715/679666643/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="javascript/20200715/679666643/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">使用排序並渲染於網頁上</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://i.imgur.com/TfmELDc.png" alt="c3"></p>
+<p><strong>JSP</strong>，<strong>J</strong>avaScript <strong>S</strong>pecial <strong>P</strong>ractice (JavaScript 特別訓練)，這是在六角學院這次長達六十天的特訓，學員專屬，這名字是我自己取的，覺得相當帥氣<del>中二</del>。</p>
+<p>之前學習到如何使用 <strong>axios</strong> 串接 AJAX，並且使用 <strong>forEach</strong> 來選取所要的資料，並且這次透過 <strong>change</strong> 事件的判斷條件，使資料有排序功能。</p>
+<p>本次練習使用此 API。<a href="https://raw.githubusercontent.com/hexschool/hexschoolNewbieJS/master/data.json" target="_blank" rel="noopener">連結</a></p>
+<h2 id="陣列排序進度"><a href="#陣列排序進度" class="headerlink" title="陣列排序進度"></a>陣列排序進度</h2><h3 id="axios-取得-API-資料"><a href="#axios-取得-API-資料" class="headerlink" title="axios 取得 API 資料"></a>axios 取得 API 資料</h3><ul>
+<li>綁定 HTML 的標籤，變數也使用一樣的名稱。</li>
+<li>宣告一個變數為 data，後續存放回傳的資料用。</li>
+<li>使用 axios 取得 API 資料。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> record = <span class="built_in">document</span>.querySelector(<span class="string">".record"</span>);</span><br><span class="line"><span class="keyword">let</span> data;</span><br><span class="line"></span><br><span class="line">axios.get(dataUrl).then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">  data = response.data;</span><br><span class="line">  <span class="built_in">console</span>.log(data);</span><br><span class="line">  getRecord();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="建立清單渲染於網頁"><a href="#建立清單渲染於網頁" class="headerlink" title="建立清單渲染於網頁"></a>建立清單渲染於網頁</h3><p>使用一個函式存放要取得資料的方式，</p>
+<ul>
+<li>宣告一個變數為空字串。</li>
+<li>透過 forEach 來取得想要的資料。</li>
+<li>組字串，因為我要做成列表，所以用一個 <code>div</code> 包住，成為區塊元素。</li>
+<li>用 innerHTML 印出標籤在網頁上。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getRecord</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> str = <span class="string">""</span>;</span><br><span class="line">  data.forEach(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">    str += <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;div&gt;  </span></span><br><span class="line"><span class="string">      &lt;ul&gt;</span></span><br><span class="line"><span class="string">      &lt;li&gt;<span class="subst">$&#123;item.name&#125;</span>&lt;/li&gt;</span></span><br><span class="line"><span class="string">      &lt;li&gt;<span class="subst">$&#123;item.process&#125;</span>&lt;/li&gt;</span></span><br><span class="line"><span class="string">      &lt;/ul&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">  `</span>;</span><br><span class="line">  &#125;);</span><br><span class="line">  record.innerHTML = str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>CodePen <a href="https://codepen.io/tim_hsu/pen/QWyVWrR?editors=0010" target="_blank" rel="noopener">https://codepen.io/tim_hsu/pen/QWyVWrR?editors=0010</a></p>
+<h2 id="監聽切換排序功能"><a href="#監聽切換排序功能" class="headerlink" title="監聽切換排序功能"></a>監聽切換排序功能</h2><p>延續上方取得資料後，要使用一個下拉選單做為條件，並排序其資料內容。</p>
+<h3 id="select"><a href="#select" class="headerlink" title="select"></a>select</h3><p>把選項先寫好在 option 中，並在 select 做一個 class。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">class</span>=<span class="string">"select"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"id"</span>&gt;</span>依照 id 編號排序(由1開始從上往下)<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"process"</span>&gt;</span>依照完課率排序(由最高到最低)<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="sort-排序資料"><a href="#sort-排序資料" class="headerlink" title="sort() 排序資料"></a>sort() 排序資料</h3><p>使用 <code>sort()</code> 讓資料可以依照條件排序：</p>
+<ul>
+<li>建立一個函式，其參數為(資料，select 選擇結果)。</li>
+<li>判斷 select 的結果是 id ，使資料採用 sort()方法做排序(小到大)，因為取得的值為字串，所以同時轉型為整數。</li>
+<li>判斷 select 的結果是 process，使資料採用 sort()方法做排序(大到小)，並只取到小數點後兩位，因後台結果有超過小數點兩位，小數點取到後兩位的渲染畫面較好看也可以做區別。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//select 排列條件</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sortData</span>(<span class="params">data, select</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (select === <span class="string">"id"</span>) data.sort(<span class="function">(<span class="params">x, y</span>) =&gt;</span> <span class="built_in">parseInt</span>(x.id) - <span class="built_in">parseInt</span>(y.id));</span><br><span class="line">  <span class="comment">//四捨五入，取小數點後兩位</span></span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (select === <span class="string">"process"</span>)</span><br><span class="line">    data.sort(<span class="function">(<span class="params">x, y</span>) =&gt;</span> <span class="built_in">parseFloat</span>(y.process) - <span class="built_in">parseFloat</span>(x.process));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="監聽事件"><a href="#監聽事件" class="headerlink" title="監聽事件"></a>監聽事件</h3><p>完成資料處理後，建立 <code>select</code> 的監聽事件，對應的是 <code>change</code>，其函式內容要按照原本條件的順序排列，不然讀取的結果會是相反。(因為程式是由上到下讀取)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//順序要擺對，不然內容會錯</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">selectRecord</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  sortData(data, select.value);</span><br><span class="line">  getRecord();</span><br><span class="line">&#125;</span><br><span class="line">select.addEventListener(<span class="string">"change"</span>, selectRecord);</span><br></pre></td></tr></table></figure>
+
+<p>CodePen <a href="https://codepen.io/tim_hsu/pen/BajOyRB?editors=1010" target="_blank" rel="noopener">https://codepen.io/tim_hsu/pen/BajOyRB?editors=1010</a></p>
+<h2 id="串接-C3-圖表"><a href="#串接-C3-圖表" class="headerlink" title="串接 C3 圖表"></a>串接 C3 圖表</h2><h3 id="起手式"><a href="#起手式" class="headerlink" title="起手式"></a>起手式</h3><p>基本認識可以看<a href="https://hsuchihting.github.io/javascript/20200715/3292510004/">C3.js 基本認識</a>。</p>
+<h4 id="取得資料"><a href="#取得資料" class="headerlink" title="取得資料"></a>取得資料</h4><p>延續前面所使用的 <code>sort()</code> 與 <code>axios</code> 方法，結合 C3.js 圖表套件完成視覺化資料處理。</p>
+<ul>
+<li>宣告 <code>columns</code> 變數要放入完成率的資料。</li>
+<li>宣告 <code>category</code> 變數要放入參賽者姓名資料。</li>
+<li>其中要執行兩個函式。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> data; <span class="comment">//存放回傳資料用</span></span><br><span class="line"><span class="keyword">let</span> columns = [<span class="string">"完成率"</span>]; <span class="comment">//data 對應名稱與存放數據資料用</span></span><br><span class="line"><span class="keyword">let</span> category = []; <span class="comment">//參賽者姓名資料</span></span><br><span class="line"></span><br><span class="line">axios.get(dataUrl).then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">  data = response.data;</span><br><span class="line">  sortData(data);</span><br><span class="line">  load(columns, category);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>來看一下函式內容。</p>
+<h4 id="資料排序"><a href="#資料排序" class="headerlink" title="資料排序"></a>資料排序</h4><p>改寫之前的篩選排序方法，</p>
+<ul>
+<li>資料排序從完成率高到低。</li>
+<li>取得完成率資料，取得小數點後兩位，並用百分比顯示，增加到圖表中的 <code>columns</code>。</li>
+<li>將參賽者姓名資料，增加到 <code>category</code> 的空陣列中。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sortData</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">  data.sort(<span class="function">(<span class="params">x, y</span>) =&gt;</span> <span class="built_in">parseFloat</span>(y.process) - <span class="built_in">parseFloat</span>(x.process)); <span class="comment">//完成率資料排序，高到低</span></span><br><span class="line">  data.forEach(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">    columns.push(<span class="built_in">parseFloat</span>(item.process) / <span class="number">100</span>); <span class="comment">//完成率資料取得小數點後兩位後，變百分比呈現</span></span><br><span class="line">    category.push(item.name); <span class="comment">//把參賽者資料推到參數中</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="呈現在視覺資料中"><a href="#呈現在視覺資料中" class="headerlink" title="呈現在視覺資料中"></a>呈現在視覺資料中</h4><ul>
+<li>函式要帶入的參數就是完成率與參賽者資料。</li>
+<li><code>columns</code> 就是把宣告的變數項目與完成率資料展開放在一起。</li>
+<li><code>colors</code> 的屬性要與 columns 所帶入的 data 名稱相符，這邊為<strong>完成率</strong>，顏色使用色票，並使用字串形式。</li>
+<li><code>size</code> 的屬性設定圖表高度 *30px，不然會全部擠在一起，無法辨識。</li>
+<li><code>axis</code> 屬性增加 <code>rotated</code> 的原因是資料太多，改成橫向較好閱讀(所以 X 軸變成 Y 軸位置)。</li>
+<li><code>categories</code> 屬性帶入的就是宣告的參賽者變數 category。</li>
+<li><code>label</code> 為要帶入的標籤內容與位置。<blockquote>
+<p>更多設定可以查看<a href="https://c3js.org/reference.html" target="_blank" rel="noopener">官網 Reference</a>。</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">load</span>(<span class="params">columns, category</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> chart = c3.generate(&#123;</span><br><span class="line">    bindto: <span class="string">"#chart"</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">      columns: [</span><br><span class="line">        [...columns], <span class="comment">//完成率與資料展開</span></span><br><span class="line">      ],</span><br><span class="line">      axes: &#123;</span><br><span class="line">        完成率: <span class="string">"y2"</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">      type: <span class="string">"bar"</span>, <span class="comment">//圖表類型</span></span><br><span class="line">      colors: &#123;</span><br><span class="line">        完成率: <span class="string">"#9CCC65"</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    size: &#123;</span><br><span class="line">      height: category.length * <span class="number">30</span>, <span class="comment">//調整圖表高度</span></span><br><span class="line">    &#125;,</span><br><span class="line">    axis: &#123;</span><br><span class="line">      rotated: <span class="literal">true</span>, <span class="comment">//轉成橫向</span></span><br><span class="line">      x: &#123;</span><br><span class="line">        type: <span class="string">"category"</span>, <span class="comment">// 左側 X 軸顯示</span></span><br><span class="line">        categories: category, <span class="comment">//參賽姓名資料</span></span><br><span class="line">        label: &#123;</span><br><span class="line">          text: <span class="string">"參賽者姓名"</span>,</span><br><span class="line">          position: <span class="string">"outer-center"</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">      y: &#123;</span><br><span class="line">        show: <span class="literal">true</span>, <span class="comment">//下方 Y 軸顯示</span></span><br><span class="line">        label: &#123;</span><br><span class="line">          text: <span class="string">"完成率%"</span>,</span><br><span class="line">          position: <span class="string">"outer-middle"</span>, <span class="comment">//名稱位置</span></span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">      y2: &#123;</span><br><span class="line">        show: <span class="literal">true</span>, <span class="comment">//上方 Y 軸顯示</span></span><br><span class="line">        label: &#123;</span><br><span class="line">          text: <span class="string">"完成率%"</span>,</span><br><span class="line">          position: <span class="string">"outer-middle"</span>, <span class="comment">//名稱位置</span></span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Demo <a href="https://codepen.io/hnzxewqw/full/BajOvob" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/full/BajOvob</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/C3-js/" rel="tag"># C3.js</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/javascript/20200715/3292510004/" rel="prev" title="JS 筆記 - C3.js 基本認識">
+      <i class="fa fa-chevron-left"></i> JS 筆記 - C3.js 基本認識
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#陣列排序進度"><span class="nav-number">1.</span> <span class="nav-text">陣列排序進度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#axios-取得-API-資料"><span class="nav-number">1.1.</span> <span class="nav-text">axios 取得 API 資料</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建立清單渲染於網頁"><span class="nav-number">1.2.</span> <span class="nav-text">建立清單渲染於網頁</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#監聽切換排序功能"><span class="nav-number">2.</span> <span class="nav-text">監聽切換排序功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#select"><span class="nav-number">2.1.</span> <span class="nav-text">select</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sort-排序資料"><span class="nav-number">2.2.</span> <span class="nav-text">sort() 排序資料</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#監聽事件"><span class="nav-number">2.3.</span> <span class="nav-text">監聽事件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#串接-C3-圖表"><span class="nav-number">3.</span> <span class="nav-text">串接 C3 圖表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#起手式"><span class="nav-number">3.1.</span> <span class="nav-text">起手式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#取得資料"><span class="nav-number">3.1.1.</span> <span class="nav-text">取得資料</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#資料排序"><span class="nav-number">3.1.2.</span> <span class="nav-text">資料排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#呈現在視覺資料中"><span class="nav-number">3.1.3.</span> <span class="nav-text">呈現在視覺資料中</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">88</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hsiangfeng.github.io/" title="https:&#x2F;&#x2F;hsiangfeng.github.io&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gretema.github.io/" title="https:&#x2F;&#x2F;gretema.github.io&#x2F;" rel="noopener" target="_blank">馬格蕾特的前端勇者日誌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wcc723.github.io/" title="https:&#x2F;&#x2F;wcc723.github.io&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/javascript/20200715/679666643/",
+            identifier: "javascript/20200715/679666643/",
+            title: "JSP 筆記 - 陣列排序 Sort()與 C3.js 視覺資料處理"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
