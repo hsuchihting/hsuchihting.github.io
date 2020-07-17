@@ -2,23 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://hsuchihting.github.io/css/20200715/3606873816/</loc>
+    <loc>https://hsuchihting.github.io/css/20200711/1366382220/</loc>
     
-    <lastmod>2020-07-15T13:42:56.627Z</lastmod>
+    <lastmod>2020-07-17T14:04:36.318Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://hsuchihting.github.io/javascript/20200715/679666643/</loc>
+    <loc>https://hsuchihting.github.io/css/20200715/3606873816/</loc>
     
-    <lastmod>2020-07-15T13:02:01.602Z</lastmod>
+    <lastmod>2020-07-15T15:33:09.490Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://hsuchihting.github.io/javascript/20200715/3292510004/</loc>
     
-    <lastmod>2020-07-15T12:55:02.285Z</lastmod>
+    <lastmod>2020-07-15T15:33:04.569Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hsuchihting.github.io/javascript/20200715/679666643/</loc>
+    
+    <lastmod>2020-07-15T15:33:04.171Z</lastmod>
     
   </url>
   
@@ -145,13 +152,6 @@
     <loc>https://hsuchihting.github.io/css/20200410/3203726250/</loc>
     
     <lastmod>2020-07-13T15:35:11.938Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hsuchihting.github.io/css/20200711/1366382220/</loc>
-    
-    <lastmod>2020-07-13T15:34:57.691Z</lastmod>
     
   </url>
   
