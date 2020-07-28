@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="簡單確實用的取值方式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery 筆記 - 取得 checkbox 的值">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;jQuery&#x2F;20200728&#x2F;1504394333&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="簡單確實用的取值方式">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1580634240125-b9f6ff4283d1?ixlib&#x3D;rb-1.2.1&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1351&amp;q&#x3D;80">
+<meta property="article:published_time" content="2020-07-28T15:23:56.000Z">
+<meta property="article:modified_time" content="2020-07-28T15:26:30.124Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="jQuery">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1580634240125-b9f6ff4283d1?ixlib&#x3D;rb-1.2.1&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1351&amp;q&#x3D;80">
+
+<link rel="canonical" href="https://hsuchihting.github.io/jQuery/20200728/1504394333/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>jQuery 筆記 - 取得 checkbox 的值 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/jQuery/20200728/1504394333/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          jQuery 筆記 - 取得 checkbox 的值
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-07-28 23:23:56 / 修改時間：23:26:30" itemprop="dateCreated datePublished" datetime="2020-07-28T23:23:56+08:00">2020-07-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jQuery/" itemprop="url" rel="index">
+                    <span itemprop="name">jQuery</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/jQuery/20200728/1504394333/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="jQuery/20200728/1504394333/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">簡單確實用的取值方式</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://images.unsplash.com/photo-1580634240125-b9f6ff4283d1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80" alt="get"><br>專案實務上遇到的情況，為了要讓後端知道前端有設定了一個取值的方式。</p>
+<h2 id="取得-input-屬性的值"><a href="#取得-input-屬性的值" class="headerlink" title="取得 input 屬性的值"></a>取得 input 屬性的值</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> inputPropertyValue = $(<span class="string">"input[type='checkbox']"</span>).val();</span><br><span class="line">  <span class="built_in">console</span>.log(inputPropertyValue); <span class="comment">//on</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="綁定-id-或是-className"><a href="#綁定-id-或是-className" class="headerlink" title="綁定 id 或是 className"></a>綁定 id 或是 className</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> checkValue;</span><br><span class="line"> $(<span class="string">'#check'</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">   checkValue = $(<span class="keyword">this</span>).val();</span><br><span class="line">   <span class="built_in">console</span>.log(checkValue); <span class="comment">//on</span></span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+<p>這個方式無論是否選中，它都會返回<strong>相同的值(on)</strong>，這可能會造成混淆，因為它不同是使用於提交表單行為。</p>
+<h2 id="確認是否被點擊"><a href="#確認是否被點擊" class="headerlink" title="確認是否被點擊"></a>確認是否被點擊</h2><p>比較建議使用被點擊到後顯示 true，取消則顯示 false。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"#isChecked"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> isChecked = $(<span class="keyword">this</span>).is(<span class="string">":checked"</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(isChecked); <span class="comment">//true or false</span></span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>CodePen <a href="https://codepen.io/hnzxewqw/pen/yLeWvWm?editors=1111" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/yLeWvWm?editors=1111</a></p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a href="https://www.ucamc.com/e-learning/javascript/393-%E5%A6%82%E4%BD%95%E5%9C%A8jquery%E4%B8%AD%E7%8D%B2%E5%8F%96checkbox-value" target="_blank" rel="noopener">如何在 jQuery 中獲取 checkbox value</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/jQuery/" rel="tag"># jQuery</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/jQuery/20200728/4086127041/" rel="prev" title="jQuery 筆記 - 點擊按鈕使數字自動加總與歸零">
+      <i class="fa fa-chevron-left"></i> jQuery 筆記 - 點擊按鈕使數字自動加總與歸零
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/javascript/20200728/3761746066/" rel="next" title="JS 筆記 -ES6:fetch 取得遠端資料">
+      JS 筆記 -ES6:fetch 取得遠端資料 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#取得-input-屬性的值"><span class="nav-number">1.</span> <span class="nav-text">取得 input 屬性的值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#綁定-id-或是-className"><span class="nav-number">2.</span> <span class="nav-text">綁定 id 或是 className</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#確認是否被點擊"><span class="nav-number">3.</span> <span class="nav-text">確認是否被點擊</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">4.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">107</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hsiangfeng.github.io/" title="https:&#x2F;&#x2F;hsiangfeng.github.io&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gretema.github.io/" title="https:&#x2F;&#x2F;gretema.github.io&#x2F;" rel="noopener" target="_blank">馬格蕾特的前端勇者日誌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wcc723.github.io/" title="https:&#x2F;&#x2F;wcc723.github.io&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/jQuery/20200728/1504394333/",
+            identifier: "jQuery/20200728/1504394333/",
+            title: "jQuery 筆記 - 取得 checkbox 的值"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
