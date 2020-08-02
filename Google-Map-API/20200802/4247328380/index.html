@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Google Map API 起手式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Google Maps API 筆記 - 載入地圖起手式 Google Maps Embed API">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;Google-Map-API&#x2F;20200802&#x2F;4247328380&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="Google Map API 起手式">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1548345680-f5475ea5df84?ixlib&#x3D;rb-1.2.1&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1352&amp;q&#x3D;80">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;uYyu4ZZ.png">
+<meta property="article:published_time" content="2020-08-02T15:01:19.000Z">
+<meta property="article:modified_time" content="2020-08-02T15:18:24.284Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Google Map API">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1548345680-f5475ea5df84?ixlib&#x3D;rb-1.2.1&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1352&amp;q&#x3D;80">
+
+<link rel="canonical" href="https://hsuchihting.github.io/Google-Map-API/20200802/4247328380/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Google Maps API 筆記 - 載入地圖起手式 Google Maps Embed API | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/Google-Map-API/20200802/4247328380/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          Google Maps API 筆記 - 載入地圖起手式 Google Maps Embed API
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-08-02 23:01:19 / 修改時間：23:18:24" itemprop="dateCreated datePublished" datetime="2020-08-02T23:01:19+08:00">2020-08-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Google-Map-API/" itemprop="url" rel="index">
+                    <span itemprop="name">Google Map API</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/Google-Map-API/20200802/4247328380/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="Google-Map-API/20200802/4247328380/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">Google Map API 起手式</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://images.unsplash.com/photo-1548345680-f5475ea5df84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80" alt="google maps"></p>
+<p>地圖應用已經廣泛的在各產業結合，許多服務都需要使用 Google Maps，剛好專案上有機會來研究，就來做個筆記。</p>
+<h2 id="申請-Google-API"><a href="#申請-Google-API" class="headerlink" title="申請 Google API"></a>申請 Google API</h2><p>自從 2018 年 Google Maps 服務開始收費後，就必須要有一個 API 才能使用提供的服務，有 Google 帳號就可以申請，至於申請細節可以看<a href="https://developers.google.com/maps/documentation/embed/get-api-key" target="_blank" rel="noopener">官網</a>或參考<a href="https://www.wfublog.com/2018/12/google-api-key-activate-quota.html" target="_blank" rel="noopener">這篇</a>。</p>
+<p>有幾點要注意：</p>
+<ol>
+<li>每個月有 200 美元的額度可以使用，只要單月不超過免費點擊次數(28,000 次)，就不會被收費。</li>
+<li>因為是自己研究與純練習，所以在<strong>應用程式限制</strong>的地方我有限制指定網域。</li>
+<li>需要綁定信用卡，但如果沒有繳費，只是會出現浮水印而已，其他功能正常。</li>
+<li>API 金鑰取得後，務必保存好，避免被他人存取使用，導致會有帳單產生。</li>
+<li>可設定單日上限次數，避免一個月超過免費額度。</li>
+</ol>
+<p>這裡就不贅述 API 申請流程與設定部分。</p>
+<h2 id="Google-Maps-Embed-API"><a href="#Google-Maps-Embed-API" class="headerlink" title="Google Maps Embed API"></a>Google Maps Embed API</h2><p>在 Google Maps 有 Google Maps Embed API 選項，選擇後可以看到這個頁面，</p>
+<p><img src="https://i.imgur.com/uYyu4ZZ.png" alt="Google Maps Embed API"></p>
+<p>會看到下方是使用 <code>&lt;iframe&gt;</code> 的方式嵌入網頁的，</p>
+<p>填入金鑰以及地點，執行後就會看到網頁出現地圖，並且按照標示我們輸入的地址或地點，網址 src 的 URL，須按照 Google Maps Embed API 的要求撰寫：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.google.com/maps/embed/v1/模式?key=你的金鑰&amp;參數</span><br></pre></td></tr></table></figure>
+
+<p>有分幾個模式，來看一下。</p>
+<h3 id="place-地點模式"><a href="#place-地點模式" class="headerlink" title="place 地點模式"></a>place 地點模式</h3><p>使用 place 時，後方會用 <code>q</code> 參數定義要在地圖上著重展示的地點，若有遇到「空格」，可用 <code>+</code> 號表示，例如，如果要找<strong>衛生福利部</strong>，就在上方頁面框輸入該名稱，地圖會自動跳到所搜尋的地點，並且要求填入 API key，完成後會出現一串網址如下方所示(所輸入的地點會變成一串亂碼，這邊就用衛生福利部代替)，只要複製該網址貼到編輯器，再到限制的網域查看，就可以看到其結果囉!</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span></span></span><br><span class="line"><span class="tag">  <span class="attr">width</span>=<span class="string">"600"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">height</span>=<span class="string">"450"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">frameborder</span>=<span class="string">"0"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">style</span>=<span class="string">"border:0"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">src</span>=<span class="string">"https://www.google.com/maps/embed/v1/place?key=你的金鑰</span></span></span><br><span class="line"><span class="tag"><span class="string">    &amp;q=衛生福利部"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">allowfullscreen</span></span></span><br><span class="line"><span class="tag">&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><a href="https://hsuchihting.github.io/GoogleMapAPI_Practice/googleMapPlace.html" target></a></p>
+<p><a href="https://hsuchihting.github.io/GoogleMapAPI_Practice/googleMapPlace.html" title="Place Mode" target="_blank">Place Demo</a></p>
+<h3 id="Search-搜尋模式"><a href="#Search-搜尋模式" class="headerlink" title="Search 搜尋模式"></a>Search 搜尋模式</h3><p>此模式設定方式與地點模式相同，官方範例是可以搜尋指定地點附近的餐廳或是商店，有多三個參數，例如我今天想找在<strong>台北捷運昆陽站附近 7-11</strong>(這是搜尋關鍵字內容)，就會得到下方網址：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span></span></span><br><span class="line"><span class="tag">  <span class="attr">width</span>=<span class="string">"600"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">height</span>=<span class="string">"450"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">frameborder</span>=<span class="string">"0"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">style</span>=<span class="string">"border:0"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">src</span>=<span class="string">"https://www.google.com/maps/embed/v1/search?q=台北捷運昆陽站附近 7-11&amp;key=你的金鑰"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">allowfullscreen</span></span></span><br><span class="line"><span class="tag">&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>可加入的參數：</p>
+<ul>
+<li>q：搜尋的關鍵詞 ( 剛剛你填寫的內容 )。</li>
+<li>zoom：地圖的縮放大小，範圍從 0 到 21。</li>
+<li>center：中心點經緯度。</li>
+</ul>
+<p><a href="https://hsuchihting.github.io/GoogleMapAPI_Practice/googleMapSearch.html" title="Search Mode" target="_blank">Search Demo</a></p>
+<h3 id="directions-路線規劃模式"><a href="#directions-路線規劃模式" class="headerlink" title="directions 路線規劃模式"></a>directions 路線規劃模式</h3><p>只要在網頁輸入<strong>起始地點 Origin</strong> 跟<strong>抵達地點 Destination</strong>，就可以了</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span></span></span><br><span class="line"><span class="tag">  <span class="attr">width</span>=<span class="string">"600"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">height</span>=<span class="string">"450"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">frameborder</span>=<span class="string">"0"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">style</span>=<span class="string">"border:0"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">src</span>=<span class="string">"https://www.google.com/maps/embed/v1/directions?origin=衛生福利部&amp;destination=台北捷運昆陽站&amp;key=你的金鑰"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">allowfullscreen</span></span></span><br><span class="line"><span class="tag">&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><a href="https://hsuchihting.github.io/GoogleMapAPI_Practice/googleMapDirections.html" title="Direction Mode" target="_blank">Direction Demo</a></p>
+<h3 id="streetview-街景服務模式"><a href="#streetview-街景服務模式" class="headerlink" title="streetview 街景服務模式"></a>streetview 街景服務模式</h3><p>在 location 的搜尋框內輸入準確的地址，為什麼是準確地址?原因是倘若今天搜尋總統府，會跑到總統府裡面，但我可能只是要搜尋總統府廣場，所以要準確的輸入搜尋關鍵字，不過 Google 很貼心會自己跑出對應的關鍵字，一樣會得到相對網址。</p>
+<blockquote>
+<p>pano：特定的全景 ID，如果沒有 location 一定要有這個參數。</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span></span></span><br><span class="line"><span class="tag">  <span class="attr">width</span>=<span class="string">"600"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">height</span>=<span class="string">"450"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">frameborder</span>=<span class="string">"0"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">style</span>=<span class="string">"border:0"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">src</span>=<span class="string">"https://www.google.com/maps/embed/v1/streetview?location=25.0399%2C121.5127&amp;key=你的金鑰"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">allowfullscreen</span></span></span><br><span class="line"><span class="tag">&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>這邊會出現以下的資訊。</p>
+<ul>
+<li>location：經緯度，以逗號分隔 ( 必須 )。</li>
+</ul>
+<p>可加入的參數：</p>
+<ul>
+<li><p>heading：從北方順時針旋轉的角度指出相機指南針所指的方向 ( -180 ~ 360 )。</p>
+</li>
+<li><p>pitch：指定相機往上或往下的角度，預設為 0 ( -90 ~ 90 )。</p>
+</li>
+<li><p>fov：影像的水平視野，數字越大視野越廣，預設為 90 ( 10 ~ 100 )。</p>
+</li>
+<li><p>language：定義 UI 元素以及地圖方塊上顯示的標籤要使用的語言。</p>
+</li>
+<li><p>region：根據地緣政治敏感度，定義要顯示的適當邊界與標籤。</p>
+<p><a href="https://hsuchihting.github.io/GoogleMapAPI_Practice/googleMapStreetview.html" title="Streetview Mode" target="_blank">Streetview Demo</a></p>
+</li>
+</ul>
+<h3 id="View-檢視模式"><a href="#View-檢視模式" class="headerlink" title="View 檢視模式"></a>View 檢視模式</h3><p>會得到一個沒有標記的地圖，網址如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span></span></span><br><span class="line"><span class="tag">  <span class="attr">width</span>=<span class="string">"600"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">height</span>=<span class="string">"450"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">frameborder</span>=<span class="string">"0"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">style</span>=<span class="string">"border:0"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">src</span>=<span class="string">"https://www.google.com/maps/embed/v1/view?zoom=17&amp;center=25.0399%2C121.5127&amp;key=你的金鑰"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">allowfullscreen</span></span></span><br><span class="line"><span class="tag">&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>其中有看到幾個參數:</p>
+<ul>
+<li>center：中心點經緯度 ( 必須 )。</li>
+<li>zoom：地圖縮放大小，範圍從 0 到 21。</li>
+</ul>
+<p>可加入的參數：</p>
+<ul>
+<li><p>maptype：定義載入的地圖方塊類型，包含 roadmap 和 satellite ( 衛星空照 )。</p>
+</li>
+<li><p>language：定義 UI 元素以及地圖方塊上顯示的標籤要使用的語言。</p>
+</li>
+<li><p>region：根據地緣政治敏感度，定義要顯示的適當邊界與標籤。</p>
+<p><a href="https://hsuchihting.github.io/GoogleMapAPI_Practice/googleMapPlace.html" title="View Mode" target="_blank">View Demo</a></p>
+</li>
+</ul>
+<p>以上就是透過 Google Maps Embed API 來顯示地圖。</p>
+<blockquote>
+<p>補充：如果是輸入中文，出來的結果都會是亂碼，以上範例是將亂碼位置用中文呈現。</p>
+</blockquote>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a href="https://www.oxxostudio.tw/articles/201707/google-maps-1.html" target="_blank" rel="noopener">Google Maps API - 網頁載入地圖 ( 起手式 )</a></li>
+<li><a href="https://developers.google.com/maps/documentation/embed/start" target="_blank" rel="noopener">Google Maps Embed API</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/Google-Map-API/" rel="tag"># Google Map API</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/css/20200731/3999112309/" rel="prev" title="CSS 筆記 - 金魚系列 20 - 不規則邊緣">
+      <i class="fa fa-chevron-left"></i> CSS 筆記 - 金魚系列 20 - 不規則邊緣
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#申請-Google-API"><span class="nav-number">1.</span> <span class="nav-text">申請 Google API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Google-Maps-Embed-API"><span class="nav-number">2.</span> <span class="nav-text">Google Maps Embed API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#place-地點模式"><span class="nav-number">2.1.</span> <span class="nav-text">place 地點模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Search-搜尋模式"><span class="nav-number">2.2.</span> <span class="nav-text">Search 搜尋模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#directions-路線規劃模式"><span class="nav-number">2.3.</span> <span class="nav-text">directions 路線規劃模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#streetview-街景服務模式"><span class="nav-number">2.4.</span> <span class="nav-text">streetview 街景服務模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#View-檢視模式"><span class="nav-number">2.5.</span> <span class="nav-text">View 檢視模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">3.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">113</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hsiangfeng.github.io/" title="https:&#x2F;&#x2F;hsiangfeng.github.io&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gretema.github.io/" title="https:&#x2F;&#x2F;gretema.github.io&#x2F;" rel="noopener" target="_blank">馬格蕾特的前端勇者日誌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wcc723.github.io/" title="https:&#x2F;&#x2F;wcc723.github.io&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/Google-Map-API/20200802/4247328380/",
+            identifier: "Google-Map-API/20200802/4247328380/",
+            title: "Google Maps API 筆記 - 載入地圖起手式 Google Maps Embed API"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
