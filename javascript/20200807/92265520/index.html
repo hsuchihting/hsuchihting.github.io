@@ -46,22 +46,22 @@
   };
 </script>
 
-  <meta name="description" content="function 函式 Hoisting 提升觀念">
+  <meta name="description" content="用原生 JS 取得日期與時間">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JS 筆記 - function 函式 Hoisting 提升觀念">
-<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;javascript&#x2F;20200309&#x2F;1212075218&#x2F;index.html">
+<meta property="og:title" content="JS 筆記 - 用 JavaScript 寫一個電子鐘">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;javascript&#x2F;20200807&#x2F;92265520&#x2F;index.html">
 <meta property="og:site_name" content="TimCodingBlog">
-<meta property="og:description" content="function 函式 Hoisting 提升觀念">
+<meta property="og:description" content="用原生 JS 取得日期與時間">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
-<meta property="article:published_time" content="2020-03-09T04:09:27.000Z">
-<meta property="article:modified_time" content="2020-04-28T14:47:05.864Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1560999719-79563481ad6a?ixlib&#x3D;rb-1.2.1&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1267&amp;q&#x3D;80">
+<meta property="article:published_time" content="2020-08-06T16:11:31.000Z">
+<meta property="article:modified_time" content="2020-08-06T16:41:35.050Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1560999719-79563481ad6a?ixlib&#x3D;rb-1.2.1&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1267&amp;q&#x3D;80">
 
-<link rel="canonical" href="https://hsuchihting.github.io/javascript/20200309/1212075218/">
+<link rel="canonical" href="https://hsuchihting.github.io/javascript/20200807/92265520/">
 
 
 <script id="page-configurations">
@@ -73,7 +73,7 @@
   };
 </script>
 
-  <title>JS 筆記 - function 函式 Hoisting 提升觀念 | TimCodingBlog</title>
+  <title>JS 筆記 - 用 JavaScript 寫一個電子鐘 | TimCodingBlog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
     <script>
@@ -218,7 +218,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/javascript/20200309/1212075218/">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/javascript/20200807/92265520/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/2019Tim.jpg">
@@ -231,7 +231,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          JS 筆記 - function 函式 Hoisting 提升觀念
+          JS 筆記 - 用 JavaScript 寫一個電子鐘
         </h2>
 
         <div class="post-meta">
@@ -240,16 +240,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
+              
 
-              <time title="創建時間：2020-03-09 12:09:27" itemprop="dateCreated datePublished" datetime="2020-03-09T12:09:27+08:00">2020-03-09</time>
+              <time title="創建時間：2020-08-07 00:11:31 / 修改時間：00:41:35" itemprop="dateCreated datePublished" datetime="2020-08-07T00:11:31+08:00">2020-08-07</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-04-28 22:47:05" itemprop="dateModified" datetime="2020-04-28T22:47:05+08:00">2020-04-28</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -271,13 +265,13 @@
       </span>
       <span class="post-meta-item-text">Disqus：</span>
     
-    <a title="disqus" href="/javascript/20200309/1212075218/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="javascript/20200309/1212075218/" itemprop="commentCount"></span>
+    <a title="disqus" href="/javascript/20200807/92265520/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="javascript/20200807/92265520/" itemprop="commentCount"></span>
     </a>
   </span>
   
   
-            <div class="post-description">function 函式 Hoisting 提升觀念</div>
+            <div class="post-description">用原生 JS 取得日期與時間</div>
 
         </div>
       </header>
@@ -288,24 +282,42 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JavaScript%20note-01.jpg?alt=media&token=7bee0261-72ac-4de4-9f5a-f39d58735b7d" alt="JavaScript Note"></p>
-<p>瀏覽器在讀取程式碼基本上都是從上到下讀取，在變數的寫法，會是這樣的結果。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//undefind</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//1</span></span><br></pre></td></tr></table></figure>
+        <p><img src="https://images.unsplash.com/photo-1560999719-79563481ad6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80" alt="this is clock"></p>
+<p>這次來練習透過 JS 原生的方式來取得日期與時間。</p>
+<h2 id="起手式"><a href="#起手式" class="headerlink" title="起手式"></a>起手式</h2><p>要先建構一個 Date 的物件才能取得當前時間。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> newDate = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="built_in">console</span>.log(newDate); <span class="comment">//Thu Aug 06 2020 09:50:01 GMT+0800 (台北標準時間)</span></span><br></pre></td></tr></table></figure>
 
-<p>上方變數的撰寫跟讀取的結果，會是由上到下讀取，所以在第一行 <code>console.log</code> 因為找不到變數所以結果會是 undefind，第三個 <code>console.log</code> 因為有讀到第二行的變數，所以找到了 a 的值為1。</p>
-<h2 id="那-function-呢"><a href="#那-function-呢" class="headerlink" title="那 function 呢?"></a>那 function 呢?</h2><p>加入一個 function，先看程式碼：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//undefind</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//1</span></span><br><span class="line"></span><br><span class="line">count();<span class="comment">//會得到什麼?</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> <span class="built_in">console</span>.log(<span class="string">'hello!'</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>count 結果會是：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">count();<span class="comment">// hello!</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> <span class="built_in">console</span>.log(<span class="string">'hello!'</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>function 有一個 Hoisting 的向上提升的概念，就是瀏覽器會先把 function 設定為優先讀取，在瀏覽器的讀取順序會變成這樣：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> <span class="built_in">console</span>.log(<span class="string">'hello!'</span>); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">count();<span class="comment">// hello!</span></span><br></pre></td></tr></table></figure>
+<h2 id="取得日期與時間的基本方式"><a href="#取得日期與時間的基本方式" class="headerlink" title="取得日期與時間的基本方式"></a>取得日期與時間的基本方式</h2><blockquote>
+<p>Date 物件中包含了許多對日期時間處理方法，大致上可以分成以下幾類:<br>getter: 獲取某種時間格式，例如 getFullYear 是回傳西元年。<br>setter: 設定某種時間格式，例如 setFullYear 設定西元年。<br>格式化的 getter: 通常是要獲取不同地區的日期(或時間)格式，以及轉換成各種資料格式。</p>
+</blockquote>
+<h2 id="此次使用的方法"><a href="#此次使用的方法" class="headerlink" title="此次使用的方法"></a>此次使用的方法</h2><ul>
+<li>這次要做一個電子鐘，要取得當前日期：年、月、日、時、分、秒。</li>
+<li>要讓秒數一秒跳一次。</li>
+</ul>
+<p>依照官網的方法介紹，我先宣告一個 Date 的物件，並取用裡面的年、月、日、時、分、秒，並用 ES6 的寫法組成我要的格式，並渲染在網頁上。</p>
+<blockquote>
+<p>month 這個地方比較奇怪，是從 0 開始，其他都從 1 開始。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> newDate = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="keyword">let</span> year = newDate.getFullYear();</span><br><span class="line"><span class="keyword">let</span> month = newDate.getMonth() + <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> days = newDate.getDate();</span><br><span class="line"><span class="keyword">let</span> hour = newDate.getHours();</span><br><span class="line"><span class="keyword">let</span> mins = newDate.getMinutes();</span><br><span class="line"><span class="keyword">let</span> sec = newDate.getSeconds();</span><br><span class="line"><span class="keyword">let</span> clockJSRead = <span class="string">`<span class="subst">$&#123;year&#125;</span>/<span class="subst">$&#123;month&#125;</span>/<span class="subst">$&#123;days&#125;</span> <span class="subst">$&#123;hour&#125;</span>:<span class="subst">$&#123;mins&#125;</span>:<span class="subst">$&#123;sec&#125;</span>`</span>;</span><br><span class="line">date.textContent = clockJSRead;</span><br></pre></td></tr></table></figure>
 
-<p>故在執行 function 的時候，function 名稱寫在上面或下面是沒有差的，但為了讓自己習慣所有程式碼都遵循由上到下讀取的方式，我還是會寫成剛上方一樣的方式，維持一個習慣寫法，也比較不會讓自己搞混！</p>
-<h2 id="補充"><a href="#補充" class="headerlink" title="補充"></a>補充</h2><p>Hositing 就是將<strong>變數</strong>&amp;<strong>函數</strong>提升到所有程式碼最前面，然後先存進記憶體中，後面在做賦值等動作。由此可知 Hositing 主要跟記憶體有關係，而 Hositing 只是一個觀念。</p>
-<hr>
-<p>文章參考:</p>
-<p><a href="https://hsiangfeng.github.io/javascript/20190419/3635730318/" target="_blank" rel="noopener">https://hsiangfeng.github.io/javascript/20190419/3635730318/</a></p>
-<p><a href="https://developer.mozilla.org/zh-TW/docs/Glossary/Hoisting" target="_blank" rel="noopener">https://developer.mozilla.org/zh-TW/docs/Glossary/Hoisting</a></p>
+<p>看起來已經寫完了，也成功渲染在網頁上，但問題來了，這樣並不會一秒跳一次，呈現一個靜止的電子鐘…</p>
+<p>既然有時間差會想到的就是 <code>setTimeout</code> 跟 <code>setInterval</code>，兩者不同的地方為：</p>
+<ul>
+<li>setTimeout： 只會執行一次就結束。</li>
+<li>setInterval：會在間隔固定的時間不斷重複。</li>
+</ul>
+<p>更多可以參考<a href="https://kuro.tw/posts/2019/02/23/%E8%AB%87%E8%AB%87-JavaScript-%E7%9A%84-setTimeout-%E8%88%87-setInterval/" target="_blank" rel="noopener">談談 JavaScript 的 setTimeout 與 setInterval</a></p>
+<p>既然要持續一秒跳一次，就要選擇 <code>setInterval()</code> 這個方法，並且給予 1000 毫秒，讓其 1 秒鐘更新一次。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> date = <span class="built_in">document</span>.querySelector(<span class="string">"#date"</span>);</span><br><span class="line"></span><br><span class="line">setInterval(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> newDate = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">  <span class="keyword">let</span> year = newDate.getFullYear();</span><br><span class="line">  <span class="keyword">let</span> month = newDate.getMonth() + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">let</span> days = newDate.getDate();</span><br><span class="line">  <span class="keyword">let</span> hour = newDate.getHours();</span><br><span class="line">  <span class="keyword">let</span> mins = newDate.getMinutes();</span><br><span class="line">  <span class="keyword">let</span> sec = newDate.getSeconds();</span><br><span class="line">  <span class="keyword">let</span> clockJSRead = <span class="string">`<span class="subst">$&#123;year&#125;</span>/<span class="subst">$&#123;month&#125;</span>/<span class="subst">$&#123;days&#125;</span> <span class="subst">$&#123;hour&#125;</span>:<span class="subst">$&#123;mins&#125;</span>:<span class="subst">$&#123;sec&#125;</span>`</span>;</span><br><span class="line">  date.textContent = clockJSRead;</span><br><span class="line">&#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+
+<p>這樣就完成了，不過上方程式碼看起來很髒，所以這邊改寫成下方這樣：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> date = <span class="built_in">document</span>.querySelector(<span class="string">"#date"</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateDate</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> newDate = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">  <span class="keyword">let</span> year = newDate.getFullYear();</span><br><span class="line">  <span class="keyword">let</span> month = newDate.getMonth() + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">let</span> days = newDate.getDate();</span><br><span class="line">  <span class="keyword">let</span> hour = newDate.getHours();</span><br><span class="line">  <span class="keyword">let</span> mins = newDate.getMinutes();</span><br><span class="line">  <span class="keyword">let</span> sec = newDate.getSeconds();</span><br><span class="line">  <span class="keyword">let</span> clockJSRead = <span class="string">`<span class="subst">$&#123;year&#125;</span>/<span class="subst">$&#123;month&#125;</span>/<span class="subst">$&#123;days&#125;</span> <span class="subst">$&#123;hour&#125;</span>:<span class="subst">$&#123;mins&#125;</span>:<span class="subst">$&#123;sec&#125;</span>`</span>;</span><br><span class="line">  date.textContent = clockJSRead;</span><br><span class="line">&#125;</span><br><span class="line">setInterval(updateDate, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+
+<p>CodePen: <a href="https://codepen.io/hnzxewqw/pen/KKzwVRO" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/KKzwVRO</a></p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a href="https://eyesofkids.gitbooks.io/javascript-start-from-es6/content/part3/datetime.html" target="_blank" rel="noopener">從 ES6 開始的 JavaScript 學習生活 - 日期與時間</a></li>
+<li><a href="https://blog.miniasp.com/post/2016/09/25/JavaScript-Date-usage-in-details" target="_blank" rel="noopener">前端工程研究：關於 JavaScript 中 Date 型別的常見地雷與建議作法</a></li>
+</ul>
 
     </div>
 
@@ -324,13 +336,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/javascript/20200302/3851113860/" rel="prev" title="JS 筆記 - 函式 function 搭配 return">
-      <i class="fa fa-chevron-left"></i> JS 筆記 - 函式 function 搭配 return
+    <a href="/javascript/20200806/841234265/" rel="prev" title="JS 核心觀念筆記 - Truthy and Falsy">
+      <i class="fa fa-chevron-left"></i> JS 核心觀念筆記 - Truthy and Falsy
     </a></div>
-      <div class="post-nav-item">
-    <a href="/javascript/20200316/526717564/" rel="next" title="JS 筆記 - 利用函式 function 寫一個計算題">
-      JS 筆記 - 利用函式 function 寫一個計算題 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -397,7 +406,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#那-function-呢"><span class="nav-number">1.</span> <span class="nav-text">那 function 呢?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#補充"><span class="nav-number">2.</span> <span class="nav-text">補充</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#起手式"><span class="nav-number">1.</span> <span class="nav-text">起手式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#取得日期與時間的基本方式"><span class="nav-number">2.</span> <span class="nav-text">取得日期與時間的基本方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#此次使用的方法"><span class="nav-number">3.</span> <span class="nav-text">此次使用的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">4.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -557,9 +566,9 @@
       DISQUS.reset({
         reload: true,
         config: {page: {
-            url: "https://hsuchihting.github.io/javascript/20200309/1212075218/",
-            identifier: "javascript/20200309/1212075218/",
-            title: "JS 筆記 - function 函式 Hoisting 提升觀念"
+            url: "https://hsuchihting.github.io/javascript/20200807/92265520/",
+            identifier: "javascript/20200807/92265520/",
+            title: "JS 筆記 - 用 JavaScript 寫一個電子鐘"
           }
         }
       });
