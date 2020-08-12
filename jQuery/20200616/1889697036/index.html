@@ -55,7 +55,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;swiperjs.com&#x2F;i&#x2F;share-banner.png">
 <meta property="article:published_time" content="2020-06-16T15:06:50.000Z">
-<meta property="article:modified_time" content="2020-06-16T15:26:48.043Z">
+<meta property="article:modified_time" content="2020-08-12T08:10:08.526Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="jQuery">
 <meta name="twitter:card" content="summary">
@@ -240,10 +240,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2020-06-16 23:06:50 / 修改時間：23:26:48" itemprop="dateCreated datePublished" datetime="2020-06-16T23:06:50+08:00">2020-06-16</time>
+              <time title="創建時間：2020-06-16 23:06:50" itemprop="dateCreated datePublished" datetime="2020-06-16T23:06:50+08:00">2020-06-16</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-08-12 16:10:08" itemprop="dateModified" datetime="2020-08-12T16:10:08+08:00">2020-08-12</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -284,8 +290,11 @@
       
         <p><img src="https://swiperjs.com/i/share-banner.png" alt="swiper"></p>
 <p>Swiper.js 是一款非常好用的第三方插件，筆記一下起初設定。</p>
-<h2 id="載入-CSS-跟-JS"><a href="#載入-CSS-跟-JS" class="headerlink" title="載入 CSS 跟 JS"></a>載入 CSS 跟 JS</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;https:&#x2F;&#x2F;unpkg.com&#x2F;swiper&#x2F;css&#x2F;swiper.css&quot;&gt;</span><br><span class="line">&lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;https:&#x2F;&#x2F;unpkg.com&#x2F;swiper&#x2F;css&#x2F;swiper.min.css&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;unpkg.com&#x2F;swiper&#x2F;js&#x2F;swiper.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;unpkg.com&#x2F;swiper&#x2F;js&#x2F;swiper.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="載入-CSS-跟-JS"><a href="#載入-CSS-跟-JS" class="headerlink" title="載入 CSS 跟 JS"></a>載入 CSS 跟 JS</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"https://unpkg.com/swiper/swiper-bundle.css"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"https://unpkg.com/swiper/swiper-bundle.min.css"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://unpkg.com/swiper/swiper-bundle.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://unpkg.com/swiper/swiper-bundle.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
+<blockquote>
+<p>Swiper 遠端服務網址有時候會換掉，若服務掛掉這是原因之一</p>
+</blockquote>
 <h3 id="使用-npm-安裝"><a href="#使用-npm-安裝" class="headerlink" title="使用 npm 安裝"></a>使用 npm 安裝</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install swiper</span><br></pre></td></tr></table></figure>
 
 <h3 id="使用-cdn-載入"><a href="#使用-cdn-載入" class="headerlink" title="使用 cdn 載入"></a>使用 cdn 載入</h3><h4 id="css"><a href="#css" class="headerlink" title="css"></a>css</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">https: //<span class="title">cdnjs.cloudflare.com</span>/<span class="title">ajax</span>/<span class="title">libs</span>/<span class="title">Swiper</span>/5.4.3/<span class="title">css</span>/<span class="title">swiper.css</span>;</span></span><br></pre></td></tr></table></figure>
@@ -435,7 +444,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">128</span>
+          <span class="site-state-item-count">130</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
