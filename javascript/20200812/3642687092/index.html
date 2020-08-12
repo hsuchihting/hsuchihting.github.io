@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="閉包的概念就是呼叫函式中的函式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 核心觀念筆記 - 閉包基本認識、工廠模式與私有方法">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;javascript&#x2F;20200812&#x2F;3642687092&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="閉包的概念就是呼叫函式中的函式">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;RvAfQKY.jpg">
+<meta property="article:published_time" content="2020-08-12T09:58:26.000Z">
+<meta property="article:modified_time" content="2020-08-12T10:00:19.932Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="JS core">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;RvAfQKY.jpg">
+
+<link rel="canonical" href="https://hsuchihting.github.io/javascript/20200812/3642687092/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>JS 核心觀念筆記 - 閉包基本認識、工廠模式與私有方法 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/javascript/20200812/3642687092/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          JS 核心觀念筆記 - 閉包基本認識、工廠模式與私有方法
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-08-12 17:58:26 / 修改時間：18:00:19" itemprop="dateCreated datePublished" datetime="2020-08-12T17:58:26+08:00">2020-08-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/javascript/20200812/3642687092/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="javascript/20200812/3642687092/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">閉包的概念就是呼叫函式中的函式</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://i.imgur.com/RvAfQKY.jpg" alt="core"></p>
+<h2 id="閉包定義"><a href="#閉包定義" class="headerlink" title="閉包定義"></a>閉包定義</h2><p>Closure 這個字詞是由 Close 與字尾 -ure 所構成，-ure 有<strong>動作</strong>、進<strong>行</strong>或<strong>結果</strong>的意思，如果 close 是<strong>關閉</strong>的意思，<strong>clousure 就是關閉的結果或動作</strong>，它可以作為名詞或動詞使用，中文有<strong>封閉</strong>、<strong>終止</strong>或<strong>結束</strong>的意思。</p>
+<p>在 JavaScript 中每當函式被建立時，一個閉包就會被產生，閉包是一個函式建立時的就有的自然特性。</p>
+<h2 id="直接呼叫內層函式"><a href="#直接呼叫內層函式" class="headerlink" title="直接呼叫內層函式"></a>直接呼叫內層函式</h2><p>閉包的概念就是呼叫函式中的函式，以下方程式碼為例，</p>
+<ul>
+<li>宣告一個函式，裡面做兩件事。</li>
+<li>宣告一個變數。</li>
+<li>回傳的值帶入內部的函式。</li>
+<li>內部的函釋內容為變數 myMoney 等於 myMoney - price(帶回外部的參數到內部函式的值)。</li>
+<li>然後再回傳到 myMoney。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">buyItem</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> myMoney = <span class="number">1000</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">price</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 這裡就是一個閉包，不過目前只會使用一次</span></span><br><span class="line">    myMoney = myMoney - price; <span class="comment">//myMoney = 1000 -100，回傳結果的值等於 myMoney</span></span><br><span class="line">    <span class="keyword">return</span> myMoney;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> balance = buyItem()(<span class="number">100</span>); <span class="comment">// 存取內部函式的變數</span></span><br><span class="line"><span class="built_in">console</span>.log(balance); <span class="comment">//900</span></span><br></pre></td></tr></table></figure>
+
+<p>因為變數在函式內，無法重複取得，所以一次後就會釋放記憶體，也無法取用變數。</p>
+<h2 id="工廠模式"><a href="#工廠模式" class="headerlink" title="工廠模式"></a>工廠模式</h2><p>不要直接呼叫，而是讓函式賦予在另一個變數上，就會將 <code>myMoney</code> 變數存在內層的作用域，在每次執行後不斷更新此值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">buyItem</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> myMoney = <span class="number">1000</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">price</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 這裡就是一個閉包，不過目前只會使用一次</span></span><br><span class="line">    myMoney = myMoney - price;</span><br><span class="line">    <span class="keyword">return</span> myMoney;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> balance = buyItem(); <span class="comment">// 存取內部函式的變數</span></span><br><span class="line"><span class="built_in">console</span>.log(balance(<span class="number">100</span>)); <span class="comment">//900</span></span><br><span class="line"><span class="built_in">console</span>.log(balance(<span class="number">200</span>)); <span class="comment">//700</span></span><br><span class="line"><span class="built_in">console</span>.log(balance(<span class="number">300</span>)); <span class="comment">//400</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不能使用 <code>buyItem()</code> 呼叫，因為執行結果會出現 <code>function ... 的物件</code>，沒辦法直接使用。</li>
+<li>透過 <code>balance</code> 變數，將 <code>buyItem()</code> 的值賦予給其變數，使其可以不斷的反覆呼叫，且內層記憶體不會被釋放。</li>
+<li><code>balance</code> 每次執行時，只會執行內層的函式，在內層記憶體沒有被釋放的情況下，<code>myMoney</code> 變數會不斷的被更新。</li>
+<li>透過給予預設值與固定流程，帶入參數後會得到值的執行過程，類似工廠一樣，又稱為工廠模式。</li>
+</ul>
+<h2 id="私有方法"><a href="#私有方法" class="headerlink" title="私有方法"></a>私有方法</h2><p>別於工廠模式只有單一種方法，私有方法是將結果傳入到另一個物件內，物件內的屬性都是一段函式，在將要使用的方法寫入其內，並可在外部取用該方法得到想要的運算結果。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">buyItem</span>(<span class="params">initValue</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> myMoney = initValue || <span class="number">1000</span>;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    increase: <span class="function"><span class="keyword">function</span> (<span class="params">price</span>) </span>&#123;</span><br><span class="line">      myMoney += price;</span><br><span class="line">    &#125;,</span><br><span class="line">    decrease: <span class="function"><span class="keyword">function</span> (<span class="params">price</span>) </span>&#123;</span><br><span class="line">      myMoney -= price;</span><br><span class="line">    &#125;,</span><br><span class="line">    value: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> myMoney;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> balance = buyItem(<span class="number">100</span>);</span><br><span class="line">balance.increase(<span class="number">1000</span>);</span><br><span class="line">balance.decrease(<span class="number">500</span>);</span><br><span class="line"><span class="built_in">console</span>.log(balance.value());</span><br></pre></td></tr></table></figure>
+
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>要了解閉包，就要了解函式的<strong>作用域</strong>、<strong>變數的作用域</strong>及<strong>函式的運作原理</strong>，就不會被專有名詞搞得團團轉。</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a href="https://wcc723.github.io/javascript/2017/12/13/javascript-closure/" target="_blank" rel="noopener">鐵人賽：另一種方式介紹 JavaScript 閉包</a></li>
+<li><a href="https://eyesofkids.gitbooks.io/javascript-start-from-es6/content/part4/closure.html" target="_blank" rel="noopener">從 ES6 開始的 JavaScript 學習生活 - Closure 閉包</a></li>
+<li><a href="https://ithelp.ithome.com.tw/articles/10193009" target="_blank" rel="noopener">重新認識 JavaScript: Day 19 閉包 Closure</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/JS-core/" rel="tag"># JS core</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/javascript/20200812/1317194214/" rel="prev" title="JS 核心觀念筆記 - 立即函式 IIFE">
+      <i class="fa fa-chevron-left"></i> JS 核心觀念筆記 - 立即函式 IIFE
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#閉包定義"><span class="nav-number">1.</span> <span class="nav-text">閉包定義</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#直接呼叫內層函式"><span class="nav-number">2.</span> <span class="nav-text">直接呼叫內層函式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工廠模式"><span class="nav-number">3.</span> <span class="nav-text">工廠模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#私有方法"><span class="nav-number">4.</span> <span class="nav-text">私有方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#結語"><span class="nav-number">5.</span> <span class="nav-text">結語</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">6.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">136</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hsiangfeng.github.io/" title="https:&#x2F;&#x2F;hsiangfeng.github.io&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gretema.github.io/" title="https:&#x2F;&#x2F;gretema.github.io&#x2F;" rel="noopener" target="_blank">馬格蕾特的前端勇者日誌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wcc723.github.io/" title="https:&#x2F;&#x2F;wcc723.github.io&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/javascript/20200812/3642687092/",
+            identifier: "javascript/20200812/3642687092/",
+            title: "JS 核心觀念筆記 - 閉包基本認識、工廠模式與私有方法"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
