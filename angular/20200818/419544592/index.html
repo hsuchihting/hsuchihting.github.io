@@ -65,7 +65,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;p1OvLP2.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;NVvviCU.png">
 <meta property="article:published_time" content="2020-08-17T16:29:23.000Z">
-<meta property="article:modified_time" content="2020-08-17T16:35:17.671Z">
+<meta property="article:modified_time" content="2020-08-18T15:54:47.717Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="Angular">
 <meta property="article:tag" content="Angular CLI">
@@ -253,7 +253,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2020-08-18 00:29:23 / 修改時間：00:35:17" itemprop="dateCreated datePublished" datetime="2020-08-18T00:29:23+08:00">2020-08-18</time>
+              <time title="創建時間：2020-08-18 00:29:23 / 修改時間：23:54:47" itemprop="dateCreated datePublished" datetime="2020-08-18T00:29:23+08:00">2020-08-18</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -313,18 +313,18 @@
 <li>Visual Studio Code</li>
 </ul>
 <h2 id="建立-Angular-專案"><a href="#建立-Angular-專案" class="headerlink" title="建立 Angular 專案"></a>建立 Angular 專案</h2><ul>
-<li><p>新增一個資料夾。</p>
-</li>
-<li><p>將路徑指向資料夾。<br><code>cd F:/angular</code></p>
-</li>
-<li><p>透過 npm 安裝 Angular CLI，輸入：</p>
+<li>新增一個資料夾。</li>
+<li>將路徑指向資料夾。<br><code>cd F:/angular</code></li>
+<li>透過 npm 安裝 Angular CLI，輸入：</li>
+</ul>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -g @angular/cli</span><br></pre></td></tr></table></figure>
+
+<h3 id="MAC"><a href="#MAC" class="headerlink" title="MAC"></a>MAC</h3><p>OS 後來改版後，目前遇到的狀況是，第一次建立 CLI，新增一個資料夾，然後要將指令改成</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo npm i -g @angular/cli</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>i 就是 install 的意思，-g 是全域 global 的意思。</p>
 </blockquote>
-</li>
-</ul>
 <p>安裝後會出現以下訊息，輸入 <code>y</code>，就可以完成安裝，目前安裝版本為 10.0.6。</p>
 <p><img src="https://i.imgur.com/ZgObGRC.png" alt="ngInstall"></p>
 <p>確認是否安裝成功，輸入 <code>ng -v</code> 就會得到下方畫面，就代表安裝成功並告知我有什麼命令可以使用。</p>
@@ -356,6 +356,7 @@
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="built_in">start</span></span><br></pre></td></tr></table></figure>
 
 <p>輸入完後會自己跑 <code>npm serve</code>，這時候都不用做任何事情。</p>
+<h3 id="MAC-1"><a href="#MAC-1" class="headerlink" title="MAC"></a>MAC</h3><p>要先啟動 npm，所以要先跑 <code>npm install</code></p>
 <p><img src="https://i.imgur.com/5FP6aza.png" alt="question"></p>
 <p>跑完後會出現這段問題，就輸入 <code>y</code> 即可，跑一下子會得到一個 localhost 的位置，已下圖為例是 localhost:4200，把這段複製到網頁上即可。</p>
 <p><img src="https://i.imgur.com/p1OvLP2.png" alt="localhost"></p>
@@ -383,7 +384,10 @@
     <a href="/javascript/20200813/289345854/" rel="prev" title="JS 筆記 - ES6： 箭頭函式與傳統函式之差異">
       <i class="fa fa-chevron-left"></i> JS 筆記 - ES6： 箭頭函式與傳統函式之差異
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/angular/20200819/2240445654/" rel="next" title="Angular 筆記 - 應用程式啟動流程">
+      Angular 筆記 - 應用程式啟動流程 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -450,7 +454,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#簡介"><span class="nav-number">1.</span> <span class="nav-text">簡介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#開發環境"><span class="nav-number">2.</span> <span class="nav-text">開發環境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安裝前準備"><span class="nav-number">3.</span> <span class="nav-text">安裝前準備</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立-Angular-專案"><span class="nav-number">4.</span> <span class="nav-text">建立 Angular 專案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#開發好用套件大補帖"><span class="nav-number">5.</span> <span class="nav-text">開發好用套件大補帖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立專案骨架"><span class="nav-number">6.</span> <span class="nav-text">建立專案骨架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何確認專案建置成功"><span class="nav-number">7.</span> <span class="nav-text">如何確認專案建置成功</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#簡介"><span class="nav-number">1.</span> <span class="nav-text">簡介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#開發環境"><span class="nav-number">2.</span> <span class="nav-text">開發環境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安裝前準備"><span class="nav-number">3.</span> <span class="nav-text">安裝前準備</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立-Angular-專案"><span class="nav-number">4.</span> <span class="nav-text">建立 Angular 專案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MAC"><span class="nav-number">4.1.</span> <span class="nav-text">MAC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#開發好用套件大補帖"><span class="nav-number">5.</span> <span class="nav-text">開發好用套件大補帖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立專案骨架"><span class="nav-number">6.</span> <span class="nav-text">建立專案骨架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何確認專案建置成功"><span class="nav-number">7.</span> <span class="nav-text">如何確認專案建置成功</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MAC-1"><span class="nav-number">7.1.</span> <span class="nav-text">MAC</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -466,7 +470,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-count">146</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
