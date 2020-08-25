@@ -55,7 +55,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;87pBpoJ.jpg">
 <meta property="article:published_time" content="2020-08-24T17:26:14.000Z">
-<meta property="article:modified_time" content="2020-08-24T17:27:33.716Z">
+<meta property="article:modified_time" content="2020-08-25T16:18:19.961Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="Angular">
 <meta name="twitter:card" content="summary">
@@ -240,10 +240,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2020-08-25 01:26:14 / 修改時間：01:27:33" itemprop="dateCreated datePublished" datetime="2020-08-25T01:26:14+08:00">2020-08-25</time>
+              <time title="創建時間：2020-08-25 01:26:14" itemprop="dateCreated datePublished" datetime="2020-08-25T01:26:14+08:00">2020-08-25</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-08-26 00:18:19" itemprop="dateModified" datetime="2020-08-26T00:18:19+08:00">2020-08-26</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -310,6 +316,27 @@
 <p><img src="https://i.imgur.com/87pBpoJ.jpg" alt="angular"></p>
 <h2 id="路由其他進階設定"><a href="#路由其他進階設定" class="headerlink" title="路由其他進階設定"></a>路由其他進階設定</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> routes: Routes = [</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">""</span>,</span><br><span class="line">    redirectTo: <span class="string">"/home"</span>,</span><br><span class="line">    pathMatch: <span class="string">"full"</span>, <span class="comment">// 當路徑是空的時候轉址到 home</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">"home"</span>,</span><br><span class="line">    component: HomeComponent,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">"second"</span>,</span><br><span class="line">    component: SecondComponent,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">"**"</span>,</span><br><span class="line">    component: HomeComponent, <span class="comment">// 萬用路徑，路由沒有比對到，永遠會執行</span></span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
 
+<h2 id="設定子路由-Child-Routing"><a href="#設定子路由-Child-Routing" class="headerlink" title="設定子路由 Child Routing"></a>設定子路由 Child Routing</h2><p>這是路由比較進階的作法，就是在原本的路由下再建立更多的路由；也就是有些頁面下還會有其他子頁面。</p>
+<p>設定指令如下：</p>
+<ol>
+<li>建立 HOME 元件下的 home1 頁面。</li>
+</ol>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ng g c home/home1</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>建立 HOME 元件下的 home1 頁面。</li>
+</ol>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ng g c home/home2</span><br></pre></td></tr></table></figure>
+
+<p>輸入後就會在 home 資料夾中增加三個子資料夾，分別為 home1，home2，裡面的元件也都會自動建立好。</p>
+<p>接著在 <code>home.component.html</code> 中建立下方路由程式碼，因為 home1 跟 home2 是相依在 home 的下方，建立完路由後一樣要給予 <code>&lt;router-outlet&gt;</code> 這個標籤做接口。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>home works!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hr</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> [<span class="attr">routerLink</span>]=<span class="string">"['/home/home1']"</span>&gt;</span>Home1<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> [<span class="attr">routerLink</span>]=<span class="string">"['/home/home2']"</span>&gt;</span>Home2<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">router-outlet</span>&gt;</span><span class="tag">&lt;/<span class="name">router-outlet</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>完成後來看到 <code>home.component.ts</code>，我在 home1 建立了路由後，要在這邊加上子路由的設定，寫法跟路由很相似。</p>
+<p>下方可以看到在 <code>HomeComponent</code> 後面直接加上一個 children 的陣列，裡面包著物件，這跟原本的路由設定概念相同，很重要的地方是子路由第一個 <code>path</code> 一定要寫，並給予空值，代表不管怎麼樣一定都會跑這行，不然後面的子路由會讀不到。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   path: <span class="string">'home'</span>,</span><br><span class="line">   component: HomeComponent,</span><br><span class="line">   children: [</span><br><span class="line">     &#123;</span><br><span class="line">       path: <span class="string">''</span>, <span class="comment">// 一定要加這行</span></span><br><span class="line">     &#125;,</span><br><span class="line">     &#123;</span><br><span class="line">       path: <span class="string">'home1'</span>,</span><br><span class="line">       component: Home1Component,</span><br><span class="line">     &#125;,</span><br><span class="line">     &#123;</span><br><span class="line">       path: <span class="string">'home2'</span>,</span><br><span class="line">       component: Home2Component,</span><br><span class="line">     &#125;,</span><br><span class="line">   ],</span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>這樣在點擊 home，就會出現 home1 跟 home2，並且顯示其內容。</p>
 <h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
 <li><a href="https://www.youtube.com/watch?v=sQx9s6fGI8E&fbclid=IwAR0KTfnMr4hhqTrvWWez3W6fzQIGree_wTMR0yqi849R-R08IsuffAHFnW4" target="_blank" rel="noopener">使用 Angular 2 Router 快速建構 SPA 網站</a></li>
 </ul>
@@ -404,7 +431,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#設定-Router"><span class="nav-number">1.</span> <span class="nav-text">設定 Router</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Angular-路由在取得-URL-後五個核心動作"><span class="nav-number">2.</span> <span class="nav-text">Angular 路由在取得 URL 後五個核心動作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立路由與存放標籤"><span class="nav-number">3.</span> <span class="nav-text">建立路由與存放標籤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#建立路由"><span class="nav-number">3.1.</span> <span class="nav-text">建立路由</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由其他進階設定"><span class="nav-number">4.</span> <span class="nav-text">路由其他進階設定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">5.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#設定-Router"><span class="nav-number">1.</span> <span class="nav-text">設定 Router</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Angular-路由在取得-URL-後五個核心動作"><span class="nav-number">2.</span> <span class="nav-text">Angular 路由在取得 URL 後五個核心動作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立路由與存放標籤"><span class="nav-number">3.</span> <span class="nav-text">建立路由與存放標籤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#建立路由"><span class="nav-number">3.1.</span> <span class="nav-text">建立路由</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由其他進階設定"><span class="nav-number">4.</span> <span class="nav-text">路由其他進階設定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#設定子路由-Child-Routing"><span class="nav-number">5.</span> <span class="nav-text">設定子路由 Child Routing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">6.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
