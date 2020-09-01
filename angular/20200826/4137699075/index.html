@@ -58,7 +58,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;e38WzPH.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;1mwsPdr.png">
 <meta property="article:published_time" content="2020-08-26T15:44:08.000Z">
-<meta property="article:modified_time" content="2020-08-27T16:22:35.855Z">
+<meta property="article:modified_time" content="2020-09-01T13:39:19.876Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="Angular">
 <meta name="twitter:card" content="summary">
@@ -251,7 +251,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-08-28 00:22:35" itemprop="dateModified" datetime="2020-08-28T00:22:35+08:00">2020-08-28</time>
+                <time title="修改時間：2020-09-01 21:39:19" itemprop="dateModified" datetime="2020-09-01T21:39:19+08:00">2020-09-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -304,36 +304,36 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Injectable &#125; <span class="keyword">from</span> <span class="string">"@angular/core"</span>;</span><br><span class="line"></span><br><span class="line">@Injectable(&#123;</span><br><span class="line">  providedIn: <span class="string">"root"</span>,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">FeatureService</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>其實服務元件也是一個類別，裡面放的內容只有兩個，<strong>屬性</strong>或是<strong>方法</strong>。</p>
-<h2 id="注入-service"><a href="#注入-service" class="headerlink" title="注入 service"></a>注入 service</h2><p>建立好 service 後，要回到 <code>app.module.ts</code> 中，注入 service，Angular 10 很貼心的在我們新增 service 後會自動幫我們建立一個 <code>providers</code> 的屬性，其組成為陣列，代表可以放多個 service。</p>
+<h2 id="注入-service"><a href="#注入-service" class="headerlink" title="注入 service"></a>注入 service</h2><p>建立好 <code>service</code> 後，要回到 <code>app.module.ts</code> 中，注入 <code>service</code>，Angular 10 很貼心的在我們新增 service 後會自動幫我們建立一個 <code>providers</code> 的屬性，其組成為陣列，代表可以放多個 service。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@NgModule(&#123;</span><br><span class="line">  declarations: [</span><br><span class="line">    AppComponent,</span><br><span class="line">    HomeComponent,</span><br><span class="line">    SecondComponent,</span><br><span class="line">    Home1Component,</span><br><span class="line">    Home2Component,</span><br><span class="line">  ],</span><br><span class="line">  imports: [BrowserModule, AppRoutingModule, FormsModule], <span class="comment">// 加入倒 imports</span></span><br><span class="line">  providers: [], <span class="comment">// service 使用</span></span><br><span class="line">  bootstrap: [AppComponent],</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<p>雖然已經建立好，但還沒放入我們剛剛建立的 service，所以要手動輸入剛剛建立的 service 名稱，所以只要把 <code>featureService</code> 放入陣列即可，放入後也會自動 import 到 <code>app.module.ts</code> 內。</p>
+<p>雖然已經建立好，但還沒放入我們剛剛建立的 <code>service</code>，所以要手動輸入剛剛建立的 <code>service</code> 名稱，所以只要把 <code>featureService</code> 放入陣列即可，放入後也會自動 import 到 <code>app.module.ts</code> 內。</p>
 <blockquote>
 <p>因為 VScode 有內建 IntelliSense 功能，所以只要打關鍵字就會出現相對應的選項，選到想要的選項後按下 tab 就可以完成囉！</p>
 </blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; FeatureService &#125; <span class="keyword">from</span> <span class="string">'./feature.service'</span>; <span class="comment">// service 新增</span></span><br><span class="line"></span><br><span class="line">@NgModule(&#123;</span><br><span class="line">  declarations: [</span><br><span class="line">    AppComponent,</span><br><span class="line">    HomeComponent,</span><br><span class="line">    SecondComponent,</span><br><span class="line">    Home1Component,</span><br><span class="line">    Home2Component,</span><br><span class="line">  ],</span><br><span class="line">  imports: [BrowserModule, AppRoutingModule, FormsModule], <span class="comment">// 加入倒 imports</span></span><br><span class="line">  providers: [FeatureService], <span class="comment">// service 使用</span></span><br><span class="line">  bootstrap: [AppComponent],</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 <p><strong>需要注意的地方是 <code>providers</code> 一定要把 service 元件註冊到 module 中，不然後續要相依性注入的時候會不能進行。</strong></p>
-<h2 id="相依性注入-service"><a href="#相依性注入-service" class="headerlink" title="相依性注入 service"></a>相依性注入 service</h2><p>註冊完 service 後，最重要的就是要注入 service，因為為了就是要共用其行為與邏輯。</p>
-<h3 id="feature-service-ts"><a href="#feature-service-ts" class="headerlink" title="feature.service.ts"></a>feature.service.ts</h3><p>假設在 service 裡面寫一個方法叫做 <code>run()</code>，</p>
+<h2 id="相依性注入-service"><a href="#相依性注入-service" class="headerlink" title="相依性注入 service"></a>相依性注入 service</h2><p>註冊完 <code>service</code> 後，最重要的就是要注入 <code>service</code>，因為為了就是要共用其行為與邏輯。</p>
+<h3 id="feature-service-ts"><a href="#feature-service-ts" class="headerlink" title="feature.service.ts"></a>feature.service.ts</h3><p>假設在 <code>service</code> 裡面寫一個方法叫做 <code>run()</code>，</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">FeatureService</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;&#125;</span><br><span class="line"></span><br><span class="line">  run() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"featureService"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="home-component-ts"><a href="#home-component-ts" class="headerlink" title="home.component.ts"></a>home.component.ts</h3><ol>
-<li><p>將 featureService 注入到 home.component.ts 中，因為註冊到父層就可以讓子層的 home1 跟 home2 元件使用。</p>
+<li><p>將 <code>featureService</code> 注入到 <code>home.component.ts</code> 中，因為註冊到父層就可以讓子層的 home1 跟 home2 元件使用。</p>
 </li>
-<li><p>首先在 constructor 建構式裡面宣告一個變數，這邊設定為 featureSvc，透過 TS 宣告型別為 featureService，在完成的過程中，import 也會自動完成。</p>
+<li><p>首先在 <code>constructor</code> 建構式裡面宣告一個變數，這邊設定為 <code>featureSvc，透過</code> TS 宣告型別為 <code>featureService，在完成的過程中，import</code> 也會自動完成。</p>
 </li>
-<li><p>在 constructor 上宣告一個 featureService 的屬性。</p>
+<li><p>在 <code>constructor</code> 上宣告一個 <code>featureService</code> 的屬性。</p>
 </li>
-<li><p>如果注入成功後，featureSvc 其屬性的值，就是 featureSve 本身。</p>
+<li><p>如果注入成功後，<code>featureSvc</code> 其屬性的值，就是 <code>featureSvc</code> 本身。</p>
 </li>
 </ol>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; FeatureService &#125; <span class="keyword">from</span> <span class="string">'./../feature.service'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">HomeComponent</span> <span class="title">implements</span> <span class="title">OnInit</span> </span>&#123;</span><br><span class="line">  featureSvc: FeatureService;</span><br><span class="line">  <span class="keyword">constructor</span>(featureSvc: FeatureService) &#123;</span><br><span class="line">    <span class="keyword">this</span>.featureSvc = featureSvc;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>當注入 featureService 時，透過建構式已經製作了一個實體物件，而且只會建構一次，所以得到的是唯一且可以共用的實體元件，所以未來需要共用的資料或是程式邏輯，都可以透過此元件來共享。</p>
+<p>當注入 <code>featureService</code> 時，透過建構式已經製作了一個實體物件，而且只會建構一次，所以得到的是唯一且可以共用的實體元件，所以未來需要共用的資料或是程式邏輯，都可以透過此元件來共享。</p>
 </blockquote>
-<p>上方可看到要透過三行程式碼才能做出一個 featureService 的建構方式，但在 TS 有更簡潔的寫法，也就是加上其物件是否作為公開或是私有的方法，可改寫成下方這樣，</p>
+<p>上方可看到要透過三行程式碼才能做出一個 <code>featureService</code> 的建構方式，但在 TS 有更簡潔的寫法，也就是加上其物件是否作為公開或是私有的方法，可改寫成下方這樣，</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">HomeComponent</span> <span class="title">implements</span> <span class="title">OnInit</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(public featureSvc: FeatureService) &#123;&#125;<span class="comment">// 一行解決</span></span><br><span class="line"></span><br><span class="line">  ngOnInit(): <span class="keyword">void</span> &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
@@ -344,11 +344,11 @@
 </blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">HomeComponent</span> <span class="title">implements</span> <span class="title">OnInit</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(public featureSvc: FeatureService) &#123;&#125;<span class="comment">// 一行解決</span></span><br><span class="line"></span><br><span class="line">  ngOnInit(): <span class="keyword">void</span> &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>透過 ngOnInit() 為例，要使用在 service 建立的方法會變這樣寫：</p>
+<p>透過 <code>ngOnInit()</code> 為例，要使用在 <code>service</code> 建立的方法會變這樣寫：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">HomeComponent</span> <span class="title">implements</span> <span class="title">OnInit</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(public featureSvc: FeatureService) &#123;&#125;<span class="comment">// 一行解決</span></span><br><span class="line"></span><br><span class="line">  ngOnInit(): <span class="keyword">void</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.featureSvc.run(); <span class="comment">// 呼叫在 service 建立的方法</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://i.imgur.com/1mwsPdr.png" alt="featureService"></p>
-<p>可以看到方法已經從 feature.service.ts 被呼叫了!</p>
+<p>可以看到方法已經從 <code>feature.service.ts</code> 被呼叫了!</p>
 
     </div>
 
