@@ -46,16 +46,16 @@
   };
 </script>
 
-  <meta name="description" content="最常使用的結構型指令 ngFor">
+  <meta name="description" content="引入資料最常使用的結構型指令 ngFor">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Angular 筆記 - 結構型指令 ngFor">
 <meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;angular&#x2F;20200903&#x2F;2141622735&#x2F;index.html">
 <meta property="og:site_name" content="TimCodingBlog">
-<meta property="og:description" content="最常使用的結構型指令 ngFor">
+<meta property="og:description" content="引入資料最常使用的結構型指令 ngFor">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;87pBpoJ.jpg">
 <meta property="article:published_time" content="2020-09-02T16:26:39.000Z">
-<meta property="article:modified_time" content="2020-09-02T16:29:25.293Z">
+<meta property="article:modified_time" content="2020-09-16T04:49:03.889Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="Angular">
 <meta name="twitter:card" content="summary">
@@ -240,10 +240,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2020-09-03 00:26:39 / 修改時間：00:29:25" itemprop="dateCreated datePublished" datetime="2020-09-03T00:26:39+08:00">2020-09-03</time>
+              <time title="創建時間：2020-09-03 00:26:39" itemprop="dateCreated datePublished" datetime="2020-09-03T00:26:39+08:00">2020-09-03</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-09-16 12:49:03" itemprop="dateModified" datetime="2020-09-16T12:49:03+08:00">2020-09-16</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -271,7 +277,7 @@
   </span>
   
   
-            <div class="post-description">最常使用的結構型指令 ngFor</div>
+            <div class="post-description">引入資料最常使用的結構型指令 ngFor</div>
 
         </div>
       </header>
@@ -296,7 +302,7 @@
 <h2 id="ngFor-的作用範圍"><a href="#ngFor-的作用範圍" class="headerlink" title="ngFor 的作用範圍"></a>ngFor 的作用範圍</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> *<span class="attr">ngFor</span>=<span class="string">"let item of data"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p><code>ngFor</code> 的作用範圍，就只有在這個 <code>&lt;div&gt;</code> 裡面而已，透過 <code>ngFor</code> 會在 <code>data</code> 資料中跑回圈，取出我們要的屬性資料內容，套用到 <code>item</code> 這個變數，並渲染在網頁上。</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="function">parameterName2: "24",</span></span><br><span class="line"><span class="function"><span class="title">parameterUnit2</span>: "<span class="title">C</span>",</span></span><br><span class="line"><span class="function"><span class="title">parameterName1</span>: "多雲短暫陣雨或雷雨",</span></span><br><span class="line"><span class="function"><span class="title">parameterUnit3</span>: "<span class="title">C</span>",</span></span><br><span class="line"><span class="function"><span class="title">parameterName3</span>: "23",</span></span><br><span class="line"><span class="function"><span class="title">parameterValue1</span>: "15",</span></span><br><span class="line"><span class="function"><span class="title">locationName</span>: "臺北市",</span></span><br><span class="line"><span class="function"><span class="title">endTime</span>: "2020-05-21<span class="title">T06</span>:00:00+08:00",</span></span><br><span class="line"><span class="function"><span class="title">startTime</span>: "2020-05-21<span class="title">T00</span>:00:00+08:00",</span></span><br><span class="line"><span class="function"><span class="title">_id</span>: 1</span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"><span class="function">parameterName2: "24",</span></span><br><span class="line"><span class="function"><span class="title">parameterUnit2</span>: "<span class="title">C</span>",</span></span><br><span class="line"><span class="function"><span class="title">parameterName1</span>: "多雲短暫陣雨或雷雨",</span></span><br><span class="line"><span class="function"><span class="title">parameterUnit3</span>: "<span class="title">C</span>",</span></span><br><span class="line"><span class="function"><span class="title">parameterName3</span>: "23",</span></span><br><span class="line"><span class="function"><span class="title">parameterValue1</span>: "15",</span></span><br><span class="line"><span class="function"><span class="title">locationName</span>: "臺北市",</span></span><br><span class="line"><span class="function"><span class="title">endTime</span>: "2020-05-21<span class="title">T06</span>:00:00+08:00",</span></span><br><span class="line"><span class="function"><span class="title">startTime</span>: "2020-05-21<span class="title">T00</span>:00:00+08:00",</span></span><br><span class="line"><span class="function">\<span class="title">_id</span>: 1</span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
 
 <p>這次我們資料的其中一筆物件內容如上，所以只要透過之前講過的四個資料繫結方法，就可以取得想要的資料內容。</p>
 <p>所以 <code>app.component.html</code> 就會變這樣。</p>
@@ -411,7 +417,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-count">165</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>

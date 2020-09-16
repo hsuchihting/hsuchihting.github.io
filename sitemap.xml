@@ -2,6 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://hsuchihting.github.io/angular/20200914/2445569370/</loc>
+    
+    <lastmod>2020-09-16T04:55:40.333Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hsuchihting.github.io/angular/20200903/2141622735/</loc>
+    
+    <lastmod>2020-09-16T04:49:03.889Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hsuchihting.github.io/angular/20200913/2155444350/</loc>
+    
+    <lastmod>2020-09-16T04:31:06.666Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hsuchihting.github.io/angular/20200819/2240445654/</loc>
+    
+    <lastmod>2020-09-16T02:44:08.568Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hsuchihting.github.io/angular/20200902/3901701089/</loc>
+    
+    <lastmod>2020-09-16T02:39:22.679Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hsuchihting.github.io/javascript/20200915/2757140016/</loc>
+    
+    <lastmod>2020-09-14T18:31:34.463Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hsuchihting.github.io/angular/20200825/595101447/</loc>
+    
+    <lastmod>2020-09-13T16:25:31.658Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hsuchihting.github.io/angular/20200818/419544592/</loc>
+    
+    <lastmod>2020-09-13T16:24:59.134Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://hsuchihting.github.io/javascript/20200302/3851113860/</loc>
     
     <lastmod>2020-09-13T07:15:18.562Z</lastmod>
@@ -12,20 +68,6 @@
     <loc>https://hsuchihting.github.io/javascript/20200908/3879475582/</loc>
     
     <lastmod>2020-09-07T16:33:53.591Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hsuchihting.github.io/angular/20200902/3901701089/</loc>
-    
-    <lastmod>2020-09-02T16:33:37.061Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hsuchihting.github.io/angular/20200903/2141622735/</loc>
-    
-    <lastmod>2020-09-02T16:29:25.293Z</lastmod>
     
   </url>
   
@@ -86,13 +128,6 @@
   </url>
   
   <url>
-    <loc>https://hsuchihting.github.io/angular/20200825/595101447/</loc>
-    
-    <lastmod>2020-08-26T15:46:07.493Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://hsuchihting.github.io/angular/20200825/1020258751/</loc>
     
     <lastmod>2020-08-25T16:34:32.024Z</lastmod>
@@ -131,20 +166,6 @@
     <loc>https://hsuchihting.github.io/javascript/20200819/2369373932/</loc>
     
     <lastmod>2020-08-24T17:19:08.551Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hsuchihting.github.io/angular/20200819/2240445654/</loc>
-    
-    <lastmod>2020-08-24T17:19:04.276Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hsuchihting.github.io/angular/20200818/419544592/</loc>
-    
-    <lastmod>2020-08-18T15:54:47.717Z</lastmod>
     
   </url>
   
@@ -478,16 +499,16 @@
   </url>
   
   <url>
-    <loc>https://hsuchihting.github.io/css/20200721/3279463377/</loc>
+    <loc>https://hsuchihting.github.io/javascript/20200721/2453969415/</loc>
     
-    <lastmod>2020-07-22T16:57:50.786Z</lastmod>
+    <lastmod>2020-07-22T17:06:37.072Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://hsuchihting.github.io/javascript/20200721/2453969415/</loc>
+    <loc>https://hsuchihting.github.io/css/20200721/3279463377/</loc>
     
-    <lastmod>2020-07-21T15:32:02.762Z</lastmod>
+    <lastmod>2020-07-22T16:57:50.786Z</lastmod>
     
   </url>
   
@@ -677,6 +698,13 @@
     <loc>https://hsuchihting.github.io/css/20200410/3203726250/</loc>
     
     <lastmod>2020-07-13T15:35:11.938Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hsuchihting.github.io/javascript/20200427/496196438/</loc>
+    
+    <lastmod>2020-07-13T15:05:04.747Z</lastmod>
     
   </url>
   
@@ -1118,13 +1146,6 @@
     <loc>https://hsuchihting.github.io/javascript/20200404/784099098/</loc>
     
     <lastmod>2020-04-28T14:46:31.156Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hsuchihting.github.io/javascript/20200427/496196438/</loc>
-    
-    <lastmod>2020-04-28T14:46:25.728Z</lastmod>
     
   </url>
   
