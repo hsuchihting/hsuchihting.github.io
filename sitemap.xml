@@ -2,23 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://hsuchihting.github.io/angular/20200825/2522965862/</loc>
+    
+    <lastmod>2020-09-18T03:06:11.539Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://hsuchihting.github.io/vue-js/20200917/334940023/</loc>
     
-    <lastmod>2020-09-17T13:55:51.469Z</lastmod>
+    <lastmod>2020-09-17T13:56:59.300Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://hsuchihting.github.io/vue-js/20200917/2086781732/</loc>
     
-    <lastmod>2020-09-17T08:01:36.553Z</lastmod>
+    <lastmod>2020-09-17T13:56:59.094Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://hsuchihting.github.io/vue-js/20200917/2215013588/</loc>
     
-    <lastmod>2020-09-17T07:33:04.038Z</lastmod>
+    <lastmod>2020-09-17T13:56:59.016Z</lastmod>
     
   </url>
   
@@ -194,13 +201,6 @@
     <loc>https://hsuchihting.github.io/angular/20200825/4153138698/</loc>
     
     <lastmod>2020-08-25T16:34:31.945Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hsuchihting.github.io/angular/20200825/2522965862/</loc>
-    
-    <lastmod>2020-08-25T16:34:31.759Z</lastmod>
     
   </url>
   
