@@ -46,23 +46,23 @@
   };
 </script>
 
-  <meta name="description" content="馬上執行的函式">
+  <meta name="description" content="在 Vue 中非常重要的元件觀念">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JS 核心觀念筆記 - 立即函式 IIFE">
-<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;javascript&#x2F;20200812&#x2F;1317194214&#x2F;index.html">
+<meta property="og:title" content="Vue 筆記 - 元件概念介紹">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;vue-js&#x2F;20200919&#x2F;4209129907&#x2F;index.html">
 <meta property="og:site_name" content="TimCodingBlog">
-<meta property="og:description" content="馬上執行的函式">
+<meta property="og:description" content="在 Vue 中非常重要的元件觀念">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;RvAfQKY.jpg">
-<meta property="article:published_time" content="2020-08-12T09:56:04.000Z">
-<meta property="article:modified_time" content="2020-08-12T10:01:15.509Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;1Hx3C1e.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;LZWaLe1.png">
+<meta property="article:published_time" content="2020-09-19T14:53:15.000Z">
+<meta property="article:modified_time" content="2020-09-19T14:54:25.447Z">
 <meta property="article:author" content="Tim Hsu">
-<meta property="article:tag" content="JavaScript">
-<meta property="article:tag" content="JS core">
+<meta property="article:tag" content="vue.js">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;RvAfQKY.jpg">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;1Hx3C1e.png">
 
-<link rel="canonical" href="https://hsuchihting.github.io/javascript/20200812/1317194214/">
+<link rel="canonical" href="https://hsuchihting.github.io/vue-js/20200919/4209129907/">
 
 
 <script id="page-configurations">
@@ -74,7 +74,7 @@
   };
 </script>
 
-  <title>JS 核心觀念筆記 - 立即函式 IIFE | TimCodingBlog</title>
+  <title>Vue 筆記 - 元件概念介紹 | TimCodingBlog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
     <script>
@@ -219,7 +219,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/javascript/20200812/1317194214/">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/vue-js/20200919/4209129907/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/2019Tim.jpg">
@@ -232,7 +232,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          JS 核心觀念筆記 - 立即函式 IIFE
+          Vue 筆記 - 元件概念介紹
         </h2>
 
         <div class="post-meta">
@@ -243,7 +243,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2020-08-12 17:56:04 / 修改時間：18:01:15" itemprop="dateCreated datePublished" datetime="2020-08-12T17:56:04+08:00">2020-08-12</time>
+              <time title="創建時間：2020-09-19 22:53:15 / 修改時間：22:54:25" itemprop="dateCreated datePublished" datetime="2020-09-19T22:53:15+08:00">2020-09-19</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -251,8 +251,8 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javascript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
+                  <a href="/categories/vue-js/" itemprop="url" rel="index">
+                    <span itemprop="name">vue.js</span>
                   </a>
                 </span>
             </span>
@@ -266,13 +266,13 @@
       </span>
       <span class="post-meta-item-text">Disqus：</span>
     
-    <a title="disqus" href="/javascript/20200812/1317194214/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="javascript/20200812/1317194214/" itemprop="commentCount"></span>
+    <a title="disqus" href="/vue-js/20200919/4209129907/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="vue-js/20200919/4209129907/" itemprop="commentCount"></span>
     </a>
   </span>
   
   
-            <div class="post-description">馬上執行的函式</div>
+            <div class="post-description">在 Vue 中非常重要的元件觀念</div>
 
         </div>
       </header>
@@ -283,35 +283,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><img src="https://i.imgur.com/RvAfQKY.jpg" alt="core"></p>
-<h2 id="什麼是立即函式"><a href="#什麼是立即函式" class="headerlink" title="什麼是立即函式"></a>什麼是立即函式</h2><blockquote>
-<p>MDN 說明：立即函式的英文縮寫為 IIFE (<strong>I</strong>mmediately <strong>I</strong>nvoked <strong>F</strong>unction <strong>E</strong>xpression) 是一個定義完馬上就執行的函式。<br><del>(非常白話)</del></p>
+        <p><img src="https://i.imgur.com/1Hx3C1e.png" alt="components"></p>
+<p>如上圖，在網頁上有許多的元件，像是 <code>header</code>，<code>aside</code>，<code>footer</code> 等重複性較高的元件，就可以透過這次要使用 <code>x-template</code> 來引入模組，並重複使用，在專案是就可以省下許多時間，與之前直接拆模組時使用的模板語法不同。</p>
+<h2 id="元件資料獨立與傳遞"><a href="#元件資料獨立與傳遞" class="headerlink" title="元件資料獨立與傳遞"></a>元件資料獨立與傳遞</h2><p><img src="https://i.imgur.com/LZWaLe1.png" alt="props"><br>如上圖所示，每一個元件的資料都是獨立的，只有該元件可以讀取到自己的 data，所以就算命名相同，也不會互相影響，當然在實務開發的時候避免自己搞混，還是會做不一樣的命名方式。</p>
+<p>拆分元件後，因為資料彼此無法給對方使用，如果上圖的 <code>side</code> 資料要給 <code>component</code> 使用該怎麼做？</p>
+<h3 id="資料由外層傳向內層-props"><a href="#資料由外層傳向內層-props" class="headerlink" title="資料由外層傳向內層 props"></a>資料由外層傳向內層 props</h3><p>若要將外層的資料傳給內層的資料，可以使用 <code>props</code> 的方法，當 side 資料更新時，就會同步的更新給 <code>component</code>。</p>
+<blockquote>
+<p>簡單講就是被動技能。</p>
 </blockquote>
-<h2 id="立即函式起手式"><a href="#立即函式起手式" class="headerlink" title="立即函式起手式"></a>立即函式起手式</h2><p>前面一篇已經知道有具名與匿名的函式，都要透過呼叫來使用其函式，具名函式如果把名稱拿掉，編譯器會提醒錯誤資訊，且無法執行。但如果想要不要呼叫立刻執行該怎麼寫?</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">IIFE</span>(<span class="params"></span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上方為一個函式，如果不要呼叫就要讓函式立刻執行，可以這樣寫：</p>
-<ul>
-<li>這個函式最外面加上一個小括號</li>
-<li>在函式的大括號後面加上一個小括號。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">IIFE</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"立即函式"</span>);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-
-<p>或是</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">IIFE</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"立即函式"</span>);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-
-<p>以上得到的結果是一樣的。</p>
-<h3 id="立即函式有兩個特性"><a href="#立即函式有兩個特性" class="headerlink" title="立即函式有兩個特性"></a>立即函式有兩個特性</h3><ul>
-<li>立刻執行。</li>
-<li>無法在函式外被再次執行。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">IIFE</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"立即函式"</span>);</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(IIFE); <span class="comment">//會跳錯</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="立即函式使用情境"><a href="#立即函式使用情境" class="headerlink" title="立即函式使用情境"></a>立即函式使用情境</h2><h3 id="限制變數作用域"><a href="#限制變數作用域" class="headerlink" title="限制變數作用域"></a>限制變數作用域</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> Tim = <span class="string">"提姆"</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(Tim);</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Tim);</span><br></pre></td></tr></table></figure>
-
-<h3 id="亦可帶參數"><a href="#亦可帶參數" class="headerlink" title="亦可帶參數"></a>亦可帶參數</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">Tim</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(Tim);</span><br><span class="line">&#125;)(<span class="string">"Tim is here"</span>);</span><br></pre></td></tr></table></figure>
-
-<h3 id="可搭配匿名函式使用"><a href="#可搭配匿名函式使用" class="headerlink" title="可搭配匿名函式使用"></a>可搭配匿名函式使用</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> whereTim = (<span class="function"><span class="keyword">function</span> (<span class="params">Tim</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(Tim);</span><br><span class="line">  <span class="keyword">return</span> Tim;</span><br><span class="line">&#125;)(<span class="string">"Tim is here"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(whereTim);</span><br></pre></td></tr></table></figure>
+<h3 id="資料由內層傳向外層-emit-Event"><a href="#資料由內層傳向外層-emit-Event" class="headerlink" title="資料由內層傳向外層 emit Event"></a>資料由內層傳向外層 emit Event</h3><p>當內層資料要傳給外層時，可以使用 <code>emit</code> 方法，英文中有包含 <strong>event</strong> 的這個單字，所以它需要一個事件產生，才能使用該方法將資料傳送，並且只有透過<strong>事件產生</strong>時，才會傳遞資料給外層，所以並不是內層資料更新後，就會自動更新給外層的元件。</p>
+<blockquote>
+<p>簡單講就是主動技能。</p>
+</blockquote>
 
     </div>
 
@@ -321,8 +304,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
-              <a href="/tags/JS-core/" rel="tag"># JS core</a>
+              <a href="/tags/vue-js/" rel="tag"># vue.js</a>
           </div>
 
         
@@ -331,13 +313,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/javascript/20200812/1474477581/" rel="prev" title="JS 核心觀念筆記 - 具名函式與匿名函式的基本認識">
-      <i class="fa fa-chevron-left"></i> JS 核心觀念筆記 - 具名函式與匿名函式的基本認識
+    <a href="/vue-js/20200919/3037030482/" rel="prev" title="Vue 筆記 - 使表格資料按照資料條件排序">
+      <i class="fa fa-chevron-left"></i> Vue 筆記 - 使表格資料按照資料條件排序
     </a></div>
-      <div class="post-nav-item">
-    <a href="/javascript/20200812/3642687092/" rel="next" title="JS 核心觀念筆記 - 閉包基本認識、工廠模式與私有方法">
-      JS 核心觀念筆記 - 閉包基本認識、工廠模式與私有方法 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -404,7 +383,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什麼是立即函式"><span class="nav-number">1.</span> <span class="nav-text">什麼是立即函式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#立即函式起手式"><span class="nav-number">2.</span> <span class="nav-text">立即函式起手式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#立即函式有兩個特性"><span class="nav-number">2.1.</span> <span class="nav-text">立即函式有兩個特性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#立即函式使用情境"><span class="nav-number">3.</span> <span class="nav-text">立即函式使用情境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#限制變數作用域"><span class="nav-number">3.1.</span> <span class="nav-text">限制變數作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#亦可帶參數"><span class="nav-number">3.2.</span> <span class="nav-text">亦可帶參數</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可搭配匿名函式使用"><span class="nav-number">3.3.</span> <span class="nav-text">可搭配匿名函式使用</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#元件資料獨立與傳遞"><span class="nav-number">1.</span> <span class="nav-text">元件資料獨立與傳遞</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#資料由外層傳向內層-props"><span class="nav-number">1.1.</span> <span class="nav-text">資料由外層傳向內層 props</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#資料由內層傳向外層-emit-Event"><span class="nav-number">1.2.</span> <span class="nav-text">資料由內層傳向外層 emit Event</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -564,9 +543,9 @@
       DISQUS.reset({
         reload: true,
         config: {page: {
-            url: "https://hsuchihting.github.io/javascript/20200812/1317194214/",
-            identifier: "javascript/20200812/1317194214/",
-            title: "JS 核心觀念筆記 - 立即函式 IIFE"
+            url: "https://hsuchihting.github.io/vue-js/20200919/4209129907/",
+            identifier: "vue-js/20200919/4209129907/",
+            title: "Vue 筆記 - 元件概念介紹"
           }
         }
       });
