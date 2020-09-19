@@ -55,7 +55,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vue%20cover.png?alt&#x3D;media&amp;token&#x3D;5f8b5aa0-eb3e-4d21-a715-07c5442dafbc">
 <meta property="article:published_time" content="2020-09-18T07:12:35.000Z">
-<meta property="article:modified_time" content="2020-09-18T07:14:11.754Z">
+<meta property="article:modified_time" content="2020-09-19T06:11:35.913Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="vue.js">
 <meta name="twitter:card" content="summary">
@@ -240,10 +240,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2020-09-18 15:12:35 / 修改時間：15:14:11" itemprop="dateCreated datePublished" datetime="2020-09-18T15:12:35+08:00">2020-09-18</time>
+              <time title="創建時間：2020-09-18 15:12:35" itemprop="dateCreated datePublished" datetime="2020-09-18T15:12:35+08:00">2020-09-18</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-09-19 14:11:35" itemprop="dateModified" datetime="2020-09-19T14:11:35+08:00">2020-09-19</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -291,7 +297,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">"#app"</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    firstName: <span class="string">"Foo"</span>,</span><br><span class="line">    lastName: <span class="string">"Bar"</span>,</span><br><span class="line">    fullName: <span class="string">"Foo Bar"</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  watch: &#123;</span><br><span class="line">    firstName: <span class="function"><span class="keyword">function</span> (<span class="params">val</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.fullName = val + <span class="string">" "</span> + <span class="keyword">this</span>.lastName;</span><br><span class="line">    &#125;,</span><br><span class="line">    lastName: <span class="function"><span class="keyword">function</span> (<span class="params">val</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.fullName = <span class="keyword">this</span>.firstName + <span class="string">" "</span> + val;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <h3 id="computed-改寫"><a href="#computed-改寫" class="headerlink" title="computed 改寫"></a>computed 改寫</h3><p>但這個範例使用 watch，就不太聰明，可以改用 computed，原因是組合名字，是馬上就可以得到的資料，不需要特別觀察後再給予值，若用 computed 改寫後會如下方呈現，直接組合起來即可。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var vm2 = new Vue(&#123; el: '#app2', data: &#123; firstName: 'Foo', lastName: 'Bar' &#125;,</span><br><span class="line">computed: &#123; fullName: function () &#123; return this.firstName + ' ' + this.lastName</span><br><span class="line">&#125; &#125; &#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vm2 = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">"#app2"</span>,</span><br><span class="line">  data: &#123; <span class="attr">firstName</span>: <span class="string">"Foo"</span>, <span class="attr">lastName</span>: <span class="string">"Bar"</span> &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    fullName: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="string">" "</span> + <span class="keyword">this</span>.lastName;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <iframe height="300" style="width: 100%;" src="https://codepen.io/hnzxewqw/embed/jOqvoxR?height=265&theme-id=light&default-tab=js,result"></iframe>
 
