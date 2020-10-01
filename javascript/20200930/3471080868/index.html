@@ -55,7 +55,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;RvAfQKY.jpg">
 <meta property="article:published_time" content="2020-09-30T03:05:38.000Z">
-<meta property="article:modified_time" content="2020-09-30T03:06:50.023Z">
+<meta property="article:modified_time" content="2020-10-01T05:20:33.840Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="JavaScript">
 <meta property="article:tag" content="JS core">
@@ -241,10 +241,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2020-09-30 11:05:38 / 修改時間：11:06:50" itemprop="dateCreated datePublished" datetime="2020-09-30T11:05:38+08:00">2020-09-30</time>
+              <time title="創建時間：2020-09-30 11:05:38" itemprop="dateCreated datePublished" datetime="2020-09-30T11:05:38+08:00">2020-09-30</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-10-01 13:20:33" itemprop="dateModified" datetime="2020-10-01T13:20:33+08:00">2020-10-01</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -318,10 +324,12 @@
 <blockquote>
 <p>但是這地方會跳錯，因為之前還沒有寫上接收失敗結果的方法。</p>
 </blockquote>
-<p>失敗就要使用 catch 來接收資料傳遞失敗的的結果，但不需要重新寫一個方法，而是直接在 then 的方法後面直接加上 catch 的方法即可。</p>
+<p>失敗就要使用 <code>catch</code> 來接收資料傳遞失敗的的結果，但不需要重新寫一個方法，而是直接在 <code>then</code> 的方法後面直接加上 <code>catch</code> 的方法即可。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a.then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;).catch(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res); <span class="comment">// 執行失敗</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
+<blockquote>
 <p>以上為 Promise 建立時的基本概念，實務上並不會這樣寫。</p>
+</blockquote>
 <p>通常如果要建立一個 Promise 的實體，會使用函式，不管用具名或是匿名函式都可以，以下為基本 Promise 完成後的程式碼。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">promiseFn</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (num) &#123;</span><br><span class="line">        resolve(<span class="string">"success"</span>);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        reject(<span class="string">"error"</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;, <span class="number">0</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -330,11 +338,11 @@
 <li>既然是非同步事件，典型的用法為 <code>setTimeout</code>。</li>
 <li>在執行完非同步事件後，才會回傳結果。</li>
 </ul>
-<p>執行上方函式，並給予真值，使用 then 取得正確的結果。</p>
+<p>執行上方函式，並給予真值，使用 <code>then</code> 取得正確的結果。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">promiseFn(<span class="number">1</span>)</span><br><span class="line">  .then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
 
-<p>如果帶入的參數為 0 ，則會變失敗，就會由 catch 來呈現結果。</p>
-<p>CodePen <a href="https://codepen.io/hnzxewqw/pen/MWyRMGB?editors=1111" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/MWyRMGB?editors=1111</a></p>
+<p>如果帶入的參數為 <code>0</code> ，則會變失敗，就會由 <code>catch</code> 來呈現結果。</p>
+<p>CodePen: <a href="https://codepen.io/hnzxewqw/pen/MWyRMGB?editors=1111" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/MWyRMGB?editors=1111</a></p>
 
     </div>
 
