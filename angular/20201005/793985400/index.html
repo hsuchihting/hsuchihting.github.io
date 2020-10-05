@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="範本語法的表單驗證">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular 筆記 - 表單驗證：Template Driven Form">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;angular&#x2F;20201005&#x2F;793985400&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="範本語法的表單驗證">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;87pBpoJ.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;gn9th5n.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;1uf6E68.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;zBUC0mm.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;n0Q0dwH.png">
+<meta property="article:published_time" content="2020-10-05T06:21:15.000Z">
+<meta property="article:modified_time" content="2020-10-05T06:22:27.853Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="Angular">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;87pBpoJ.jpg">
+
+<link rel="canonical" href="https://hsuchihting.github.io/angular/20201005/793985400/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Angular 筆記 - 表單驗證：Template Driven Form | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/angular/20201005/793985400/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          Angular 筆記 - 表單驗證：Template Driven Form
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-10-05 14:21:15 / 修改時間：14:22:27" itemprop="dateCreated datePublished" datetime="2020-10-05T14:21:15+08:00">2020-10-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/angular/" itemprop="url" rel="index">
+                    <span itemprop="name">Angular</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/angular/20201005/793985400/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="angular/20201005/793985400/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">範本語法的表單驗證</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://i.imgur.com/87pBpoJ.jpg" alt="angular"></p>
+<p>表單驗證在許多網頁中很常使用到，只要有需要輸入資料的地方，就會有表單，而 Angular 本身就帶有表單驗證的內建函式庫，這次就從比較好入手的範本表單驗證做個筆記。</p>
+<h2 id="Angular-Form-基本用途"><a href="#Angular-Form-基本用途" class="headerlink" title="Angular Form 基本用途"></a>Angular Form 基本用途</h2><ul>
+<li>將表單資料進行序列化。</li>
+<li>提供初始預設資料。</li>
+<li>驗證表單資料。</li>
+<li>顯示有幫助的錯誤提示訊息。</li>
+</ul>
+<h2 id="進階用途"><a href="#進階用途" class="headerlink" title="進階用途"></a>進階用途</h2><ul>
+<li>自訂表單驗證器。</li>
+<li>自訂表單控制選項。</li>
+<li>動態建立控制選項。</li>
+</ul>
+<h2 id="Template-Driven-Form-基本認識"><a href="#Template-Driven-Form-基本認識" class="headerlink" title="Template Driven Form 基本認識"></a>Template Driven Form 基本認識</h2><ul>
+<li>只能進行 E2E 測試。</li>
+<li>需要有 DOM 的存在，因為是直接寫在 HTML 標籤上。</li>
+<li>需要 import Module: FormsModule。</li>
+<li>可以使用下列指令建立：<ul>
+<li>ngForm</li>
+<li>ngModel</li>
+<li>ngModelGroup</li>
+</ul>
+</li>
+</ul>
+<h2 id="匯入-formsModule"><a href="#匯入-formsModule" class="headerlink" title="匯入 formsModule"></a>匯入 formsModule</h2><p>在 <strong>app.module.ts</strong> 中匯入 <code>FormsModule</code>。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; FormsModule &#125; <span class="keyword">from</span> <span class="string">"@angular/forms"</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@NgModule</span>(&#123;</span><br><span class="line">  declarations: [AppComponent],</span><br><span class="line">  imports: [BrowserModule, AppRoutingModule, FormsModule],</span><br><span class="line">  providers: [],</span><br><span class="line">  bootstrap: [AppComponent],</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppModule &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="在-HTML-中加入-ngModel"><a href="#在-HTML-中加入-ngModel" class="headerlink" title="在 HTML 中加入 ngModel"></a>在 HTML 中加入 ngModel</h2><p>加入 ngModel 後會產生表單的實體，</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span></span></span><br><span class="line"><span class="tag">    &gt;</span>帳號：</span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">name</span>=<span class="string">"userEmail"</span> <span class="attr">id</span>=<span class="string">""</span> <span class="attr">ngModel</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span></span></span><br><span class="line"><span class="tag">    &gt;</span>密碼：</span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">name</span>=<span class="string">"userPassword"</span> <span class="attr">id</span>=<span class="string">""</span> <span class="attr">ngModel</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>並且會產生對應的 class 可以使用，省去還要另外去想 class 狀態的命名。</p>
+<ul>
+<li>value 有值</li>
+<li>valid / invalid 符合驗證 / 不符合驗證</li>
+<li>pristine / dirty 表單資料沒變動 / 有變動</li>
+<li>touched / untouched 有觸發 / 沒觸發</li>
+<li>errors 錯誤</li>
+</ul>
+<blockquote>
+<p>一定要加 <code>name</code>，不然會跳錯。<br>　依需求用 <code>ngModel</code> 指定 <code>component</code> 的 <code>model</code>。</p>
+</blockquote>
+<h2 id="加上範本參考變數名稱"><a href="#加上範本參考變數名稱" class="headerlink" title="加上範本參考變數名稱"></a>加上範本參考變數名稱</h2><p>在 <code>form</code> 標籤中加上<strong>範本參考變數</strong>，並給予自定義名稱，可以參考<a href="https://hsuchihting.github.io/angular/20200831/2129198187/">這篇</a>，為了檢視輸入資料是否正確，加入 <code>pre</code> 標籤與一個管線元件 <code>json</code>，來觀察 <code>#form</code> 這個範本變數中表單值的變化，這個語法僅於開發時使用，上線前都會移除。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;form #form&#x3D;&quot;ngForm&quot;&gt;</span><br><span class="line">  &lt;label&gt;帳號：</span><br><span class="line">    &lt;input type&#x3D;&quot;email&quot; name&#x3D;&quot;userEmail&quot; id&#x3D;&quot;&quot; ngModel&gt;</span><br><span class="line">  &lt;&#x2F;label&gt;</span><br><span class="line">  &lt;br&gt;</span><br><span class="line">  &lt;label&gt;密碼：</span><br><span class="line">    &lt;input type&#x3D;&quot;password&quot; name&#x3D;&quot;userPassword&quot; id&#x3D;&quot;&quot; ngModel&gt;</span><br><span class="line">  &lt;&#x2F;label&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br><span class="line"></span><br><span class="line">&lt;pre&gt;&#123;&#123;form.value | json&#125;&#125;&lt;&#x2F;pre&gt; &#x2F;&#x2F;預覽資料狀況</span><br></pre></td></tr></table></figure>
+
+<p>完成後會看到下方畫面。</p>
+<p><img src="https://i.imgur.com/gn9th5n.png" alt="pre"></p>
+<h2 id="自行更改-CSS-Class-的變化"><a href="#自行更改-CSS-Class-的變化" class="headerlink" title="自行更改 CSS Class 的變化"></a>自行更改 CSS Class 的變化</h2><p>Angular 驗證會自己帶有預設的 class，這個方式幫助到團隊開發時，不必另外想新的 className，如這次範例可以看到在未更動表單前在開發人員工具的 class 狀態，如下圖：</p>
+<p><img src="https://i.imgur.com/1uf6E68.png" alt="formsValid"></p>
+<p>若有更動則會改變 class 名稱。</p>
+<p><img src="https://i.imgur.com/zBUC0mm.png" alt="formsinvalid"></p>
+<p>可針對這些狀態設定想要的 CSS 樣式。</p>
+<h2 id="輸入預設值"><a href="#輸入預設值" class="headerlink" title="輸入預設值"></a>輸入預設值</h2><p>可在表單帶入預設值，透過雙向綁定，即可達到該設定，並可直接回饋在表單內。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> #<span class="attr">form</span>=<span class="string">"ngForm"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span></span></span><br><span class="line"><span class="tag">    &gt;</span>帳號：</span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">name</span>=<span class="string">"userEmail"</span> <span class="attr">id</span>=<span class="string">""</span> [(<span class="attr">ngModel</span>)]=<span class="string">"myEmail"</span> <span class="attr">ngModel</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span></span></span><br><span class="line"><span class="tag">    &gt;</span>密碼：</span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span></span></span><br><span class="line"><span class="tag">      <span class="attr">type</span>=<span class="string">"password"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">name</span>=<span class="string">"userPassword"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">id</span>=<span class="string">""</span></span></span><br><span class="line"><span class="tag">      [(<span class="attr">ngModel</span>)]=<span class="string">"myPassword"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">ngModel</span></span></span><br><span class="line"><span class="tag">    /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>並且在 <strong>app.module.ts</strong> 中把資料先預設好。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Component &#125; <span class="keyword">from</span> <span class="string">"@angular/core"</span>;</span><br><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">  selector: <span class="string">"app-root"</span>,</span><br><span class="line">  templateUrl: <span class="string">"./app.component.html"</span>,</span><br><span class="line">  styleUrls: [<span class="string">"./app.component.scss"</span>],</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AppComponent</span> </span>&#123;</span><br><span class="line">  myEmail = <span class="string">"text@email.com"</span>;</span><br><span class="line">  myPassword = <span class="string">"12345678"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>表單就會出現預設資料</p>
+<p><img src="https://i.imgur.com/n0Q0dwH.png" alt="preSetting"></p>
+<h2 id="驗證訊息"><a href="#驗證訊息" class="headerlink" title="驗證訊息"></a>驗證訊息</h2><p>在 HTML 本身有一個標籤是 <code>required</code> 驗證功能，Angular 也一樣有這個標籤功能，另外還有最小長度 <code>minlength</code>， 最大長度 <code>maxlength</code>, <a href="https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript" target="_blank" rel="noopener">信箱格式驗證</a> <code>pattern</code> 等標籤功能，只要將這些標籤與條件加入 <code>template</code> 即可。</p>
+<p>並且也將要驗證的資訊加上 <code>ngIf</code> 的條件，呈現在該表單下方，將兩個表單內容分別使用 <code>formGroup</code> 獨立出來，表單本身也使用 <code>formControl</code> 的 <code>className</code> 做好歸類，未來在設定 CSS 時更方便。</p>
+<p>使用範本參考變數將 <code>ngModel</code> 的功能賦予到帳號與密碼的欄位。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> #<span class="attr">form</span>=<span class="string">"ngForm"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"formGroup"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span></span></span><br><span class="line"><span class="tag">      &gt;</span>帳號：</span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span></span></span><br><span class="line"><span class="tag">        <span class="attr">type</span>=<span class="string">"email"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">class</span>=<span class="string">"formControl"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">name</span>=<span class="string">"userEmail"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">id</span>=<span class="string">"email"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">placeholder</span>=<span class="string">"請輸入帳號"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">required</span></span></span><br><span class="line"><span class="tag">        <span class="attr">pattern</span>=<span class="string">"^[a-zA-Z0-9.!#$%&amp;』*+/=?^_`&#123;|&#125;~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$"</span></span></span><br><span class="line"><span class="tag">        #<span class="attr">iAccount</span>=<span class="string">"ngModel"</span></span></span><br><span class="line"><span class="tag">        [(<span class="attr">ngModel</span>)]=<span class="string">"myEmail"</span></span></span><br><span class="line"><span class="tag">      /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"errors"</span> *<span class="attr">ngIf</span>=<span class="string">"iAccount.errors"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> *<span class="attr">ngIf</span>=<span class="string">"iAccount.errors.required"</span>&gt;</span>請輸入帳號<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> *<span class="attr">ngIf</span>=<span class="string">"iAccount.errors.pattern"</span>&gt;</span>信箱格式錯誤<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"formGroup"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span></span></span><br><span class="line"><span class="tag">      &gt;</span>密碼：</span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span></span></span><br><span class="line"><span class="tag">        <span class="attr">type</span>=<span class="string">"password"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">class</span>=<span class="string">"formControl"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">name</span>=<span class="string">"userPassword"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">id</span>=<span class="string">"password"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">placeholder</span>=<span class="string">"請輸入密碼"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">minlength</span>=<span class="string">"6"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">required</span></span></span><br><span class="line"><span class="tag">        #<span class="attr">iPassword</span>=<span class="string">"ngModel"</span></span></span><br><span class="line"><span class="tag">        [(<span class="attr">ngModel</span>)]=<span class="string">"myPassword"</span></span></span><br><span class="line"><span class="tag">      /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"errors"</span> *<span class="attr">ngIf</span>=<span class="string">"iPassword.errors"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> *<span class="attr">ngIf</span>=<span class="string">"iPassword.errors.required"</span>&gt;</span>請輸入密碼<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> *<span class="attr">ngIf</span>=<span class="string">"iPassword.errors.minlength"</span>&gt;</span>密碼長度須超過 6 字元<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>這樣就完成了表單驗證功能。</p>
+<p>Demo： <a href="https://stackblitz.com/edit/angular-ivy-e71hxv?file=src/app/app.component.html" target="_blank" rel="noopener">https://stackblitz.com/edit/angular-ivy-e71hxv?file=src/app/app.component.html</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Angular/" rel="tag"># Angular</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/javascript/20201005/1655458365/" rel="prev" title="JS 筆記 - 點選清單項目時，刪除清單資料">
+      <i class="fa fa-chevron-left"></i> JS 筆記 - 點選清單項目時，刪除清單資料
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Angular-Form-基本用途"><span class="nav-number">1.</span> <span class="nav-text">Angular Form 基本用途</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#進階用途"><span class="nav-number">2.</span> <span class="nav-text">進階用途</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Template-Driven-Form-基本認識"><span class="nav-number">3.</span> <span class="nav-text">Template Driven Form 基本認識</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#匯入-formsModule"><span class="nav-number">4.</span> <span class="nav-text">匯入 formsModule</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在-HTML-中加入-ngModel"><span class="nav-number">5.</span> <span class="nav-text">在 HTML 中加入 ngModel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加上範本參考變數名稱"><span class="nav-number">6.</span> <span class="nav-text">加上範本參考變數名稱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自行更改-CSS-Class-的變化"><span class="nav-number">7.</span> <span class="nav-text">自行更改 CSS Class 的變化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#輸入預設值"><span class="nav-number">8.</span> <span class="nav-text">輸入預設值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#驗證訊息"><span class="nav-number">9.</span> <span class="nav-text">驗證訊息</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">187</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hsiangfeng.github.io/" title="https:&#x2F;&#x2F;hsiangfeng.github.io&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gretema.github.io/" title="https:&#x2F;&#x2F;gretema.github.io&#x2F;" rel="noopener" target="_blank">馬格蕾特的前端勇者日誌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wcc723.github.io/" title="https:&#x2F;&#x2F;wcc723.github.io&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/angular/20201005/793985400/",
+            identifier: "angular/20201005/793985400/",
+            title: "Angular 筆記 - 表單驗證：Template Driven Form"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
