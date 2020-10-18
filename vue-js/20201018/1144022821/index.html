@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="中大型專案好用的管理方式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue 筆記 - Vuex 基本認識">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;vue-js&#x2F;20201018&#x2F;1144022821&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="中大型專案好用的管理方式">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;MmGAnsx.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;U2iMDVo.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;Q1SgKk6.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;YEAMHz9.png">
+<meta property="article:published_time" content="2020-10-18T14:46:49.000Z">
+<meta property="article:modified_time" content="2020-10-18T14:48:07.623Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="vue.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;MmGAnsx.png">
+
+<link rel="canonical" href="https://hsuchihting.github.io/vue-js/20201018/1144022821/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Vue 筆記 - Vuex 基本認識 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/vue-js/20201018/1144022821/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          Vue 筆記 - Vuex 基本認識
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-10-18 22:46:49 / 修改時間：22:48:07" itemprop="dateCreated datePublished" datetime="2020-10-18T22:46:49+08:00">2020-10-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue-js/" itemprop="url" rel="index">
+                    <span itemprop="name">vue.js</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/vue-js/20201018/1144022821/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="vue-js/20201018/1144022821/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">中大型專案好用的管理方式</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://i.imgur.com/MmGAnsx.png" alt="vuex"></p>
+<p>上圖為一份元件與資料要傳遞的示意圖，先前知道要傳遞資料可以使用 <code>props</code> 跟 <code>emit</code> 兩種方式，來傳遞 <code>side</code> 跟 <code>components</code> 的資料，若資料狀態比較少，也可以使用 <code>evenbus</code> 來傳遞，但 <code>header</code> 跟 <code>side</code> 是同層資料，就要使用 <code>evenbus</code> 來傳遞。</p>
+<blockquote>
+<p><code>evenbus</code> 比較適合使用在簡單的情境。</p>
+</blockquote>
+<p>也不能使用全域變數，因為會失去雙向綁定的特性。</p>
+<h2 id="Vuex-的方式"><a href="#Vuex-的方式" class="headerlink" title="Vuex 的方式"></a>Vuex 的方式</h2><p><img src="https://i.imgur.com/U2iMDVo.png" alt="store"></p>
+<p>Vuex 就把資料與方法統一放在這裡管理，讓不管是哪一個元件都可以來這裡取用，Vuex 較常使用在中大型網站專案上，管理資料相對好用，如果是小專案使用 vuex，會有點綁手綁腳，透過 Vue CLI 會建立好 vuex 的檔案，存放在 <code>store</code> 資料下的 <code>index.js</code> 檔案，起始看到的程式如下：</p>
+<p><strong>stroe/index.js</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">"vue"</span>;</span><br><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">"vuex"</span>;</span><br><span class="line"></span><br><span class="line">Vue.use(Vuex);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  state: &#123;&#125;,</span><br><span class="line">  mutations: &#123;&#125;,</span><br><span class="line">  actions: &#123;&#125;,</span><br><span class="line">  modules: &#123;&#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Vuex-使用的方法有四種"><a href="#Vuex-使用的方法有四種" class="headerlink" title="Vuex 使用的方法有四種"></a>Vuex 使用的方法有四種</h3><p><img src="https://i.imgur.com/Q1SgKk6.png" alt="vuex function"><br>上圖使用元件方法與 Vuex 的方法做對照，有點類似但卻稍微不太一樣，算是一種輔助記憶的方式。</p>
+<ol>
+<li><code>state</code>:存放預設資料。</li>
+<li><code>action</code>：取得非同步事件與取得遠端資料(不會改變狀態)。</li>
+<li><code>getter</code>：呈現畫面之前，完成計算結果。</li>
+<li><code>mutation</code>:即時改變資料內容的方法。</li>
+</ol>
+<h3 id="Vuex-的流程"><a href="#Vuex-的流程" class="headerlink" title="Vuex 的流程"></a>Vuex 的流程</h3><p><img src="https://i.imgur.com/YEAMHz9.png" alt="vuex process"><br>上圖為 vuex 進行的流程，元件透過 <code>action</code> 取得資料或進行非同步事件後，要透過 <code>commit</code> 方法改變 <code>mutation</code> 的資料狀態。</p>
+<blockquote>
+<p><code>Action</code>　階段不會改變資料內容。<br><code>mutation</code> 階段資料才會進行更動，故可搭配 <code>vue Devtools</code> 做資料查看。</p>
+</blockquote>
+<p>改變後的資料會更新道 <code>state</code>，並且渲染於元件。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/vue-js/" rel="tag"># vue.js</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/vue-js/20201018/899307915/" rel="prev" title="Vue 筆記 - Props 基本觀念">
+      <i class="fa fa-chevron-left"></i> Vue 筆記 - Props 基本觀念
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Vuex-的方式"><span class="nav-number">1.</span> <span class="nav-text">Vuex 的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vuex-使用的方法有四種"><span class="nav-number">1.1.</span> <span class="nav-text">Vuex 使用的方法有四種</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vuex-的流程"><span class="nav-number">1.2.</span> <span class="nav-text">Vuex 的流程</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">191</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hsiangfeng.github.io/" title="https:&#x2F;&#x2F;hsiangfeng.github.io&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gretema.github.io/" title="https:&#x2F;&#x2F;gretema.github.io&#x2F;" rel="noopener" target="_blank">馬格蕾特的前端勇者日誌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wcc723.github.io/" title="https:&#x2F;&#x2F;wcc723.github.io&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/vue-js/20201018/1144022821/",
+            identifier: "vue-js/20201018/1144022821/",
+            title: "Vue 筆記 - Vuex 基本認識"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
