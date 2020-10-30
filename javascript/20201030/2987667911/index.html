@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Browser Object Model 瀏覽器物件模型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 筆記 - 認識 BOM">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;javascript&#x2F;20201030&#x2F;2987667911&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="Browser Object Model 瀏覽器物件模型">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;BOM.png?alt&#x3D;media&amp;token&#x3D;d34a2270-faef-4965-bb58-19d3550f58f4">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;innerHeight.jpg?alt&#x3D;media&amp;token&#x3D;b8d0323b-9f29-4793-97f0-48b0cc6001d7">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;outerHeight.png?alt&#x3D;media&amp;token&#x3D;e94189dd-dd79-410a-856a-88e876d6ff5d">
+<meta property="article:published_time" content="2020-10-30T13:45:12.000Z">
+<meta property="article:modified_time" content="2020-10-30T13:52:53.597Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
+
+<link rel="canonical" href="https://hsuchihting.github.io/javascript/20201030/2987667911/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>JS 筆記 - 認識 BOM | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/javascript/20201030/2987667911/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          JS 筆記 - 認識 BOM
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-10-30 21:45:12 / 修改時間：21:52:53" itemprop="dateCreated datePublished" datetime="2020-10-30T21:45:12+08:00">2020-10-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/javascript/20201030/2987667911/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="javascript/20201030/2987667911/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">Browser Object Model 瀏覽器物件模型</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JavaScript%20note-01.jpg?alt=media&token=7bee0261-72ac-4de4-9f5a-f39d58735b7d" alt="JavaScript Note"></p>
+<h2 id="BOM-是什麼"><a href="#BOM-是什麼" class="headerlink" title="BOM 是什麼"></a>BOM 是什麼</h2><p>Browser Object Model 瀏覽器物件模型，簡稱 BOM，是瀏覽器所有功能的核心，與網頁的內容無關。</p>
+<p>在早期沒有制定標準規範的時候，各家瀏覽器廠商幾乎各自在自家瀏覽器上實作功能，非常混亂。 直到最近幾年， W3C 把各家瀏覽器都有實作的部分，以及確定已經(或未來會) 加入的功能，統一集合起來納入了 HTML5 的標準中，這也就是我們現在看到的 BOM API 的實作。</p>
+<p>BOM 也有人非正式地稱它為 「Level 0 DOM」。 因為它在 DOM level 1 標準前就已存在，而不是真的有文件去規範這些，所以「Level 0 DOM」與「BOM」兩者實際上指的是同一個東西。</p>
+<p><strong>簡單來說</strong><br>BOM，是 JavaScript 與<strong>瀏覽器</strong>溝通的橋樑，JavaScript 可以透過 BOM 對瀏覽器進行各種操作，包含開啟及關閉視窗、改變視窗大小、計時器、取得位址之類的。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/BOM.png?alt=media&token=d34a2270-faef-4965-bb58-19d3550f58f4" alt="BOM"></p>
+<h2 id="什麼是-Window"><a href="#什麼是-Window" class="headerlink" title="什麼是 Window"></a>什麼是 Window</h2><p>BOM 的核心是 <code>window</code> 物件，而 <code>window</code> 物件提供的特性主要為 <code>document</code>、<code>location</code>、<code>navigator</code>、<code>screen</code>、<code>history</code> 以及 <code>frames</code>。</p>
+<p>在瀏覽器裡的 <code>window</code> 物件扮演著兩種角色：</p>
+<ul>
+<li>ECMAScript 標準裡的「全域物件」 (Global Object)</li>
+<li>JavaScript 用來與瀏覽器溝通的窗口</li>
+</ul>
+<p>可以透過 chrome 開發人員工具中的 <code>console</code> 輸入 <code>window</code> ，得到相關的值，假如我今天想要得到網頁中的 <code>a</code> 連結資訊，就可以這樣輸入：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">111</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">window</span>.a); <span class="comment">//111</span></span><br></pre></td></tr></table></figure>
+
+<p>另外，window 也是瀏覽器中的對話框，一開始學習 JavaScript，就先學 alert，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert(<span class="string">"這裡是一段文字"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>但其實其完整的程式碼是這樣寫:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.alert(<span class="string">'這是一段文字'</span>;)</span><br></pre></td></tr></table></figure>
+
+<p><code>window</code> 一般都省略不寫，這就是瀏覽器環境的 BOM 提供給 JavaScript 控制的功能之一。</p>
+<h2 id="常用的-window-功能"><a href="#常用的-window-功能" class="headerlink" title="常用的 window 功能"></a>常用的 window 功能</h2><h3 id="當前瀏覽器尺寸-screen"><a href="#當前瀏覽器尺寸-screen" class="headerlink" title="當前瀏覽器尺寸 screen"></a>當前瀏覽器尺寸 screen</h3><p>當輸入 <code>window.screen</code> 的時候，會得知當前瀏覽器尺寸。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Screen &#123;<span class="attr">availWidth</span>: <span class="number">1920</span>, <span class="attr">availHeight</span>: <span class="number">1040</span>, <span class="attr">width</span>: <span class="number">1920</span>, <span class="attr">height</span>: <span class="number">1080</span>, <span class="attr">colorDepth</span>: <span class="number">24</span>, …&#125;</span><br><span class="line">availWidth: <span class="number">1920</span></span><br><span class="line">availHeight: <span class="number">1040</span></span><br><span class="line">width: <span class="number">1920</span></span><br><span class="line">height: <span class="number">1080</span></span><br><span class="line">colorDepth: <span class="number">24</span></span><br><span class="line">pixelDepth: <span class="number">24</span></span><br><span class="line">availLeft: <span class="number">0</span></span><br><span class="line">availTop: <span class="number">0</span></span><br><span class="line">orientation: ScreenOrientation &#123;<span class="attr">angle</span>: <span class="number">0</span>, <span class="attr">type</span>: <span class="string">"landscape-primary"</span>, <span class="attr">onchange</span>: <span class="literal">null</span>&#125;</span><br><span class="line">__proto__: Screen</span><br></pre></td></tr></table></figure>
+
+<h3 id="當前瀏覽的網址"><a href="#當前瀏覽的網址" class="headerlink" title="當前瀏覽的網址"></a>當前瀏覽的網址</h3><p>當輸入 <code>window.location</code> 的話，可以找到 <code>href</code> 的資訊，就是當前網址：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Location &#123;<span class="attr">href</span>: <span class="string">"https://tw.yahoo.com/"</span>, <span class="attr">ancestorOrigins</span>: DOMStringList, <span class="attr">origin</span>: <span class="string">"https://tw.yahoo.com"</span>, <span class="attr">protocol</span>: <span class="string">"https:"</span>, <span class="attr">host</span>: <span class="string">"tw.yahoo.com"</span>, …&#125;</span><br><span class="line">ancestorOrigins: DOMStringList &#123;<span class="attr">length</span>: <span class="number">0</span>&#125;</span><br><span class="line">origin: <span class="string">"https://tw.yahoo.com"</span></span><br><span class="line">protocol: <span class="string">"https:"</span></span><br><span class="line">host: <span class="string">"tw.yahoo.com"</span></span><br><span class="line">hostname: <span class="string">"tw.yahoo.com"</span></span><br><span class="line">port: <span class="string">""</span></span><br><span class="line">pathname: <span class="string">"/"</span></span><br><span class="line">search: <span class="string">""</span></span><br><span class="line">hash: <span class="string">""</span></span><br><span class="line">href: <span class="string">"https://tw.yahoo.com/"</span> <span class="comment">//當前網址資訊</span></span><br><span class="line">assign: ƒ assign()</span><br><span class="line">reload: ƒ reload()</span><br><span class="line">toString: ƒ toString()</span><br><span class="line">replace: ƒ replace()</span><br><span class="line">valueOf: ƒ valueOf()</span><br><span class="line"><span class="built_in">Symbol</span>(<span class="built_in">Symbol</span>.toPrimitive): <span class="literal">undefined</span></span><br><span class="line">__proto__: Location</span><br></pre></td></tr></table></figure>
+
+<h3 id="當前瀏覽器相關資訊"><a href="#當前瀏覽器相關資訊" class="headerlink" title="當前瀏覽器相關資訊"></a>當前瀏覽器相關資訊</h3><p>輸入 window.navigator 的話，會得到下方資訊， <code>onload</code> 就是上網狀態， <code>true</code> 就是上網中，<code>false</code> 就是離線：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">Navigator &#123;<span class="attr">vendorSub</span>: <span class="string">""</span>, <span class="attr">productSub</span>: <span class="string">"20030107"</span>, <span class="attr">vendor</span>: <span class="string">"Google Inc."</span>, <span class="attr">maxTouchPoints</span>: <span class="number">0</span>, <span class="attr">hardwareConcurrency</span>: <span class="number">8</span>, …&#125;</span><br><span class="line">vendorSub: <span class="string">""</span></span><br><span class="line">productSub: <span class="string">"20030107"</span></span><br><span class="line">vendor: <span class="string">"Google Inc."</span></span><br><span class="line">maxTouchPoints: <span class="number">0</span></span><br><span class="line">hardwareConcurrency: <span class="number">8</span></span><br><span class="line">cookieEnabled: <span class="literal">true</span></span><br><span class="line">appCodeName: <span class="string">"Mozilla"</span></span><br><span class="line">appName: <span class="string">"Netscape"</span></span><br><span class="line">appVersion: <span class="string">"5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"</span></span><br><span class="line">platform: <span class="string">"Win32"</span></span><br><span class="line">product: <span class="string">"Gecko"</span></span><br><span class="line">userAgent: <span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"</span></span><br><span class="line">language: <span class="string">"zh-TW"</span></span><br><span class="line">languages: (<span class="number">5</span>) [<span class="string">"zh-TW"</span>, <span class="string">"zh"</span>, <span class="string">"en-US"</span>, <span class="string">"en"</span>, <span class="string">"ia"</span>]</span><br><span class="line">onLine: <span class="literal">true</span> <span class="comment">//上網中</span></span><br><span class="line">doNotTrack: <span class="literal">null</span></span><br><span class="line">geolocation: Geolocation &#123;&#125;</span><br><span class="line">mediaCapabilities: MediaCapabilities &#123;&#125;</span><br><span class="line">connection: NetworkInformation &#123;<span class="attr">onchange</span>: <span class="literal">null</span>, <span class="attr">effectiveType</span>: <span class="string">"4g"</span>, <span class="attr">rtt</span>: <span class="number">0</span>, <span class="attr">downlink</span>: <span class="number">10</span>, <span class="attr">saveData</span>: <span class="literal">false</span>&#125;</span><br><span class="line">plugins: PluginArray &#123;<span class="number">0</span>: Plugin, <span class="number">1</span>: Plugin, <span class="number">2</span>: Plugin, Chrome PDF Plugin: Plugin, Chrome PDF Viewer: Plugin, Native Client: Plugin, <span class="attr">length</span>: <span class="number">3</span>&#125;</span><br><span class="line">mimeTypes: MimeTypeArray &#123;<span class="number">0</span>: MimeType, <span class="number">1</span>: MimeType, <span class="number">2</span>: MimeType, <span class="number">3</span>: MimeType, application/pdf: MimeType, application/x-google-chrome-pdf: MimeType, application/x-nacl: MimeType, application/x-pnacl: MimeType, <span class="attr">length</span>: <span class="number">4</span>&#125;</span><br><span class="line">webkitTemporaryStorage: DeprecatedStorageQuota &#123;&#125;</span><br><span class="line">webkitPersistentStorage: DeprecatedStorageQuota &#123;&#125;</span><br><span class="line">userActivation: UserActivation &#123;<span class="attr">hasBeenActive</span>: <span class="literal">true</span>, <span class="attr">isActive</span>: <span class="literal">true</span>&#125;</span><br><span class="line">mediaSession: MediaSession &#123;<span class="attr">metadata</span>: <span class="literal">null</span>, <span class="attr">playbackState</span>: <span class="string">"none"</span>&#125;</span><br><span class="line">permissions: Permissions &#123;&#125;</span><br><span class="line">deviceMemory: <span class="number">8</span></span><br><span class="line">clipboard: Clipboard &#123;&#125;</span><br><span class="line">credentials: CredentialsContainer &#123;&#125;</span><br><span class="line">keyboard: Keyboard &#123;&#125;</span><br><span class="line">locks: LockManager &#123;&#125;</span><br><span class="line">mediaDevices: MediaDevices &#123;<span class="attr">ondevicechange</span>: <span class="literal">null</span>&#125;</span><br><span class="line">serviceWorker: ServiceWorkerContainer &#123;<span class="attr">ready</span>: <span class="built_in">Promise</span>, <span class="attr">controller</span>: <span class="literal">null</span>, <span class="attr">oncontrollerchange</span>: <span class="literal">null</span>, <span class="attr">onmessage</span>: <span class="literal">null</span>, <span class="attr">onmessageerror</span>: <span class="literal">null</span>&#125;</span><br><span class="line">storage: StorageManager &#123;&#125;</span><br><span class="line">presentation: Presentation &#123;<span class="attr">receiver</span>: <span class="literal">null</span>, <span class="attr">defaultRequest</span>: <span class="literal">null</span>&#125;</span><br><span class="line">bluetooth: Bluetooth &#123;&#125;</span><br><span class="line">usb: USB &#123;<span class="attr">onconnect</span>: <span class="literal">null</span>, <span class="attr">ondisconnect</span>: <span class="literal">null</span>&#125;</span><br><span class="line">xr: XR &#123;<span class="attr">ondevicechange</span>: <span class="literal">null</span>&#125;</span><br><span class="line">__proto__: Navigator</span><br></pre></td></tr></table></figure>
+
+<h2 id="上一頁與下一頁的功能"><a href="#上一頁與下一頁的功能" class="headerlink" title="上一頁與下一頁的功能"></a>上一頁與下一頁的功能</h2><p>使用 <code>history</code> 來製作上一頁與下一頁的語法，先在 <code>console</code> 輸入 <code>history，會看到其中這兩個語法</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">History &#123;<span class="attr">length</span>: <span class="number">1</span>, <span class="attr">scrollRestoration</span>: <span class="string">"auto"</span>, <span class="attr">state</span>: <span class="literal">null</span>&#125;</span><br><span class="line">length: <span class="number">1</span></span><br><span class="line">scrollRestoration: <span class="string">"auto"</span></span><br><span class="line">state: <span class="literal">null</span></span><br><span class="line">__proto__: History</span><br><span class="line">length: (...)</span><br><span class="line">scrollRestoration: (...)</span><br><span class="line">state: (...)</span><br><span class="line">go: ƒ go()</span><br><span class="line">back: ƒ back() <span class="comment">//上一頁</span></span><br><span class="line">forward: ƒ forward() <span class="comment">//下一頁</span></span><br><span class="line">pushState: ƒ pushState()</span><br><span class="line">replaceState: ƒ replaceState()</span><br><span class="line"><span class="keyword">constructor</span>: ƒ History()</span><br><span class="line">Symbol(Symbol.toStringTag): "History"</span><br><span class="line"><span class="keyword">get</span> length: ƒ length()</span><br><span class="line"><span class="keyword">get</span> scrollRestoration: ƒ scrollRestoration()</span><br><span class="line"><span class="keyword">set</span> scrollRestoration: ƒ scrollRestoration()</span><br><span class="line"><span class="keyword">get</span> state: ƒ state()</span><br><span class="line">__proto__: Object</span><br></pre></td></tr></table></figure>
+
+<p>做兩個按鈕，點擊後可以進行上一頁與下一頁，</p>
+<h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"aLink"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://tw.yahoo.com/"</span>&gt;</span>Yahoo!<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">id</span>=<span class="string">"backBtn"</span> <span class="attr">value</span>=<span class="string">"上一頁"</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">id</span>=<span class="string">"forwardBtn"</span> <span class="attr">value</span>=<span class="string">"下一頁"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>綁定兩個 <code>id</code> 後，寫入監聽事件，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> back = <span class="built_in">document</span>.getElementById(<span class="string">"backBtn"</span>);</span><br><span class="line"><span class="keyword">var</span> foward = <span class="built_in">document</span>.getElementById(<span class="string">"forwardBtn"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//上一頁</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">back</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">window</span>.history.back();</span><br><span class="line">&#125;</span><br><span class="line">back.addEventListener(<span class="string">"click"</span>, back, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//下一頁</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">forward</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">window</span>.history.forward();</span><br><span class="line">&#125;</span><br><span class="line">foward.addEventListener(<span class="string">"click"</span>, forward, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<p>在讀取到新的頁面後，就可以進行上一頁與下一頁囉!!</p>
+<p>codepen: <a href="https://codepen.io/hnzxewqw/pen/mdJMrdN" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/mdJMrdN</a></p>
+<blockquote>
+<p>程式碼僅供對照，無法實現跳轉後功能。</p>
+</blockquote>
+<h2 id="列印功能"><a href="#列印功能" class="headerlink" title="列印功能"></a>列印功能</h2><p>寫一個列印按鈕，並綁定 <code>id</code> 寫入列印語法:</p>
+<h3 id="HTML-1"><a href="#HTML-1" class="headerlink" title="HTML"></a>HTML</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">id</span>=<span class="string">"print"</span> <span class="attr">value</span>=<span class="string">"列印"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"print"</span>).onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">window</span>.print();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>codepen: <a href="https://codepen.io/hnzxewqw/pen/bGdrwLq" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/bGdrwLq</a></p>
+<h2 id="innerHeight-outerHeight-動態擷取瀏覽器高度"><a href="#innerHeight-outerHeight-動態擷取瀏覽器高度" class="headerlink" title="innerHeight, outerHeight 動態擷取瀏覽器高度"></a>innerHeight, outerHeight 動態擷取瀏覽器高度</h2><p>innerHeight 指的可見的瀏覽器範圍，如下圖紅框處:</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/innerHeight.jpg?alt=media&token=b8d0323b-9f29-4793-97f0-48b0cc6001d7" alt="innerHeight"></p>
+<p>outerHeight 指的是整個瀏覽器範圍，如下圖:</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/outerHeight.png?alt=media&token=e94189dd-dd79-410a-856a-88e876d6ff5d" alt="outerHeight"></p>
+<p>如果要讓網頁圖片，不管是什麼尺寸的瀏覽器，都可以滿版呈現，可以這樣寫:</p>
+<h3 id="HTML-2"><a href="#HTML-2" class="headerlink" title="HTML"></a>HTML</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pic"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"section2"</span>&gt;</span>section2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>lorem150<span class="tag">&lt;/<span class="name">p</span>&gt;</span> //文字長度部分用數字代替，避免版面過長</span><br></pre></td></tr></table></figure>
+
+<p>綁定 <code>.pic</code> 後，動態修改 CSS 的高度樣式(覆蓋原本的數值)，讓瀏覽器的 <code>innerHeight</code> 給予當前數值，並且後面要加上單位 <code>&#39;px&#39;</code>，這樣圖片就會變成滿版了。</p>
+<h3 id="JavaScript-1"><a href="#JavaScript-1" class="headerlink" title="JavaScript"></a>JavaScript</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">".pic"</span>).style.height = <span class="built_in">window</span>.innerHeight + <span class="string">"px"</span>;</span><br></pre></td></tr></table></figure>
+
+<p>如果任意改變瀏覽器視窗大小，也要讓圖片的高度數值跟著改變，可以在上方程式碼下，再加上這一段，在 <code>onresize</code> 的時候，會自動改變 CSS 內的 <code>innerHeight</code> 的數值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onresize = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">document</span>.querySelector(<span class="string">".pic"</span>).style.height = <span class="built_in">window</span>.innerHeight + <span class="string">"px"</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>codepen: <a href="https://codepen.io/hnzxewqw/pen/BaNdvrL" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/BaNdvrL</a></p>
+<hr>
+<p>參考資料:</p>
+<ul>
+<li><a href="https://codertw.com/%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC/283220/" target="_blank" rel="noopener">https://codertw.com/%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC/283220/</a></li>
+<li><a href="https://ithelp.ithome.com.tw/articles/10191666" target="_blank" rel="noopener">https://ithelp.ithome.com.tw/articles/10191666</a></li>
+<li><a href="https://medium.com/%E9%A6%AC%E6%A0%BC%E8%95%BE%E7%89%B9%E7%9A%84%E5%86%92%E9%9A%AA%E8%80%85%E6%97%A5%E8%AA%8C/js-bom-%E7%AD%86%E8%A8%98-6dedea7155ea" target="_blank" rel="noopener">https://medium.com/%E9%A6%AC%E6%A0%BC%E8%95%BE%E7%89%B9%E7%9A%84%E5%86%92%E9%9A%AA%E8%80%85%E6%97%A5%E8%AA%8C/js-bom-%E7%AD%86%E8%A8%98-6dedea7155ea</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/javascript/20201026/3745026985/" rel="prev" title="JS 筆記 - 做一個 TodoList">
+      <i class="fa fa-chevron-left"></i> JS 筆記 - 做一個 TodoList
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/javascript/20201030/52463831/" rel="next" title="JS 筆記 - 使用 postman 編輯通訊 API">
+      JS 筆記 - 使用 postman 編輯通訊 API <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BOM-是什麼"><span class="nav-number">1.</span> <span class="nav-text">BOM 是什麼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什麼是-Window"><span class="nav-number">2.</span> <span class="nav-text">什麼是 Window</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用的-window-功能"><span class="nav-number">3.</span> <span class="nav-text">常用的 window 功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#當前瀏覽器尺寸-screen"><span class="nav-number">3.1.</span> <span class="nav-text">當前瀏覽器尺寸 screen</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#當前瀏覽的網址"><span class="nav-number">3.2.</span> <span class="nav-text">當前瀏覽的網址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#當前瀏覽器相關資訊"><span class="nav-number">3.3.</span> <span class="nav-text">當前瀏覽器相關資訊</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上一頁與下一頁的功能"><span class="nav-number">4.</span> <span class="nav-text">上一頁與下一頁的功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML"><span class="nav-number">4.1.</span> <span class="nav-text">HTML</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列印功能"><span class="nav-number">5.</span> <span class="nav-text">列印功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML-1"><span class="nav-number">5.1.</span> <span class="nav-text">HTML</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JavaScript"><span class="nav-number">5.1.1.</span> <span class="nav-text">JavaScript</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#innerHeight-outerHeight-動態擷取瀏覽器高度"><span class="nav-number">6.</span> <span class="nav-text">innerHeight, outerHeight 動態擷取瀏覽器高度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML-2"><span class="nav-number">6.1.</span> <span class="nav-text">HTML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript-1"><span class="nav-number">6.2.</span> <span class="nav-text">JavaScript</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">195</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hsiangfeng.github.io/" title="https:&#x2F;&#x2F;hsiangfeng.github.io&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gretema.github.io/" title="https:&#x2F;&#x2F;gretema.github.io&#x2F;" rel="noopener" target="_blank">馬格蕾特的前端勇者日誌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wcc723.github.io/" title="https:&#x2F;&#x2F;wcc723.github.io&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/javascript/20201030/2987667911/",
+            identifier: "javascript/20201030/2987667911/",
+            title: "JS 筆記 - 認識 BOM"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
