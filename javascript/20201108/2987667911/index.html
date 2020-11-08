@@ -49,7 +49,7 @@
   <meta name="description" content="Browser Object Model 瀏覽器物件模型">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS 筆記 - 認識 BOM">
-<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;javascript&#x2F;20201030&#x2F;2987667911&#x2F;index.html">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;javascript&#x2F;20201108&#x2F;2987667911&#x2F;index.html">
 <meta property="og:site_name" content="TimCodingBlog">
 <meta property="og:description" content="Browser Object Model 瀏覽器物件模型">
 <meta property="og:locale" content="zh_TW">
@@ -57,14 +57,14 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;BOM.png?alt&#x3D;media&amp;token&#x3D;d34a2270-faef-4965-bb58-19d3550f58f4">
 <meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;innerHeight.jpg?alt&#x3D;media&amp;token&#x3D;b8d0323b-9f29-4793-97f0-48b0cc6001d7">
 <meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;outerHeight.png?alt&#x3D;media&amp;token&#x3D;e94189dd-dd79-410a-856a-88e876d6ff5d">
-<meta property="article:published_time" content="2020-10-30T13:45:12.000Z">
-<meta property="article:modified_time" content="2020-10-30T14:31:29.581Z">
+<meta property="article:published_time" content="2020-11-08T14:53:39.000Z">
+<meta property="article:modified_time" content="2020-11-08T14:56:18.425Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
 
-<link rel="canonical" href="https://hsuchihting.github.io/javascript/20201030/2987667911/">
+<link rel="canonical" href="https://hsuchihting.github.io/javascript/20201108/2987667911/">
 
 
 <script id="page-configurations">
@@ -221,7 +221,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/javascript/20201030/2987667911/">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/javascript/20201108/2987667911/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/2019Tim.jpg">
@@ -245,7 +245,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2020-10-30 21:45:12 / 修改時間：22:31:29" itemprop="dateCreated datePublished" datetime="2020-10-30T21:45:12+08:00">2020-10-30</time>
+              <time title="創建時間：2020-11-08 22:53:39 / 修改時間：22:56:18" itemprop="dateCreated datePublished" datetime="2020-11-08T22:53:39+08:00">2020-11-08</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -268,8 +268,8 @@
       </span>
       <span class="post-meta-item-text">Disqus：</span>
     
-    <a title="disqus" href="/javascript/20201030/2987667911/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="javascript/20201030/2987667911/" itemprop="commentCount"></span>
+    <a title="disqus" href="/javascript/20201108/2987667911/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="javascript/20201108/2987667911/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -320,7 +320,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">History &#123;<span class="attr">length</span>: <span class="number">1</span>, <span class="attr">scrollRestoration</span>: <span class="string">"auto"</span>, <span class="attr">state</span>: <span class="literal">null</span>&#125;</span><br><span class="line">length: <span class="number">1</span></span><br><span class="line">scrollRestoration: <span class="string">"auto"</span></span><br><span class="line">state: <span class="literal">null</span></span><br><span class="line">__proto__: History</span><br><span class="line">length: (...)</span><br><span class="line">scrollRestoration: (...)</span><br><span class="line">state: (...)</span><br><span class="line">go: ƒ go()</span><br><span class="line">back: ƒ back() <span class="comment">//上一頁</span></span><br><span class="line">forward: ƒ forward() <span class="comment">//下一頁</span></span><br><span class="line">pushState: ƒ pushState()</span><br><span class="line">replaceState: ƒ replaceState()</span><br><span class="line"><span class="keyword">constructor</span>: ƒ History()</span><br><span class="line">Symbol(Symbol.toStringTag): "History"</span><br><span class="line"><span class="keyword">get</span> length: ƒ length()</span><br><span class="line"><span class="keyword">get</span> scrollRestoration: ƒ scrollRestoration()</span><br><span class="line"><span class="keyword">set</span> scrollRestoration: ƒ scrollRestoration()</span><br><span class="line"><span class="keyword">get</span> state: ƒ state()</span><br><span class="line">__proto__: Object</span><br></pre></td></tr></table></figure>
 
 <p>做兩個按鈕，點擊後可以進行上一頁與下一頁，</p>
-<h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"aLink"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://tw.yahoo.com/"</span>&gt;</span>Yahoo!<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">id</span>=<span class="string">"backBtn"</span> <span class="attr">value</span>=<span class="string">"上一頁"</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">id</span>=<span class="string">"forwardBtn"</span> <span class="attr">value</span>=<span class="string">"下一頁"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"aLink"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://tw.yahoo.com/"</span>&gt;</span>Yahoo!<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">id</span>=<span class="string">"backBtn"</span> <span class="attr">value</span>=<span class="string">"上一頁"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">id</span>=<span class="string">"forwardBtn"</span> <span class="attr">value</span>=<span class="string">"下一頁"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>綁定兩個 <code>id</code> 後，寫入監聽事件，</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> back = <span class="built_in">document</span>.getElementById(<span class="string">"backBtn"</span>);</span><br><span class="line"><span class="keyword">var</span> foward = <span class="built_in">document</span>.getElementById(<span class="string">"forwardBtn"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//上一頁</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">back</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">window</span>.history.back();</span><br><span class="line">&#125;</span><br><span class="line">back.addEventListener(<span class="string">"click"</span>, back, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//下一頁</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">forward</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">window</span>.history.forward();</span><br><span class="line">&#125;</span><br><span class="line">foward.addEventListener(<span class="string">"click"</span>, forward, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
@@ -331,9 +331,9 @@
 <p>程式碼僅供對照，無法實現跳轉後功能。</p>
 </blockquote>
 <h2 id="列印功能"><a href="#列印功能" class="headerlink" title="列印功能"></a>列印功能</h2><p>寫一個列印按鈕，並綁定 <code>id</code> 寫入列印語法:</p>
-<h3 id="HTML-1"><a href="#HTML-1" class="headerlink" title="HTML"></a>HTML</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">id</span>=<span class="string">"print"</span> <span class="attr">value</span>=<span class="string">"列印"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="html"><a href="#html" class="headerlink" title="html"></a>html</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">id</span>=<span class="string">"print"</span> <span class="attr">value</span>=<span class="string">"列印"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"print"</span>).onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">window</span>.print();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"print"</span>).onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">window</span>.print();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>codepen: <a href="https://codepen.io/hnzxewqw/pen/bGdrwLq" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/bGdrwLq</a></p>
 <h2 id="innerHeight-outerHeight-動態擷取瀏覽器高度"><a href="#innerHeight-outerHeight-動態擷取瀏覽器高度" class="headerlink" title="innerHeight, outerHeight 動態擷取瀏覽器高度"></a>innerHeight, outerHeight 動態擷取瀏覽器高度</h2><p>innerHeight 指的可見的瀏覽器範圍，如下圖紅框處:</p>
@@ -341,7 +341,7 @@
 <p>outerHeight 指的是整個瀏覽器範圍，如下圖:</p>
 <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/outerHeight.png?alt=media&token=e94189dd-dd79-410a-856a-88e876d6ff5d" alt="outerHeight"></p>
 <p>如果要讓網頁圖片，不管是什麼尺寸的瀏覽器，都可以滿版呈現，可以這樣寫:</p>
-<h3 id="HTML-2"><a href="#HTML-2" class="headerlink" title="HTML"></a>HTML</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pic"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"section2"</span>&gt;</span>section2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>lorem150<span class="tag">&lt;/<span class="name">p</span>&gt;</span> //文字長度部分用數字代替，避免版面過長</span><br></pre></td></tr></table></figure>
+<h3 id="html-1"><a href="#html-1" class="headerlink" title="html"></a>html</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pic"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"section2"</span>&gt;</span>section2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>lorem150<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">//文字長度部分用數字代替，避免版面過長</span><br></pre></td></tr></table></figure>
 
 <p>綁定 <code>.pic</code> 後，動態修改 CSS 的高度樣式(覆蓋原本的數值)，讓瀏覽器的 <code>innerHeight</code> 給予當前數值，並且後面要加上單位 <code>&#39;px&#39;</code>，這樣圖片就會變成滿版了。</p>
 <h3 id="JavaScript-1"><a href="#JavaScript-1" class="headerlink" title="JavaScript"></a>JavaScript</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">".pic"</span>).style.height = <span class="built_in">window</span>.innerHeight + <span class="string">"px"</span>;</span><br></pre></td></tr></table></figure>
@@ -375,13 +375,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/javascript/20201026/3745026985/" rel="prev" title="JS 筆記 - 做一個 TodoList">
-      <i class="fa fa-chevron-left"></i> JS 筆記 - 做一個 TodoList
+    <a href="/vue-js/20201031/2004839907/" rel="prev" title="Vue 全家桶系列 - 古早味事件燉畫面綁定">
+      <i class="fa fa-chevron-left"></i> Vue 全家桶系列 - 古早味事件燉畫面綁定
     </a></div>
-      <div class="post-nav-item">
-    <a href="/javascript/20201030/52463831/" rel="next" title="JS 筆記 - 使用 postman 編輯通訊 API">
-      JS 筆記 - 使用 postman 編輯通訊 API <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -448,7 +445,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BOM-是什麼"><span class="nav-number">1.</span> <span class="nav-text">BOM 是什麼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什麼是-Window"><span class="nav-number">2.</span> <span class="nav-text">什麼是 Window</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用的-window-功能"><span class="nav-number">3.</span> <span class="nav-text">常用的 window 功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#當前瀏覽器尺寸-screen"><span class="nav-number">3.1.</span> <span class="nav-text">當前瀏覽器尺寸 screen</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#當前瀏覽的網址"><span class="nav-number">3.2.</span> <span class="nav-text">當前瀏覽的網址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#當前瀏覽器相關資訊"><span class="nav-number">3.3.</span> <span class="nav-text">當前瀏覽器相關資訊</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上一頁與下一頁的功能"><span class="nav-number">4.</span> <span class="nav-text">上一頁與下一頁的功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML"><span class="nav-number">4.1.</span> <span class="nav-text">HTML</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列印功能"><span class="nav-number">5.</span> <span class="nav-text">列印功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML-1"><span class="nav-number">5.1.</span> <span class="nav-text">HTML</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JavaScript"><span class="nav-number">5.1.1.</span> <span class="nav-text">JavaScript</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#innerHeight-outerHeight-動態擷取瀏覽器高度"><span class="nav-number">6.</span> <span class="nav-text">innerHeight, outerHeight 動態擷取瀏覽器高度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML-2"><span class="nav-number">6.1.</span> <span class="nav-text">HTML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript-1"><span class="nav-number">6.2.</span> <span class="nav-text">JavaScript</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BOM-是什麼"><span class="nav-number">1.</span> <span class="nav-text">BOM 是什麼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什麼是-Window"><span class="nav-number">2.</span> <span class="nav-text">什麼是 Window</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用的-window-功能"><span class="nav-number">3.</span> <span class="nav-text">常用的 window 功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#當前瀏覽器尺寸-screen"><span class="nav-number">3.1.</span> <span class="nav-text">當前瀏覽器尺寸 screen</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#當前瀏覽的網址"><span class="nav-number">3.2.</span> <span class="nav-text">當前瀏覽的網址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#當前瀏覽器相關資訊"><span class="nav-number">3.3.</span> <span class="nav-text">當前瀏覽器相關資訊</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上一頁與下一頁的功能"><span class="nav-number">4.</span> <span class="nav-text">上一頁與下一頁的功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML"><span class="nav-number">4.1.</span> <span class="nav-text">HTML</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列印功能"><span class="nav-number">5.</span> <span class="nav-text">列印功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#html"><span class="nav-number">5.1.</span> <span class="nav-text">html</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript"><span class="nav-number">5.2.</span> <span class="nav-text">JavaScript</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#innerHeight-outerHeight-動態擷取瀏覽器高度"><span class="nav-number">6.</span> <span class="nav-text">innerHeight, outerHeight 動態擷取瀏覽器高度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#html-1"><span class="nav-number">6.1.</span> <span class="nav-text">html</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript-1"><span class="nav-number">6.2.</span> <span class="nav-text">JavaScript</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -608,8 +605,8 @@
       DISQUS.reset({
         reload: true,
         config: {page: {
-            url: "https://hsuchihting.github.io/javascript/20201030/2987667911/",
-            identifier: "javascript/20201030/2987667911/",
+            url: "https://hsuchihting.github.io/javascript/20201108/2987667911/",
+            identifier: "javascript/20201108/2987667911/",
             title: "JS 筆記 - 認識 BOM"
           }
         }
