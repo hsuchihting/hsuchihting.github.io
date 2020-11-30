@@ -55,7 +55,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vue%20cover.png?alt&#x3D;media&amp;token&#x3D;5f8b5aa0-eb3e-4d21-a715-07c5442dafbc">
 <meta property="article:published_time" content="2020-09-21T04:21:53.000Z">
-<meta property="article:modified_time" content="2020-09-21T11:13:35.771Z">
+<meta property="article:modified_time" content="2020-11-30T14:22:47.914Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="vue.js">
 <meta name="twitter:card" content="summary">
@@ -240,10 +240,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2020-09-21 12:21:53 / 修改時間：19:13:35" itemprop="dateCreated datePublished" datetime="2020-09-21T12:21:53+08:00">2020-09-21</time>
+              <time title="創建時間：2020-09-21 12:21:53" itemprop="dateCreated datePublished" datetime="2020-09-21T12:21:53+08:00">2020-09-21</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-11-30 22:22:47" itemprop="dateModified" datetime="2020-11-30T22:22:47+08:00">2020-11-30</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -311,10 +317,10 @@
 <iframe height="265" style="width: 100%;" src="https://codepen.io/hnzxewqw/embed/QWNJEQL?height=265&theme-id=light&default-tab=js,result"></iframe>
 
 <p><code>emit</code> 是可以傳遞參數的，其參數就是 <code>this.counter</code>，也就是局部元件中的 counter 的值。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">             <span class="keyword">return</span> &#123;</span><br><span class="line">               counter: <span class="number">1</span></span><br><span class="line">             &#125;</span><br><span class="line">           &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">   counter: <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>但為了確保傳入的值為<strong>數字型別</strong>，所以外面使用 Number 將 this.counter 包起來。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">             incrementCounter()&#123;</span><br><span class="line">               this.$emit(&#39;increment&#39;Number(this.counter));</span><br><span class="line">             &#125;</span><br><span class="line">           &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">  incrementCounter()&#123;</span><br><span class="line">     <span class="keyword">this</span>.$emit(<span class="string">'increment'</span><span class="built_in">Number</span>(<span class="keyword">this</span>.counter));</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="改寫-Vue-物件實體"><a href="#改寫-Vue-物件實體" class="headerlink" title="改寫 Vue 物件實體"></a>改寫 Vue 物件實體</h2><p>如果在另一個按鈕要改變輸入的值，並將其值累加於父層上，在 Vue 物件實體的方法中，帶入參數 newNumber，在將原本累加的程式碼改寫成下方程式碼，就可以完成在子層設定的值，累加到父層上。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">"#app"</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    cash: <span class="number">300</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    incrementTotal(newNumber) &#123;</span><br><span class="line">      <span class="keyword">this</span>.cash = <span class="keyword">this</span>.cash + newNumber;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
