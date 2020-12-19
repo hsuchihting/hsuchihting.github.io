@@ -68,7 +68,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vueCli-12_%E5%B7%A5%E4%BD%9C%E5%8D%80%E5%9F%9F%201.png?alt&#x3D;media&amp;token&#x3D;4238ffea-3f4a-47be-bb6a-2187c9466e8a">
 <meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;vueCli-13.png?alt&#x3D;media&amp;token&#x3D;4a7a4db1-7697-41fa-b7b4-f30f0119eba2">
 <meta property="article:published_time" content="2020-04-04T06:28:04.000Z">
-<meta property="article:modified_time" content="2020-04-28T14:49:24.869Z">
+<meta property="article:modified_time" content="2020-12-19T13:13:10.545Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="vue.js">
 <meta property="article:tag" content="vue CLI">
@@ -262,7 +262,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-04-28 22:49:24" itemprop="dateModified" datetime="2020-04-28T22:49:24+08:00">2020-04-28</time>
+                <time title="修改時間：2020-12-19 21:13:10" itemprop="dateModified" datetime="2020-12-19T21:13:10+08:00">2020-12-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -313,16 +313,19 @@
 
 <p>我個人是使用 npm 比較習慣，所以我就輸入 npm 指令進行安裝，安裝完畢後再輸入下方指令確認版本號。</p>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue -V</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>注意：-V 的 V 要大寫，不然會跳錯，目前版本號為 <code>@vue/cli 4.2.3</code></p>
 </blockquote>
 <h3 id="開啟專案"><a href="#開啟專案" class="headerlink" title="開啟專案"></a>開啟專案</h3><p>首先開啟命令列或終端機，輸入</p>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue create [專案名稱]</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>也就是 vue create newProject，括弧不用打</p>
 </blockquote>
 <p>或者已經在專案目錄中了，那就輸入</p>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue create .</span><br></pre></td></tr></table></figure>
+
 <p>cli 就會提示你是否直接在這個目錄中建立專案，選擇 y，並選擇手動建立專案 (Manually select features)，如下圖。</p>
 <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vueCli-01.png?alt=media&token=f6b99f3b-4dc2-474f-bdcd-eecb95900e6f" alt="建立專案"></p>
 <h3 id="選擇套件"><a href="#選擇套件" class="headerlink" title="選擇套件"></a>選擇套件</h3><h4 id="常用套件選擇"><a href="#常用套件選擇" class="headerlink" title="常用套件選擇"></a>常用套件選擇</h4><p>選 Babel、Vuex、CSS Pre-processors 以及 Linter / Formatter。</p>
@@ -332,7 +335,7 @@
 <h4 id="選擇規範"><a href="#選擇規範" class="headerlink" title="選擇規範"></a>選擇規範</h4><p>此範例我們選 SASS 與 ESLint + Airbnb config，當然也可以按照自己習慣調整。</p>
 <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vueCli-04.png?alt=media&token=250a1ec3-c6e0-4d67-9e3a-9a02be4c5de7" alt="選擇規範"></p>
 <blockquote>
-<p>開發若使用此功能，就會很容易陰部符合規範時一直跳錯，是滿煩的，但為了工作上的 coding style 其實還是有必要的。</p>
+<p>開發若使用此功能，就會很容易程式碼不符合規範時一直跳錯，是滿煩的，但為了工作上的 coding style 其實還是有必要的。</p>
 </blockquote>
 <h4 id="Lint-存檔"><a href="#Lint-存檔" class="headerlink" title="Lint 存檔"></a>Lint 存檔</h4><p>只以這次為主。</p>
 <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vueCli-05.png?alt=media&token=dc9e47e0-f121-4bde-9e7a-7487cdcddc58" alt="Lint"></p>
@@ -356,8 +359,8 @@
 <li>JavaScript</li>
 <li>CSS</li>
 </ul>
-<p>這三個部分，分別由 <code>&lt;template&gt;</code>  、  <code>&lt;script&gt;</code>  與 <code>&lt;style&gt;</code> 這三個標籤來表示。</p>
-<p>而 <code>.vue</code> 檔案也可以透過 <code>import</code> 其他 <code>.vue</code>  檔案，來將其他 component 引入作為自己的子元件。</p>
+<p>這三個部分，分別由 <code>&lt;template&gt;</code> 、 <code>&lt;script&gt;</code> 與 <code>&lt;style&gt;</code> 這三個標籤來表示。</p>
+<p>而 <code>.vue</code> 檔案也可以透過 <code>import</code> 其他 <code>.vue</code> 檔案，來將其他 component 引入作為自己的子元件。</p>
 <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/vueCli-13.png?alt=media&token=4a7a4db1-7697-41fa-b7b4-f30f0119eba2" alt="components"></p>
 
     </div>
