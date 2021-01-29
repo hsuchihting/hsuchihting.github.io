@@ -55,7 +55,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1444080748397-f442aa95c3e5?ixid&#x3D;MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib&#x3D;rb-1.2.1&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1490&amp;q&#x3D;80">
 <meta property="article:published_time" content="2021-01-28T06:19:58.000Z">
-<meta property="article:modified_time" content="2021-01-28T13:31:03.277Z">
+<meta property="article:modified_time" content="2021-01-29T03:28:58.001Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
@@ -240,10 +240,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2021-01-28 14:19:58 / 修改時間：21:31:03" itemprop="dateCreated datePublished" datetime="2021-01-28T14:19:58+08:00">2021-01-28</time>
+              <time title="創建時間：2021-01-28 14:19:58" itemprop="dateCreated datePublished" datetime="2021-01-28T14:19:58+08:00">2021-01-28</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-01-29 11:28:58" itemprop="dateModified" datetime="2021-01-29T11:28:58+08:00">2021-01-29</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -292,19 +298,19 @@
 
 <h2 id="先解一個"><a href="#先解一個" class="headerlink" title="先解一個"></a>先解一個</h2><p>看到題目我第一時間反應是我不會解到第 10 個，那我解一個試看看，如果印得出一個，應該就可以印出 10 個。</p>
 <p>看規則應該是要使用迴圈，然後印出來，所以想到這樣。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> n = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= n.length; i++) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"*"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"*"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>沒錯，會跑 10 次的一顆星星。</p>
 <p>前一篇有說如果還不知道怎麼做，就先用<a href="https://hsuchihting.github.io/javascript/20210128/4033691106/">函式填空法</a>。</p>
 <p>所以先填起來，如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> n = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= n.length; i++) &#123;</span><br><span class="line">  printStar(i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printStar</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//todo</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++) &#123;</span><br><span class="line">  printStar(i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printStar</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//todo</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="印出-10-個星星"><a href="#印出-10-個星星" class="headerlink" title="印出 10 個星星"></a>印出 10 個星星</h2><ul>
 <li>要依序找出 10 個星星，也是要用迴圈的方法來做，並且起始數字為 1，因為 n=1 要印出一個。</li>
 <li>讓其跑回圈印出星星，並且加總讓每次數字跟星星的數量相同。</li>
 <li>印出星星。</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printStar</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> s = <span class="string">""</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">    s += <span class="string">"*"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printStar</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> star = <span class="string">""</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">    star += <span class="string">"*"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(star);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Demo： <a href="https://codepen.io/hnzxewqw/pen/ZEBzXmm?editors=1112" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/ZEBzXmm?editors=1112</a></p>
 <h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ol>
