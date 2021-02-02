@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="信用卡驗證的題目怎麼寫?">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 筆記 - 信用卡驗證">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;javascript&#x2F;20210202&#x2F;711211859&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="信用卡驗證的題目怎麼寫?">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1589758438368-0ad531db3366?ixid&#x3D;MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib&#x3D;rb-1.2.1&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1489&amp;q&#x3D;80">
+<meta property="article:published_time" content="2021-02-02T09:29:53.000Z">
+<meta property="article:modified_time" content="2021-02-02T09:30:56.172Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1589758438368-0ad531db3366?ixid&#x3D;MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib&#x3D;rb-1.2.1&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1489&amp;q&#x3D;80">
+
+<link rel="canonical" href="https://hsuchihting.github.io/javascript/20210202/711211859/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>JS 筆記 - 信用卡驗證 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/javascript/20210202/711211859/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          JS 筆記 - 信用卡驗證
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-02-02 17:29:53 / 修改時間：17:30:56" itemprop="dateCreated datePublished" datetime="2021-02-02T17:29:53+08:00">2021-02-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/javascript/20210202/711211859/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="javascript/20210202/711211859/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">信用卡驗證的題目怎麼寫?</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://images.unsplash.com/photo-1589758438368-0ad531db3366?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1489&q=80" alt="credit card"></p>
+<p>在一般消費平台會需要刷卡，並要填入信用卡單，再填寫第一欄的時候會發現卡片會自己辨識是屬於哪類的信用卡，有 Master Card，VISA，JCB，美國運通卡號只有 15 碼，不再這次驗證範圍。這次剛好在課程中學到信用卡驗證器，就來依照條件實作看看吧！</p>
+<h2 id="信用卡號產生器"><a href="#信用卡號產生器" class="headerlink" title="信用卡號產生器"></a>信用卡號產生器</h2><p>可自行輸入信用卡 16 碼，或是用<a href="https://saijogeorge.com/dummy-credit-card-generator/" target="_blank" rel="noopener">產生器</a>。</p>
+<h2 id="信用卡驗證流程"><a href="#信用卡驗證流程" class="headerlink" title="信用卡驗證流程"></a>信用卡驗證流程</h2><ol>
+<li>從左邊算起來的第一個數字為發卡行，Master Card 是 5 開頭，Visa 是 4，JCB 則是 3。</li>
+<li>前 15 位數經過加權後加總，會得出一個數字，先把這數字除以 10 取餘數，如果結果是 0，那檢查碼就是 0，否則就是用 10 減去之後的結果。</li>
+<li>權重的部分你可以這樣記：<ul>
+<li>左邊數起奇數位是 <code>*2</code>。</li>
+<li>偶數位是 <code>*1</code>。</li>
+<li>若是在計算的過程中某一位數加權後的結果比 10 大，那請減去 9。<blockquote>
+<p>舉例來說，5412-3456-7890-1232 這個卡號的第一位是 5，代表這是 MasterCard 的卡。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="奇數位加總"><a href="#奇數位加總" class="headerlink" title="奇數位加總"></a>奇數位加總</h3><ul>
+<li>奇數位加總為：<code>5*2</code> + <code>1*2</code> + <code>3*2</code> + <code>5*2</code> + <code>7*2</code> + <code>9*2</code> + <code>1*2</code> + <code>3*2</code>，原本應該是：10 + 2 + 6 + 10 + 14 + 18 + 2 + 6。</li>
+<li>前面有說過「如果比 10 大，請減去 9」，所以就是 1(10-9) + 2 + 6 + 1(10-9) + 5(14-9) + 9(18-9) + 2 + 6 = 32。</li>
+</ul>
+<h3 id="偶數位加總"><a href="#偶數位加總" class="headerlink" title="偶數位加總"></a>偶數位加總</h3><ul>
+<li>偶數位加總為：4 + 2 + 4 + 6 + 8 + 0 + 2 = 26，乘以 1 之後還是 26。<blockquote>
+<p>第 16 碼檢查碼，不用算進偶數列。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="卡片是否可用"><a href="#卡片是否可用" class="headerlink" title="卡片是否可用"></a>卡片是否可用</h3><p>把 32 跟 26 相加，得到 58，<code>58 % 10 = 8</code>，因此檢查碼就是 <code>10-8 = 2</code>，而卡號的第 16 碼也是 2，因此這個卡號是沒有問題的。</p>
+<h2 id="任務需求"><a href="#任務需求" class="headerlink" title="任務需求"></a>任務需求</h2><h3 id="輸入信用卡號"><a href="#輸入信用卡號" class="headerlink" title="輸入信用卡號"></a>輸入信用卡號</h3><p>輸入為一個信用卡卡號，皆為 16 碼，每 4 碼以 <code>-</code> 做為分隔。<br>EX. 5412-3456-7890-1232</p>
+<h3 id="輸出"><a href="#輸出" class="headerlink" title="輸出"></a>輸出</h3><p>若是信用卡不合法，請輸出 INVALID，合法則輸出信用卡的發卡行，只會有 VISA 與 MASTER CARD 兩種結果。</p>
+<h2 id="實作信用卡驗證架構"><a href="#實作信用卡驗證架構" class="headerlink" title="實作信用卡驗證架構"></a>實作信用卡驗證架構</h2><p>所使用的卡號為 <code>5412-3456-7890-1232</code><br>首先，觀察到信用卡號中間的 dash 符號，在計算時是不需要出現的。<br>所以可以先給一個變數存卡片號碼，並使用 reduce 方法把 dash 的內容拿掉，這樣之後才能加總。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> cardNum = <span class="string">"5412-3456-7890-1232"</span>;</span><br><span class="line"><span class="keyword">let</span> newCardNum = cardNum.replace(<span class="string">"5412-3456-7890-1232"</span>, <span class="string">"5412345678901232"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(newCardNum); <span class="comment">//5412345678901232</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="奇偶數加總、取出奇偶數"><a href="#奇偶數加總、取出奇偶數" class="headerlink" title="奇偶數加總、取出奇偶數"></a>奇偶數加總、取出奇偶數</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//奇偶數相加</span></span><br><span class="line"><span class="keyword">let</span> sum = evenNum(newCardNum) + oddNum(newCardNum);</span><br><span class="line"></span><br><span class="line"><span class="comment">//偶數位加總</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">evenNum</span>(<span class="params">newCardNum</span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//奇數位加總</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">oddNum</span>(<span class="params">newCardNum</span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="加權後的數字"><a href="#加權後的數字" class="headerlink" title="加權後的數字"></a>加權後的數字</h3><p>題目有提到，前 15 位數經過加權後加總，會得出一個數字，先把這數字除以 10 取餘數，如果結果是 0，那檢查碼就是 0，否則就是用 10 減去之後的結果，這一段文字可以先改成步驟來寫。</p>
+<ol>
+<li><code>resultNum = sum % 10;</code></li>
+<li>如果 <code>resultNum = 0;</code></li>
+<li><code>檢查碼 = resultNum;</code></li>
+<li>否則就是<code>resultNum = 10-resultNum;</code></li>
+</ol>
+<p>可是步驟這樣寫有點難變成虛擬碼，可以換個角度來想，</p>
+<ol>
+<li><code>resultNum = sum % 10;</code></li>
+<li>如果 <code>resultNum !=0;</code></li>
+<li>是 <code>resultNum = 10-resultNum;</code></li>
+</ol>
+<p>這樣就可以試著改成程式碼，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> resultNum = sum % <span class="number">10</span>;</span><br><span class="line"><span class="keyword">if</span> (resultNum != <span class="number">0</span>) &#123;</span><br><span class="line">  resultNum = <span class="number">10</span> - resultNum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="判斷驗證是否成功架構"><a href="#判斷驗證是否成功架構" class="headerlink" title="判斷驗證是否成功架構"></a>判斷驗證是否成功架構</h2><ol>
+<li>第 16 碼是檢查碼，如果與檢查碼不符，就是 INVALID。</li>
+<li>如果第一碼是 5 就是 MASTER CARD，不然就是 VISA，為什麼沒有 JCB，因為這次任務只需要這兩種卡片。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (resultNum !== newCardNum[<span class="number">15</span>] * <span class="number">1</span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"INVALID"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (card[<span class="number">0</span>] === <span class="string">"5"</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"MASTER CARD"</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"VISA"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>目前 console 出來的結果會是 INVALID，因為還沒奇偶數的運算。</p>
+<p>截至目前為止的架構已經寫好，不明確的地方都用<strong>函式填空法</strong>完成，完整程式碼如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> cardNum = <span class="string">"5412-3456-7890-1232"</span>;</span><br><span class="line"><span class="keyword">let</span> newCardNum = cardNum.replace(<span class="string">"5412-3456-7890-1232"</span>, <span class="string">"5412345678901232"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> sum = evenNum(newCardNum) + oddNum(newCardNum);</span><br><span class="line"><span class="keyword">let</span> resultNum = sum % <span class="number">10</span>;</span><br><span class="line"><span class="keyword">if</span> (resultNum != <span class="number">0</span>) &#123;</span><br><span class="line">  resultNum = <span class="number">10</span> - resultNum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (resultNum !== newCardNum[<span class="number">15</span>] * <span class="number">1</span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"INVALID"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (card[<span class="number">0</span>] === <span class="string">"5"</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"Master Card"</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"VISA"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//偶數位加總</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">evenNum</span>(<span class="params">newCardNum</span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//奇數位加總</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">oddNum</span>(<span class="params">newCardNum</span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>if (resultNum !== newCardNum[15] * 1)</code> 跟 <code>if (resultNum !== Number(newCardNum[15]) )</code> 都是把<strong>字串轉成數字</strong>的方式。</p>
+</blockquote>
+<h2 id="奇偶數列運算實作"><a href="#奇偶數列運算實作" class="headerlink" title="奇偶數列運算實作"></a>奇偶數列運算實作</h2><p>目前得到的卡號： <code>5412345678901232</code>。</p>
+<h3 id="先做簡單的偶數列"><a href="#先做簡單的偶數列" class="headerlink" title="先做簡單的偶數列"></a>先做簡單的偶數列</h3><ol>
+<li>因為偶數位比較單純，所以先來做偶數位，觀察數列，偶數位從第 1 個開始。(程式式從第 0 位開始)。</li>
+<li>看到要取順序，就要想到用 for 迴圈，並且偶數最末位為第 14 個，數列為第 13 個。</li>
+<li>因為要跳兩位取得數字，故要 i+=2。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">evenNum</span>(<span class="params">newCardNum</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> sum = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= <span class="number">13</span>; i += <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> resultNum = <span class="built_in">Number</span>(newCardNum[i]);</span><br><span class="line">    sum += resultNum;</span><br><span class="line">    <span class="built_in">console</span>.log(sum); <span class="comment">//4 2 4 6 8 0 2</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>步驟說明：</p>
+<ol>
+<li>先設定偶數數列總數 sum 起始為 0。</li>
+<li>並且數列長度小於等於 13 個數列，並透過 i+=2 取得偶數列的數字。</li>
+<li>sum 會依序跑 newCardNum 的每個數字，跑到偶數列就存到 sum 的變數中。</li>
+<li>確認 console 結果為預期。</li>
+<li>回傳到 sum。</li>
+</ol>
+<h3 id="奇數列加總實作"><a href="#奇數列加總實作" class="headerlink" title="奇數列加總實作"></a>奇數列加總實作</h3><ol>
+<li>與偶數列方法雷同，所以把偶數函式中的方法先複製到奇數列的函式內。</li>
+<li>奇數列從第 0 個開始，最後一碼是第 15 個。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">oddNum</span>(<span class="params">newCardNum</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> sum = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt;= <span class="number">15</span>; i += <span class="number">2</span>) &#123;</span><br><span class="line">    sum = <span class="built_in">Number</span>(newCardNum[i]);</span><br><span class="line">    <span class="built_in">console</span>.log(sum); <span class="comment">// 5 1 3 5 7 9 1 3</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>題目有提到奇數列有加權重(數字*2)，大於 10 的話要減 9，這邊的程式碼要加上運算。</li>
+<li>把運算結果回傳給 sum。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">oddNum</span>(<span class="params">newCardNum</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> sum = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt;= <span class="number">15</span>; i += <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> resultNum = <span class="built_in">Number</span>(newCardNum[i]);</span><br><span class="line">    <span class="keyword">if</span> (resultNum &gt;= <span class="number">10</span>) &#123;</span><br><span class="line">      resultNum -= <span class="number">9</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    sum += resultNum;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="驗證一下-sum-的結果"><a href="#驗證一下-sum-的結果" class="headerlink" title="驗證一下 sum 的結果"></a>驗證一下 sum 的結果</h3><p>驗證結果如下，是如預期的結果。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> sum = evenNum(newCardNum) + oddNum(newCardNum);</span><br><span class="line"><span class="built_in">console</span>.log(evenNum(newCardNum)); <span class="comment">//26</span></span><br><span class="line"><span class="built_in">console</span>.log(oddNum(newCardNum)); <span class="comment">//32</span></span><br><span class="line"><span class="built_in">console</span>.log(sum); <span class="comment">//58</span></span><br></pre></td></tr></table></figure>
+
+<p>最終答案會是 MASTER CARD。</p>
+<h2 id="完整程式碼與-Demo"><a href="#完整程式碼與-Demo" class="headerlink" title="完整程式碼與 Demo"></a>完整程式碼與 Demo</h2><p>DEMO: <a href="https://codepen.io/hnzxewqw/pen/LYbVjpN?editors=1111" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/LYbVjpN?editors=1111</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> cardNum = <span class="string">"5412-3456-7890-1232"</span>;</span><br><span class="line"><span class="keyword">let</span> newCardNum = cardNum.replace(<span class="string">"5412-3456-7890-1232"</span>, <span class="string">"5412345678901232"</span>);</span><br><span class="line"><span class="keyword">let</span> sum = evenNum(newCardNum) + oddNum(newCardNum);</span><br><span class="line"><span class="keyword">let</span> resultNum = sum % <span class="number">10</span>;</span><br><span class="line"><span class="keyword">if</span> (resultNum != <span class="number">0</span>) &#123;</span><br><span class="line">  resultNum = <span class="number">10</span> - resultNum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (resultNum !== newCardNum[<span class="number">15</span>] * <span class="number">1</span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"INVALID"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (newCardNum[<span class="number">0</span>] === <span class="string">"5"</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"MASTER CARD"</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"VISA"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//偶數位加總</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">evenNum</span>(<span class="params">newCardNum</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> sum = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= <span class="number">13</span>; i += <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> resultNum = <span class="built_in">Number</span>(newCardNum[i]);</span><br><span class="line">    sum += resultNum;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//奇數位加總</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">oddNum</span>(<span class="params">newCardNum</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> sum = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt;= <span class="number">15</span>; i += <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> resultNum = <span class="built_in">Number</span>(newCardNum[i]) * <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (resultNum &gt;= <span class="number">10</span>) &#123;</span><br><span class="line">      resultNum -= <span class="number">9</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    sum += resultNum;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><ol>
+<li>先把需求架構寫出來，不要急著寫答案。</li>
+<li>利用函式填空法專注於程式邏輯的編寫。</li>
+<li>透過 <code>console.log</code> 把不確定的地方都印出來檢查是否與預期的相同。</li>
+</ol>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a href="https://lidemy.com/courses/793973/lectures/14637255" target="_blank" rel="noopener">先別急著寫 leetcode</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/javascript/20210129/1094387651/" rel="prev" title="JS 筆記 - 簡化法 + 函式填空法實作九九乘法表">
+      <i class="fa fa-chevron-left"></i> JS 筆記 - 簡化法 + 函式填空法實作九九乘法表
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#信用卡號產生器"><span class="nav-number">1.</span> <span class="nav-text">信用卡號產生器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信用卡驗證流程"><span class="nav-number">2.</span> <span class="nav-text">信用卡驗證流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#奇數位加總"><span class="nav-number">2.1.</span> <span class="nav-text">奇數位加總</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#偶數位加總"><span class="nav-number">2.2.</span> <span class="nav-text">偶數位加總</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卡片是否可用"><span class="nav-number">2.3.</span> <span class="nav-text">卡片是否可用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任務需求"><span class="nav-number">3.</span> <span class="nav-text">任務需求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#輸入信用卡號"><span class="nav-number">3.1.</span> <span class="nav-text">輸入信用卡號</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#輸出"><span class="nav-number">3.2.</span> <span class="nav-text">輸出</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#實作信用卡驗證架構"><span class="nav-number">4.</span> <span class="nav-text">實作信用卡驗證架構</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#奇偶數加總、取出奇偶數"><span class="nav-number">4.1.</span> <span class="nav-text">奇偶數加總、取出奇偶數</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加權後的數字"><span class="nav-number">4.2.</span> <span class="nav-text">加權後的數字</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判斷驗證是否成功架構"><span class="nav-number">5.</span> <span class="nav-text">判斷驗證是否成功架構</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#奇偶數列運算實作"><span class="nav-number">6.</span> <span class="nav-text">奇偶數列運算實作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#先做簡單的偶數列"><span class="nav-number">6.1.</span> <span class="nav-text">先做簡單的偶數列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#奇數列加總實作"><span class="nav-number">6.2.</span> <span class="nav-text">奇數列加總實作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#驗證一下-sum-的結果"><span class="nav-number">6.3.</span> <span class="nav-text">驗證一下 sum 的結果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完整程式碼與-Demo"><span class="nav-number">7.</span> <span class="nav-text">完整程式碼與 Demo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小結"><span class="nav-number">8.</span> <span class="nav-text">小結</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">9.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">208</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hsiangfeng.github.io/" title="https:&#x2F;&#x2F;hsiangfeng.github.io&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gretema.github.io/" title="https:&#x2F;&#x2F;gretema.github.io&#x2F;" rel="noopener" target="_blank">馬格蕾特的前端勇者日誌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wcc723.github.io/" title="https:&#x2F;&#x2F;wcc723.github.io&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/javascript/20210202/711211859/",
+            identifier: "javascript/20210202/711211859/",
+            title: "JS 筆記 - 信用卡驗證"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
