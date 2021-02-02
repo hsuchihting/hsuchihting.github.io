@@ -55,7 +55,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1589758438368-0ad531db3366?ixid&#x3D;MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib&#x3D;rb-1.2.1&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1489&amp;q&#x3D;80">
 <meta property="article:published_time" content="2021-02-02T09:29:53.000Z">
-<meta property="article:modified_time" content="2021-02-02T09:33:04.203Z">
+<meta property="article:modified_time" content="2021-02-02T11:18:37.543Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
@@ -242,7 +242,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2021-02-02 17:29:53 / 修改時間：17:33:04" itemprop="dateCreated datePublished" datetime="2021-02-02T17:29:53+08:00">2021-02-02</time>
+              <time title="創建時間：2021-02-02 17:29:53 / 修改時間：19:18:37" itemprop="dateCreated datePublished" datetime="2021-02-02T17:29:53+08:00">2021-02-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -311,7 +311,7 @@
 <h3 id="卡片是否可用"><a href="#卡片是否可用" class="headerlink" title="卡片是否可用"></a>卡片是否可用</h3><p>把 32 跟 26 相加，得到 58，<code>58 % 10 = 8</code>，因此檢查碼就是 <code>10-8 = 2</code>，而卡號的第 16 碼也是 2，因此這個卡號是沒有問題的。</p>
 <h2 id="任務需求"><a href="#任務需求" class="headerlink" title="任務需求"></a>任務需求</h2><h3 id="輸入信用卡號"><a href="#輸入信用卡號" class="headerlink" title="輸入信用卡號"></a>輸入信用卡號</h3><p>輸入為一個信用卡卡號，皆為 16 碼，每 4 碼以 <code>-</code> 做為分隔。<br>EX. 5412-3456-7890-1232</p>
 <h3 id="輸出"><a href="#輸出" class="headerlink" title="輸出"></a>輸出</h3><p>若是信用卡不合法，請輸出 INVALID，合法則輸出信用卡的發卡行，只會有 VISA 與 MASTER CARD 兩種結果。</p>
-<h2 id="實作信用卡驗證架構"><a href="#實作信用卡驗證架構" class="headerlink" title="實作信用卡驗證架構"></a>實作信用卡驗證架構</h2><p>所使用的卡號為 <code>5412-3456-7890-1232</code><br>首先，觀察到信用卡號中間的 dash 符號，在計算時是不需要出現的。<br>所以可以先給一個變數存卡片號碼，並使用 reduce 方法把 dash 的內容拿掉，這樣之後才能加總。</p>
+<h2 id="實作信用卡驗證架構"><a href="#實作信用卡驗證架構" class="headerlink" title="實作信用卡驗證架構"></a>實作信用卡驗證架構</h2><p>所使用的卡號為 <code>5412-3456-7890-1232</code><br>首先，觀察到信用卡號中間的 dash 符號，在計算時是不需要出現的。<br>所以可以先給一個變數存卡片號碼，並使用 replace 方法把 dash 的內容拿掉，這樣之後才能加總。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> cardNum = <span class="string">"5412-3456-7890-1232"</span>;</span><br><span class="line"><span class="keyword">let</span> newCardNum = cardNum.replace(<span class="string">"5412-3456-7890-1232"</span>, <span class="string">"5412345678901232"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(newCardNum); <span class="comment">//5412345678901232</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="奇偶數加總、取出奇偶數"><a href="#奇偶數加總、取出奇偶數" class="headerlink" title="奇偶數加總、取出奇偶數"></a>奇偶數加總、取出奇偶數</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//奇偶數相加</span></span><br><span class="line"><span class="keyword">let</span> sum = evenNum(newCardNum) + oddNum(newCardNum);</span><br><span class="line"></span><br><span class="line"><span class="comment">//偶數位加總</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">evenNum</span>(<span class="params">newCardNum</span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//奇數位加總</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">oddNum</span>(<span class="params">newCardNum</span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
@@ -321,7 +321,7 @@
 <li><code>resultNum = sum % 10;</code></li>
 <li>如果 <code>resultNum = 0;</code></li>
 <li><code>檢查碼 = resultNum;</code></li>
-<li>否則就是<code>resultNum = 10-resultNum;</code></li>
+<li>否則就是 <code>resultNum = 10-resultNum;</code></li>
 </ol>
 <p>可是步驟這樣寫有點難變成虛擬碼，可以換個角度來想，</p>
 <ol>
