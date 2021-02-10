@@ -55,7 +55,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;87pBpoJ.jpg">
 <meta property="article:published_time" content="2020-08-24T17:21:36.000Z">
-<meta property="article:modified_time" content="2020-09-18T03:06:11.539Z">
+<meta property="article:modified_time" content="2021-02-10T13:23:44.294Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="Angular">
 <meta name="twitter:card" content="summary">
@@ -248,7 +248,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-09-18 11:06:11" itemprop="dateModified" datetime="2020-09-18T11:06:11+08:00">2020-09-18</time>
+                <time title="修改時間：2021-02-10 21:23:44" itemprop="dateModified" datetime="2021-02-10T21:23:44+08:00">2021-02-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -289,7 +289,7 @@
 
       
         <p><img src="https://i.imgur.com/87pBpoJ.jpg" alt="angular"></p>
-<h2 id="基礎認識"><a href="#基礎認識" class="headerlink" title="基礎認識"></a>基礎認識</h2><p>屬性使用<strong>中括號</strong>包住，並等於一個陳述式，使用<strong>引號</strong>包住，EX. [屬性]=’陳述內容’。</p>
+<h2 id="基礎認識"><a href="#基礎認識" class="headerlink" title="基礎認識"></a>基礎認識</h2><p>屬性使用<strong>中括號</strong>包住，並等於一個陳述式，使用<strong>引號</strong>包住，EX. <code>[屬性]=&#39;陳述內容&#39;</code>。</p>
 <p>延續內嵌繫結來改寫，將 <code>href</code> 改成<strong>屬繫繫結</strong>，其值為 url，url 的值就是原本的連結內容。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> [<span class="attr">href</span>]=<span class="string">"url"</span>&gt;</span>屬性繫結<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -318,7 +318,7 @@
 <p>像是 <code>img</code>、<code>src</code>、<code>title</code>、<code>alt</code> 為標籤屬性，另外還有很常見的 <code>href</code>、<code>class</code>…等。</p>
 <h3 id="property"><a href="#property" class="headerlink" title="property"></a>property</h3><p>如果是想要看見 img 這個 DOM 元素底下有什麼屬性可以使用，所以屬於 JavaScript 底下的 property，可以透過開發人員工具中的 properties 找到許多這個 img 這個網頁元素可以使用的屬性，所以屬性繫結是綁定 DOM 元素底下可以使用的屬性，非 attribute。</p>
 <p>所以如果要用屬性繫結一樣的方法去綁定自定義的屬性名稱是沒有辦法的，因為會找不到，但是可以在前面加上一個 attr 就可以使用自定義的屬性囉!其值內容也可以從 component 而來。</p>
-<p>EX. <code>[attr.data-setName]=&#39;statement</code></p>
+<p>EX. <code>[attr.data-setName]=&#39;statement&#39;</code></p>
 
     </div>
 
