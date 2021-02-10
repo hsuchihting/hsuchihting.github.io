@@ -58,7 +58,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;e38WzPH.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;1mwsPdr.png">
 <meta property="article:published_time" content="2020-08-26T15:44:08.000Z">
-<meta property="article:modified_time" content="2020-09-01T13:39:19.876Z">
+<meta property="article:modified_time" content="2021-02-10T14:30:03.599Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="Angular">
 <meta name="twitter:card" content="summary">
@@ -251,7 +251,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-09-01 21:39:19" itemprop="dateModified" datetime="2020-09-01T21:39:19+08:00">2020-09-01</time>
+                <time title="修改時間：2021-02-10 22:30:03" itemprop="dateModified" datetime="2021-02-10T22:30:03+08:00">2021-02-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -342,8 +342,6 @@
 <li>private: 私有方法，只限於其物件下使用。</li>
 </ul>
 </blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">HomeComponent</span> <span class="title">implements</span> <span class="title">OnInit</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(public featureSvc: FeatureService) &#123;&#125;<span class="comment">// 一行解決</span></span><br><span class="line"></span><br><span class="line">  ngOnInit(): <span class="keyword">void</span> &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>透過 <code>ngOnInit()</code> 為例，要使用在 <code>service</code> 建立的方法會變這樣寫：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">HomeComponent</span> <span class="title">implements</span> <span class="title">OnInit</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(public featureSvc: FeatureService) &#123;&#125;<span class="comment">// 一行解決</span></span><br><span class="line"></span><br><span class="line">  ngOnInit(): <span class="keyword">void</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.featureSvc.run(); <span class="comment">// 呼叫在 service 建立的方法</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
