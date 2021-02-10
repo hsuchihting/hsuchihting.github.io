@@ -56,7 +56,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;8B8zeGR.jpg">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;SeC7Kjo.png">
 <meta property="article:published_time" content="2020-08-24T17:24:56.000Z">
-<meta property="article:modified_time" content="2020-08-25T16:34:32.024Z">
+<meta property="article:modified_time" content="2021-02-10T13:44:09.949Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="Angular">
 <meta name="twitter:card" content="summary">
@@ -249,7 +249,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-08-26 00:34:32" itemprop="dateModified" datetime="2020-08-26T00:34:32+08:00">2020-08-26</time>
+                <time title="修改時間：2021-02-10 21:44:09" itemprop="dateModified" datetime="2021-02-10T21:44:09+08:00">2021-02-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -291,7 +291,10 @@
       
         <p><img src="https://i.imgur.com/8B8zeGR.jpg" alt="合體"></p>
 <h2 id="基礎認識"><a href="#基礎認識" class="headerlink" title="基礎認識"></a>基礎認識</h2><p>雙向繫結簡單來說就是內嵌細節與屬性繫結的合體技，寫法為 EX. <code>[(ngModel)]=&quot;keyword&quot;</code>，外側為中括號，內側為小括號，裡面加上屬性，順序不能相反，若相反則無法執行。</p>
-<h2 id="同步綁定"><a href="#同步綁定" class="headerlink" title="同步綁定"></a>同步綁定</h2><p>倘若今天有一個表單，希望可以在表單輸入的時候同時改變資料內的值，或是當我改變 component 的資料時，同時改變表單內的值，可以這樣寫。</p>
+<h2 id="同步綁定"><a href="#同步綁定" class="headerlink" title="同步綁定"></a>同步綁定</h2><blockquote>
+<p>使用情境大多在表單</p>
+</blockquote>
+<p>倘若今天有一個表單，希望可以在表單輸入的時候同時改變資料內的值，或是當我改變 component 的資料時，同時改變表單內的值，可以這樣寫。</p>
 <h3 id="HTML-標籤"><a href="#HTML-標籤" class="headerlink" title="HTML 標籤"></a>HTML 標籤</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> [(<span class="attr">ngModel</span>)]=<span class="string">"keyword"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="component"><a href="#component" class="headerlink" title="component"></a>component</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Component &#125; <span class="keyword">from</span> <span class="string">"@angular/core"</span>;</span><br><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">  selector: <span class="string">"app-root"</span>,</span><br><span class="line">  templateUrl: <span class="string">"./app.component.html"</span>,</span><br><span class="line">  styleUrls: [<span class="string">"./app.component.scss"</span>],</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AppComponent</span> </span>&#123;</span><br><span class="line">  keyword = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>() &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -315,7 +318,7 @@
 <p>component 加入方法，在練習當下我只有在方法中輸入 keyword，Angular 就自動幫我加上 this。(太神奇了)</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Component &#125; <span class="keyword">from</span> <span class="string">"@angular/core"</span>;</span><br><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">  selector: <span class="string">"app-root"</span>,</span><br><span class="line">  templateUrl: <span class="string">"./app.component.html"</span>,</span><br><span class="line">  styleUrls: [<span class="string">"./app.component.scss"</span>],</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AppComponent</span> </span>&#123;</span><br><span class="line">  keyword = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>() &#123;&#125;</span><br><span class="line"></span><br><span class="line">  keywordReset() &#123;</span><br><span class="line">    <span class="keyword">this</span>.keyword = <span class="string">""</span>; <span class="comment">// 清空輸入框</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>雙向繫結方便規方便，但不是什麼情境都通用，因為在畫面與資料同步下效能會較低，如果網頁資料龐大，使用雙向繫結可能會變慢，不過也要看網頁設計而定。</p>
+<p>雙向繫結方便歸方便，大多使用在表單情境，因為在畫面與資料同步下效能會較低，如果網頁資料龐大，使用雙向繫結可能會變慢，不過也要看網頁設計而定。</p>
 
     </div>
 
