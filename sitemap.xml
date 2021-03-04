@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://hsuchihting.github.io/typescript/20210302/1513399276/</loc>
+    
+    <lastmod>2021-03-04T14:52:28.234Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hsuchihting.github.io/angular/20210304/1004423002/</loc>
+    
+    <lastmod>2021-03-04T14:52:02.729Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://hsuchihting.github.io/typescript/20210303/1114442971/</loc>
     
-    <lastmod>2021-03-03T14:08:17.140Z</lastmod>
+    <lastmod>2021-03-03T14:08:25.107Z</lastmod>
     
   </url>
   
@@ -12,13 +26,6 @@
     <loc>https://hsuchihting.github.io/css/20200711/1366382220/</loc>
     
     <lastmod>2021-03-02T14:26:24.119Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hsuchihting.github.io/typescript/20210302/1513399276/</loc>
-    
-    <lastmod>2021-03-02T14:23:37.921Z</lastmod>
     
   </url>
   
