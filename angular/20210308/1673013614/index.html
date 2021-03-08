@@ -55,7 +55,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;07vFnCj.jpg">
 <meta property="article:published_time" content="2021-03-08T13:53:23.000Z">
-<meta property="article:modified_time" content="2021-03-08T13:56:11.621Z">
+<meta property="article:modified_time" content="2021-03-08T13:59:05.973Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="Angular">
 <meta name="twitter:card" content="summary">
@@ -242,7 +242,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2021-03-08 21:53:23 / 修改時間：21:56:11" itemprop="dateCreated datePublished" datetime="2021-03-08T21:53:23+08:00">2021-03-08</time>
+              <time title="創建時間：2021-03-08 21:53:23 / 修改時間：21:59:05" itemprop="dateCreated datePublished" datetime="2021-03-08T21:53:23+08:00">2021-03-08</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -287,7 +287,7 @@
 <h2 id="form-起手式"><a href="#form-起手式" class="headerlink" title="form 起手式"></a>form 起手式</h2><p>Angular 包含了許多函式庫，form 表單便是其中之一，且官方文件還特別拉出一部分的篇幅來教學，可見表單元件的重要性。</p>
 <h3 id="引入表單相關模組"><a href="#引入表單相關模組" class="headerlink" title="引入表單相關模組"></a>引入表單相關模組</h3><p>先在 <code>app.module.ts</code> 引入表單相關模組，</p>
 <ul>
-<li>FormsModule,</li>
+<li>FormsModule</li>
 <li>ReactiveFormsModule</li>
 </ul>
 <p>再新增一個 form 資料夾裡面新增一組 <code>form.component</code>，form 有提供許多元件，起手式為：</p>
@@ -345,7 +345,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">form: FormGroup;</span><br></pre></td></tr></table></figure>
 
 <h2 id="取得表單的值"><a href="#取得表單的值" class="headerlink" title="取得表單的值"></a>取得表單的值</h2><p>使用一個按鈕並給予事件 <code>getFormValue()</code>，動態取得表單的控制元件值。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p-button (click)&#x3D;&quot;getFormValue()&quot;&gt;動態取得表單的控制元件值 &lt;&#x2F;p-button&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p-button</span> (<span class="attr">click</span>)=<span class="string">"getFormValue()"</span>&gt;</span>動態取得表單的控制元件值 <span class="tag">&lt;/<span class="name">p-button</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>事件中內寫入要查看的內容，</p>
 <p><strong>form.component.ts</strong></p>
