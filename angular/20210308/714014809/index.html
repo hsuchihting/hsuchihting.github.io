@@ -46,33 +46,22 @@
   };
 </script>
 
-  <meta name="description" content="建立一個 Angular CLI 專案骨架">
+  <meta name="description" content="使用表單取得陣列資料">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Angular 筆記 - Angular CLI 安裝與基本認識">
-<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;angular&#x2F;20200818&#x2F;419544592&#x2F;index.html">
+<meta property="og:title" content="Angular 筆記 - FormArray 表單實作">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;angular&#x2F;20210308&#x2F;714014809&#x2F;index.html">
 <meta property="og:site_name" content="TimCodingBlog">
-<meta property="og:description" content="建立一個 Angular CLI 專案骨架">
+<meta property="og:description" content="使用表單取得陣列資料">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;87pBpoJ.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;ZgObGRC.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;7DgBfAn.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;DzlojbC.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;9iwou7h.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;kyoDx7E.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;UDR7HLC.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;F59BJ1J.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;5FP6aza.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;p1OvLP2.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;NVvviCU.png">
-<meta property="article:published_time" content="2020-08-17T16:29:23.000Z">
-<meta property="article:modified_time" content="2021-02-03T02:45:50.096Z">
+<meta property="article:published_time" content="2021-03-08T14:22:15.000Z">
+<meta property="article:modified_time" content="2021-03-08T14:23:06.159Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="Angular">
-<meta property="article:tag" content="Angular CLI">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;87pBpoJ.jpg">
 
-<link rel="canonical" href="https://hsuchihting.github.io/angular/20200818/419544592/">
+<link rel="canonical" href="https://hsuchihting.github.io/angular/20210308/714014809/">
 
 
 <script id="page-configurations">
@@ -84,7 +73,7 @@
   };
 </script>
 
-  <title>Angular 筆記 - Angular CLI 安裝與基本認識 | TimCodingBlog</title>
+  <title>Angular 筆記 - FormArray 表單實作 | TimCodingBlog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
     <script>
@@ -229,7 +218,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/angular/20200818/419544592/">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/angular/20210308/714014809/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/2019Tim.jpg">
@@ -242,7 +231,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          Angular 筆記 - Angular CLI 安裝與基本認識
+          Angular 筆記 - FormArray 表單實作
         </h2>
 
         <div class="post-meta">
@@ -251,16 +240,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
+              
 
-              <time title="創建時間：2020-08-18 00:29:23" itemprop="dateCreated datePublished" datetime="2020-08-18T00:29:23+08:00">2020-08-18</time>
+              <time title="創建時間：2021-03-08 22:22:15 / 修改時間：22:23:06" itemprop="dateCreated datePublished" datetime="2021-03-08T22:22:15+08:00">2021-03-08</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-02-03 10:45:50" itemprop="dateModified" datetime="2021-02-03T10:45:50+08:00">2021-02-03</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -282,13 +265,13 @@
       </span>
       <span class="post-meta-item-text">Disqus：</span>
     
-    <a title="disqus" href="/angular/20200818/419544592/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="angular/20200818/419544592/" itemprop="commentCount"></span>
+    <a title="disqus" href="/angular/20210308/714014809/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="angular/20210308/714014809/" itemprop="commentCount"></span>
     </a>
   </span>
   
   
-            <div class="post-description">建立一個 Angular CLI 專案骨架</div>
+            <div class="post-description">使用表單取得陣列資料</div>
 
         </div>
       </header>
@@ -300,74 +283,30 @@
 
       
         <p><img src="https://i.imgur.com/87pBpoJ.jpg" alt="angular"></p>
-<h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><p>Angular 是 Google 開發出來一款開源 JavaScript 框架，用來開發單一頁面應用程式（single page application, SPA）。目前已經到 Angular 10 版本，預計今年 11 月還會有 11 的版本釋出 ，第一版正名為 AngularJS ，而第 2 版後稱為 Angular。兩者架構差異很大，簡單來說 AngularJS 本身有些缺點，後來受到 React 的刺激後，Angular 便被開發出來與之抗衡。</p>
-<p>Angular 採用 MVC 模式，涵蓋了 M、V、C/VM 等層面，不需要組合、評估其它技術就能完成大部分前端開發任務。這是因為她已經將各種技術封裝在框架中，隔離了瀏覽器的細節，讓你不用關心它的實現細節。此外所有需要使用的套件、模組 Angular 都已經幫你打包好了，不像是 React 或 Vue 要自己去架構模組。</p>
-<blockquote>
-<p><a href="https://url.joor.net/ckF" target="_blank" rel="noopener">引用內文</a></p>
+<p>承 <a href="https://hsuchihting.github.io/angular/20210308/1673013614/">Angular 筆記 - form 表單基礎實作</a> 還有另一個表單實作，就是 formArray。</p>
+<h2 id="formArrayName-指令"><a href="#formArrayName-指令" class="headerlink" title="formArrayName 指令"></a>formArrayName 指令</h2><ol>
+<li>一樣是在 <code>[formGroup] = &#39;form&#39;</code> 中實作。</li>
+<li>因為是陣列取值，所以要跑迴圈<blockquote>
+<p>tips: 看到陣列就要想到要跑迴圈的方法。</p>
 </blockquote>
-<h2 id="開發環境"><a href="#開發環境" class="headerlink" title="開發環境"></a>開發環境</h2><ul>
-<li>win10 64bit</li>
-<li>npm 6.12.1</li>
-<li>node.js v12.13.1</li>
-<li>Git 2.23.0.windows.1</li>
-<li>vscode 1.48.0 x64</li>
-</ul>
-<h2 id="安裝前準備"><a href="#安裝前準備" class="headerlink" title="安裝前準備"></a>安裝前準備</h2><p>使用 Angular 開發會需要安裝以下軟體：</p>
-<ul>
-<li>Node.js</li>
-<li>Git</li>
-<li>Visual Studio Code</li>
-</ul>
-<h2 id="建立-Angular-專案"><a href="#建立-Angular-專案" class="headerlink" title="建立 Angular 專案"></a>建立 Angular 專案</h2><ul>
-<li>新增一個資料夾。</li>
-<li>將路徑指向資料夾。<br><code>cd F:/angular</code></li>
-<li>透過 npm 安裝 Angular CLI，輸入：</li>
-</ul>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -g @angular/cli</span><br></pre></td></tr></table></figure>
+</li>
+<li>但因為 <code>nameArr</code> 並不是真的陣列，所以還是要套用 form 裡面的 <code>controls</code> 的屬性，才取得到值。</li>
+<li>為了給予序列，給予一個 <code>i</code> 變數存放 <code>index</code>。</li>
+<li>使用屬性繫結綁定 <code>formGroupName</code> 的指令，其值為序列的變數 <code>i</code>。</li>
+</ol>
+<p><strong>form.component.html</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> [<span class="attr">formGroup</span>]=<span class="string">"form"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">formArrayName</span>=<span class="string">"nameArr"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span></span></span><br><span class="line"><span class="tag">      <span class="attr">class</span>=<span class="string">"p-field"</span></span></span><br><span class="line"><span class="tag">      *<span class="attr">ngFor</span>=<span class="string">"let item of nameArr.controls; let i = index"</span></span></span><br><span class="line"><span class="tag">      [<span class="attr">formGroupName</span>]=<span class="string">"i"</span></span></span><br><span class="line"><span class="tag">    &gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span> firstKidName <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">pInputText</span> <span class="attr">formControlName</span>=<span class="string">"firstKidName"</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"></span><br><span class="line">      <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span> secondKidName <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">pInputText</span> <span class="attr">formControlName</span>=<span class="string">"secondKidName"</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="MAC"><a href="#MAC" class="headerlink" title="MAC"></a>MAC</h3><p>OS 後來改版後，目前遇到的狀況是，第一次建立 CLI，新增一個資料夾，然後要將指令改成</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo npm i -g @angular/cli</span><br></pre></td></tr></table></figure>
+<p><strong>form.component.ts</strong></p>
+<ol>
+<li>建立一個方法，並新增物件在 <code>nameArr</code> 的陣列中。</li>
+<li>使用 <code>FormBuilder</code> 中的 <code>group</code> 方法，是新增物件的語法。</li>
+<li>並在先前的表單中呼叫 <code>createFromArray</code> 的函式。</li>
+<li>取得 <code>nameArr</code> 的內容，使用 <code>get</code> 方法，讓其屬性的值與 <code>FormArray</code> 相符。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">get</span> nameArr() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.form.get(<span class="string">'nameArr'</span>) <span class="keyword">as</span> FormArray;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">createForm() &#123;</span><br><span class="line">    <span class="keyword">this</span>.form = <span class="keyword">this</span>.formBuilder.group(&#123;</span><br><span class="line">      formName: [&#123; <span class="attr">value</span>: <span class="string">'1111'</span>, <span class="attr">disabled</span>: <span class="literal">true</span> &#125;, Validators.required],</span><br><span class="line">      firstName: [<span class="string">''</span>, Validators.required],</span><br><span class="line">      lastName: [<span class="string">''</span>, Validators.required],</span><br><span class="line">      nameArr: <span class="keyword">this</span>.formBuilder.array([]),</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 驗證表單與觀察表單變數的狀態，類似 vue watch</span></span><br><span class="line">    <span class="keyword">this</span>.form.get(<span class="string">'formName'</span>).valueChanges.subscribe(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'value:'</span>, res);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">this</span>.createFormArray(); <span class="comment">//呼叫函式</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">createFormArray() &#123;</span><br><span class="line">    <span class="keyword">this</span>.nameArr.push(</span><br><span class="line">      <span class="keyword">this</span>.formBuilder.group(&#123;</span><br><span class="line">        firstKidName: <span class="string">'大哥'</span>,</span><br><span class="line">        secondKidName: <span class="string">'二哥'</span>,</span><br><span class="line">      &#125;)</span><br><span class="line">    );</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.nameArr);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>i 就是 install 的意思，-g 是全域 global 的意思。</p>
-</blockquote>
-<p>安裝後會出現以下訊息，輸入 <code>y</code>，就可以完成安裝，目前安裝版本為 10.0.6。</p>
-<p><img src="https://i.imgur.com/ZgObGRC.png" alt="ngInstall"></p>
-<p>確認是否安裝成功，輸入 <code>ng -v</code> 就會得到下方畫面，就代表安裝成功並告知我有什麼命令可以使用。</p>
-<p><img src="https://i.imgur.com/7DgBfAn.png" alt="angularVersion"></p>
-<h2 id="開發好用套件大補帖"><a href="#開發好用套件大補帖" class="headerlink" title="開發好用套件大補帖"></a>開發好用套件大補帖</h2><p>可以在 VSCode 擴充套件工具欄位中搜尋 angular，並在前幾名可以看到 Will 保哥開發的好用 Angular Extension Pack 套件。</p>
-<p><img src="https://i.imgur.com/DzlojbC.png" alt="will"></p>
-<p>如果是全新手要找 Angular 的開發套件，推薦可以使用此大補帖，便可以安裝基本所需的套件喔!已經有 11 萬下載人次了呢!</p>
-<h2 id="建立專案骨架"><a href="#建立專案骨架" class="headerlink" title="建立專案骨架"></a>建立專案骨架</h2><p>在剛剛建立好的目錄資料夾中，輸入以下指令：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ng new index</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>index 為專案名稱，可自訂義。</p>
-</blockquote>
-<p>輸入後會問兩個問題：</p>
-<p><img src="https://i.imgur.com/9iwou7h.png" alt="install"></p>
-<ul>
-<li>請問你想要新增 Angular Routor 嗎? Y</li>
-<li>哪個 stylesheet 是你想要使用的？SCSS</li>
-</ul>
-<blockquote>
-<p>CSS 我習慣用 SCSS 預處理器編譯。</p>
-</blockquote>
-<p>這時候看到骨架已經完成，但程式還在安裝，原因是 npm 正在做 install 的動作，安裝之後要開發的元件。</p>
-<p><img src="https://i.imgur.com/kyoDx7E.png" alt="install finish"></p>
-<p>在將資料夾放到 VScode 中，會看到專案已建立完成。</p>
-<p><img src="https://i.imgur.com/UDR7HLC.png" alt="project is complete"></p>
-<h2 id="如何確認專案建置成功"><a href="#如何確認專案建置成功" class="headerlink" title="如何確認專案建置成功"></a>如何確認專案建置成功</h2><p>因為剛剛我有新增專案名稱，所以要將路徑改成專案資料夾的名稱，<br><img src="https://i.imgur.com/F59BJ1J.png" alt="npmStart"></p>
-<p>剛剛看起來都建置完成，但如果跑不起來也是白搭，所以透過以下指令測試：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="built_in">start</span></span><br></pre></td></tr></table></figure>
-
-<p>輸入完後會自己跑 <code>npm serve</code>，這時候都不用做任何事情。</p>
-<h3 id="MAC-1"><a href="#MAC-1" class="headerlink" title="MAC"></a>MAC</h3><p>要先啟動 npm，所以要先跑 <code>npm install</code></p>
-<p><img src="https://i.imgur.com/5FP6aza.png" alt="question"></p>
-<p>跑完後會出現這段問題，就輸入 <code>y</code> 即可，跑一下子會得到一個 localhost 的位置，已下圖為例是 localhost:4200，把這段複製到網頁上即可。</p>
-<p><img src="https://i.imgur.com/p1OvLP2.png" alt="localhost"></p>
-<p>如果看到以下畫面，就代表建置成功了!!</p>
-<p><img src="https://i.imgur.com/NVvviCU.png" alt="complete"></p>
+<p>DEMO: <a href="https://stackblitz.com/edit/angular-ivy-kzcccj?embed=1&amp;file=src/app/app.component.ts" target="_blank" rel="noopener">https://stackblitz.com/edit/angular-ivy-kzcccj?embed=1&amp;file=src/app/app.component.ts</a></p>
 
     </div>
 
@@ -378,7 +317,6 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Angular/" rel="tag"># Angular</a>
-              <a href="/tags/Angular-CLI/" rel="tag"># Angular CLI</a>
           </div>
 
         
@@ -387,13 +325,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/javascript/20200813/289345854/" rel="prev" title="JS 筆記 - ES6： 箭頭函式與傳統函式之差異">
-      <i class="fa fa-chevron-left"></i> JS 筆記 - ES6： 箭頭函式與傳統函式之差異
+    <a href="/angular/20210308/1673013614/" rel="prev" title="Angular 筆記 - form 表單基礎實作">
+      <i class="fa fa-chevron-left"></i> Angular 筆記 - form 表單基礎實作
     </a></div>
-      <div class="post-nav-item">
-    <a href="/angular/20200819/2240445654/" rel="next" title="Angular 筆記 - 應用程式啟動流程">
-      Angular 筆記 - 應用程式啟動流程 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -460,7 +395,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#簡介"><span class="nav-number">1.</span> <span class="nav-text">簡介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#開發環境"><span class="nav-number">2.</span> <span class="nav-text">開發環境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安裝前準備"><span class="nav-number">3.</span> <span class="nav-text">安裝前準備</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立-Angular-專案"><span class="nav-number">4.</span> <span class="nav-text">建立 Angular 專案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MAC"><span class="nav-number">4.1.</span> <span class="nav-text">MAC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#開發好用套件大補帖"><span class="nav-number">5.</span> <span class="nav-text">開發好用套件大補帖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立專案骨架"><span class="nav-number">6.</span> <span class="nav-text">建立專案骨架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何確認專案建置成功"><span class="nav-number">7.</span> <span class="nav-text">如何確認專案建置成功</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MAC-1"><span class="nav-number">7.1.</span> <span class="nav-text">MAC</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#formArrayName-指令"><span class="nav-number">1.</span> <span class="nav-text">formArrayName 指令</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -620,9 +555,9 @@
       DISQUS.reset({
         reload: true,
         config: {page: {
-            url: "https://hsuchihting.github.io/angular/20200818/419544592/",
-            identifier: "angular/20200818/419544592/",
-            title: "Angular 筆記 - Angular CLI 安裝與基本認識"
+            url: "https://hsuchihting.github.io/angular/20210308/714014809/",
+            identifier: "angular/20210308/714014809/",
+            title: "Angular 筆記 - FormArray 表單實作"
           }
         }
       });
