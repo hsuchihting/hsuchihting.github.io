@@ -55,7 +55,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;f6TVlKd.jpg">
 <meta property="article:published_time" content="2021-03-13T15:05:09.000Z">
-<meta property="article:modified_time" content="2021-03-13T15:07:41.686Z">
+<meta property="article:modified_time" content="2021-03-14T12:49:26.121Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="Angular">
 <meta name="twitter:card" content="summary">
@@ -240,10 +240,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2021-03-13 23:05:09 / 修改時間：23:07:41" itemprop="dateCreated datePublished" datetime="2021-03-13T23:05:09+08:00">2021-03-13</time>
+              <time title="創建時間：2021-03-13 23:05:09" itemprop="dateCreated datePublished" datetime="2021-03-13T23:05:09+08:00">2021-03-13</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-03-14 20:49:26" itemprop="dateModified" datetime="2021-03-14T20:49:26+08:00">2021-03-14</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -308,7 +314,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  FormBuilder,</span><br><span class="line">  FormControl,</span><br><span class="line">  FormGroup,</span><br><span class="line">  Validators,</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">"@angular/forms"</span>;</span><br></pre></td></tr></table></figure>
 
 <h3 id="form-使用指令-formGroup"><a href="#form-使用指令-formGroup" class="headerlink" title="form 使用指令 formGroup"></a>form 使用指令 formGroup</h3><ol>
-<li>在 form 標籤使用屬性繫結<code>formGroup</code> 指令，其變數為 <code>invalidFrom</code>。</li>
+<li>在 form 標籤使用屬性繫結<code>formGroup</code> 指令，其變數為 <code>invalidForm</code>。</li>
 <li>input 中使用 <code>formControlName</code>，其變數為 <code>name</code>、<code>phone</code>、<code>password</code>。</li>
 </ol>
 <p><strong>validator.component.html</strong></p>
@@ -317,7 +323,7 @@
 <p><strong>validator.component.ts</strong></p>
 <ol>
 <li>因為有使用 <code>formControlName</code>，建立一個變數 <code>formName</code>，並建構一個 <code>formControl</code> 的物件，並預設為空值。</li>
-<li>自定義變數 <code>invalidFrom</code> 使用 Angular 內建的 <code>FromGroup</code> 的方法。</li>
+<li>自定義變數 <code>invalidForm</code> 使用 Angular 內建的 <code>FromGroup</code> 的方法。</li>
 </ol>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">formName = <span class="keyword">new</span> FormControl(<span class="string">""</span>);</span><br><span class="line">invalidForm: FormGroup;</span><br></pre></td></tr></table></figure>
 
@@ -341,7 +347,7 @@
 <h2 id="用-ngIf-將驗證提示寫在-html-中"><a href="#用-ngIf-將驗證提示寫在-html-中" class="headerlink" title="用 ngIf 將驗證提示寫在 html 中"></a>用 ngIf 將驗證提示寫在 html 中</h2><p>雖然完成了基本驗證功能，可是在使用者端還不會看到驗證提示，所以要來加上驗證提示，驗證提示出現在表單下方。</p>
 <p>用 <code>ngIf</code> 判斷如果有填寫才會做驗證的機制。</p>
 <h3 id="使用者名稱驗證提示"><a href="#使用者名稱驗證提示" class="headerlink" title="使用者名稱驗證提示"></a>使用者名稱驗證提示</h3><ol>
-<li>使用 Angular form 提供的 controls 的方法，要控制的欄位(<code>name</code>，<code>phone</code>，<code>password</code>) 的狀態如果是 <code>pristine</code> 驗證為不顯示，但有 errors 的狀態為 <code>required</code>。<blockquote>
+<li>使用 Angular form 提供的 <code>controls</code> 的方法，要控制的欄位(<code>name</code>，<code>phone</code>，<code>password</code>) 的狀態如果是 <code>pristine</code> 驗證為不顯示，但有 errors 的狀態為 <code>required</code>。<blockquote>
 <p><code>pristine</code> 的意思是未被改變過的</p>
 </blockquote>
 </li>
@@ -352,9 +358,11 @@
 
 <p><strong>phone</strong></p>
 <ol>
-<li>驗證錯誤的地方使用 hasError 的方式來寫，裡面只要放入剛剛在 TS 中寫好驗證條件即可，要是字串的形式才可以。</li>
-<li>因有兩個條件，所以使用兩段來呈現。</li>
-<li>雖然在 TS 的 <code>maxLength</code> 與 <code>minLength</code> 是用小駝峰的方式撰寫，但在 html 是全部小寫，這部分需要注意一下。</li>
+<li>驗證錯誤的地方使用 <code>hasError</code> 的方法來寫，裡面只要放入剛剛在 TS 中寫好驗證條件即可，要是字串的形式才可以。</li>
+<li>因有兩個條件，所以使用兩段來呈現。<blockquote>
+<p>雖然在 TS 的 <code>maxLength</code> 與 <code>minLength</code> 是用小駝峰的方式撰寫，但在 html 是全部小寫，這部分需要注意一下。</p>
+</blockquote>
+</li>
 </ol>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>使用者電話<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">formControlName</span>=<span class="string">"phone"</span> <span class="attr">pInputText</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">small</span></span></span><br><span class="line"><span class="tag">    <span class="attr">class</span>=<span class="string">"p-error"</span></span></span><br><span class="line"><span class="tag">    *<span class="attr">ngIf</span>=<span class="string">"</span></span></span><br><span class="line"><span class="tag"><span class="string">              !invalidForm.controls.phone.pristine &amp;&amp;</span></span></span><br><span class="line"><span class="tag"><span class="string">              invalidForm.controls.phone.errors?.required</span></span></span><br><span class="line"><span class="tag"><span class="string">            "</span></span></span><br><span class="line"><span class="tag">    &gt;</span>請輸入電話<span class="tag">&lt;/<span class="name">small</span></span></span><br><span class="line"><span class="tag">  &gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">small</span></span></span><br><span class="line"><span class="tag">    <span class="attr">class</span>=<span class="string">"p-error"</span></span></span><br><span class="line"><span class="tag">    *<span class="attr">ngIf</span>=<span class="string">"</span></span></span><br><span class="line"><span class="tag"><span class="string">              !invalidForm.controls.phone.pristine &amp;&amp;</span></span></span><br><span class="line"><span class="tag"><span class="string">              invalidForm.controls.phone.hasError('maxlength')</span></span></span><br><span class="line"><span class="tag"><span class="string">            "</span></span></span><br><span class="line"><span class="tag">    &gt;</span>電話長度不可大於 10 碼<span class="tag">&lt;/<span class="name">small</span></span></span><br><span class="line"><span class="tag">  &gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">small</span></span></span><br><span class="line"><span class="tag">    <span class="attr">class</span>=<span class="string">"p-error"</span></span></span><br><span class="line"><span class="tag">    *<span class="attr">ngIf</span>=<span class="string">"</span></span></span><br><span class="line"><span class="tag"><span class="string">              !invalidForm.controls.phone.pristine &amp;&amp;</span></span></span><br><span class="line"><span class="tag"><span class="string">              invalidForm.controls.phone.hasError('minlength')</span></span></span><br><span class="line"><span class="tag"><span class="string">            "</span></span></span><br><span class="line"><span class="tag">    &gt;</span>電話格式錯誤<span class="tag">&lt;/<span class="name">small</span></span></span><br><span class="line"><span class="tag">  &gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
