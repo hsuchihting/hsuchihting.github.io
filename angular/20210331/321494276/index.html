@@ -53,16 +53,15 @@
 <meta property="og:site_name" content="TimCodingBlog">
 <meta property="og:description" content="觸發 scroll 事件">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;87pBpoJ.jpg">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;KuRrQ0p.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;GzBQ8HD.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;QxGHLSp.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;7dJFIng.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;LyocWBz.png">
 <meta property="article:published_time" content="2021-03-31T14:41:37.000Z">
-<meta property="article:modified_time" content="2021-03-31T14:45:05.075Z">
+<meta property="article:modified_time" content="2021-03-31T14:56:18.904Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="Angular">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;87pBpoJ.jpg">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;KuRrQ0p.png">
 
 <link rel="canonical" href="https://hsuchihting.github.io/angular/20210331/321494276/">
 
@@ -245,7 +244,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2021-03-31 22:41:37 / 修改時間：22:45:05" itemprop="dateCreated datePublished" datetime="2021-03-31T22:41:37+08:00">2021-03-31</time>
+              <time title="創建時間：2021-03-31 22:41:37 / 修改時間：22:56:18" itemprop="dateCreated datePublished" datetime="2021-03-31T22:41:37+08:00">2021-03-31</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -285,8 +284,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><img src="https://i.imgur.com/87pBpoJ.jpg" alt="angular"></p>
-<p>在許多頁面，不管是註冊或是購買東西時，都會有落落長的授權頁，相信大部分的人都不會認真看，而有些機制就是要全部看完才能進行下一步，而這次紀錄如何知道 scroll 的觸發事件。</p>
+        <p>在許多頁面，不管是註冊或是購買東西時，都會有落落長的授權頁，相信大部分的人都不會認真看，而有些機制就是要全部看完才能進行下一步，而這次紀錄如何知道 scroll 的觸發事件。</p>
 <h2 id="文字區塊"><a href="#文字區塊" class="headerlink" title="文字區塊"></a>文字區塊</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"modal-dialog modal-dialog-scrollable privacy-box-2"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"modal-content"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"modal-body"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">cols</span>=<span class="string">"40"</span> <span class="attr">rows</span>=<span class="string">"20"</span>&gt;</span></span><br><span class="line">Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque alias obcaecati eligendi magni debitis ducimus</span><br><span class="line">        numquam. Omnis quia eveniet nisi praesentium asperiores dolore magni. Fugit aspernatur ipsa nulla! Rem hic, quo,</span><br><span class="line">        repellat quidem eligendi, maiores molestiae laudantium asperiores magnam architecto quaerat maxime nisi eaque</span><br><span class="line">        sint aliquid commodi excepturi neque voluptas. Harum ratione id iure atque voluptate natus, unde quisquam quod</span><br><span class="line">        veritatis nisi maxime tempora dolore qui laudantium itaque quam velit fugiat obcaecati ex eius, debitis</span><br><span class="line">        molestiae ea nemo? Repellat ratione exercitationem voluptate optio commodi voluptatem, corporis dolores, unde</span><br><span class="line">        quibusdam mollitia incidunt voluptatibus quis tempora. Quas ab vero molestias itaque repellat earum pariatur</span><br><span class="line">        ratione, aliquam natus qui obcaecati, praesentium ex cupiditate tempore ducimus harum voluptatem provident</span><br><span class="line">        exercitationem consectetur asperiores architecto facilis officiis non. Quo architecto saepe ipsa id amet quaerat</span><br><span class="line">        nam sunt dolorum, consectetur magnam commodi aperiam suscipit tempora labore libero, maiores a in quod iste?</span><br><span class="line">        Magni laudantium officia amet aspernatur, cupiditate ea cumque sed ipsa dolor iste qui ratione. Nemo quod,</span><br><span class="line">        officiis rerum quos facilis quae et consequuntur expedita vel quo atque ut repellat nihil ab voluptate quaerat</span><br><span class="line">        excepturi dolorem dolor aperiam deserunt? Doloremque corporis accusantium exercitationem sapiente consequatur</span><br><span class="line">        maiores minima nostrum fugit, consectetur illum. Amet laboriosam molestias soluta fugiat.<span class="tag">&lt;/<span class="name">textarea</span></span></span><br><span class="line"><span class="tag">      &gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="獲取事件"><a href="#獲取事件" class="headerlink" title="獲取事件"></a>獲取事件</h2><h3 id="HostListener-裝飾器"><a href="#HostListener-裝飾器" class="headerlink" title="HostListener 裝飾器"></a>HostListener 裝飾器</h3><p>以前在寫 jQuery 的時候可以綁定 DOM，Angular 可以透過 <code>@HostListener</code> 的裝飾器來實作用於宣告要監聽的 DOM 事件，並提供在該事件發生時要執行的處理器方法。</p>
@@ -309,7 +307,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@HostListener(<span class="string">'scroll'</span>, [<span class="string">'$event'</span>]) onElementScroll($event: any) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log($event); <span class="comment">//有監聽到事件</span></span><br><span class="line">      <span class="keyword">let</span> modal= <span class="keyword">this</span>.el.nativeElement;</span><br><span class="line">    <span class="built_in">console</span>.log(modal);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
 <p>看一下開發人員工具顯示，似乎是抓到了整個網頁…</p>
-<p><img src="https://i.imgur.com/GzBQ8HD.png" alt="printsc"></p>
+<p><img src="https://i.imgur.com/7dJFIng.png" alt="printsc"></p>
 <p>因為我只要抓到 <code>textarea</code> 的地方，所以我在這邊加上一個 <code>.scrollModal</code> 來抓取。</p>
 <p><strong>scroll.html</strong></p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"modal-body scrollModal"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">textarea</span>&gt;</span>...<span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -322,7 +320,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@HostListener(<span class="string">'scroll'</span>, [<span class="string">'$event'</span>]) onElementScroll($event: any) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log($event); <span class="comment">//有監聽到事件</span></span><br><span class="line">      <span class="keyword">let</span> modal= <span class="keyword">this</span>.el.nativeElement.querySelector(<span class="string">'.scrollModal'</span>);;</span><br><span class="line">    <span class="built_in">console</span>.log(modal);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
 <p>這時候會發現我取得我指定的區塊了！</p>
-<p><img src="https://i.imgur.com/QxGHLSp.png" alt="textarea"></p>
+<p><img src="https://i.imgur.com/LyocWBz.png" alt="textarea"></p>
 <p>DEMO <a href="https://stackblitz.com/edit/angular-ivy-scgz2d?embed=1&amp;file=src/app/app.component.html" target="_blank" rel="noopener">https://stackblitz.com/edit/angular-ivy-scgz2d?embed=1&amp;file=src/app/app.component.html</a></p>
 <h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
 <li><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/Element/scrollHeight" target="_blank" rel="noopener">Element.scrollHeight</a></li>
