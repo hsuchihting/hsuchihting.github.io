@@ -56,7 +56,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;tools.wingzero.tw&#x2F;assets&#x2F;upload&#x2F;1611643654838_0.jpg">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;9RtP50g.png">
 <meta property="article:published_time" content="2021-06-07T14:57:00.000Z">
-<meta property="article:modified_time" content="2021-06-07T14:58:45.005Z">
+<meta property="article:modified_time" content="2021-06-12T13:55:21.606Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="TailwindCSS">
 <meta name="twitter:card" content="summary">
@@ -241,10 +241,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2021-06-07 22:57:00 / 修改時間：22:58:45" itemprop="dateCreated datePublished" datetime="2021-06-07T22:57:00+08:00">2021-06-07</time>
+              <time title="創建時間：2021-06-07 22:57:00" itemprop="dateCreated datePublished" datetime="2021-06-07T22:57:00+08:00">2021-06-07</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-06-12 21:55:21" itemprop="dateModified" datetime="2021-06-12T21:55:21+08:00">2021-06-12</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -306,7 +312,7 @@
 <h2 id="Tailwind-是手機優先斷點寫法"><a href="#Tailwind-是手機優先斷點寫法" class="headerlink" title="Tailwind 是手機優先斷點寫法"></a>Tailwind 是手機優先斷點寫法</h2><p>跟 Bootstrap 一樣是從手機優先來規劃斷點的，以卡片為例，今天透過 Utility-first 的方式來撰寫三張卡片並排且加入斷點。Tailwind 不需要相依在元件之下，就可以寫出卡片效果以及斷點。</p>
 <p><img src="https://i.imgur.com/9RtP50g.png" alt="rwd"></p>
 <p>官方也提供明確的斷點寫法，只要在想要做斷點的前面加上斷點縮寫即可，例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img class&#x3D;&quot;w-16 md:w-32 lg:w-48&quot; src&#x3D;&quot;...&quot;&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"w-16 md:w-32 lg:w-48"</span> <span class="attr">src</span>=<span class="string">"..."</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>是不是跟 Bootstrap 有異曲同工之妙，但是我只要加在想要的 element 上面就好了，也不用加了很多 <code>.row</code> 跟 <code>.col</code>。</p>
 <h2 id="偽類也是一樣的方法"><a href="#偽類也是一樣的方法" class="headerlink" title="偽類也是一樣的方法"></a>偽類也是一樣的方法</h2><p>通常我們想要按鈕有點互動效果，一般 CSS 也會寫成：</p>
@@ -346,7 +352,10 @@
     <a href="/TailwindCSS/20210607/1535452451/" rel="prev" title="Tailwind CSS - CSS 傳統撰寫方式與功能優先的差異">
       <i class="fa fa-chevron-left"></i> Tailwind CSS - CSS 傳統撰寫方式與功能優先的差異
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/uncategorized/20210612/3636859470/" rel="next" title="tailwind-06">
+      tailwind-06 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -429,7 +438,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">231</span>
+          <span class="site-state-item-count">232</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
