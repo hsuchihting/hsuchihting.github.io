@@ -56,7 +56,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;tools.wingzero.tw&#x2F;assets&#x2F;upload&#x2F;1611643654838_0.jpg">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;9RtP50g.png">
 <meta property="article:published_time" content="2021-06-07T14:57:00.000Z">
-<meta property="article:modified_time" content="2021-06-12T13:55:21.606Z">
+<meta property="article:modified_time" content="2021-06-14T07:59:39.446Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="TailwindCSS">
 <meta name="twitter:card" content="summary">
@@ -249,7 +249,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-06-12 21:55:21" itemprop="dateModified" datetime="2021-06-12T21:55:21+08:00">2021-06-12</time>
+                <time title="修改時間：2021-06-14 15:59:39" itemprop="dateModified" datetime="2021-06-14T15:59:39+08:00">2021-06-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -294,7 +294,7 @@
 <h2 id="怎麼寫響應式斷點"><a href="#怎麼寫響應式斷點" class="headerlink" title="怎麼寫響應式斷點"></a>怎麼寫響應式斷點</h2><p>手刻響應式會使用下面的方式撰寫：</p>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@media query(max-width:XXXpx)&#123;</span><br><span class="line">/** 響應式內容 */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>甚至後來學 SCSS 的時候因為懶惰就另外寫了一個元件，每次只要引入元件，在使用 @include 想要的尺寸就好，可是前端的世界沒這麼好過，看看現在手機已經都快不像手機，都跟小電視一樣，尺寸亂七八糟什麼都有，各家手機也都規則不一。</p>
+<p>甚至後來學 SCSS 的時候因為懶惰就另外寫了一個元件，每次只要引入元件，在使用 <code>@include</code> 想要的尺寸就好，可是前端的世界沒這麼好過，看看現在手機已經都快不像手機，都跟小電視一樣，尺寸亂七八糟什麼都有，各家手機也都規則不一。</p>
 <h3 id="使用-Bootstrap-設定響應式"><a href="#使用-Bootstrap-設定響應式" class="headerlink" title="使用 Bootstrap 設定響應式"></a>使用 Bootstrap 設定響應式</h3><p>後來學了 Bootstrap 後，算是在響應式有得到一點救贖，只在響應式不用去想斷點，只要專心切板就好，我最常用的就是惱人的 <a href="https://bootstrap5.hexschool.com/docs/5.0/content/tables/" target="_blank" rel="noopener">table</a> 了。</p>
 <iframe height="265" style="width: 100%;" scrolling="no" title="Tailwind CSS example BS table" src="https://codepen.io/hnzxewqw/embed/oNZyWKd?height=265&theme-id=light&default-tab=html,result"></iframe>
 
@@ -314,7 +314,7 @@
 <p>官方也提供明確的斷點寫法，只要在想要做斷點的前面加上斷點縮寫即可，例如：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"w-16 md:w-32 lg:w-48"</span> <span class="attr">src</span>=<span class="string">"..."</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>是不是跟 Bootstrap 有異曲同工之妙，但是我只要加在想要的 element 上面就好了，也不用加了很多 <code>.row</code> 跟 <code>.col</code>。</p>
+<p>是不是跟 Bootstrap 有異曲同工之妙，但是我只要加在想要的 <code>element</code> 上面就好了，也不用加了很多 <code>.row</code> 跟 <code>.col</code>。</p>
 <h2 id="偽類也是一樣的方法"><a href="#偽類也是一樣的方法" class="headerlink" title="偽類也是一樣的方法"></a>偽類也是一樣的方法</h2><p>通常我們想要按鈕有點互動效果，一般 CSS 也會寫成：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">h1</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -325,7 +325,7 @@
 <iframe height="265" style="width: 100%;" scrolling="no" title="Tailwind CSS hover" src="https://codepen.io/hnzxewqw/embed/VwpdzYw?height=265&theme-id=light&default-tab=html,result"></iframe>
 
 <p>直觀又好理解！</p>
-<h2 id="最後綜合一個響應式卡片與有偽類效果的練習"><a href="#最後綜合一個響應式卡片與有偽類效果的練習" class="headerlink" title="最後綜合一個響應式卡片與有偽類效果的練習"></a>最後綜合一個響應式卡片與有偽類效果的練習</h2><p>點選右側的 codepen 可以看見響應式的效果喔！</p>
+<h2 id="最後綜合一個響應式卡片與有偽類效果的練習"><a href="#最後綜合一個響應式卡片與有偽類效果的練習" class="headerlink" title="最後綜合一個響應式卡片與有偽類效果的練習"></a>最後綜合一個響應式卡片與有偽類效果的練習</h2><p>點選右側的 CodePen 可以看見響應式的效果喔！</p>
 <iframe height="800" style="width: 100%;" scrolling="no" title="Tailwind RWD &amp; hover" src="https://codepen.io/hnzxewqw/embed/dyvKzMy?height=265&theme-id=light&default-tab=html,result"></iframe>
 
 <h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
@@ -438,7 +438,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">232</span>
+          <span class="site-state-item-count">233</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -483,6 +483,9 @@
         </li>
         <li class="links-of-blogroll-item">
           <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">人生重開機</a>
         </li>
     </ul>
   </div>

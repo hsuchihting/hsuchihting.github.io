@@ -56,14 +56,12 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;tools.wingzero.tw&#x2F;assets&#x2F;upload&#x2F;1611643654838_0.jpg">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;KarsOIk.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;lcHM6lM.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;z3JMQrH.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;2Q2M5z4.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;WNHP5Zo.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;UXDIzZn.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;eElcCD6.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;yAsShBM.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;GT9Pba4.png">
 <meta property="article:published_time" content="2021-06-05T12:47:03.000Z">
-<meta property="article:modified_time" content="2021-06-13T09:57:44.171Z">
+<meta property="article:modified_time" content="2021-06-14T07:56:10.285Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="TailwindCSS">
 <meta name="twitter:card" content="summary">
@@ -256,7 +254,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-06-13 17:57:44" itemprop="dateModified" datetime="2021-06-13T17:57:44+08:00">2021-06-13</time>
+                <time title="修改時間：2021-06-14 15:56:10" itemprop="dateModified" datetime="2021-06-14T15:56:10+08:00">2021-06-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -314,16 +312,13 @@
 <p><img src="https://i.imgur.com/lcHM6lM.png" alt=""></p>
 <p>如果要使用更多 Tailwind，應該要安裝 PostCSS 套件。</p>
 <h3 id="使用-NPM-安裝"><a href="#使用-NPM-安裝" class="headerlink" title="使用 NPM 安裝"></a>使用 NPM 安裝</h3><p>首先先進入開啟好專案的資料夾，然後點選右鍵開啟終端機，這時候會看到路徑已經在自己的資料夾中，</p>
-<p><img src="https://i.imgur.com/z3JMQrH.png" alt="terminal"></p>
-<blockquote>
-<p>注意：安裝 Tailwind CSS 需要 node.js 版本 12.13.0 以上版本才能安裝。</p>
-</blockquote>
+<p><img src="https://i.imgur.com/2Q2M5z4.png" alt="terminal"></p>
 <p>官方教學使用 NPM 來安裝 Tailwind CSS、PostCSS，還有 autoprefixer 這三個檔案。</p>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install tailwindcss@latest postcss@latest autoprefixer@latest</span><br></pre></td></tr></table></figure>
 
 <p><strong>安裝原因：</strong></p>
 <blockquote>
-<p>Tailwind 不會自動加上瀏覽器前缀詞到產生的 CSS 中，所以瀏覽器無法讀取 CSS，要加上 autoprefixer 這個套件去處理此問題，所以一行指令就三個安裝完了，輕鬆愉快。</p>
+<p>Tailwind 不會自動加上瀏覽器前缀詞到產生的 CSS 中，所以瀏覽器無法讀取 CSS，要加上 autoprefixer 這個套件去處理此問題，所以一行指令就三個安裝玩了，輕鬆愉快。</p>
 </blockquote>
 <p>還有提到一個錯誤，但是 v2.0 版本的 Tailwind 依賴於 PostCSS 8，若將 Tailwind 與舊版本的 PostCSS 混合使用，可能會看到以下跳錯訊息：</p>
 <p><code>Error: PostCSS plugin tailwindcss requires PostCSS 8.</code></p>
@@ -343,18 +338,22 @@
 <p>安裝完成後就會看到有一個 tailwind.config.js 的檔案在目錄底下。</p>
 <p><img src="https://i.imgur.com/UXDIzZn.png" alt="menu"></p>
 <p>點進檔案後就會看到預設的配置內容。</p>
-<p><img src="https://i.imgur.com/eElcCD6.png" alt="config"></p>
+<p><strong>tailwind.config.js</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  purge: [],</span><br><span class="line">  darkMode: <span class="literal">false</span>, <span class="comment">// or 'media' or 'class'</span></span><br><span class="line">  theme: &#123;</span><br><span class="line">    extend: &#123;&#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  variants: &#123;</span><br><span class="line">    extend: &#123;&#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
 <h2 id="新增-Tailwind-到-CSS-中"><a href="#新增-Tailwind-到-CSS-中" class="headerlink" title="新增 Tailwind 到 CSS 中"></a>新增 Tailwind 到 CSS 中</h2><p>在 VSCode 中新增一個 CSS 檔案，命名就如官方推薦的 <code>style.css</code>。(依照專案可自訂義此名字)</p>
 <p>再把 Tailwind 的三個核心複製貼到剛剛新建的 CSS 檔案中。</p>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@tailwind base;</span><br><span class="line">@tailwind components;</span><br><span class="line">@tailwind utilities;</span><br></pre></td></tr></table></figure>
 
 <h3 id="不依賴-PostCSS-使用-Tailwind"><a href="#不依賴-PostCSS-使用-Tailwind" class="headerlink" title="不依賴 PostCSS 使用 Tailwind"></a>不依賴 PostCSS 使用 Tailwind</h3><p>雖然官方強力推薦要搭配 PostCSS，但因為還要去了解 PostCSS 沒有那麼容易，所以為了達到比較無障礙的使用，就不依賴 PostCSS 來使用，可以輸入下方指令，就可以將 Tailwind 編譯成瀏覽器看得懂的 CSS，完成後就可以直接使用 Tailwind 了！</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx tailwindcss-cli@latest build -o tailwind.css</span><br></pre></td></tr></table></figure>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx tailwindcss build style.css -o tailwind.css</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://i.imgur.com/yAsShBM.png" alt="tailwindcss"></p>
 <p>看到上方畫面就代表成功囉！</p>
 <h2 id="幫-CSS-瘦身"><a href="#幫-CSS-瘦身" class="headerlink" title="幫 CSS 瘦身"></a>幫 CSS 瘦身</h2><p>承上所示，Tailwind 因為是 Utility 的關係，會把整包檔案匯入，但我可能這次專案沒有用到這麼多的 Utility，如果整包檔案要選染於網頁，效能就會低落，Tailwind 官方文件很貼心也提供可以瘦身的方法，選到 <code>tailwind.config.js</code> 檔案，將我可能會使用到的內容寫在 <code>purge</code> 屬性內，就可以去監聽我哪支檔案有使用到，只會編譯使用的檔案，真的很貼心呢！</p>
-<p><img src="https://i.imgur.com/GT9Pba4.png" alt="config"></p>
+<p><strong>tailwind.config.js</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  purge: &#123;</span><br><span class="line">    enabled: <span class="literal">true</span>,</span><br><span class="line">    content: [<span class="string">"./*.html"</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">  darkMode: <span class="literal">false</span>, <span class="comment">// or 'media' or 'class'</span></span><br><span class="line">  theme: &#123;</span><br><span class="line">    extend: &#123;&#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  variants: &#123;</span><br><span class="line">    extend: &#123;&#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
 <h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
 <li><a href="https://tailwindcss.com/docs/installation" target="_blank" rel="noopener">Tailwind 官方文件</a></li>
 </ul>
@@ -465,7 +464,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">232</span>
+          <span class="site-state-item-count">233</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -510,6 +509,9 @@
         </li>
         <li class="links-of-blogroll-item">
           <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">人生重開機</a>
         </li>
     </ul>
   </div>
