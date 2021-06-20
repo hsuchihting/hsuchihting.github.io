@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="用 jQuery 的基本語法讓網頁動起來">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery 筆記 - 選擇器的選法與基本動畫效果語法">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;uncategorized&#x2F;20200609&#x2F;184811241&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="用 jQuery 的基本語法讓網頁動起來">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1583365978529-042d9f46dccc?ixlib&#x3D;rb-1.2.1&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1350&amp;q&#x3D;80">
+<meta property="article:published_time" content="2020-06-09T14:13:24.000Z">
+<meta property="article:modified_time" content="2020-06-10T15:08:45.916Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="TimCodingBlog">
+<meta property="article:tag" content=" 前端工程師">
+<meta property="article:tag" content=" Frond-end developer">
+<meta property="article:tag" content=" F2E">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1583365978529-042d9f46dccc?ixlib&#x3D;rb-1.2.1&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1350&amp;q&#x3D;80">
+
+<link rel="canonical" href="https://hsuchihting.github.io/uncategorized/20200609/184811241/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>jQuery 筆記 - 選擇器的選法與基本動畫效果語法 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/uncategorized/20200609/184811241/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          jQuery 筆記 - 選擇器的選法與基本動畫效果語法
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-06-09 22:13:24" itemprop="dateCreated datePublished" datetime="2020-06-09T22:13:24+08:00">2020-06-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-06-10 23:08:45" itemprop="dateModified" datetime="2020-06-10T23:08:45+08:00">2020-06-10</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/uncategorized/20200609/184811241/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="uncategorized/20200609/184811241/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">用 jQuery 的基本語法讓網頁動起來</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://images.unsplash.com/photo-1583365978529-042d9f46dccc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="animation"></p>
+<p>jQuery 是直接控制網頁元素的效果，直關且強大，筆記一些基本會使用到的語法。當然更多可以參考<a href="https://api.jquery.com/" target="_blank" rel="noopener">官網</a>。</p>
+<h2 id="選擇器"><a href="#選擇器" class="headerlink" title="選擇器"></a>選擇器</h2><p>使用 <code>$</code> 字號當作選擇器，相當於原生語法的 <code>document.getElementById()</code> 以及 <code>querySelector</code>，一個錢字號就可以少打這麼多字母。</p>
+<p>並且用小括號與引號包住要選擇的 <code>class</code> 或 <code>id</code> 或<code>網頁元素</code>，結尾要用分號標示，才會是完整的語法，如 <code>$(&#39; &#39;);</code>。</p>
+<p>常見的選擇器使用方式有：</p>
+<h3 id="選擇-class"><a href="#選擇-class" class="headerlink" title="選擇 class"></a>選擇 class</h3><p>因為是選擇 Class ，所以前面要加 <code>.</code> ，如範例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">".ClassName"</span>).fadeIn();</span><br></pre></td></tr></table></figure>
+
+<h3 id="選擇-id"><a href="#選擇-id" class="headerlink" title="選擇 id"></a>選擇 id</h3><p>選擇 id，前面要加 <code>#</code> 字號</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"#id"</span>).hide();</span><br></pre></td></tr></table></figure>
+
+<h3 id="選擇元素"><a href="#選擇元素" class="headerlink" title="選擇元素"></a>選擇元素</h3><p>選擇網頁元素，不用加符號。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"h1"</span>).show();</span><br></pre></td></tr></table></figure>
+
+<h2 id="hide"><a href="#hide" class="headerlink" title="hide()"></a>hide()</h2><p>使元素隱藏，在 HTML 會產生 CSS <code>display:none;</code>，參數可放入秒數，ex. 1000 毫秒。</p>
+<h2 id="show"><a href="#show" class="headerlink" title="show()"></a>show()</h2><p>可使原本預設 <code>display:none;</code> 的元素顯示，參數可放入秒數，ex. 1000 毫秒。</p>
+<h2 id="toggle"><a href="#toggle" class="headerlink" title="toggle()"></a>toggle()</h2><p>可切換設定的 <code>hide();</code> 與 <code>show();</code> 的效果，參數可放入秒數，ex. 1000 毫秒。</p>
+<h2 id="slide-滑動系列"><a href="#slide-滑動系列" class="headerlink" title="slide() 滑動系列"></a>slide() 滑動系列</h2><h3 id="slideUp"><a href="#slideUp" class="headerlink" title="slideUp()"></a>slideUp()</h3><p>使元素往上滑動，參數可放入秒數，ex. 1000 毫秒。</p>
+<h3 id="slideDown"><a href="#slideDown" class="headerlink" title="slideDown()"></a>slideDown()</h3><p>使元素往下滑動，參數可放入秒數，ex. 1000 毫秒。</p>
+<h3 id="slideToggle"><a href="#slideToggle" class="headerlink" title="slideToggle()"></a>slideToggle()</h3><p>使元素切換滑動效果，點擊會自動向下/上滑動，參數可放入秒數，ex. 1000 毫秒。</p>
+<h2 id="fade-淡化系列"><a href="#fade-淡化系列" class="headerlink" title="fade() 淡化系列"></a>fade() 淡化系列</h2><h3 id="fadeIn"><a href="#fadeIn" class="headerlink" title="fadeIn()"></a>fadeIn()</h3><p>使元素有淡入效果，參數可放入秒數，ex. 1000 毫秒。</p>
+<h3 id="fadeOut"><a href="#fadeOut" class="headerlink" title="fadeOut()"></a>fadeOut()</h3><p>使元素有淡出效果，參數可放入秒數，ex. 1000 毫秒。</p>
+<h3 id="fadeToggle"><a href="#fadeToggle" class="headerlink" title="fadeToggle()"></a>fadeToggle()</h3><p>使元素自動切換淡入與淡出效果，參數可放入秒數，ex. 1000 毫秒。</p>
+<h2 id="Class-常常搭配-active"><a href="#Class-常常搭配-active" class="headerlink" title="Class 常常搭配 active"></a>Class 常常搭配 active</h2><h3 id="addClass"><a href="#addClass" class="headerlink" title="addClass()"></a>addClass()</h3><p>動態增加 class，參數放入 class 名稱。</p>
+<h3 id="removeClass"><a href="#removeClass" class="headerlink" title="removeClass()"></a>removeClass()</h3><p>動態移除 class，參數放入 class 名稱。</p>
+<h3 id="toggleClass"><a href="#toggleClass" class="headerlink" title="toggleClass()"></a>toggleClass()</h3><p>動態增加與移除 class，參數放入 class 名稱。</p>
+<h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><iframe height="900" style="width: 100%;" src="https://codepen.io/tim_hsu/embed/oNbgXWB?height=265&theme-id=light&default-tab=result"></iframe>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/uncategorized/20200609/2466460421/" rel="prev" title="JS 筆記 - 使用 select 選到該功能並執行其中內容">
+      <i class="fa fa-chevron-left"></i> JS 筆記 - 使用 select 選到該功能並執行其中內容
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/uncategorized/20200610/4073219914/" rel="next" title="CSS 筆記 - 寫一個 iPhone 開關效果">
+      CSS 筆記 - 寫一個 iPhone 開關效果 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#選擇器"><span class="nav-number">1.</span> <span class="nav-text">選擇器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#選擇-class"><span class="nav-number">1.1.</span> <span class="nav-text">選擇 class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#選擇-id"><span class="nav-number">1.2.</span> <span class="nav-text">選擇 id</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#選擇元素"><span class="nav-number">1.3.</span> <span class="nav-text">選擇元素</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hide"><span class="nav-number">2.</span> <span class="nav-text">hide()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#show"><span class="nav-number">3.</span> <span class="nav-text">show()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#toggle"><span class="nav-number">4.</span> <span class="nav-text">toggle()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#slide-滑動系列"><span class="nav-number">5.</span> <span class="nav-text">slide() 滑動系列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#slideUp"><span class="nav-number">5.1.</span> <span class="nav-text">slideUp()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#slideDown"><span class="nav-number">5.2.</span> <span class="nav-text">slideDown()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#slideToggle"><span class="nav-number">5.3.</span> <span class="nav-text">slideToggle()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fade-淡化系列"><span class="nav-number">6.</span> <span class="nav-text">fade() 淡化系列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fadeIn"><span class="nav-number">6.1.</span> <span class="nav-text">fadeIn()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fadeOut"><span class="nav-number">6.2.</span> <span class="nav-text">fadeOut()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fadeToggle"><span class="nav-number">6.3.</span> <span class="nav-text">fadeToggle()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Class-常常搭配-active"><span class="nav-number">7.</span> <span class="nav-text">Class 常常搭配 active</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#addClass"><span class="nav-number">7.1.</span> <span class="nav-text">addClass()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#removeClass"><span class="nav-number">7.2.</span> <span class="nav-text">removeClass()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#toggleClass"><span class="nav-number">7.3.</span> <span class="nav-text">toggleClass()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#範例"><span class="nav-number">8.</span> <span class="nav-text">範例</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">235</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hsiangfeng.github.io/" title="https:&#x2F;&#x2F;hsiangfeng.github.io&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gretema.github.io/" title="https:&#x2F;&#x2F;gretema.github.io&#x2F;" rel="noopener" target="_blank">馬格蕾特的前端勇者日誌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wcc723.github.io/" title="https:&#x2F;&#x2F;wcc723.github.io&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/uncategorized/20200609/184811241/",
+            identifier: "uncategorized/20200609/184811241/",
+            title: "jQuery 筆記 - 選擇器的選法與基本動畫效果語法"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

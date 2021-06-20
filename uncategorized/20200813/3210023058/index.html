@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="成為前端一定要會的 AJAX">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 筆記 - 認識 AJAX、同步與非同步、HTTP狀態碼">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;uncategorized&#x2F;20200813&#x2F;3210023058&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="成為前端一定要會的 AJAX">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1526374965328-7f61d4dc18c5?ixlib&#x3D;rb-1.2.1&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1350&amp;q&#x3D;80">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JS-true.png?alt&#x3D;media&amp;token&#x3D;7f0cabdc-a104-41b2-afc6-b8b82392aa87">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JS-false.png?alt&#x3D;media&amp;token&#x3D;71fa7dba-bf9b-414e-a5ff-717b77743c26">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;404%20ERROR.png?alt&#x3D;media&amp;token&#x3D;6195e133-4654-446b-a3b2-1f4acc61e899">
+<meta property="article:published_time" content="2020-08-13T02:14:54.000Z">
+<meta property="article:modified_time" content="2020-08-13T03:21:15.580Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="TimCodingBlog">
+<meta property="article:tag" content=" 前端工程師">
+<meta property="article:tag" content=" Frond-end developer">
+<meta property="article:tag" content=" F2E">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1526374965328-7f61d4dc18c5?ixlib&#x3D;rb-1.2.1&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1350&amp;q&#x3D;80">
+
+<link rel="canonical" href="https://hsuchihting.github.io/uncategorized/20200813/3210023058/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>JS 筆記 - 認識 AJAX、同步與非同步、HTTP狀態碼 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/uncategorized/20200813/3210023058/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          JS 筆記 - 認識 AJAX、同步與非同步、HTTP狀態碼
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-08-13 10:14:54 / 修改時間：11:21:15" itemprop="dateCreated datePublished" datetime="2020-08-13T10:14:54+08:00">2020-08-13</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/uncategorized/20200813/3210023058/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="uncategorized/20200813/3210023058/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">成為前端一定要會的 AJAX</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="ajax"></p>
+<h2 id="什麼是-AJAX"><a href="#什麼是-AJAX" class="headerlink" title="什麼是 AJAX"></a>什麼是 AJAX</h2><p>AJAX ，英文全名是「<strong>A</strong>synchronous <strong>J</strong>avaScript <strong>a</strong>nd <strong>X</strong>ML」（非同步的 JavaScript 與 XML 技術）。</p>
+<p>傳統的 Web 應用允許用戶端填寫表單（form），當送出表單時就向網頁伺服器傳送一個請求。伺服器接收並處理傳來的表單，然後送回一個新的網頁，但這個做法浪費了許多頻寬，因為在前後兩個頁面中的大部分 HTML 碼往往是相同的。由於每次應用的溝通都需要向伺服器傳送請求，應用的回應時間依賴於伺服器的回應時間。這導致了使用者介面的回應比本機應用慢得多。</p>
+<p>與此不同，AJAX 應用可以僅向伺服器傳送並取回必須的資料，並在客戶端採用 JavaScript 處理來自伺服器的回應。因為在伺服器和瀏覽器之間交換的資料大量減少，伺服器回應更快了。同時，很多的處理工作可以在發出請求的客戶端機器上完成，因此 Web 伺服器的負荷也減少了。</p>
+<h3 id="應用"><a href="#應用" class="headerlink" title="應用"></a>應用</h3><blockquote>
+<ul>
+<li>運用 XHTML+CSS 來表達資訊；</li>
+<li>運用 JavaScript 操作 DOM（Document Object Model）來執行動態效果；</li>
+<li>運用 XML 和 XSLT 操作資料</li>
+<li>運用 XMLHttpRequest 或新的 Fetch API 與網頁伺服器進行非同步資料交換；</li>
+</ul>
+</blockquote>
+<p>更簡單來說，就是取得遠端數據庫的資料。</p>
+<h2 id="透過-XMLHttpRequest-撈資料"><a href="#透過-XMLHttpRequest-撈資料" class="headerlink" title="透過 XMLHttpRequest 撈資料"></a>透過 XMLHttpRequest 撈資料</h2><p>如何使用 <code>XMLHttpRequest</code> 是物件跨瀏覽器撈資料，起手式程式碼:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br></pre></td></tr></table></figure>
+
+<p>另外在開方人員工具 <code>console</code> 中打上 <code>xhr</code>，會看到下方物件，會看到一個 <code>readyState</code> 是 0，<br>代表已經產生一個 <code>XMLHttpRequest</code>，但還沒有連到要取得的資料。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">XMLHttpRequest &#123;<span class="attr">onreadystatechange</span>: <span class="literal">null</span>, <span class="attr">readyState</span>: <span class="number">0</span>, <span class="attr">timeout</span>: <span class="number">0</span>, <span class="attr">withCredentials</span>: <span class="literal">false</span>, <span class="attr">upload</span>: XMLHttpRequestUpload, …&#125;</span><br><span class="line">onreadystatechange: <span class="literal">null</span></span><br><span class="line">readyState: <span class="number">0</span> <span class="comment">//還沒有取得資料</span></span><br><span class="line">timeout: <span class="number">0</span></span><br><span class="line">withCredentials: <span class="literal">false</span></span><br><span class="line">upload: XMLHttpRequestUpload &#123;<span class="attr">onloadstart</span>: <span class="literal">null</span>, <span class="attr">onprogress</span>: <span class="literal">null</span>, <span class="attr">onabort</span>: <span class="literal">null</span>, <span class="attr">onerror</span>: <span class="literal">null</span>, <span class="attr">onload</span>: <span class="literal">null</span>, …&#125;</span><br><span class="line">responseURL: <span class="string">""</span> <span class="comment">//AJAX 網址</span></span><br><span class="line">status: <span class="number">0</span></span><br><span class="line">statusText: <span class="string">""</span></span><br><span class="line">responseType: <span class="string">""</span></span><br><span class="line">response: <span class="string">""</span> <span class="comment">//收到的內容</span></span><br><span class="line">responseText: <span class="string">""</span> <span class="comment">//收到遠端資料的文字</span></span><br><span class="line">responseXML: <span class="literal">null</span></span><br><span class="line">onloadstart: <span class="literal">null</span></span><br><span class="line">onprogress: <span class="literal">null</span></span><br><span class="line">onabort: <span class="literal">null</span></span><br><span class="line">onerror: <span class="literal">null</span></span><br><span class="line">onload: <span class="literal">null</span></span><br><span class="line">ontimeout: <span class="literal">null</span></span><br><span class="line">onloadend: <span class="literal">null</span></span><br><span class="line">__proto__: XMLHttpRequest</span><br></pre></td></tr></table></figure>
+
+<p>要跟遠端資料庫要資料，一定要有這個 <code>XMLHttpRequest</code> 物件，告訴伺服器，我要跟你要資料了。再來透過宣告後的 <code>xhr</code> 變數來要資料，程式碼會這樣寫：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.open(<span class="string">"格式"</span>, <span class="string">"AJAX 網址"</span>, 同步非同步);</span><br></pre></td></tr></table></figure>
+
+<p>格式的部分比較常見會有下方兩個:</p>
+<ul>
+<li>get: 從 API 或後端資料。</li>
+<li>post: 傳送資料到伺服器跟後端要資料。</li>
+<li>true: 非同步 / false: 同步</li>
+</ul>
+<blockquote>
+<p>‘格式’ 與 ‘AJAX 網址’ 要有引號，不然不會執行。</p>
+</blockquote>
+<p>倘若今天要去撈台北市中有多少<a href="https://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=5941f46b-4115-49b9-a511-18ea5b427676" target="_blank" rel="noopener">哺乳室</a>的資料，程式碼會如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">xhr.open(</span><br><span class="line">  <span class="string">"get"</span>,</span><br><span class="line">  <span class="string">"https://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&amp;rid=5941f46b-4115-49b9-a511-18ea5b427676"</span>,</span><br><span class="line">  <span class="literal">true</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h3 id="open-開啟-XMLHttpRequest-物件"><a href="#open-開啟-XMLHttpRequest-物件" class="headerlink" title="open 開啟 XMLHttpRequest 物件"></a>open 開啟 XMLHttpRequest 物件</h3><p>這時在 <code>console</code> 中打入 <code>xhr</code>，會發現原本的 <code>readyState</code> 變成 1，代表有使用 <code>open</code>開啟這個物件，但還沒有把資料傳送過去。</p>
+<h3 id="send-傳送資料"><a href="#send-傳送資料" class="headerlink" title="send 傳送資料"></a>send 傳送資料</h3><p>要把資料傳過去，要給 xhr.send 指令，因為這次只是要撈資料，沒有要傳送任何東西給數據庫，所以內容可以打成空值 (空的資料) (null)，程式碼會長這樣:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.send(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+
+<p>這時的 <code>readyState</code> 會是 4 ，代表已經完全接到數據資料，並把取得的資料放在 <code>responseText</code>。</p>
+<blockquote>
+<p><strong>readyState 代碼解釋</strong></p>
+<ul>
+<li>0 - 產生一個 XMLHttpRequest，但還沒連接到想要取得的資料。</li>
+<li>1 - 偵測到使用 open()，但尚未將資料送到資料庫。</li>
+<li>2 - 偵測到使用 send 狀態。</li>
+<li>3 - loading 狀態。(如果資料很大就會顯示，如果資料很小就會直接跳成 4 。</li>
+<li>4 - 已經完全接到數據資料。</li>
+</ul>
+</blockquote>
+<p>完整程式碼:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.open(</span><br><span class="line">  <span class="string">"get"</span>,</span><br><span class="line">  <span class="string">"https://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&amp;rid=e6831708-02b4-4ef8-98fa-4b4ce53459d9"</span>,</span><br><span class="line">  <span class="literal">true</span></span><br><span class="line">);</span><br><span class="line">xhr.send(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="false-同步與-true-非同步的"><a href="#false-同步與-true-非同步的" class="headerlink" title="false 同步與 true 非同步的"></a>false 同步與 true 非同步的</h2><p>以剛剛程式碼作為延續:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.open(</span><br><span class="line">  <span class="string">"get"</span>,</span><br><span class="line">  <span class="string">"https://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&amp;rid=e6831708-02b4-4ef8-98fa-4b4ce53459d9"</span>,</span><br><span class="line">  <span class="literal">true</span></span><br><span class="line">);</span><br><span class="line">xhr.send(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+
+<p>這時使用 <code>console.log(xhr.responseText);</code> 確認一下是否有撈到資料，理論是應該會撈到資料，但在開發人員工具中會顯示為沒有資訊，</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JS-true.png?alt=media&token=7f0cabdc-a104-41b2-afc6-b8b82392aa87" alt="非同步 true"></p>
+<p>原因是在第三個參數是同步與非同步的關係，<br>true 是<strong>非同步</strong>，不會等資料回傳，就繼續進行程式碼。<br>false 是<strong>同步</strong> 就會等到資料回傳，再繼續進行程式碼。如下圖:</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JS-false.png?alt=media&token=71fa7dba-bf9b-414e-a5ff-717b77743c26" alt="同步 false"></p>
+<p>但是一般專案為了網頁瀏覽順利，會先進行網頁讀取，讓資料陸續下載，所以大部分會使用 true，不然使用者會覺得網頁壞掉了。</p>
+<h2 id="onload-載入資料"><a href="#onload-載入資料" class="headerlink" title="onload 載入資料"></a>onload 載入資料</h2><p>因為 <code>true</code> 非同步不會馬上載到資料，所以會在新增一個語法，叫做 <code>onload</code>，在上方透過開發人員工具中打入 xhr 也會看到物件 <code>onload</code>，程式碼這樣寫:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xhr.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(xhr.responseText); <span class="comment">//會撈到資料</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>onload</code> 是被動的語法，指的是在 <code>send</code> 後，收到資料回傳，就執行這個 <code>onload</code> 物件，這時就會進行資料下載。</p>
+</blockquote>
+<p>在 HTML 先設定一個 <code>.list</code>，作為等等顯示資料用。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>倘若說今天要撈去 API 中的 資料，程式碼內容就可以設立這樣的條件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">xhr.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(xhr.responseText); <span class="comment">//有撈到資料</span></span><br><span class="line">  <span class="keyword">var</span> data = <span class="built_in">JSON</span>.parse(xhr.responseText); <span class="comment">//字串轉成資料</span></span><br><span class="line">  <span class="built_in">console</span>.log(data);</span><br><span class="line">  <span class="keyword">var</span> dataLen = data.result.results.length;</span><br><span class="line">  <span class="built_in">console</span>.log(dataLen);</span><br><span class="line">  <span class="keyword">var</span> str = <span class="string">""</span>; <span class="comment">//組字串</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; dataLen; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> location = data.result.results[i].locationName; <span class="comment">//城市</span></span><br><span class="line">    <span class="keyword">var</span> lowTemp = data.result.results[i].parameterName3; <span class="comment">//最低溫</span></span><br><span class="line">    <span class="keyword">var</span> highTemp = data.result.results[i].parameterName2; <span class="comment">//最高溫</span></span><br><span class="line">    <span class="keyword">var</span> weather = data.result.results[i].parameterName1; <span class="comment">//天氣狀況</span></span><br><span class="line">    str +=</span><br><span class="line">      <span class="string">"&lt;li&gt;"</span> +</span><br><span class="line">      location +</span><br><span class="line">      <span class="string">"氣溫: "</span> +</span><br><span class="line">      lowTemp +</span><br><span class="line">      <span class="string">"~"</span> +</span><br><span class="line">      highTemp +</span><br><span class="line">      <span class="string">"°C, 天氣: "</span> +</span><br><span class="line">      weather +</span><br><span class="line">      <span class="string">"&lt;/li&gt;"</span>; <span class="comment">//字串加總</span></span><br><span class="line">  &#125;</span><br><span class="line">  list.innerHTML = str; <span class="comment">//渲染在網頁上</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>這樣就能得到一串 AJAX 所撈出的資料，並列出清單。</p>
+<p>codepen: <a href="https://codepen.io/hnzxewqw/pen/NWqwaGp" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/NWqwaGp</a></p>
+<ul>
+<li>AJAX 主要做了以下幾件事情:</li>
+</ul>
+<ol>
+<li>建立一個 XMLHttpRequest。(open)</li>
+<li>跟對方要資料。(send)</li>
+<li>回傳資料到自己的瀏覽器。(onload)</li>
+<li>拿到資料後處理資料。</li>
+</ol>
+<h2 id="HTTP-狀態碼與-CORS-跨網域"><a href="#HTTP-狀態碼與-CORS-跨網域" class="headerlink" title="HTTP 狀態碼與 CORS 跨網域"></a>HTTP 狀態碼與 CORS 跨網域</h2><p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/404%20ERROR.png?alt=media&token=6195e133-4654-446b-a3b2-1f4acc61e899" alt="404 ERROR"></p>
+<p>比較常見到的有兩個狀態碼：<br>200-正確，有收到資料。<br>404-錯誤，找不到資料。</p>
+<p>其他還有更多狀態碼可看<a href="https://blog.miniasp.com/post/2009/01/16/Web-developer-should-know-about-HTTP-Status-Code" target="_blank" rel="noopener">保哥的文章 The Will Will Web</a></p>
+<h2 id="CORS-跨來源資源共用"><a href="#CORS-跨來源資源共用" class="headerlink" title="CORS 跨來源資源共用"></a>CORS 跨來源資源共用</h2><p>CORS 跨來源資源共用，英文為 <strong>C</strong>ross-<strong>O</strong>rigin <strong>R</strong>esource <strong>S</strong>haring，是一種使用額外 HTTP 標頭令目前瀏覽網站的使用者代理取得存取其他來源（網域）伺服器特定資源權限的機制。當使用者代理請求一個不是目前文件來源——例如來自於不同網域（domain）、通訊協定（protocol）或通訊埠（port）的資源時，會建立一個跨來源 HTTP 請求（cross-origin HTTP request）。</p>
+<p>於安全性考量，程式碼所發出的跨來源 HTTP 請求會受到限制。例如，XMLHttpRequest 及 Fetch 都遵守同源政策（same-origin policy）。這代表網路應用程式所使用的 API 除非使用 CORS 標頭，否則只能請求與應用程式相同網域的 HTTP 資源。</p>
+<hr>
+<h2 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章:"></a>參考文章:</h2><p>維基百科 <a href="https://zh.wikipedia.org/wiki/AJAX" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/AJAX</a><br>MDN <a href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/CORS" target="_blank" rel="noopener">https://developer.mozilla.org/zh-TW/docs/Web/HTTP/CORS</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/uncategorized/20200812/3642687092/" rel="prev" title="JS 核心觀念筆記 - 閉包基本認識、工廠模式與私有方法">
+      <i class="fa fa-chevron-left"></i> JS 核心觀念筆記 - 閉包基本認識、工廠模式與私有方法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/uncategorized/20200813/3135340488/" rel="next" title="JS 筆記 - 傳統 form 表格與 AJAX POST 寫法">
+      JS 筆記 - 傳統 form 表格與 AJAX POST 寫法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什麼是-AJAX"><span class="nav-number">1.</span> <span class="nav-text">什麼是 AJAX</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#應用"><span class="nav-number">1.1.</span> <span class="nav-text">應用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#透過-XMLHttpRequest-撈資料"><span class="nav-number">2.</span> <span class="nav-text">透過 XMLHttpRequest 撈資料</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#open-開啟-XMLHttpRequest-物件"><span class="nav-number">2.1.</span> <span class="nav-text">open 開啟 XMLHttpRequest 物件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#send-傳送資料"><span class="nav-number">2.2.</span> <span class="nav-text">send 傳送資料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#false-同步與-true-非同步的"><span class="nav-number">3.</span> <span class="nav-text">false 同步與 true 非同步的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#onload-載入資料"><span class="nav-number">4.</span> <span class="nav-text">onload 載入資料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-狀態碼與-CORS-跨網域"><span class="nav-number">5.</span> <span class="nav-text">HTTP 狀態碼與 CORS 跨網域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CORS-跨來源資源共用"><span class="nav-number">6.</span> <span class="nav-text">CORS 跨來源資源共用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考文章"><span class="nav-number">7.</span> <span class="nav-text">參考文章:</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">235</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hsiangfeng.github.io/" title="https:&#x2F;&#x2F;hsiangfeng.github.io&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gretema.github.io/" title="https:&#x2F;&#x2F;gretema.github.io&#x2F;" rel="noopener" target="_blank">馬格蕾特的前端勇者日誌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wcc723.github.io/" title="https:&#x2F;&#x2F;wcc723.github.io&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/uncategorized/20200813/3210023058/",
+            identifier: "uncategorized/20200813/3210023058/",
+            title: "JS 筆記 - 認識 AJAX、同步與非同步、HTTP狀態碼"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="登入或註冊最常見的驗證表單">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular 筆記 - Reactive Form 表單驗證實作">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;uncategorized&#x2F;20210313&#x2F;3161083344&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="登入或註冊最常見的驗證表單">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;f6TVlKd.jpg">
+<meta property="article:published_time" content="2021-03-13T15:05:09.000Z">
+<meta property="article:modified_time" content="2021-03-14T12:49:26.121Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="TimCodingBlog">
+<meta property="article:tag" content=" 前端工程師">
+<meta property="article:tag" content=" Frond-end developer">
+<meta property="article:tag" content=" F2E">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;f6TVlKd.jpg">
+
+<link rel="canonical" href="https://hsuchihting.github.io/uncategorized/20210313/3161083344/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Angular 筆記 - Reactive Form 表單驗證實作 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/uncategorized/20210313/3161083344/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          Angular 筆記 - Reactive Form 表單驗證實作
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-03-13 23:05:09" itemprop="dateCreated datePublished" datetime="2021-03-13T23:05:09+08:00">2021-03-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-03-14 20:49:26" itemprop="dateModified" datetime="2021-03-14T20:49:26+08:00">2021-03-14</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/uncategorized/20210313/3161083344/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="uncategorized/20210313/3161083344/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">登入或註冊最常見的驗證表單</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://i.imgur.com/f6TVlKd.jpg" alt="forms"></p>
+<p><strong>表單驗證</strong>最常見的就是在登入或是註冊頁面會使用到，是很實用的一個練習。</p>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ol>
+<li>有三個表單欄位，分別為姓名、電話、密碼。</li>
+<li>表單皆為必填。</li>
+<li>表單驗證錯誤皆會有錯誤反饋資訊。</li>
+<li>電話欄位額外條件為最大不可少於 10 碼，最小不可低於 10 碼。</li>
+<li>密碼欄位額外條件是大小寫和數字的組合，以及長度限制。</li>
+</ol>
+<h2 id="HTML-架構"><a href="#HTML-架構" class="headerlink" title="HTML 架構"></a>HTML 架構</h2><p><strong>validator.component.html</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>使用者名稱<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>使用者電話<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>使用者密碼<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="加上-Angular-的指令"><a href="#加上-Angular-的指令" class="headerlink" title="加上 Angular 的指令"></a>加上 Angular 的指令</h3><p>首先要使用表單，在 Angular 有內建完整的表單函式庫，只要引入方法就可以使用了。</p>
+<p>在 <code>app.module.ts</code> 引入表單方法。</p>
+<p><strong>app.module.ts</strong></p>
+<p>引入</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; FormsModule, ReactiveFormsModule &#125; <span class="keyword">from</span> <span class="string">"@angular/forms"</span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>imports:</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FormsModule,</span><br><span class="line">ReactiveFormsModule,</span><br></pre></td></tr></table></figure>
+
+<p><strong>validator.component.ts</strong></p>
+<p>先載入表單要使用的元件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  FormBuilder,</span><br><span class="line">  FormControl,</span><br><span class="line">  FormGroup,</span><br><span class="line">  Validators,</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">"@angular/forms"</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="form-使用指令-formGroup"><a href="#form-使用指令-formGroup" class="headerlink" title="form 使用指令 formGroup"></a>form 使用指令 formGroup</h3><ol>
+<li>在 form 標籤使用屬性繫結<code>formGroup</code> 指令，其變數為 <code>invalidForm</code>。</li>
+<li>input 中使用 <code>formControlName</code>，其變數為 <code>name</code>、<code>phone</code>、<code>password</code>。</li>
+</ol>
+<p><strong>validator.component.html</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> [<span class="attr">formGroup</span>]=<span class="string">"invalidForm"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>使用者名稱<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">formControlName</span>=<span class="string">"name"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>使用者電話<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">formControlName</span>=<span class="string">"phone"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>使用者密碼<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">formControlName</span>=<span class="string">"password"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>validator.component.ts</strong></p>
+<ol>
+<li>因為有使用 <code>formControlName</code>，建立一個變數 <code>formName</code>，並建構一個 <code>formControl</code> 的物件，並預設為空值。</li>
+<li>自定義變數 <code>invalidForm</code> 使用 Angular 內建的 <code>FromGroup</code> 的方法。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">formName = <span class="keyword">new</span> FormControl(<span class="string">""</span>);</span><br><span class="line">invalidForm: FormGroup;</span><br></pre></td></tr></table></figure>
+
+<h2 id="用-formBuilder-建構表單內容與條件"><a href="#用-formBuilder-建構表單內容與條件" class="headerlink" title="用 formBuilder 建構表單內容與條件"></a>用 formBuilder 建構表單內容與條件</h2><p><strong>validator.component.ts</strong></p>
+<ol>
+<li>在建構式中建立一個私有方法(<code>private</code>)，用 <code>formBuilder</code> 這個變數儲存 <code>FormBuilder</code> 的元件。</li>
+<li>使用 creatForm 函式來執行表單的建立。</li>
+<li>指 <code>invalidForm</code> 變數建立一個物件，裡面有 <code>name</code>、<code>phone</code>、<code>password</code> 的預設值。<blockquote>
+<p>建立物件是使用 <code>this.xxxx.group({...})</code>，並不像原生建立物件實字的寫法，但意思是差不多的。</p>
+</blockquote>
+</li>
+<li>因為表單要做驗證，所以有使用到 Validators 這個驗證器，後面帶驗證條件。</li>
+<li>驗證寫法先在屬性後用一個中括號，第 0 個位置是初始值，這邊是給予空值，所以給的是空字串，第 1 個欄位為驗證條件。</li>
+<li>name:[‘空值’,驗證條件為必填]。</li>
+<li>phone:[‘空值’,驗證條件為必填，最大長度為 10 字元，最小長度為 10 字元]。</li>
+<li>password:[‘空值’,驗證條件為必填，使用密碼的正規表達式]。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constructor</span>(private formBuilder: FormBuilder) &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//* 在網頁渲染前就呼叫 creatForm</span></span><br><span class="line"> ngOnInit(): <span class="keyword">void</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.creatForm();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//*建立表單</span></span><br><span class="line">  creatForm() &#123;</span><br><span class="line">    <span class="keyword">this</span>.invalidForm = <span class="keyword">this</span>.formBuilder.group(&#123;</span><br><span class="line">      name: [<span class="string">''</span>, Validators.required],</span><br><span class="line">      phone: [</span><br><span class="line">        <span class="string">''</span>,</span><br><span class="line">        Validators.compose([</span><br><span class="line">          Validators.required,</span><br><span class="line">          Validators.maxLength(<span class="number">10</span>),</span><br><span class="line">          Validators.minLength(<span class="number">10</span>),</span><br><span class="line">        ]),</span><br><span class="line">      ],</span><br><span class="line">      password: [</span><br><span class="line">        <span class="string">''</span>,</span><br><span class="line">        Validators.compose([</span><br><span class="line">          Validators.required,</span><br><span class="line">          Validators.pattern(<span class="string">'(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).&#123;8,16&#125;'</span>),</span><br><span class="line">        ]),</span><br><span class="line">      ],</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>這樣就達到基本的驗證功能了。</p>
+<h2 id="用-ngIf-將驗證提示寫在-html-中"><a href="#用-ngIf-將驗證提示寫在-html-中" class="headerlink" title="用 ngIf 將驗證提示寫在 html 中"></a>用 ngIf 將驗證提示寫在 html 中</h2><p>雖然完成了基本驗證功能，可是在使用者端還不會看到驗證提示，所以要來加上驗證提示，驗證提示出現在表單下方。</p>
+<p>用 <code>ngIf</code> 判斷如果有填寫才會做驗證的機制。</p>
+<h3 id="使用者名稱驗證提示"><a href="#使用者名稱驗證提示" class="headerlink" title="使用者名稱驗證提示"></a>使用者名稱驗證提示</h3><ol>
+<li>使用 Angular form 提供的 <code>controls</code> 的方法，要控制的欄位(<code>name</code>，<code>phone</code>，<code>password</code>) 的狀態如果是 <code>pristine</code> 驗證為不顯示，但有 errors 的狀態為 <code>required</code>。<blockquote>
+<p><code>pristine</code> 的意思是未被改變過的</p>
+</blockquote>
+</li>
+<li>顯示要提示的內容。</li>
+</ol>
+<p><strong>name</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>使用者名稱<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"username"</span> <span class="attr">formControlName</span>=<span class="string">"name"</span> <span class="attr">pInputText</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">small</span></span></span><br><span class="line"><span class="tag">    <span class="attr">class</span>=<span class="string">"p-error"</span></span></span><br><span class="line"><span class="tag">    *<span class="attr">ngIf</span>=<span class="string">"</span></span></span><br><span class="line"><span class="tag"><span class="string">              !invalidForm.controls.name.pristine &amp;&amp;</span></span></span><br><span class="line"><span class="tag"><span class="string">              invalidForm.controls.name.errors?.required</span></span></span><br><span class="line"><span class="tag"><span class="string">            "</span></span></span><br><span class="line"><span class="tag">    &gt;</span>請填寫姓名<span class="tag">&lt;/<span class="name">small</span></span></span><br><span class="line"><span class="tag">  &gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>phone</strong></p>
+<ol>
+<li>驗證錯誤的地方使用 <code>hasError</code> 的方法來寫，裡面只要放入剛剛在 TS 中寫好驗證條件即可，要是字串的形式才可以。</li>
+<li>因有兩個條件，所以使用兩段來呈現。<blockquote>
+<p>雖然在 TS 的 <code>maxLength</code> 與 <code>minLength</code> 是用小駝峰的方式撰寫，但在 html 是全部小寫，這部分需要注意一下。</p>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>使用者電話<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">formControlName</span>=<span class="string">"phone"</span> <span class="attr">pInputText</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">small</span></span></span><br><span class="line"><span class="tag">    <span class="attr">class</span>=<span class="string">"p-error"</span></span></span><br><span class="line"><span class="tag">    *<span class="attr">ngIf</span>=<span class="string">"</span></span></span><br><span class="line"><span class="tag"><span class="string">              !invalidForm.controls.phone.pristine &amp;&amp;</span></span></span><br><span class="line"><span class="tag"><span class="string">              invalidForm.controls.phone.errors?.required</span></span></span><br><span class="line"><span class="tag"><span class="string">            "</span></span></span><br><span class="line"><span class="tag">    &gt;</span>請輸入電話<span class="tag">&lt;/<span class="name">small</span></span></span><br><span class="line"><span class="tag">  &gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">small</span></span></span><br><span class="line"><span class="tag">    <span class="attr">class</span>=<span class="string">"p-error"</span></span></span><br><span class="line"><span class="tag">    *<span class="attr">ngIf</span>=<span class="string">"</span></span></span><br><span class="line"><span class="tag"><span class="string">              !invalidForm.controls.phone.pristine &amp;&amp;</span></span></span><br><span class="line"><span class="tag"><span class="string">              invalidForm.controls.phone.hasError('maxlength')</span></span></span><br><span class="line"><span class="tag"><span class="string">            "</span></span></span><br><span class="line"><span class="tag">    &gt;</span>電話長度不可大於 10 碼<span class="tag">&lt;/<span class="name">small</span></span></span><br><span class="line"><span class="tag">  &gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">small</span></span></span><br><span class="line"><span class="tag">    <span class="attr">class</span>=<span class="string">"p-error"</span></span></span><br><span class="line"><span class="tag">    *<span class="attr">ngIf</span>=<span class="string">"</span></span></span><br><span class="line"><span class="tag"><span class="string">              !invalidForm.controls.phone.pristine &amp;&amp;</span></span></span><br><span class="line"><span class="tag"><span class="string">              invalidForm.controls.phone.hasError('minlength')</span></span></span><br><span class="line"><span class="tag"><span class="string">            "</span></span></span><br><span class="line"><span class="tag">    &gt;</span>電話格式錯誤<span class="tag">&lt;/<span class="name">small</span></span></span><br><span class="line"><span class="tag">  &gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>password</strong><br>寫法與 <code>name</code> 跟 <code>phone</code> 相同。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>使用者密碼<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">formControlName</span>=<span class="string">"password"</span> <span class="attr">pInputText</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">small</span></span></span><br><span class="line"><span class="tag">    <span class="attr">class</span>=<span class="string">"p-error"</span></span></span><br><span class="line"><span class="tag">    *<span class="attr">ngIf</span>=<span class="string">"</span></span></span><br><span class="line"><span class="tag"><span class="string">              !invalidForm.controls.password.pristine &amp;&amp;</span></span></span><br><span class="line"><span class="tag"><span class="string">              invalidForm.controls.password.hasError('required')</span></span></span><br><span class="line"><span class="tag"><span class="string">            "</span></span></span><br><span class="line"><span class="tag">    &gt;</span>請輸入密碼<span class="tag">&lt;/<span class="name">small</span></span></span><br><span class="line"><span class="tag">  &gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">small</span></span></span><br><span class="line"><span class="tag">    <span class="attr">class</span>=<span class="string">"p-error"</span></span></span><br><span class="line"><span class="tag">    *<span class="attr">ngIf</span>=<span class="string">"</span></span></span><br><span class="line"><span class="tag"><span class="string">              !invalidForm.controls.password.pristine &amp;&amp;</span></span></span><br><span class="line"><span class="tag"><span class="string">              invalidForm.controls.password.hasError('pattern')</span></span></span><br><span class="line"><span class="tag"><span class="string">            "</span></span></span><br><span class="line"><span class="tag">    &gt;</span>密碼格式錯誤：至少一個小寫字母，一個大寫字母，或是數字，密碼長度不得小於 8</span><br><span class="line">    個字元亦不可超過 16 字元<span class="tag">&lt;/<span class="name">small</span></span></span><br><span class="line"><span class="tag">  &gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="最後給一個送出按鈕就大功告成了"><a href="#最後給一個送出按鈕就大功告成了" class="headerlink" title="最後給一個送出按鈕就大功告成了"></a>最後給一個送出按鈕就大功告成了</h2><p><strong>validator.component.html</strong><br>因按鈕 type 預設為 <code>submit</code> ，避免按下 enter 按鈕將資料送出，所以在 type 要給予 <code>button</code> 的類型。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p-button</span> <span class="attr">type</span>=<span class="string">"button"</span> (<span class="attr">click</span>)=<span class="string">"confirm()"</span>&gt;</span>確認<span class="tag">&lt;/<span class="name">p-button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>validator.component.ts</strong><br>給予事件，當表單為無效 ( <code>invalid</code> ) 的時候寫入回饋提示。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//todo 送出按鈕</span></span><br><span class="line">confirm() &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.invalidForm.invalid) &#123;</span><br><span class="line">    alert(<span class="string">'表單漏填囉!'</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    alert(<span class="string">'驗證成功'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>補充</strong></p>
+<p>本次範例有使用到 <a href="https://www.primefaces.org/primeng/" target="_blank" rel="noopener">primeng</a> 的 UI 套件。</p>
+<p>DEMO: <a href="https://stackblitz.com/edit/angular-ivy-9jc9ld?embed=1&amp;file=src/app/app.component.html" target="_blank" rel="noopener">https://stackblitz.com/edit/angular-ivy-9jc9ld?embed=1&amp;file=src/app/app.component.html</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/uncategorized/20210308/722060059/" rel="prev" title="Angular 筆記 - 實作 API 的取得、刪除、新增、更新">
+      <i class="fa fa-chevron-left"></i> Angular 筆記 - 實作 API 的取得、刪除、新增、更新
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/uncategorized/20210315/3117291664/" rel="next" title="Angular 筆記 - 登入頁跳轉">
+      Angular 筆記 - 登入頁跳轉 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#需求"><span class="nav-number">1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML-架構"><span class="nav-number">2.</span> <span class="nav-text">HTML 架構</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加上-Angular-的指令"><span class="nav-number">2.1.</span> <span class="nav-text">加上 Angular 的指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#form-使用指令-formGroup"><span class="nav-number">2.2.</span> <span class="nav-text">form 使用指令 formGroup</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用-formBuilder-建構表單內容與條件"><span class="nav-number">3.</span> <span class="nav-text">用 formBuilder 建構表單內容與條件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用-ngIf-將驗證提示寫在-html-中"><span class="nav-number">4.</span> <span class="nav-text">用 ngIf 將驗證提示寫在 html 中</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用者名稱驗證提示"><span class="nav-number">4.1.</span> <span class="nav-text">使用者名稱驗證提示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最後給一個送出按鈕就大功告成了"><span class="nav-number">5.</span> <span class="nav-text">最後給一個送出按鈕就大功告成了</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">235</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hsiangfeng.github.io/" title="https:&#x2F;&#x2F;hsiangfeng.github.io&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gretema.github.io/" title="https:&#x2F;&#x2F;gretema.github.io&#x2F;" rel="noopener" target="_blank">馬格蕾特的前端勇者日誌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wcc723.github.io/" title="https:&#x2F;&#x2F;wcc723.github.io&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/uncategorized/20210313/3161083344/",
+            identifier: "uncategorized/20210313/3161083344/",
+            title: "Angular 筆記 - Reactive Form 表單驗證實作"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

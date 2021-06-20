@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="上班快一年了，我還是不會寫程式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何把想法轉成程式碼?">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;uncategorized&#x2F;20210127&#x2F;1279212541&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="上班快一年了，我還是不會寫程式">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1581090700227-1e37b190418e?ixid&#x3D;MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib&#x3D;rb-1.2.1&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1350&amp;q&#x3D;80">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;hEBU61Q.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;7BZhTOo.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;GT6Buxn.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;KOcfNWW.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;pyW14DY.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;6SVCedE.png">
+<meta property="article:published_time" content="2021-01-27T03:58:02.000Z">
+<meta property="article:modified_time" content="2021-03-26T02:22:36.116Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="TimCodingBlog">
+<meta property="article:tag" content=" 前端工程師">
+<meta property="article:tag" content=" Frond-end developer">
+<meta property="article:tag" content=" F2E">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1581090700227-1e37b190418e?ixid&#x3D;MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib&#x3D;rb-1.2.1&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1350&amp;q&#x3D;80">
+
+<link rel="canonical" href="https://hsuchihting.github.io/uncategorized/20210127/1279212541/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>如何把想法轉成程式碼? | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/uncategorized/20210127/1279212541/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          如何把想法轉成程式碼?
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-01-27 11:58:02" itemprop="dateCreated datePublished" datetime="2021-01-27T11:58:02+08:00">2021-01-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-03-26 10:22:36" itemprop="dateModified" datetime="2021-03-26T10:22:36+08:00">2021-03-26</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/uncategorized/20210127/1279212541/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="uncategorized/20210127/1279212541/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">上班快一年了，我還是不會寫程式</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://images.unsplash.com/photo-1581090700227-1e37b190418e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="upset"></p>
+<h2 id="原來我還是不會寫程式"><a href="#原來我還是不會寫程式" class="headerlink" title="原來我還是不會寫程式"></a>原來我還是不會寫程式</h2><p>從平面轉職前端也快一年了，以為切切版，寫個 CSS 跟套個 jQuery 就是有跟程式碰到邊，結果不是，在進入專案開始處理 API 資料，get 跟 post 都傻傻分不清楚，拿到資料也不太會處理的時候，才知道我根本還不會寫程式。</p>
+<h2 id="新手寫程式問題"><a href="#新手寫程式問題" class="headerlink" title="新手寫程式問題"></a>新手寫程式問題</h2><p>其中提到新手遇到的幾個問題，那就是我啊！</p>
+<p><img src="https://i.imgur.com/hEBU61Q.png" alt="初學者寫程式"></p>
+<p>我就是那 1-3…</p>
+<p><img src="https://i.imgur.com/7BZhTOo.png" alt="pic2"></p>
+<p>看不懂需求或題目…</p>
+<p><img src="https://i.imgur.com/GT6Buxn.png" alt="pic3"></p>
+<p>是不是也有這種困擾，</p>
+<p><img src="https://i.imgur.com/KOcfNWW.png" alt="pic4"></p>
+<p>所以要有一個橋梁幫助我，</p>
+<p><img src="https://i.imgur.com/pyW14DY.png" alt="pic5"></p>
+<p>用虛擬碼來寫。</p>
+<p><img src="https://i.imgur.com/6SVCedE.png" alt="pic6"></p>
+<h2 id="先想流程，再想動作"><a href="#先想流程，再想動作" class="headerlink" title="先想流程，再想動作"></a>先想流程，再想動作</h2><p>以我自己為例，我拿到資料就想直接處理它，但卻忽略我為什麼要處理，該怎麼處理，哪個流程才需要處理資料，例如我今天從起床到睡覺，寫出一行一行的步驟，並把握以下原則：</p>
+<ol>
+<li>一行只做一件事。</li>
+<li>善用跳轉。(等等會說明)</li>
+</ol>
+<p>實際例子說明：</p>
+<h3 id="學生的一天"><a href="#學生的一天" class="headerlink" title="學生的一天"></a>學生的一天</h3><ol>
+<li>早上八點起床。</li>
+<li>吃早餐。</li>
+<li>如果公車來了，搭公車。</li>
+<li>如果公車沒來，搭捷運。</li>
+<li>到學校上課。</li>
+<li>放學。</li>
+<li>吃晚餐。</li>
+<li>睡覺。</li>
+<li>回到步驟 1。</li>
+</ol>
+<p>可以發現有幾項為<strong>敘述</strong>，有幾項為<strong>條件判斷</strong>，有一項是<strong>跳轉</strong>。</p>
+<ol>
+<li>早上八點起床。(敘述)</li>
+<li>吃早餐。(敘述)</li>
+<li>如果公車來了，搭公車。(條件判斷)</li>
+<li>如果公車沒來，搭捷運。(條件判斷)</li>
+<li>到學校上課。(敘述)</li>
+<li>放學。(敘述)</li>
+<li>吃晚餐。(敘述)</li>
+<li>睡覺。(敘述)</li>
+<li>回到步驟 1。(重複，也就是跳轉)</li>
+</ol>
+<p>透過重複的選項，可以製造出一個不斷循環的行為。</p>
+<h3 id="等人"><a href="#等人" class="headerlink" title="等人"></a>等人</h3><ol>
+<li>人來了嗎?(敘述)</li>
+<li>還沒，滑手機五分鐘。(條件判斷)</li>
+<li>來了，跳到第五步。(條件判斷)</li>
+<li>跳到第一步。(重複)</li>
+<li>一起去逛街。(敘述)</li>
+</ol>
+<p>分析一下會有兩個狀況產生，</p>
+<p><strong>如果人還沒來</strong>，會是：</p>
+<ol>
+<li>人來了嗎?</li>
+<li>還沒，滑手機五分鐘。</li>
+<li>跳到第一步。</li>
+</ol>
+<p>會一直重複。</p>
+<p><strong>如果人來了</strong>，會是：</p>
+<ol>
+<li>人來了嗎?</li>
+<li>來了，跳到第五步。</li>
+<li>一起去逛街。</li>
+</ol>
+<p>所以可以看到，如果沒有符合判斷條件的狀況下，就會略過幾個步驟，也就是之後會很常使用的迴圈加上條件判斷的應用。</p>
+<h2 id="找出-1-100-的偶數"><a href="#找出-1-100-的偶數" class="headerlink" title="找出 1~100 的偶數"></a>找出 1~100 的偶數</h2><p>一開始看到這個題目的時候，就會很快想把心中的偶數得到，然後就卡住了…<br>但其實應該要拆解問題，變成下方步驟：</p>
+<ol>
+<li>找出 1~100 的數字。</li>
+<li>可以被 2 整除的就是偶數。</li>
+</ol>
+<h3 id="找出-1-100-的數字"><a href="#找出-1-100-的數字" class="headerlink" title="找出 1~100 的數字"></a>找出 1~100 的數字</h3><p>似乎問題就變單純，且可以被執行，把這個題目寫成一步步可執行的步驟，先來找出 1~100 的數字。</p>
+<ol>
+<li>令 i 為 1。</li>
+<li>如果 i &gt; 100，結束。</li>
+<li>印出 i 。</li>
+<li>i = i+1。</li>
+<li>跳回第二行。</li>
+</ol>
+<p>其中，第四個步驟非常重要，可以印出 1~100 的關鍵就是這個，因為如果沒有 i+1 的步驟，會一直重複只出現 1 這個數字，就永遠不會達到 100。</p>
+<h3 id="找出偶數"><a href="#找出偶數" class="headerlink" title="找出偶數"></a>找出偶數</h3><p>找到 1~100 的數字了，再來是要找偶數。<br>什麼是偶數，也就是可以被 2 整除的叫做偶數，若有餘數為 1 的稱為奇數。</p>
+<blockquote>
+<p>EX. 2 除以 2 為 0，3 除以 2 為 1。</p>
+</blockquote>
+<p>所以步驟可以改寫成這樣，</p>
+<ol>
+<li>令 i 為 1。</li>
+<li>如果 i &gt; 100，結束。</li>
+<li>如果可以被 2 整除的為偶數，印出 i。</li>
+<li>i = i+1。</li>
+<li>跳回第二行。</li>
+</ol>
+<p>再更直覺一點可以改成這樣。</p>
+<ol>
+<li>令 i 為 1。</li>
+<li>如果 i &gt; 100，結束。</li>
+<li>如果 i % 2 === 0，印出 i。</li>
+<li>i = i+1。</li>
+<li>跳回第二行。</li>
+</ol>
+<h2 id="什麼是虛擬碼"><a href="#什麼是虛擬碼" class="headerlink" title="什麼是虛擬碼"></a>什麼是虛擬碼</h2><p>虛擬碼就是把腦袋的想法轉成一步步可執行的步驟，然後再透過比較像程式碼的形式寫出來。<br>例如剛剛提到找出 1~100 的步驟。</p>
+<ol>
+<li>令 i 為 1。</li>
+<li>如果 i &gt; 100，結束。</li>
+<li>印出 i 。</li>
+<li>i = i+1。</li>
+<li>跳回第二行。</li>
+</ol>
+<p>改成虛擬碼的話會是這樣，</p>
+<ol>
+<li>let i = 1</li>
+<li>if i &gt; 100 then exit</li>
+<li>print i</li>
+<li>i = i+1</li>
+<li>jump to line2</li>
+</ol>
+<p>喔！好像跟程式碼有點像喔！<br>可以感覺得出來好像有迴圈加上條件判斷。</p>
+<h2 id="把虛擬碼改成程式碼"><a href="#把虛擬碼改成程式碼" class="headerlink" title="把虛擬碼改成程式碼"></a>把虛擬碼改成程式碼</h2><p>試著改寫成程式碼的話應該是：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">  <span class="keyword">if</span> (i % <span class="number">2</span> === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i); <span class="comment">// 得到 2 4 6 8 10....98</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有發現到一件事情，似乎就是把中文的意思改寫成類似程式碼的敘述，<br>步驟的流程建議使用英文，因為要讓敘述的過程更貼近程式碼。</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ol>
+<li><a href="https://lidemy.com/courses/793973/lectures/14419352" target="_blank" rel="noopener">先別急著寫 leetcode</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/uncategorized/20210120/4254951765/" rel="prev" title="JS 核心觀念筆記 - 物件的淺層複製與深層複製">
+      <i class="fa fa-chevron-left"></i> JS 核心觀念筆記 - 物件的淺層複製與深層複製
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/uncategorized/20210127/2644125855/" rel="next" title="JS 筆記 - 迴圈與判斷式的應用">
+      JS 筆記 - 迴圈與判斷式的應用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原來我還是不會寫程式"><span class="nav-number">1.</span> <span class="nav-text">原來我還是不會寫程式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新手寫程式問題"><span class="nav-number">2.</span> <span class="nav-text">新手寫程式問題</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#先想流程，再想動作"><span class="nav-number">3.</span> <span class="nav-text">先想流程，再想動作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#學生的一天"><span class="nav-number">3.1.</span> <span class="nav-text">學生的一天</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#等人"><span class="nav-number">3.2.</span> <span class="nav-text">等人</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#找出-1-100-的偶數"><span class="nav-number">4.</span> <span class="nav-text">找出 1~100 的偶數</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#找出-1-100-的數字"><span class="nav-number">4.1.</span> <span class="nav-text">找出 1~100 的數字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#找出偶數"><span class="nav-number">4.2.</span> <span class="nav-text">找出偶數</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什麼是虛擬碼"><span class="nav-number">5.</span> <span class="nav-text">什麼是虛擬碼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#把虛擬碼改成程式碼"><span class="nav-number">6.</span> <span class="nav-text">把虛擬碼改成程式碼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">7.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">235</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hsiangfeng.github.io/" title="https:&#x2F;&#x2F;hsiangfeng.github.io&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gretema.github.io/" title="https:&#x2F;&#x2F;gretema.github.io&#x2F;" rel="noopener" target="_blank">馬格蕾特的前端勇者日誌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wcc723.github.io/" title="https:&#x2F;&#x2F;wcc723.github.io&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/uncategorized/20210127/1279212541/",
+            identifier: "uncategorized/20210127/1279212541/",
+            title: "如何把想法轉成程式碼?"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
