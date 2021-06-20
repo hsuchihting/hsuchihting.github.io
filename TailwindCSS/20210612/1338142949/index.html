@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="通通給我 RWD 起來！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tailwind CSS - 手機到桌上螢幕，所有的元素都能自適應">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;TailwindCSS&#x2F;20210612&#x2F;1338142949&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="通通給我 RWD 起來！">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;tools.wingzero.tw&#x2F;assets&#x2F;upload&#x2F;1611643654838_0.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;R0sWHIH.png">
+<meta property="article:published_time" content="2021-06-12T14:03:50.000Z">
+<meta property="article:modified_time" content="2021-06-14T08:01:00.284Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="TailwindCSS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;tools.wingzero.tw&#x2F;assets&#x2F;upload&#x2F;1611643654838_0.jpg">
+
+<link rel="canonical" href="https://hsuchihting.github.io/TailwindCSS/20210612/1338142949/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Tailwind CSS - 手機到桌上螢幕，所有的元素都能自適應 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/TailwindCSS/20210612/1338142949/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          Tailwind CSS - 手機到桌上螢幕，所有的元素都能自適應
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-06-12 22:03:50" itemprop="dateCreated datePublished" datetime="2021-06-12T22:03:50+08:00">2021-06-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-06-14 16:01:00" itemprop="dateModified" datetime="2021-06-14T16:01:00+08:00">2021-06-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/TailwindCSS/" itemprop="url" rel="index">
+                    <span itemprop="name">TailwindCSS</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TailwindCSS/20210612/1338142949/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="TailwindCSS/20210612/1338142949/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">通通給我 RWD 起來！</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://tools.wingzero.tw/assets/upload/1611643654838_0.jpg" alt="tailwindcss"></p>
+<p>跟 Bootstrap 一樣也是手機優先的響應式斷點設計，官方文件也提供尺寸對照：</p>
+<p><img src="https://i.imgur.com/R0sWHIH.png" alt="rwd"></p>
+<p>讓前端在開發輕鬆在 HTML 上寫斷點，不用特別去 CSS 撰寫了。</p>
+<h2 id="直觀又好懂的斷點寫法"><a href="#直觀又好懂的斷點寫法" class="headerlink" title="直觀又好懂的斷點寫法"></a>直觀又好懂的斷點寫法</h2><p>我可以透過 <code>斷點:條件</code> 的方式來撰寫斷點，例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"w-16 md:w-32 lg:w-48"</span> <span class="attr">src</span>=<span class="string">"..."</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>這一段是表示：</p>
+<ul>
+<li>手機圖片寬度為 <code>16px</code></li>
+<li>平板圖片寬度為 <code>32px</code></li>
+<li>桌機圖片寬度為 <code>48px</code></li>
+</ul>
+<iframe height="265" style="width: 100%;" scrolling="no" title="Tailwind breakpoint" src="https://codepen.io/hnzxewqw/embed/XWMPEZp?height=265&theme-id=light&default-tab=html,result" ></iframe>
+
+<p>官方推薦是從小到大的斷點依序撰寫，好讀又直觀，當然想要隨意換順序也可以，但為了以後維護，還是有順序的寫會比較好。</p>
+<h2 id="不只單元素，合體技也可以"><a href="#不只單元素，合體技也可以" class="headerlink" title="不只單元素，合體技也可以"></a>不只單元素，合體技也可以</h2><iframe height="600" style="width: 100%;" scrolling="no" title="tailwind breapoint2" src="https://codepen.io/hnzxewqw/embed/WNpgzgb?height=265&theme-id=light&default-tab=html,result"></iframe>
+
+<p>Tailwind 因為可以自由控制元素達到響應式的效果，所以上方範例手機板看起來是一張卡片，但手機板以上就會成橫幅的排版，這時候就可以看得出來此彈性的優勢別於元件型框架的差別。可以自由地做成任何想要的排版，我覺得這部份真的非常棒，不用受限於元件庫的限制了。</p>
+<p>想要做卡片、彈窗，還是其他常見的元件，似乎都可以透過 Utility-First 來完成。</p>
+<h2 id="不需要針對手機板使用斷點"><a href="#不需要針對手機板使用斷點" class="headerlink" title="不需要針對手機板使用斷點"></a>不需要針對手機板使用斷點</h2><p>有提到 Tailwind 是手機優先開始撰寫，所以手機板不需要使用前綴詞，不要誤用 sm 是手機螢幕大小，sm 的預設斷點為 640px 喔！官方範例為：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"sm:text-center"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>正確的寫法為：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"text-center sm:text-left"</span>&gt;</span>這是一段文字<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>上方的寫法意思是，在手機板的時候文字居中，解析度 <code>640px</code> 以上時，文字靠左。</p>
+<iframe height="265" style="width: 100%;" scrolling="no" title="Tailwind breakpoint3" src="https://codepen.io/hnzxewqw/embed/PopdRvr?height=265&theme-id=light&default-tab=html,result"></iframe>
+
+<h2 id="單一斷點導向"><a href="#單一斷點導向" class="headerlink" title="單一斷點導向"></a>單一斷點導向</h2><p>Tailwind 的斷點只有 <code>min-width</code>，沒有 <code>max-width</code> ，這代表我都是要從手機板出發來寫斷點，如果我只想在某個元素使用斷點，我只需要在更大的斷點上寫我要的內容，就會覆蓋前一個斷點的內容，比如說下方範例：</p>
+<iframe height="265" style="width: 100%;" scrolling="no" title="Tailwind breakpoint4" src="https://codepen.io/hnzxewqw/embed/QWpVmeN?height=265&theme-id=light&default-tab=html,result" ></iframe>
+
+<p>我有一個方塊，在手機板的時候要靠左，並且是蜜桃色的，但隨著螢幕尺寸的變化，會慢慢變成不同的顏色，甚至到最大的斷點時，可以設定讓方塊靠右對齊。</p>
+<p>透過斷點達到想呈現的效果就是這麼容易。</p>
+<h2 id="客製化斷點"><a href="#客製化斷點" class="headerlink" title="客製化斷點"></a>客製化斷點</h2><p>Tailwind 的優點就是可以自由的客製化，假如預設的斷點比較不符專案使用，也可以透過 <code>tailwind.config.js</code> 去設定想要的斷點喔！斷點的前綴詞可以自訂義。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// tailwind.config.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  theme: &#123;</span><br><span class="line">    screens: &#123;</span><br><span class="line">      <span class="string">'tablet'</span>: <span class="string">'640px'</span>,</span><br><span class="line">      <span class="comment">// =&gt; @media (min-width: 640px) &#123; ... &#125;</span></span><br><span class="line"></span><br><span class="line">      <span class="string">'laptop'</span>: <span class="string">'1024px'</span>,</span><br><span class="line">      <span class="comment">// =&gt; @media (min-width: 1024px) &#123; ... &#125;</span></span><br><span class="line"></span><br><span class="line">      <span class="string">'desktop'</span>: <span class="string">'1280px'</span>,</span><br><span class="line">      <span class="comment">// =&gt; @media (min-width: 1280px) &#123; ... &#125;</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a href="https://tailwindcss.tw/docs/breakpoints" target="_blank" rel="noopener">Tailwind CSS - Breakpoints</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/TailwindCSS/" rel="tag"># TailwindCSS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/TailwindCSS/20210607/2095338064/" rel="prev" title="Tailwind CSS - 每個 Utility class 都支援響應式與偽類">
+      <i class="fa fa-chevron-left"></i> Tailwind CSS - 每個 Utility class 都支援響應式與偽類
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/TailwindCSS/20210614/1455247132/" rel="next" title="Tailwind CSS - 增加 Base 樣式">
+      Tailwind CSS - 增加 Base 樣式 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#直觀又好懂的斷點寫法"><span class="nav-number">1.</span> <span class="nav-text">直觀又好懂的斷點寫法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不只單元素，合體技也可以"><span class="nav-number">2.</span> <span class="nav-text">不只單元素，合體技也可以</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不需要針對手機板使用斷點"><span class="nav-number">3.</span> <span class="nav-text">不需要針對手機板使用斷點</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#單一斷點導向"><span class="nav-number">4.</span> <span class="nav-text">單一斷點導向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客製化斷點"><span class="nav-number">5.</span> <span class="nav-text">客製化斷點</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">6.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">235</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hsiangfeng.github.io/" title="https:&#x2F;&#x2F;hsiangfeng.github.io&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gretema.github.io/" title="https:&#x2F;&#x2F;gretema.github.io&#x2F;" rel="noopener" target="_blank">馬格蕾特的前端勇者日誌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wcc723.github.io/" title="https:&#x2F;&#x2F;wcc723.github.io&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/TailwindCSS/20210612/1338142949/",
+            identifier: "TailwindCSS/20210612/1338142949/",
+            title: "Tailwind CSS - 手機到桌上螢幕，所有的元素都能自適應"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

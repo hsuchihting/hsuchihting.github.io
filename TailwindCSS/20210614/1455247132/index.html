@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="客製化自己的樣式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tailwind CSS - 增加 Base 樣式">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;TailwindCSS&#x2F;20210614&#x2F;1455247132&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="客製化自己的樣式">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;tools.wingzero.tw&#x2F;assets&#x2F;upload&#x2F;1611643654838_0.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;poFwTnK.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;EXHx13W.png">
+<meta property="article:published_time" content="2021-06-14T08:15:29.000Z">
+<meta property="article:modified_time" content="2021-06-14T08:17:01.231Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="TailwindCSS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;tools.wingzero.tw&#x2F;assets&#x2F;upload&#x2F;1611643654838_0.jpg">
+
+<link rel="canonical" href="https://hsuchihting.github.io/TailwindCSS/20210614/1455247132/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Tailwind CSS - 增加 Base 樣式 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/TailwindCSS/20210614/1455247132/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          Tailwind CSS - 增加 Base 樣式
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-06-14 16:15:29 / 修改時間：16:17:01" itemprop="dateCreated datePublished" datetime="2021-06-14T16:15:29+08:00">2021-06-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/TailwindCSS/" itemprop="url" rel="index">
+                    <span itemprop="name">TailwindCSS</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TailwindCSS/20210614/1455247132/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="TailwindCSS/20210614/1455247132/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">客製化自己的樣式</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://tools.wingzero.tw/assets/upload/1611643654838_0.jpg" alt="tailwindcss"></p>
+<h2 id="什麼是-Base-樣式"><a href="#什麼是-Base-樣式" class="headerlink" title="什麼是 Base 樣式"></a>什麼是 Base 樣式</h2><p>概念有點像是 CSSreset，現在網頁基本上都會使用 CSS reset，有寫過網頁一段時間都不陌生，而 Tailwind 有提供一組基底樣式，稱為 <a href="https://tailwindcss.tw/docs/preflight" target="_blank" rel="noopener">Preflight</a>，基本上就是採用 <a href="https://github.com/sindresorhus/modern-normalize" target="_blank" rel="noopener">modern-normalize</a> 啦！</p>
+<p>以前一開始學網頁是用 <a href="https://meyerweb.com/eric/tools/css/reset/" target="_blank" rel="noopener">CSS reset</a> ，後來就都用 <a href="https://necolas.github.io/normalize.css/" target="_blank" rel="noopener">Nomalize</a> 了。</p>
+<blockquote>
+<p>延伸閱讀：<a href="https://ithelp.ithome.com.tw/articles/10196528" target="_blank" rel="noopener">Day21：小事之 CSS Reset 與 CSS normalize</a>。</p>
+</blockquote>
+<p>然後官網有說到基底預設樣式為 <a href="https://www.paulirish.com/2012/box-sizing-border-box-ftw/" target="_blank" rel="noopener">box-sizing-reset</a>，為什麼特別提這個呢？</p>
+<p>因為預設其實是 <code>box-sizing:content-box</code>，那 <code>border-box</code> 跟 <code>content-box</code> 的差別是什麼?</p>
+<p>簡單來說，<code>border-box</code> 就是我指定的寬度或高度是多少，網頁就會呈現該數值，但如果是 <code>content-box</code> 就會另外加上 border(邊框) 的寬度，結果跟預期的結果不同。</p>
+<p>從範例可以看到兩者不同的在尺寸上不同的變化。</p>
+<iframe height="265" style="width: 100%;" scrolling="no" title="Tailwind base" src="https://codepen.io/hnzxewqw/embed/dyvgrbO?height=265&theme-id=light&default-tab=css,result" ></iframe>
+
+<p>Tailwind 跟 Bootstrap 5 都有加上這個屬性。</p>
+<h2 id="覆蓋原本-base-的設定"><a href="#覆蓋原本-base-的設定" class="headerlink" title="覆蓋原本 base 的設定"></a>覆蓋原本 base 的設定</h2><p>在一開始安裝 Tailwind 的時候有一個主要的 CSS 檔案 <code>style.css</code>，裡面會放 Tailwind 三個基本設定內容</p>
+<p><strong>style.css</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@tailwind</span> base;</span><br><span class="line"><span class="keyword">@tailwind</span> components;</span><br><span class="line"><span class="keyword">@tailwind</span> utilities;</span><br></pre></td></tr></table></figure>
+
+<p>如果專案的需求是改變 h1 的預設大小，那可以把要改變的內容直接寫在 <code>style.css</code> 這隻檔案內，然後使用 <code>@layer base</code>，再把要更改的屬性與值寫在裡面。如下方範例：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@tailwind</span> base;</span><br><span class="line"><span class="keyword">@tailwind</span> components;</span><br><span class="line"><span class="keyword">@tailwind</span> utilities;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@layer</span> base &#123;</span><br><span class="line">  <span class="selector-tag">h1</span> &#123;</span><br><span class="line">    @apply text-6xl text-red-500 my-5;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這段意思是，我使用 <code>@layer</code> 圖層的語法，把 base 的 <code>h1</code> 樣式改掉，並且使用 <code>@apply</code> 允許修改整個 <code>h1</code> 的內容， <code>@apply</code> 有點像是把想要的樣式合併起來，類似拆模組的概念。</p>
+<p>下圖為原本的 <code>h1</code> 樣式，</p>
+<p><img src="https://i.imgur.com/poFwTnK.png" alt="origin"></p>
+<p>此圖為修改後的樣式，改變樣式後記得要重新編譯。</p>
+<p><img src="https://i.imgur.com/EXHx13W.png" alt="change"></p>
+<h2 id="覆蓋預設文字樣式"><a href="#覆蓋預設文字樣式" class="headerlink" title="覆蓋預設文字樣式"></a>覆蓋預設文字樣式</h2><p>跟覆蓋 base 樣式的方法一樣，專案需求如果要覆蓋樣式，官網也提供範例可以參考，而覆蓋字體是使用 <code>@font-face</code> 語法，並把相關內容寫在其中。</p>
+<p><strong>style.css</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@tailwind</span> base;</span><br><span class="line"><span class="keyword">@tailwind</span> components;</span><br><span class="line"><span class="keyword">@tailwind</span> utilities;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@layer</span> base &#123;</span><br><span class="line">  <span class="selector-tag">h1</span> &#123;</span><br><span class="line">    @apply text-6xl text-red-500 my-5;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">@font-face</span> &#123;</span><br><span class="line">    <span class="attribute">font-family</span>: Proxima Nova;</span><br><span class="line">    <span class="attribute">font-weight</span>: <span class="number">400</span>;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">url</span>(/fonts/proxima-nova/<span class="number">400</span>-regular.woff) <span class="built_in">format</span>(<span class="string">"woff"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">@font-face</span> &#123;</span><br><span class="line">    <span class="attribute">font-family</span>: Proxima Nova;</span><br><span class="line">    <span class="attribute">font-weight</span>: <span class="number">500</span>;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">url</span>(/fonts/proxima-nova/<span class="number">500</span>-medium.woff) <span class="built_in">format</span>(<span class="string">"woff"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如此我就新增了一種字型的粗細度。</p>
+<h2 id="使用套件新增字型"><a href="#使用套件新增字型" class="headerlink" title="使用套件新增字型"></a>使用套件新增字型</h2><p>官方也提供了另一種方法，如同之前響應式一樣，可以直接寫在 <code>tailwind.config.js</code> 裡面，當作套件來新增。</p>
+<p>如果要自訂義套件使用，要使用 <code>addBase</code> 這個方法，才能做使用喔！並且所有有使用 <code>addBase</code> 產生的樣式，都會被加到 <code>base</code> 的樣式中。下方範例就是將自訂義 <code>h1</code>~<code>h3</code> 字體大小。</p>
+<p>使用方法：</p>
+<ul>
+<li>在 plugins 的陣列中加上套件的方法，此範例稱作 <code>plugin()</code>，此名稱可自訂義。</li>
+<li>裡面使用一個函式，並給予一個物件，兩個屬性， <code>addBase</code>,<code>theme</code>。</li>
+<li>函式裡面需用 <code>addBase()</code> 這個方法，並且塞入物件，此物件就是要修改的文字屬性內容。</li>
+</ul>
+<p><strong>tailwind.config.js</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//引入剛剛新增的字型 plugin</span></span><br><span class="line"><span class="keyword">const</span> plugin = <span class="built_in">require</span>(<span class="string">"tailwindcss/plugin"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  purge: &#123;</span><br><span class="line">    enabled: <span class="literal">true</span>,</span><br><span class="line">    content: [<span class="string">"./*.html"</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">  darkMode: <span class="literal">false</span>, <span class="comment">// or 'media' or 'class'</span></span><br><span class="line">  theme: &#123;</span><br><span class="line">    extend: &#123;&#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  variants: &#123;</span><br><span class="line">    extend: &#123;&#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [</span><br><span class="line">    plugin(<span class="function"><span class="keyword">function</span> (<span class="params">&#123; addBase, theme &#125;</span>) </span>&#123;</span><br><span class="line">      addBase(&#123;</span><br><span class="line">        h1: &#123; <span class="attr">fontSize</span>: theme(<span class="string">"fontSize.2xl"</span>) &#125;,</span><br><span class="line">        h2: &#123; <span class="attr">fontSize</span>: theme(<span class="string">"fontSize.xl"</span>) &#125;,</span><br><span class="line">        h3: &#123; <span class="attr">fontSize</span>: theme(<span class="string">"fontSize.lg"</span>) &#125;,</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;),</span><br><span class="line">  ],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>完成後，就設定好文字的套件囉！</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a href="https://tailwindcss.com/docs/adding-base-styles" target="_blank" rel="noopener">Tailwind CSS - Adding Base Styles</a></li>
+<li><a href="https://ithelp.ithome.com.tw/articles/10244972" target="_blank" rel="noopener">【Tailwind CSS 教學 - 6】我知道你懂 CSS Reset，但你懂 base 全站樣式設定嗎？</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/TailwindCSS/" rel="tag"># TailwindCSS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/TailwindCSS/20210612/1338142949/" rel="prev" title="Tailwind CSS - 手機到桌上螢幕，所有的元素都能自適應">
+      <i class="fa fa-chevron-left"></i> Tailwind CSS - 手機到桌上螢幕，所有的元素都能自適應
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/TailwindCSS/20210614/1717980556/" rel="next" title="Tailwind CSS - 偽類變體 Pseudo-Class Variants">
+      Tailwind CSS - 偽類變體 Pseudo-Class Variants <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什麼是-Base-樣式"><span class="nav-number">1.</span> <span class="nav-text">什麼是 Base 樣式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#覆蓋原本-base-的設定"><span class="nav-number">2.</span> <span class="nav-text">覆蓋原本 base 的設定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#覆蓋預設文字樣式"><span class="nav-number">3.</span> <span class="nav-text">覆蓋預設文字樣式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用套件新增字型"><span class="nav-number">4.</span> <span class="nav-text">使用套件新增字型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">5.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">235</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hsiangfeng.github.io/" title="https:&#x2F;&#x2F;hsiangfeng.github.io&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gretema.github.io/" title="https:&#x2F;&#x2F;gretema.github.io&#x2F;" rel="noopener" target="_blank">馬格蕾特的前端勇者日誌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wcc723.github.io/" title="https:&#x2F;&#x2F;wcc723.github.io&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/TailwindCSS/20210614/1455247132/",
+            identifier: "TailwindCSS/20210614/1455247132/",
+            title: "Tailwind CSS - 增加 Base 樣式"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

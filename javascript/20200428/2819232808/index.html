@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="好用的 Moment.js 時間套件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Moment.js 套件筆記 - 使用 Moment.js 套件做一個電子時鐘">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;javascript&#x2F;20200428&#x2F;2819232808&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="好用的 Moment.js 時間套件">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;momentClock.jpg?alt&#x3D;media&amp;token&#x3D;7fb1360f-9e69-4d6c-83e3-b009ffb45fe8">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;moment.keyword.png?alt&#x3D;media&amp;token&#x3D;d9854c12-5b0f-49d3-948c-050a5931b7ff">
+<meta property="article:published_time" content="2020-04-28T14:44:28.000Z">
+<meta property="article:modified_time" content="2020-04-28T14:55:05.432Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Moment.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;momentClock.jpg?alt&#x3D;media&amp;token&#x3D;7fb1360f-9e69-4d6c-83e3-b009ffb45fe8">
+
+<link rel="canonical" href="https://hsuchihting.github.io/javascript/20200428/2819232808/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Moment.js 套件筆記 - 使用 Moment.js 套件做一個電子時鐘 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/javascript/20200428/2819232808/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          Moment.js 套件筆記 - 使用 Moment.js 套件做一個電子時鐘
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-04-28 22:44:28 / 修改時間：22:55:05" itemprop="dateCreated datePublished" datetime="2020-04-28T22:44:28+08:00">2020-04-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/javascript/20200428/2819232808/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="javascript/20200428/2819232808/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">好用的 Moment.js 時間套件</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/momentClock.jpg?alt=media&token=7fb1360f-9e69-4d6c-83e3-b009ffb45fe8" alt="moment.js"></p>
+<p>這次因為專案關係，研究了這個套件，之前就有聽過很好用，但一直沒實際使用過，查考網路很多教學都只有按照官網說明有哪些功能可以使用，但卻找不到會呈現在 HTML 的文章，想說趁著還熟悉就紀錄一下這次的製作方式。</p>
+<h2 id="契機"><a href="#契機" class="headerlink" title="契機"></a>契機</h2><p>事情是這樣，專案上需要一個時間可以自動更新，不需要手動操作的資料，所以我就找了這個套件來用。這次做了一個電子時鐘當作筆記。</p>
+<h2 id="關於-Moment-js-與下載套件"><a href="#關於-Moment-js-與下載套件" class="headerlink" title="關於 Moment.js 與下載套件"></a>關於 Moment.js 與下載套件</h2><p>這是一個關於日期與時間的套件，網路上非常多說明，就不再贅述，可以參照下方文章有更完整的說明。</p>
+<p><a href="https://momentjs.com/" target="_blank" rel="noopener">Moment.js 官方網站</a></p>
+<p><a href="https://ithelp.ithome.com.tw/articles/10208995" target="_blank" rel="noopener">moment.js - 關於時間的一切</a></p>
+<p><a href="https://codertw.com/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/122725/" target="_blank" rel="noopener">Moment.js 常見用法總結</a></p>
+<p>進入官網後有幾個安裝套件的方式：</p>
+<ol>
+<li><p>透過終端機安裝套件 <a href="https://momentjs.com/docs/" target="_blank" rel="noopener">https://momentjs.com/docs/</a> 方法有很多，可以進入官網看。</p>
+</li>
+<li><p>透過 cdnjs</p>
+</li>
+</ol>
+<p>moment.min.js (普通的套件)</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">https://<span class="title">cdnjs.cloudflare.com</span>/<span class="title">ajax</span>/<span class="title">libs</span>/<span class="title">moment.js</span>/2.24.0/<span class="title">moment.min.js</span></span></span><br></pre></td></tr></table></figure>
+
+<p>moment-with-locales.min.js (有含時區的套件)</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">https://<span class="title">cdnjs.cloudflare.com</span>/<span class="title">ajax</span>/<span class="title">libs</span>/<span class="title">moment.js</span>/2.24.0/<span class="title">moment</span>-<span class="title">with</span>-<span class="title">locales.min.js</span></span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>直接下載套件，並安裝到 js 資料夾中。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"js/moment.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>然後加入這段其實就可以使用 moment.js 套件了，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">moment();</span><br></pre></td></tr></table></figure>
+
+<p>對了!要跟 jQuery 一樣放在 <code>head</code> 裡面，不然會找不到核心， <code>console</code> 會跳錯！是可以在 <code>console</code> 裡面看到時間了…</p>
+<p>但是，最重要的是要讓它在 HTML 上呈現阿…</p>
+<h2 id="進入正題"><a href="#進入正題" class="headerlink" title="進入正題"></a>進入正題</h2><p>這次要做一個電子時鐘，有小時，有分鐘，有秒數，所以這邊會使用到 <code>setInterval()</code> 的用法，是固定延遲了某段時間之後，才去執行對應的程式碼，然後「不斷循環」。與 <code>setTimeout()</code> 不同之處是 <code>setTimeout()</code> 只會執行一次就結束，而 <code>setInterval()</code> 則是會在間隔固定的時間不斷重複。</p>
+<blockquote>
+<p>引用文章: <a href="https://kuro.tw/posts/2019/02/23/%E8%AB%87%E8%AB%87-JavaScript-%E7%9A%84-setTimeout-%E8%88%87-setInterval/" target="_blank" rel="noopener">談談 JavaScript 的 setTimeout 與 setInterval</a></p>
+</blockquote>
+<p>首先在 HTML 綁定一個 <code>id=&quot;clock&quot;</code> 。</p>
+<p>JS 也同步綁定一個這個 <code>id</code>，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> clock = <span class="built_in">document</span>.getElementById(<span class="string">"clock"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>並利用 <code>setInterval()</code> 來製造一秒跳一次的效果，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">setInterval(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> time = moment();</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"time is being updated"</span>); <span class="comment">//會看到文字旁邊會有數字一秒跳一下</span></span><br><span class="line">&#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+
+<p>這時官方語法有一個是 <code>format();</code>，是讓我們可以閱讀的格式，會呈現完整的日期與時間，</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">moment().<span class="built_in">format</span>();</span><br></pre></td></tr></table></figure>
+
+<p>所以把剛剛宣告的變數後面加上 <code>format();</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> readTime = time.format();</span><br><span class="line"><span class="built_in">console</span>.log(readTime); <span class="comment">//就會看到時間格式了 2020-04-28T22:22:03+08:00</span></span><br></pre></td></tr></table></figure>
+
+<p>但陽春一點的電子鐘，只有時間還有制度 (12/24hr)，依照官網所說明的我們這邊在 <code>format();</code>裡面加上 <code>&quot;hh:mm:ss A&quot;</code></p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/moment.keyword.png?alt=media&token=d9854c12-5b0f-49d3-948c-050a5931b7ff" alt="moment.js keyword"></p>
+<blockquote>
+<p>補充：<br>A: 顯示大寫的 AM/PM<br>a: 顯示小寫的 am/pm</p>
+</blockquote>
+<p>完成後在 console 應該會得到我們想要的樣子，最後終於要印在網頁上啦!!只要加上最基本的語法，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clock.textContent = readTime;</span><br></pre></td></tr></table></figure>
+
+<p>目前打完的完整程式碼：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> clock = <span class="built_in">document</span>.getElementById(<span class="string">"clock"</span>);</span><br><span class="line">setInterval(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> time = moment();</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"time is being updated"</span>);</span><br><span class="line">  <span class="keyword">let</span> readTime = time.format();</span><br><span class="line">  <span class="built_in">console</span>.log(readTime);</span><br><span class="line">  clock.textContent = readTime;</span><br><span class="line">&#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+
+<p>這樣就完成了!!</p>
+<p>但是，這樣的程式碼太凌亂，另外建立一個具名函式，在將這個具名函式放到 setInterval() 的函式內，並且最後在執行這個函式，這樣程式碼既簡潔也好閱讀。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> clock = <span class="built_in">document</span>.getElementById(<span class="string">"clock"</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateTime</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> time = moment();</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"time is being updated"</span>);</span><br><span class="line">  <span class="keyword">let</span> readTime = time.format(<span class="string">"hh:mm:ss A"</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(readTime);</span><br><span class="line">  clock.textContent = readTime;</span><br><span class="line">&#125;</span><br><span class="line">setInterval(updateTime, <span class="number">1000</span>);</span><br><span class="line">updateTime();</span><br></pre></td></tr></table></figure>
+
+<p>CodePen <a href="https://codepen.io/hnzxewqw/pen/zYvzjNG" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/zYvzjNG</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/Moment-js/" rel="tag"># Moment.js</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/vue-js/20200427/1872522243/" rel="prev" title="Vue 筆記 - 使用 v-on 處理互動式行為">
+      <i class="fa fa-chevron-left"></i> Vue 筆記 - 使用 v-on 處理互動式行為
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/c/20200428/284475535/" rel="next" title="C# 筆記 - 類別">
+      C# 筆記 - 類別 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#契機"><span class="nav-number">1.</span> <span class="nav-text">契機</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#關於-Moment-js-與下載套件"><span class="nav-number">2.</span> <span class="nav-text">關於 Moment.js 與下載套件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#進入正題"><span class="nav-number">3.</span> <span class="nav-text">進入正題</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">235</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hsiangfeng.github.io/" title="https:&#x2F;&#x2F;hsiangfeng.github.io&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gretema.github.io/" title="https:&#x2F;&#x2F;gretema.github.io&#x2F;" rel="noopener" target="_blank">馬格蕾特的前端勇者日誌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wcc723.github.io/" title="https:&#x2F;&#x2F;wcc723.github.io&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/javascript/20200428/2819232808/",
+            identifier: "javascript/20200428/2819232808/",
+            title: "Moment.js 套件筆記 - 使用 Moment.js 套件做一個電子時鐘"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

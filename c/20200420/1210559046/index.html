@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="0 基礎介紹 C#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C# 筆記 - C# 語言的基本認識">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;c&#x2F;20200420&#x2F;1210559046&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="0 基礎介紹 C#">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;robertlan.com&#x2F;wp-content&#x2F;uploads&#x2F;2018&#x2F;09&#x2F;C-1024x384.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;ithelp.ithome.com.tw&#x2F;upload&#x2F;images&#x2F;20190903&#x2F;20120055SKBEyvMP6B.png">
+<meta property="article:published_time" content="2020-04-20T14:53:57.000Z">
+<meta property="article:modified_time" content="2020-04-28T14:48:24.768Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="C#">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;robertlan.com&#x2F;wp-content&#x2F;uploads&#x2F;2018&#x2F;09&#x2F;C-1024x384.png">
+
+<link rel="canonical" href="https://hsuchihting.github.io/c/20200420/1210559046/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>C# 筆記 - C# 語言的基本認識 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/c/20200420/1210559046/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          C# 筆記 - C# 語言的基本認識
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-04-20 22:53:57" itemprop="dateCreated datePublished" datetime="2020-04-20T22:53:57+08:00">2020-04-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-04-28 22:48:24" itemprop="dateModified" datetime="2020-04-28T22:48:24+08:00">2020-04-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index">
+                    <span itemprop="name">C#</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/c/20200420/1210559046/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="c/20200420/1210559046/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">0 基礎介紹 C#</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://robertlan.com/wp-content/uploads/2018/09/C-1024x384.png" alt="C# ASP.NET"></p>
+<p>C# 是微軟推出的一種基於 <strong>.NET 框架</strong>的、<strong>物件導向</strong>的進階程式語言。C# 以 .NET 框架類別館作為基礎，擁有類似 Visual Basic 的快速開發能力。C# 由安德斯·海爾斯伯格主持開發，微軟在 2000 年發布了這種語言，希望藉助這種語言來取代 Java。 C# 已經成為 ECMA 國際和國際標準組織的標準規範。</p>
+<p><a href="https://zh.wikipedia.org/wiki/C%E2%99%AF" target="_blank" rel="noopener">若要看更多關於 C# 的資訊，可見維基百科</a></p>
+<h2 id="何謂-C"><a href="#何謂-C" class="headerlink" title="何謂 C#"></a>何謂 C#</h2><ol>
+<li><p>C# ( 念法為 C Sharp )。源自於 C 語言。</p>
+</li>
+<li><p>C# 為<strong>強型別的語言</strong>，指的是每一個物件都<strong>必須</strong>指定型別。使用前你要先幫它規定好，該是整數就是整數 ( int )，該是字串就是字串 ( string )，要把整數當成字串用，就需要使用<strong>轉型</strong>。在各型別的<strong>繼承關係</strong>中，最上層的型別是 Object，意即，所有的東西都是物件。</p>
+</li>
+<li><p>C# 副檔名為 .cs，應用範圍廣，如網頁、大型作業系統、小型嵌入式系統…等皆可以用其來開發。</p>
+</li>
+<li><p>為了確保 C# 程式和庫能夠隨著時間的推移以相容的方式發展，在 C# 設計中，已非常強調版本控制。 許多程式設計語言很少注意這個問題。 因此，引入依賴庫的較新版本時，用這些其他語言編寫的程式中斷的頻率超過必要。 C# 設計中受版本控制注意事項直接影響的方面包括單獨 <code>virtual</code> 和 <code>override</code> 修改器、方法重載解析規則以及對顯式介面成員聲明的支援。</p>
+</li>
+</ol>
+<h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h2><p>以下為 C# 官方起手式的寫法，並附上說明：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title">Hello</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        Console.WriteLine(<span class="string">"Hello, World"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="using"><a href="#using" class="headerlink" title="using"></a>using</h2><p>寫在最上方用來匯入函式庫(其他命名空間)使用，這也是 <code>using</code> 最常用的用法。</p>
+<ul>
+<li>為什麼要匯入其他函式?</li>
+</ul>
+<p>用法類似寫 SCSS 使用的 <code>import</code> ，匯入外部程式碼，就可以直接在程式中使用命名空間裡的型別，而不用指定型別的詳細空間，以縮短程式碼。</p>
+<h2 id="namespace-命名空間"><a href="#namespace-命名空間" class="headerlink" title="namespace 命名空間"></a>namespace 命名空間</h2><p>通常會在 <code>using System</code> 之後，在 <code>class</code> 之前，打包程式碼的空間，把相同功能者聚集在一起，用 <code>namespace</code> 名稱 <code>{ }</code> 一組大括號包起來，可以自訂義名稱，預設建立時會設定的跟專案( project )名稱一樣，當其他地方要用到的時候可以呼叫這個名字，如上方 using 後方也都是命名空間。<strong>用來指名程式所屬範圍，避免相同名稱類別產生衝突，可以控制類別的範圍。</strong> 一個檔案只有一個命名空間。</p>
+<h2 id="class"><a href="#class" class="headerlink" title="class"></a>class</h2><ul>
+<li>開頭要使用 <code>using</code>, <code>System</code> 代表使用這個命名空間，命名空間包含數個型別 (如程式中參考的 <code>Console</code> 類別)，和數個其他命名空間 (如 <code>IO</code> 和 <code>Collections</code>)。並且每一段程式碼要用 <code>;</code> 分號結尾。</li>
+<li>如上方簡介提到 C# 為強型別語言，也就是都要先定義類別 <code>(class)</code> 並給予一個變數名稱，這裡使用變數名稱為 <code>Hello</code>。</li>
+<li>C# 是階層式的語法，從宣告 <code>class</code> 開始，都要使用大括號包住下一層的程式碼。</li>
+</ul>
+<h3 id="static-void-Main-進入點寫法"><a href="#static-void-Main-進入點寫法" class="headerlink" title="static void Main(){ }: 進入點寫法"></a>static void Main(){ }: 進入點寫法</h3><p>整份程式碼非常多，C# 的世界裡，要告訴電腦從哪一行開始往下讀。這是 <code>Console</code> 模式裡進入點的寫法。C# 只能有一個進入點。</p>
+<ol>
+<li><strong>static</strong>: 一般類別中的方法必須先建立該類別的實體物件 (new) 後才能使用。若宣告為 <code>static</code>，<strong>代表一開始就存在在記憶體中</strong>，不用先建立 <code>Main()</code> 的物件實體就能叫用。</li>
+<li><strong>void</strong>: 表示不會傳回任何值。</li>
+<li><strong>Main()</strong>: 為程式開始執行的進入點。</li>
+<li><strong>string[] args</strong>:代表執行 <code>Main()</code> 方法時會將接在專案執行檔後面的參數置入 <code>args</code> 陣列。<code>args</code> 是一個字串陣列。</li>
+</ol>
+<blockquote>
+<p>在函式參數中看到這串參數 <code>string[] args</code> ，表示命令列引數是字串陣列，就是說，你在命令列 <code>[]</code> 裡輸入的引數可以使多個字串(在某種意義上意味著什麼都可以是命令列引數)。</p>
+<ul>
+<li>執行時會彈出命令視窗,你可以在那裡輸入一些引數，<code>string[] args</code> 指的就是你在命令視窗輸入的引數。<code>args</code> 是用來處理命令列引數的。命令列引數，就是你執行這個程式的時候給它傳的引數。它是可選項，不是必須。</li>
+</ul>
+</blockquote>
+<h3 id="Console"><a href="#Console" class="headerlink" title="Console"></a>Console</h3><p><code>Console.WritLine(&quot;Hello World!&quot;);</code></p>
+<ul>
+<li><strong>console</strong>: 是在 <code>console</code> 執行，所以目標就是 <code>console</code>。</li>
+<li><strong>WriteLine()</strong>: 這是一種方法，代表 <strong>輸出 + 換行</strong> 這個動作。<code>()</code> 內要放參數，或是我們要輸出的內容。由於我們要輸出的 <code>Hello World</code> 是字串，要用雙引號包起來。更多輸出內容可以參考 <a href="https://docs.microsoft.com/zh-tw/dotnet/api/system.console.writeline?view=netframework-4.8" target="_blank" rel="noopener">MSDN</a></li>
+<li>C#每行程式需要用分號 <code>;</code> 結尾。</li>
+</ul>
+<p><code>Console.Read();</code></p>
+<p>架構跟上方相同，<code>Read()</code> 這個方法是讀入主控台輸入的字串。這一行是因為，程式預設一執行完就會關閉視窗，會看不到輸出結果。加了這一行它就會等著我們輸入字串暫時不關閉視窗。也可以寫<code>Console.ReadKey();</code>，讀入一個鍵的意思。</p>
+<p>接著按下上方執行輸出結果，恭喜你完成 <code>Hello World!</code> 了!</p>
+<h2 id="C-讀入與輸出"><a href="#C-讀入與輸出" class="headerlink" title="C# 讀入與輸出"></a>C# 讀入與輸出</h2><h3 id="讀入"><a href="#讀入" class="headerlink" title="讀入"></a>讀入</h3><p><code>Console.Read()</code>: 讀入一個字元。<br><code>Console.ReadLine()</code>: 讀入一行字串。<br><code>Console.ReadKey()</code>: 讀入一個鍵。</p>
+<h3 id="輸出"><a href="#輸出" class="headerlink" title="輸出"></a>輸出</h3><p><code>Console.Write()</code>: 輸出一段字但不換行。<br><code>Console.WriteLine()</code>: 輸出一段字並換行。</p>
+<p>所呈現的程式碼內容會如下圖:</p>
+<p><img src="https://ithelp.ithome.com.tw/upload/images/20190903/20120055SKBEyvMP6B.png" alt="the first C#"></p>
+<blockquote>
+<p>以上為自學筆記，若有誤還請各位前輩提點指正。</p>
+</blockquote>
+<p>參考資料:</p>
+<p><a href="https://ithelp.ithome.com.tw/articles/10213373" target="_blank" rel="noopener">Day04-用 C#寫出第一個 Hello World 吧!(Console 模式/Visual Studio)</a></p>
+<p><a href="https://docs.microsoft.com/zh-tw/dotnet/csharp/tour-of-csharp/" target="_blank" rel="noopener">C# 語言之旅</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C#</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/javascript/20200420/4050508230/" rel="prev" title="JS 筆記 - 控制判斷(if、else if、switch)">
+      <i class="fa fa-chevron-left"></i> JS 筆記 - 控制判斷(if、else if、switch)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/c/20200420/951951981/" rel="next" title="C# 筆記 - 型別與變數">
+      C# 筆記 - 型別與變數 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#何謂-C"><span class="nav-number">1.</span> <span class="nav-text">何謂 C#</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hello-World"><span class="nav-number">2.</span> <span class="nav-text">Hello World</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#using"><span class="nav-number">3.</span> <span class="nav-text">using</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#namespace-命名空間"><span class="nav-number">4.</span> <span class="nav-text">namespace 命名空間</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#class"><span class="nav-number">5.</span> <span class="nav-text">class</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#static-void-Main-進入點寫法"><span class="nav-number">5.1.</span> <span class="nav-text">static void Main(){ }: 進入點寫法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Console"><span class="nav-number">5.2.</span> <span class="nav-text">Console</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-讀入與輸出"><span class="nav-number">6.</span> <span class="nav-text">C# 讀入與輸出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#讀入"><span class="nav-number">6.1.</span> <span class="nav-text">讀入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#輸出"><span class="nav-number">6.2.</span> <span class="nav-text">輸出</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">235</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hsiangfeng.github.io/" title="https:&#x2F;&#x2F;hsiangfeng.github.io&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gretema.github.io/" title="https:&#x2F;&#x2F;gretema.github.io&#x2F;" rel="noopener" target="_blank">馬格蕾特的前端勇者日誌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wcc723.github.io/" title="https:&#x2F;&#x2F;wcc723.github.io&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/c/20200420/1210559046/",
+            identifier: "c/20200420/1210559046/",
+            title: "C# 筆記 - C# 語言的基本認識"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

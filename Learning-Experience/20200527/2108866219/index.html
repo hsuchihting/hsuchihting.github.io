@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="放棄十年平面設計經驗，重新投入前端的世界">
+<meta property="og:type" content="article">
+<meta property="og:title" content="平面設計踏上前端工程師的旅程">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;Learning-Experience&#x2F;20200527&#x2F;2108866219&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="放棄十年平面設計經驗，重新投入前端的世界">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;800&#x2F;1*bYnk-x7sAtPOp-wuMTaKLw.jpeg">
+<meta property="article:published_time" content="2020-05-27T14:42:37.000Z">
+<meta property="article:modified_time" content="2020-05-27T15:21:13.490Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="前端學習之路">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;800&#x2F;1*bYnk-x7sAtPOp-wuMTaKLw.jpeg">
+
+<link rel="canonical" href="https://hsuchihting.github.io/Learning-Experience/20200527/2108866219/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>平面設計踏上前端工程師的旅程 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/Learning-Experience/20200527/2108866219/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          平面設計踏上前端工程師的旅程
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-05-27 22:42:37 / 修改時間：23:21:13" itemprop="dateCreated datePublished" datetime="2020-05-27T22:42:37+08:00">2020-05-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning-Experience/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning Experience</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/Learning-Experience/20200527/2108866219/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="Learning-Experience/20200527/2108866219/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">放棄十年平面設計經驗，重新投入前端的世界</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>從事平面設計超過 10 年，在大環境的衝擊下，因自己已經抵達薪資與該領域的瓶頸，想再往更高的專案挑戰也心有餘而力不足，在評估與考量之後，選擇前端工程師的道路！</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*bYnk-x7sAtPOp-wuMTaKLw.jpeg" alt="F2E"></p>
+<h2 id="為什麼選擇前端工程師？"><a href="#為什麼選擇前端工程師？" class="headerlink" title="為什麼選擇前端工程師？"></a>為什麼選擇前端工程師？</h2><p>從大學就開始做平面設計直到出社會，一路就走了 10 年，而在大環境的變遷與趨勢下，平面設計與印刷品需求逐年下滑，每一年都會想著如果不做設計我可以做什麼? 原本壓根沒有想過會跟寫程式語言有關係，但近五年遠端工作與電子載具儼然成為資訊戰國時代下的產物，各產業也都轉換呈現方式，現在只要透過網路就可以完成許多事情，民生生活習慣也因為數位化而轉變，這時我就在想，如果我可以將我的設計能力延伸到網頁或是載具上，也是非常不錯的一件事情。</p>
+<h2 id="投入前端工程師之前"><a href="#投入前端工程師之前" class="headerlink" title="投入前端工程師之前"></a>投入前端工程師之前</h2><p>面臨著工作案件越來越少，就覺得應該要趕快轉變跑道，面臨著太太半年後即將臨盆的景況，讓我開始評估<strong>實體課程</strong>與<strong>線上課程</strong>什麼比較適合我？但因為需要考量現實能力與狀況，在只有設計背景的條件下，我想說先從 UI 設計師下手，所以先購買了<strong>UI 入門講座的實體課程</strong>，用了三週的時間花了 18 個小時聽課 (共 16,000 元)，但聽完後發現還是在<strong>設計的領域打轉</strong>，這與我想要的不同，因為我覺得應該要用有<strong>設計的能力</strong>當作背景，去做一個跳脫設計從業人員的工作內容。</p>
+<h3 id="所以我又開始思考什麼才是我想要的。"><a href="#所以我又開始思考什麼才是我想要的。" class="headerlink" title="所以我又開始思考什麼才是我想要的。"></a>所以我又開始思考什麼才是我想要的。</h3><p>接著我查詢了資策會的相關課程，也去聽了說明會，了解若去資策會我可以學習成什麼樣的技能，是否會更接近前端工程師。聽完資策會後心裡抱持著遺憾，還是沒辦法投入資策會的學習，因時間上要投入半年，且學費昂貴又無法工作，這樣會沒有收入，面對半年後的小孩出生的景況，家庭張力會非常緊繃，但透過資策會老師說明，讓我確定程式語言會是很好的發展，且可以應用上過去設計的能力，所以這條路可以通。<br>但，怎麼走?</p>
+<h2 id="學習的過程"><a href="#學習的過程" class="headerlink" title="學習的過程"></a>學習的過程</h2><p>在排除資策會與民間電腦補習班的實體課程之後(因曾經在某電腦補習班吃虧過，故不考慮)，在網路上開始找尋線上課程，時間上比較可以配合。就發現了<strong>六角學院</strong>，看到<a href="https://www.hexschool.com/qa/how-to.html" target="_blank" rel="noopener">邁向前端工程師/設計師之路</a>的地圖，讓我覺得我好像可以從網頁設計師開始，畢竟我是非資訊相關科系畢業，要一頭栽入程式的世界好像離我太遠，所以我就先購買了<a href="https://shop.hexschool.com/order/create?order=z_bs4_html_jquery_rwd&coupon_code=COUPON_2018_HEXSCHOOL" target="_blank" rel="noopener">網頁設計師</a>的課程，就在投入近半年的時間，發現好像可以往前端工程師的領域邁進，所以就把其他與前端工程師相關的課程都註冊了。</p>
+<h3 id="學習不會是一路順遂，但要定時定量"><a href="#學習不會是一路順遂，但要定時定量" class="headerlink" title="學習不會是一路順遂，但要定時定量"></a>學習不會是一路順遂，但要定時定量</h3><p>在沒有程式背景之下學習程式語言，我每一步都踩得戰競，深怕一鬆懈或分心，這段學習的時間就會拉得更長。因白天要工作的關係，我安排了一週六天晚上 9:00~12:00 的時間來學習，每個章節的小作業跟練習一定跟著登打一次，課程不懂的就反覆的多聽幾次，並且利用問答區詢問問題，並且把握一個原則：<strong>今天要比昨天的自己還要強</strong>。</p>
+<h3 id="對抗心魔的唯一辦法，就是丟掉羞恥心"><a href="#對抗心魔的唯一辦法，就是丟掉羞恥心" class="headerlink" title="對抗心魔的唯一辦法，就是丟掉羞恥心"></a>對抗心魔的唯一辦法，就是丟掉羞恥心</h3><p>一開始我不太問問題，因為覺得是自己資質不夠，怕問了蠢問題，但後來看到學員社團中大家卯起來問，還有跟老師與助教討論後，反正也沒人認識我，就算問了蠢問題其實也無妨，就這樣，只要有一點不懂，我就會寫在 CodePen 裡面並且提問，也透過提問來釐清自己的思緒，而不是一昧的求得解答。</p>
+<h3 id="師父引進門，修行在個人"><a href="#師父引進門，修行在個人" class="headerlink" title="師父引進門，修行在個人"></a>師父引進門，修行在個人</h3><p>如上面俗諺可知，老師、助教等教學資源都已經預備好，剩下就是要靠自己努力與前進，我是學習技術相關的人，我知道並不是學多少時間，或是學習多少技能就能進入該職場，而是對於這門技術的掌握度有多高，當面對專案時能不能貢獻己力在專案上，而不是拖垮整個團隊或共事的夥伴。<br>我從 2019.2.11 註冊六角學院，學習半年累積皮毛的程式概念與能力後，便積極參與許多學院舉辦的活動。</p>
+<h4 id="六角同學會"><a href="#六角同學會" class="headerlink" title="六角同學會"></a>六角同學會</h4><p>可與畢業且在業界的學長姐做交流，與正在學習路上的同學互相打氣，也看到學院為了這次實體同學會的精心策畫與努力！詳情可看<a href="https://hsuchihting.github.io/Learning-Experience/20200527/2006749370/">這篇</a></p>
+<h4 id="THE-F2E-精神時光屋"><a href="#THE-F2E-精神時光屋" class="headerlink" title="THE F2E 精神時光屋"></a>THE F2E 精神時光屋</h4><p>有超過 18 個頁面可以練習，這些如果通通都能完整地完成，能力一定大幅提升，我就是在<a href="https://hsuchihting.github.io/Hotel_booking/hotel_index.html">旅館訂房頁面</a>的作品中提升我自己的切版與 RWD 的能力，並且也學習到 JavaScript 一些基本的語法與 Git 的使用。</p>
+<h4 id="iT-邦幫忙鐵人賽"><a href="#iT-邦幫忙鐵人賽" class="headerlink" title="iT 邦幫忙鐵人賽"></a>iT 邦幫忙鐵人賽</h4><p>非常推薦參加的比賽，連續撰寫 30 天技術文或是學習筆記，一定會有大幅成長，並且這段過程中看到更多前端好手與神人在其中，跟著他們的思維脈絡學習，會加速成長!</p>
+<h4 id="線上直播研討會"><a href="#線上直播研討會" class="headerlink" title="線上直播研討會"></a>線上直播研討會</h4><p>非常推薦一定要參加，尤其是要累積更快速的技能與知識，投入一個半小時，勝過你自己學習好幾個小時。</p>
+<h2 id="不放手，直到前端工作到手"><a href="#不放手，直到前端工作到手" class="headerlink" title="不放手，直到前端工作到手"></a>不放手，直到前端工作到手</h2><p>經過了一年的學習與累積，我鼓起勇氣開始投遞履歷，並且也詢問校長作品強度，校長建議我可以直接寫履歷並給我相關資料參考，透過面試來了解自己跟產業的落差有多少，我感謝上帝，在經過一個月的投遞履歷，還有八場面試中，我拿到了第一份前端工程師的 offer，也正式踏入前端工程師的里程碑，但真正的挑戰是進入職場的開始。</p>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>我還有很多需要學習的，但積極的態度與對前端的熱情，一定要把握，要相信自己所做的是非常有前瞻性的工作內容，堅持不放棄，才是完成目標的唯一途徑。</p>
+<hr>
+<p>本文同步發布於 <a href="https://medium.com/@hsuchihting/%E5%B9%B3%E9%9D%A2%E8%A8%AD%E8%A8%88%E8%B8%8F%E4%B8%8A%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%AB%E7%9A%84%E6%97%85%E7%A8%8B-d0f226b74868" target="_blank" rel="noopener">Medium</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%89%8D%E7%AB%AF%E5%AD%B8%E7%BF%92%E4%B9%8B%E8%B7%AF/" rel="tag"># 前端學習之路</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/css/20200525/2231842812/" rel="prev" title="CSS 筆記 - box-shadow & drop-shadow 的差異">
+      <i class="fa fa-chevron-left"></i> CSS 筆記 - box-shadow & drop-shadow 的差異
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Learning-Experience/20200527/2006749370/" rel="next" title="首次參加六角學院同學會">
+      首次參加六角學院同學會 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#為什麼選擇前端工程師？"><span class="nav-number">1.</span> <span class="nav-text">為什麼選擇前端工程師？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#投入前端工程師之前"><span class="nav-number">2.</span> <span class="nav-text">投入前端工程師之前</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#所以我又開始思考什麼才是我想要的。"><span class="nav-number">2.1.</span> <span class="nav-text">所以我又開始思考什麼才是我想要的。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#學習的過程"><span class="nav-number">3.</span> <span class="nav-text">學習的過程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#學習不會是一路順遂，但要定時定量"><span class="nav-number">3.1.</span> <span class="nav-text">學習不會是一路順遂，但要定時定量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#對抗心魔的唯一辦法，就是丟掉羞恥心"><span class="nav-number">3.2.</span> <span class="nav-text">對抗心魔的唯一辦法，就是丟掉羞恥心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#師父引進門，修行在個人"><span class="nav-number">3.3.</span> <span class="nav-text">師父引進門，修行在個人</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#六角同學會"><span class="nav-number">3.3.1.</span> <span class="nav-text">六角同學會</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#THE-F2E-精神時光屋"><span class="nav-number">3.3.2.</span> <span class="nav-text">THE F2E 精神時光屋</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iT-邦幫忙鐵人賽"><span class="nav-number">3.3.3.</span> <span class="nav-text">iT 邦幫忙鐵人賽</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#線上直播研討會"><span class="nav-number">3.3.4.</span> <span class="nav-text">線上直播研討會</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不放手，直到前端工作到手"><span class="nav-number">4.</span> <span class="nav-text">不放手，直到前端工作到手</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#結語"><span class="nav-number">5.</span> <span class="nav-text">結語</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">235</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hsiangfeng.github.io/" title="https:&#x2F;&#x2F;hsiangfeng.github.io&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gretema.github.io/" title="https:&#x2F;&#x2F;gretema.github.io&#x2F;" rel="noopener" target="_blank">馬格蕾特的前端勇者日誌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wcc723.github.io/" title="https:&#x2F;&#x2F;wcc723.github.io&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/Learning-Experience/20200527/2108866219/",
+            identifier: "Learning-Experience/20200527/2108866219/",
+            title: "平面設計踏上前端工程師的旅程"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

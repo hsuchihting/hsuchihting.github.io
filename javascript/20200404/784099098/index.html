@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="ES6 變數宣告觀念加強">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 筆記 - ES6：使用 let 與 const 宣告變數">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;javascript&#x2F;20200404&#x2F;784099098&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="ES6 變數宣告觀念加強">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;js-ES6.png?alt&#x3D;media&amp;token&#x3D;0bf94bee-c7cd-4cc0-b619-45e5bf71d07b">
+<meta property="article:published_time" content="2020-04-04T06:25:33.000Z">
+<meta property="article:modified_time" content="2020-04-28T14:46:31.156Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="ES6">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;js-ES6.png?alt&#x3D;media&amp;token&#x3D;0bf94bee-c7cd-4cc0-b619-45e5bf71d07b">
+
+<link rel="canonical" href="https://hsuchihting.github.io/javascript/20200404/784099098/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>JS 筆記 - ES6：使用 let 與 const 宣告變數 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/javascript/20200404/784099098/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          JS 筆記 - ES6：使用 let 與 const 宣告變數
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-04-04 14:25:33" itemprop="dateCreated datePublished" datetime="2020-04-04T14:25:33+08:00">2020-04-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-04-28 22:46:31" itemprop="dateModified" datetime="2020-04-28T22:46:31+08:00">2020-04-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/javascript/20200404/784099098/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="javascript/20200404/784099098/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">ES6 變數宣告觀念加強</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/js-ES6.png?alt=media&token=0bf94bee-c7cd-4cc0-b619-45e5bf71d07b" alt="ES6"></p>
+<p><code>var</code>、<code>let</code>、<code>const</code> 都是宣告變數的方法，倘若沒有使用變數宣告，就會變成<strong>全域變數</strong>，那這些宣告的方法中，在作用域中的範圍是哪些，來記錄一下釐清觀念。</p>
+<h2 id="var-let-的作用域差異"><a href="#var-let-的作用域差異" class="headerlink" title="var let 的作用域差異"></a>var let 的作用域差異</h2><p>下方有一個範例，宣告後並透過一個<a href="https://developer.mozilla.org/zh-TW/docs/Glossary/IIFE" target="_blank" rel="noopener">立即函式</a>來執行其內容，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mom = <span class="string">'mary'</span>;</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'mom'</span>) <span class="comment">// mary</span></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>立即函式</strong>：IIFE (Immediately Invoked Function Expression) 是一個定義完馬上就執行的 JavaScript function。</p>
+</blockquote>
+<p>可知會得到 <code>mary</code> 這個值，把 <code>var</code> 換成 <code>let</code> 也會有一樣的結果。<br>但若把 <code>console.log</code> 複製一個並移到最上面，結果會如何呢?</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'mom'</span>) <span class="comment">//mom is not defined</span></span><br><span class="line"><span class="keyword">let</span> mom = <span class="string">'mary'</span>;</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'mom'</span>) </span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<p>會直接跳錯，並顯示：<code>mom is not defined</code>，因為變數尚未定義，所以會找不到，但如果又把 <code>let</code> 換成 <code>var</code> 就會得到下方結果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'mom'</span>) <span class="comment">//undefined</span></span><br><span class="line"><span class="keyword">var</span> mom = <span class="string">'mary'</span>;</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'mom'</span>) <span class="comment">// mary</span></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<p>兩個都會被執行，不會跳錯，究竟 <code>not defined</code> 跟 <code>undefined</code> 的差別在哪裡呢? 這在開發時檢查會很常遇到，這邊紀錄一下。</p>
+<h3 id="undefined"><a href="#undefined" class="headerlink" title="undefined"></a>undefined</h3><p>記憶體已經準備好空間，但讀不到相關資料，之所以 <code>var</code> 可以抓到 <code>undefined</code>，是 <strong>Hoisting</strong> 向上提升的特性。</p>
+<blockquote>
+<p>Hoisting 向上提升：在變數與函數宣告時，會在編譯階段就被放入記憶體。</p>
+</blockquote>
+<h3 id="not-defined"><a href="#not-defined" class="headerlink" title="not defined"></a>not defined</h3><p>記憶體還沒有準備空間，所以沒辦法抓取資料到記憶體。</p>
+<p>為了<strong>避免汙染全域</strong>，現在都會建議使用 <code>let</code>。</p>
+<h2 id="var-與-let-的作用域"><a href="#var-與-let-的作用域" class="headerlink" title="var 與 let 的作用域"></a>var 與 let 的作用域</h2><p>透過下方 function 的範例，來了解，<code>var</code> 與 <code>let</code> 的作用域範圍。</p>
+<h3 id="var-的作用域範圍是-function-scope"><a href="#var-的作用域範圍是-function-scope" class="headerlink" title="var 的作用域範圍是 function scope"></a>var 的作用域範圍是 function scope</h3><p>若是在 function 內所宣告的 <code>var</code>，皆會被影響，若重複宣告變數的值，後宣告的變數內容會去<strong>覆蓋</strong>這個 function 內先前所宣告的變數內容。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">funA</span> </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> name = <span class="string">'小明'</span>;</span><br><span class="line">  <span class="keyword">if</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">  <span class="keyword">var</span> name = <span class="string">'大明'</span>;	</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log (name); <span class="comment">// '大明'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="let-的作用域範圍是-block"><a href="#let-的作用域範圍是-block" class="headerlink" title="let 的作用域範圍是 block"></a>let 的作用域範圍是 block</h3><p>若是在 function 內使用 <code>let</code> ，只會讀取該<strong>「大括號」</strong>的內變數內容。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">funA</span> </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> name = <span class="string">'小明'</span>;</span><br><span class="line">  <span class="keyword">if</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">  <span class="keyword">let</span> name = <span class="string">'大明'</span>;	</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log (name); <span class="comment">// '小明'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由此可知，<code>var</code> 因為比較容易汙染到全域，所以使用 <code>let</code> 會比較容易管理 function 的內容。</p>
+<h2 id="var-與-let-經典的-for-迴圈範例"><a href="#var-與-let-經典的-for-迴圈範例" class="headerlink" title="var 與 let 經典的 for 迴圈範例"></a>var 與 let 經典的 for 迴圈範例</h2><p>此範例希望出現的是在 console 內顯示 「這是第幾次執行」的文字，並且 <code>i</code> 的內容會是 0~9，所以預期的結果應該如下：</p>
+<blockquote>
+<p>這是第0次執行<br>這是第1次執行<br>這是第2次執行<br>這是第3次執行<br>這是第4次執行<br>這是第5次執行<br>這是第6次執行<br>這是第7次執行<br>這是第8次執行<br>這是第9次執行</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">  setTimeout (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'這是第'</span>+i+<span class="string">'次執行'</span>)</span><br><span class="line">  &#125;,<span class="number">10</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可看到一個 for 迴圈裏面有一個非同步事件，並且這個 for 迴圈並沒有被 function 包住，是直接執行的，邏輯上 setTimeout 的位置應該在 for 迴圈之外，如下程式碼：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;</span><br><span class="line">setTimeout (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">//應該在 i 加總完之後，才在這裡執行</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'這是第'</span>+i+<span class="string">'次執行'</span>)</span><br><span class="line">	&#125;,<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+<p>透過第一範例知道這裡使用 <code>var</code> 宣告 <code>i</code> 的時候，此時 <code>i</code> 是全域變數，在 <code>console.log</code> 中輸入 window.i 時，會出現 10 的結果。所以 setTimeout 會執行的是全域變數底下的 <code>i</code>，並不會依序的執行，所以這並非預期出現的結果。</p>
+<p>但如果將 <code>var</code> 改成 <code>let</code>，作用域就會變成 block，就只會執行該大括號內的內容。所以就會得到預期的結果，並且在 console 中輸入 window.i 結果會出現 <code>undefined</code>。</p>
+<h2 id="const-的特性"><a href="#const-的特性" class="headerlink" title="const 的特性"></a>const 的特性</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">1</span>;</span><br><span class="line">a = <span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//2</span></span><br></pre></td></tr></table></figure>
+<p>在開發人員工具，就會出現跳錯的訊息，</p>
+<p><code>Uncaught SyntaxError: Identifier &#39;a&#39; has already been declared</code></p>
+<p>所以只要是不能變更的資訊，就可以使用 <code>const</code> 來宣告。(例如 AJAX 中的 API 網址。)</p>
+<h3 id="但是-const-宣告的物件是可以修改內容的"><a href="#但是-const-宣告的物件是可以修改內容的" class="headerlink" title="但是 const 宣告的物件是可以修改內容的"></a>但是 const 宣告的物件是可以修改內容的</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> family = &#123;</span><br><span class="line">  mom: <span class="string">'媽媽'</span>,</span><br><span class="line">	son: <span class="string">'兒子'</span>,</span><br><span class="line">	sister: <span class="string">'妹妹'</span></span><br><span class="line">&#125;;</span><br><span class="line">family.dad = <span class="string">'爸爸'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(family); </span><br><span class="line"></span><br><span class="line"><span class="comment">//就會得到 </span></span><br><span class="line"><span class="comment">//mom: "媽媽"</span></span><br><span class="line"><span class="comment">//son: "兒子"</span></span><br><span class="line"><span class="comment">//sister: "妹妹"</span></span><br><span class="line"><span class="comment">//dad: "爸爸"</span></span><br></pre></td></tr></table></figure>
+<p>因為 <code>const</code> 物件是傳參考，不是傳值，所以並非改變物件中的值，所以是可以的。<br>但如果把上方物件修改成： <code>family = {};</code><br>因為修改了值，就會跳錯。</p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>了解 <code>var</code> 跟 <code>let</code> 作用域的概念以及 <code>const</code> 的特行，在使用 function 上，比較不會因為程式碼一多，就會搞亂。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/ES6/" rel="tag"># ES6</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/javascript/20200331/3067475316/" rel="prev" title="JS 筆記 - Object 物件的基本認識">
+      <i class="fa fa-chevron-left"></i> JS 筆記 - Object 物件的基本認識
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/vue-js/20200404/497821688/" rel="next" title="Vue 筆記 - 使用 vue CLI 建立 SPA 專案">
+      Vue 筆記 - 使用 vue CLI 建立 SPA 專案 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#var-let-的作用域差異"><span class="nav-number">1.</span> <span class="nav-text">var let 的作用域差異</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">undefined</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#not-defined"><span class="nav-number">1.2.</span> <span class="nav-text">not defined</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#var-與-let-的作用域"><span class="nav-number">2.</span> <span class="nav-text">var 與 let 的作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#var-的作用域範圍是-function-scope"><span class="nav-number">2.1.</span> <span class="nav-text">var 的作用域範圍是 function scope</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#let-的作用域範圍是-block"><span class="nav-number">2.2.</span> <span class="nav-text">let 的作用域範圍是 block</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#var-與-let-經典的-for-迴圈範例"><span class="nav-number">3.</span> <span class="nav-text">var 與 let 經典的 for 迴圈範例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#const-的特性"><span class="nav-number">4.</span> <span class="nav-text">const 的特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#但是-const-宣告的物件是可以修改內容的"><span class="nav-number">4.1.</span> <span class="nav-text">但是 const 宣告的物件是可以修改內容的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#心得"><span class="nav-number">5.</span> <span class="nav-text">心得</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">235</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hsiangfeng.github.io/" title="https:&#x2F;&#x2F;hsiangfeng.github.io&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gretema.github.io/" title="https:&#x2F;&#x2F;gretema.github.io&#x2F;" rel="noopener" target="_blank">馬格蕾特的前端勇者日誌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wcc723.github.io/" title="https:&#x2F;&#x2F;wcc723.github.io&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/javascript/20200404/784099098/",
+            identifier: "javascript/20200404/784099098/",
+            title: "JS 筆記 - ES6：使用 let 與 const 宣告變數"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

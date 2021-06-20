@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="使用 TodoList 綜合練習之前的學習">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 筆記 - 做一個 TodoList">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;javascript&#x2F;20201026&#x2F;3745026985&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="使用 TodoList 綜合練習之前的學習">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;todolist.png?alt&#x3D;media&amp;token&#x3D;049c8df9-9ab8-41b3-b321-8166aeb6432d">
+<meta property="article:published_time" content="2020-10-26T14:18:38.000Z">
+<meta property="article:modified_time" content="2020-10-26T14:33:45.410Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;todolist.png?alt&#x3D;media&amp;token&#x3D;049c8df9-9ab8-41b3-b321-8166aeb6432d">
+
+<link rel="canonical" href="https://hsuchihting.github.io/javascript/20201026/3745026985/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>JS 筆記 - 做一個 TodoList | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/javascript/20201026/3745026985/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          JS 筆記 - 做一個 TodoList
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-10-26 22:18:38 / 修改時間：22:33:45" itemprop="dateCreated datePublished" datetime="2020-10-26T22:18:38+08:00">2020-10-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/javascript/20201026/3745026985/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="javascript/20201026/3745026985/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">使用 TodoList 綜合練習之前的學習</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="練習-TodoList-的原因"><a href="#練習-TodoList-的原因" class="headerlink" title="練習 TodoList 的原因"></a>練習 TodoList 的原因</h2><p>TodoList 看似簡單的介面，但其實隱藏了很多小細節，記錄一下這次的練習，預計要完成的畫面如下：<br><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/todolist.png?alt=media&token=049c8df9-9ab8-41b3-b321-8166aeb6432d" alt="todolist"></p>
+<hr>
+<h2 id="練習重點"><a href="#練習重點" class="headerlink" title="練習重點"></a>練習重點</h2><ul>
+<li>切版的熟悉度。</li>
+<li>綁定 DOM 元素。</li>
+<li>紀錄資料再 <code>localStorage。</code></li>
+<li>透過 <code>setItem</code> 與 <code>getItem</code> 實現新增待辦。</li>
+<li>透過 <code>dataset</code> 與 <code>splice</code> 屬性抓出排序與刪除資料。</li>
+</ul>
+<h2 id="製作-TodoList"><a href="#製作-TodoList" class="headerlink" title="製作 TodoList"></a>製作 TodoList</h2><blockquote>
+<p>navbar 用 Bootstrap 4 套件很快速就可以完成了，相關的 CSS 再看 codepen，就不做太多陳述。</p>
+</blockquote>
+<p>下方的 content 分成兩欄，這邊稍微紀錄一下：</p>
+<p>左邊 <code>siderbar</code> 設定為 <code>Width:30%</code></p>
+<p>右邊 <code>inputbar</code> 為 <code>width: 67%</code>，再往左邊推 <code>margin-left: 3%</code>，總共為 <code>70%</code>。</p>
+<p>因為最下面的 <code>taskList</code> 清單想要再 <code>inputbar</code> 下方，且限制其寬度， CSS 設定為 <code>width: 70%</code> 跟 <code>margin-left: 26%</code>。</p>
+<h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"siderbar"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>今天<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>明天<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>未來七天<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"inputbar"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"task"</span> <span class="attr">id</span>=<span class="string">"task"</span> <span class="attr">placeholder</span>=<span class="string">"請輸入待辦事項"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn"</span>&gt;</span><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"fas fa-plus"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- input --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"taskList"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="SCSS"><a href="#SCSS" class="headerlink" title="SCSS"></a>SCSS</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.content</span> &#123;</span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="number">3%</span>;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line"></span><br><span class="line">  .siderbar &#123;</span><br><span class="line">    <span class="selector-tag">width</span>: 30%;</span><br><span class="line">    <span class="selector-tag">line-height</span>: 2;</span><br><span class="line">    <span class="selector-tag">margin-right</span>: 0;</span><br><span class="line"></span><br><span class="line">    <span class="selector-tag">a</span> &#123;</span><br><span class="line">      <span class="attribute">text-decoration</span>: none;</span><br><span class="line">      <span class="attribute">color</span>: $primary-color;</span><br><span class="line"></span><br><span class="line">      &amp;:hover &#123;</span><br><span class="line">        <span class="selector-tag">font-weight</span>: <span class="selector-tag">bold</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="selector-class">.inputbar</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">margin-left</span>: <span class="number">3%</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">42px</span>;</span><br><span class="line">    //限制高度，就能讓 inputbar 的高度固定，不會受 flex 影響</span><br><span class="line"></span><br><span class="line">    <span class="selector-tag">input</span> &#123;</span><br><span class="line">      <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">      <span class="attribute">margin-right</span>: <span class="number">0.3em</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="selector-class">.btn</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: $primary-color;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">42px</span>;</span><br><span class="line"></span><br><span class="line">    &amp;:hover &#123;</span><br><span class="line">      background-color: (darken($color: $primary-color, $amount: 20%));</span><br><span class="line">      <span class="selector-tag">color</span>: <span class="selector-id">#fff</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上是<strong>靜態頁面</strong>會呈現的樣子，但 todolist 需要有互動，可增加與刪除事項的功能，所以要加入 JavaScript。</p>
+<h3 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h3><p>先綁定資料，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.querySelector(<span class="string">".btn"</span>);</span><br><span class="line"><span class="comment">//綁定 .btn</span></span><br><span class="line"><span class="keyword">var</span> input = <span class="built_in">document</span>.querySelector(<span class="string">"#task"</span>);</span><br><span class="line"><span class="comment">//綁定 input 中的 id</span></span><br><span class="line"><span class="keyword">var</span> list = <span class="built_in">document</span>.querySelector(<span class="string">".taskList"</span>);</span><br><span class="line"><span class="comment">//綁定新增 todos 的清單 .taskList</span></span><br></pre></td></tr></table></figure>
+
+<p>宣告 getData 變數作為從 <code>localStorage</code> 取出 <code>value</code>，typeof 會是 string，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> getData = localStorage.getItem(<span class="string">"task"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>先宣告一個 getDataAry = 空值，如果 getData 是 true，會去解析 getDataAry 字串資料成陣列，否則就會空陣列。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> getDataAry = <span class="string">""</span>;</span><br><span class="line"><span class="keyword">if</span> (getData) &#123;</span><br><span class="line">  getDataAry = <span class="built_in">JSON</span>.parse(getData); <span class="comment">//將字串轉成陣列</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  getDataAry = [];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> taskList = getDataAry; <span class="comment">//陣列資料</span></span><br></pre></td></tr></table></figure>
+
+<p>更新清單，組完字串後，會放在 <code>.taskList</code> 的 <code>ul</code> 中，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">updateList(); <span class="comment">//讓後面新增與刪除的功能也吃到 funciton</span></span><br><span class="line"><span class="comment">//更新清單</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateList</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> len = taskList.length; <span class="comment">//計算 taskList 的長度</span></span><br><span class="line">  <span class="keyword">var</span> str = <span class="string">""</span>; <span class="comment">//組字串</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">    str += <span class="string">`</span></span><br><span class="line"><span class="string">        &lt;li&gt;</span></span><br><span class="line"><span class="string">          &lt;a data-num=<span class="subst">$&#123;i&#125;</span>&gt;</span></span><br><span class="line"><span class="string">            &lt;i class='fas fa-times-circle'&gt;&lt;/i&gt;</span></span><br><span class="line"><span class="string">          &lt;/a&gt;<span class="subst">$&#123;taskList[i]&#125;</span></span></span><br><span class="line"><span class="string">        &lt;/li&gt;`</span>;</span><br><span class="line">    <span class="comment">//字串加總後會產生 li，並加入 a 連結，新增一個 data-num 作為陣列排序，加上陣列資料</span></span><br><span class="line">  &#125;</span><br><span class="line">  list.innerHTML = str; <span class="comment">//每次更新就存回 localStorage 印在網頁上成字串</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> taskListStr = <span class="built_in">JSON</span>.stringify(taskList); <span class="comment">//解析陣列成字串</span></span><br><span class="line">  localStorage.setItem(<span class="string">"task"</span>, taskListStr); <span class="comment">//把輸入的資料存到 localStorage 的 key, value</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>建立<strong>新增資料</strong>與<strong>刪除資料</strong>監聽事件，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">btn.addEventListener(<span class="string">"click"</span>, getInput, <span class="literal">false</span>);</span><br><span class="line"><span class="comment">//新增監聽按鈕，當有點擊事件時得到 input 的值</span></span><br><span class="line">list.addEventListener(<span class="string">"click"</span>, delTask, <span class="literal">false</span>);</span><br><span class="line"><span class="comment">//新增監聽清單，當點擊事件時刪除 list 的值</span></span><br></pre></td></tr></table></figure>
+
+<p>當使用者輸入資料，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInput</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(input.value);</span><br><span class="line">  <span class="keyword">var</span> text = input.value; <span class="comment">//簡易判斷是否為空值</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (text === <span class="string">""</span>) &#123;</span><br><span class="line">    <span class="comment">//如果 input 裡面是空值</span></span><br><span class="line">    alert(<span class="string">"您未輸入事項"</span>); <span class="comment">//會跳 alert 視窗</span></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//把 input 加入陣列</span></span><br><span class="line">  taskList.push(text); <span class="comment">//輸入的值丟回代辦事項的陣列</span></span><br><span class="line">  input.value = <span class="string">""</span>; <span class="comment">//清空輸入框</span></span><br><span class="line">  updateList();</span><br><span class="line">  <span class="comment">//重新更新清單</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>當使用者刪除資料，點擊到的 <code>nodeName</code> 為 <code>A</code> 或是 <code>I</code> 就中斷，造成點選<code>A</code>和 <code>I</code> 就結束動作，而點到後面文字，也就是 <code>LI</code> 則被刪除，所以要把刪除的動作放在 <code>if</code> 判斷內就能點 icon 圖示刪除 todo</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">delTask</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> current = e.target.nodeName; <span class="comment">//當刪除事件指的是自己的 nodeName</span></span><br><span class="line">  <span class="keyword">if</span> (current == <span class="string">"A"</span> || current == <span class="string">"I"</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> currentNum = e.target.dataset.num; <span class="comment">//選取到自定義的 data-num</span></span><br><span class="line">    taskList.splice(currentNum, <span class="number">1</span>); <span class="comment">//就刪除該筆的一筆資料</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  updateList(); <span class="comment">//重新更新清單</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>JS 的互動行為有點細，跟人腦思維不太一樣，要一個口令一個動作，也不用想得太難，要直觀一點，可能人腦的思維可以很快速的整合一件事情的內容，但 JS 是要透過很多的行為告訴電腦該怎麼完成這些很細的動作。很有趣的練習!!</p>
+<p>附上 codepen，可以玩玩看： <a href="https://codepen.io/hnzxewqw/pen/eYmRgoJ" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/eYmRgoJ</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/javascript/20201019/3849135081/" rel="prev" title="JS 筆記 - dataset 與 Array 的運用">
+      <i class="fa fa-chevron-left"></i> JS 筆記 - dataset 與 Array 的運用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/javascript/20201030/52463831/" rel="next" title="JS 筆記 - 使用 postman 編輯通訊 API">
+      JS 筆記 - 使用 postman 編輯通訊 API <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#練習-TodoList-的原因"><span class="nav-number">1.</span> <span class="nav-text">練習 TodoList 的原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#練習重點"><span class="nav-number">2.</span> <span class="nav-text">練習重點</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#製作-TodoList"><span class="nav-number">3.</span> <span class="nav-text">製作 TodoList</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML"><span class="nav-number">3.1.</span> <span class="nav-text">HTML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SCSS"><span class="nav-number">3.2.</span> <span class="nav-text">SCSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript"><span class="nav-number">3.3.</span> <span class="nav-text">JavaScript</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#結語"><span class="nav-number">4.</span> <span class="nav-text">結語</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">235</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hsiangfeng.github.io/" title="https:&#x2F;&#x2F;hsiangfeng.github.io&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gretema.github.io/" title="https:&#x2F;&#x2F;gretema.github.io&#x2F;" rel="noopener" target="_blank">馬格蕾特的前端勇者日誌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wcc723.github.io/" title="https:&#x2F;&#x2F;wcc723.github.io&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/javascript/20201026/3745026985/",
+            identifier: "javascript/20201026/3745026985/",
+            title: "JS 筆記 - 做一個 TodoList"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

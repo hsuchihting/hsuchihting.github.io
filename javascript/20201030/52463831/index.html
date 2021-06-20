@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="自薦資料庫與使用 POSTMAN 編輯 API">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 筆記 - 使用 postman 編輯通訊 API">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;javascript&#x2F;20201030&#x2F;52463831&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="自薦資料庫與使用 POSTMAN 編輯 API">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;xpEPDvU.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;JFxjAte.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;t8GAVkS.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;yJIeZja.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;en2SisW.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;o4Ekobn.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;GMpngqD.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;e047t5w.png">
+<meta property="article:published_time" content="2020-10-30T13:50:39.000Z">
+<meta property="article:modified_time" content="2021-01-27T04:39:55.715Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="vue.js">
+<meta property="article:tag" content="json-server">
+<meta property="article:tag" content="Postman">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;xpEPDvU.png">
+
+<link rel="canonical" href="https://hsuchihting.github.io/javascript/20201030/52463831/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>JS 筆記 - 使用 postman 編輯通訊 API | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/javascript/20201030/52463831/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          JS 筆記 - 使用 postman 編輯通訊 API
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-10-30 21:50:39" itemprop="dateCreated datePublished" datetime="2020-10-30T21:50:39+08:00">2020-10-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-01-27 12:39:55" itemprop="dateModified" datetime="2021-01-27T12:39:55+08:00">2021-01-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/javascript/20201030/52463831/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="javascript/20201030/52463831/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">自薦資料庫與使用 POSTMAN 編輯 API</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://i.imgur.com/xpEPDvU.png" alt="postman"></p>
+<p>使用 API 最常使用的方法，讀取、新增、編輯、刪除。<br>本次練習欄位會有排序、姓名、信箱等欄位，透過 json server 與 postman 來操作 API。</p>
+<h2 id="檔案初始化"><a href="#檔案初始化" class="headerlink" title="檔案初始化"></a>檔案初始化</h2><p>使用 node.js 設定檔案架構，所以請先安裝 <a href="https://nodejs.org/en/" target="_blank" rel="noopener">node.js</a>，打開終端機並輸入指令：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure>
+
+<p>然後一路 enter 到底，就會看到檔案列出現 <code>package.json</code> 檔案。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "name": "test", // 專案名稱</span><br><span class="line">  "version": "<span class="number">1</span>.<span class="number">0</span>.<span class="number">0</span>", //專案版本</span><br><span class="line">  "description": "", //專案簡介</span><br><span class="line">  "main": "index.js", //主程式</span><br><span class="line">  "scripts": &#123; //自訂 npm  指令</span><br><span class="line">    "test": "<span class="built_in">echo</span> \"Error: no test specified\" &amp;&amp; <span class="keyword">exit</span> <span class="number">1</span>"</span><br><span class="line">  &#125;,</span><br><span class="line">  "author": "", //作者</span><br><span class="line">  "license": "ISC", //出處</span><br><span class="line">  "dependencies": &#123; //使用的套件</span><br><span class="line">    "json-server": "^<span class="number">0</span>.<span class="number">16</span>.<span class="number">2</span>"</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>並修改下方這樣：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "name": "test",</span><br><span class="line">  "version": "<span class="number">1</span>.<span class="number">0</span>.<span class="number">0</span>",</span><br><span class="line">  "description": "api postman practice",</span><br><span class="line">  "scripts": &#123;</span><br><span class="line">    "json":"json-server --watch db.json --port <span class="number">3000</span>"</span><br><span class="line">  &#125;,</span><br><span class="line">  "author": "Tim",</span><br><span class="line">  "license": "MIT",</span><br><span class="line">  "dependencies": &#123;</span><br><span class="line">    "json-server": "^<span class="number">0</span>.<span class="number">16</span>.<span class="number">2</span>"</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>scripts 指令部份：執行自訂指令 json 時，會透過 <code>json-server</code> 套件執行 <code>watch</code> 來監看 <code>db.json</code> 這支檔案，並使用 <code>post:3000</code>，post 的路由位置可自訂。</p>
+</blockquote>
+<h2 id="json-server"><a href="#json-server" class="headerlink" title="json-server"></a>json-server</h2><p>完成後安裝 <code>json-server</code> ，輸入安裝指令：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i json-server</span><br></pre></td></tr></table></figure>
+
+<p>就會開始安裝，再安裝的同時順便建立一個 <code>json</code> 檔案，名稱為 <code>db.json</code> ，完成本地資料庫設建立。</p>
+<blockquote>
+<p>json 檔案內容為物件形式，需要注意的地方是<strong>屬性</strong>跟其<strong>值</strong>需要用雙引號。</p>
+</blockquote>
+<p>在 <code>db.json</code> 建立好的資料如下：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "contact":[</span><br><span class="line">    &#123;</span><br><span class="line">      "id":<span class="number">1</span>,</span><br><span class="line">      "name":"Tim",</span><br><span class="line">      "email":"timhsu@email.com"</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>post</code> 檔案時，不必給 <code>id</code> 的項目，因為 <code>id</code> 是資料庫自行管理的資料，新增資料後會自動加入。</p>
+<h2 id="執行-json-指令"><a href="#執行-json-指令" class="headerlink" title="執行 json 指令"></a>執行 json 指令</h2><p>使用剛剛自定義的指令</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run json</span><br></pre></td></tr></table></figure>
+
+<p>終端機最後跑完會出現下方資訊：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Resources</span><br><span class="line"><span class="function">  http://<span class="title">localhost</span>:3000/<span class="title">contact</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">  <span class="title">Home</span></span></span><br><span class="line"><span class="function">  <span class="title">http</span>://<span class="title">localhost</span>:3000</span></span><br></pre></td></tr></table></figure>
+
+<p>將 Home 的網址貼到瀏覽器，會得到下方頁面資訊，就代表成功了。</p>
+<p><img src="https://i.imgur.com/JFxjAte.png" alt="cut"></p>
+<p>可以看到在 Resources 中有幾個方法可以使用，等等會介紹較常使用的五個方法。</p>
+<p>輸入 Resources 的網址可以看到一開始建立的資料內容。</p>
+<blockquote>
+<p>注意：<code>npm run json</code> 要持續開著才可以正確開啟資料頁面在瀏覽器上。</p>
+<p><img src="https://i.imgur.com/t8GAVkS.png" alt="contact"></p>
+</blockquote>
+<h2 id="使用-postman"><a href="#使用-postman" class="headerlink" title="使用 postman"></a>使用 postman</h2><p>postman 下載<a href="https://www.postman.com/downloads/" target="_blank" rel="noopener">連結</a></p>
+<p>完成後打開會看到起始畫面：<br><img src="https://i.imgur.com/yJIeZja.png" alt="postman"></p>
+<p>就開始操作 API 吧！</p>
+<p>都貼上此網址</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">http://<span class="title">localhost</span>:3000/<span class="title">contact</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="GET-讀取資料"><a href="#GET-讀取資料" class="headerlink" title="GET 讀取資料"></a>GET 讀取資料</h2><p>顧名思義就是取得資料，選到 GET 方法再選擇 send，目前沒有指定任何編號，所以會得到所有資料，但目前預設只有一筆，所以<br>只會出現一筆資料。</p>
+<p><img src="https://i.imgur.com/en2SisW.png" alt="get"></p>
+<h2 id="POST-新增資料"><a href="#POST-新增資料" class="headerlink" title="POST 新增資料"></a>POST 新增資料</h2><p>將資料送出到數據庫，這邊選擇的界面不同，</p>
+<ol>
+<li>方法選擇 <code>POST</code></li>
+<li>標籤選到 <code>body</code>。</li>
+<li>再選到 <code>raw</code>。</li>
+<li>最後格式下拉選單選擇 <code>JSON</code>。</li>
+<li>並且輸入下方資訊。</li>
+<li><code>send</code> 資料後會得到下方畫面</li>
+</ol>
+<p><img src="https://i.imgur.com/o4Ekobn.png" alt="post"></p>
+<p>同樣的在 <code>db.json</code> 中會出現剛剛新增的資料。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "contact": [</span><br><span class="line">    &#123;</span><br><span class="line">      "id": <span class="number">1</span>,</span><br><span class="line">      "name": "Tim",</span><br><span class="line">      "email": "timhsu@email.com"</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      "name": "Timothy",</span><br><span class="line">      "email": "Timothy@email.com",</span><br><span class="line">      "id": <span class="number">2</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="DELETE-刪除資料"><a href="#DELETE-刪除資料" class="headerlink" title="DELETE 刪除資料"></a>DELETE 刪除資料</h2><p>刪除資料，只要在 API 後方加上資料編號就可以直接刪除。例如我想刪除第二筆資料，就可以像下圖一樣的設定。<br><img src="https://i.imgur.com/GMpngqD.png" alt="delete"></p>
+<h2 id="PATCH-更新指定資料"><a href="#PATCH-更新指定資料" class="headerlink" title="PATCH 更新指定資料"></a>PATCH 更新指定資料</h2><p>更新指定資料，這時要輸入要更新的資料編號，對應的網址為 <code>http://localhost:3000/contact/2</code></p>
+<p>把名字修改成 <code>bob</code>，就會變下方畫面。</p>
+<p><img src="https://i.imgur.com/e047t5w.png" alt="patch"></p>
+<h2 id="PUT-覆寫全部資料"><a href="#PUT-覆寫全部資料" class="headerlink" title="PUT 覆寫全部資料"></a>PUT 覆寫全部資料</h2><p>覆寫全部資料，方法如 <code>patch</code>。</p>
+<h3 id="但-PATCH-跟-PUT-不同之處"><a href="#但-PATCH-跟-PUT-不同之處" class="headerlink" title="但 PATCH 跟 PUT 不同之處"></a>但 PATCH 跟 PUT 不同之處</h3><p><code>PATCH</code> 是可以只更新指定資料，也就是今天我只想多一加一行新的資料可以使用 <code>PATCH</code>，不會更動到原本的其他資料。</p>
+<p><code>PUT</code> 會直接把原本的欄位資料整個覆蓋掉，也就是說如果今天不小心更新資料少了或多了資料，會把原本正確的資料都一併蓋掉，所以使用上要小心。</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><p><a href="https://ithelp.ithome.com.tw/articles/10205590" target="_blank" rel="noopener">總匯拼盤 - 家鄉通訊錄佐手作 API #1</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/vue-js/" rel="tag"># vue.js</a>
+              <a href="/tags/json-server/" rel="tag"># json-server</a>
+              <a href="/tags/Postman/" rel="tag"># Postman</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/javascript/20201026/3745026985/" rel="prev" title="JS 筆記 - 做一個 TodoList">
+      <i class="fa fa-chevron-left"></i> JS 筆記 - 做一個 TodoList
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/javascript/20201030/1732150077/" rel="next" title="JS 筆記 - JSON.parse, JSON.stringify">
+      JS 筆記 - JSON.parse, JSON.stringify <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#檔案初始化"><span class="nav-number">1.</span> <span class="nav-text">檔案初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#json-server"><span class="nav-number">2.</span> <span class="nav-text">json-server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#執行-json-指令"><span class="nav-number">3.</span> <span class="nav-text">執行 json 指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-postman"><span class="nav-number">4.</span> <span class="nav-text">使用 postman</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GET-讀取資料"><span class="nav-number">5.</span> <span class="nav-text">GET 讀取資料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#POST-新增資料"><span class="nav-number">6.</span> <span class="nav-text">POST 新增資料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DELETE-刪除資料"><span class="nav-number">7.</span> <span class="nav-text">DELETE 刪除資料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PATCH-更新指定資料"><span class="nav-number">8.</span> <span class="nav-text">PATCH 更新指定資料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PUT-覆寫全部資料"><span class="nav-number">9.</span> <span class="nav-text">PUT 覆寫全部資料</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#但-PATCH-跟-PUT-不同之處"><span class="nav-number">9.1.</span> <span class="nav-text">但 PATCH 跟 PUT 不同之處</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">10.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">235</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hsiangfeng.github.io/" title="https:&#x2F;&#x2F;hsiangfeng.github.io&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gretema.github.io/" title="https:&#x2F;&#x2F;gretema.github.io&#x2F;" rel="noopener" target="_blank">馬格蕾特的前端勇者日誌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wcc723.github.io/" title="https:&#x2F;&#x2F;wcc723.github.io&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/javascript/20201030/52463831/",
+            identifier: "javascript/20201030/52463831/",
+            title: "JS 筆記 - 使用 postman 編輯通訊 API"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

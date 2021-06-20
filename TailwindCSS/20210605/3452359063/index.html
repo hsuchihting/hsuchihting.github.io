@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="如何使用 Tailwind CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tailwind CSS - 起手式">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;TailwindCSS&#x2F;20210605&#x2F;3452359063&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="如何使用 Tailwind CSS">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;tools.wingzero.tw&#x2F;assets&#x2F;upload&#x2F;1611643654838_0.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;KarsOIk.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;lcHM6lM.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;2Q2M5z4.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;WNHP5Zo.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;UXDIzZn.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;yAsShBM.png">
+<meta property="article:published_time" content="2021-06-05T12:47:03.000Z">
+<meta property="article:modified_time" content="2021-06-14T07:56:10.285Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="TailwindCSS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;tools.wingzero.tw&#x2F;assets&#x2F;upload&#x2F;1611643654838_0.jpg">
+
+<link rel="canonical" href="https://hsuchihting.github.io/TailwindCSS/20210605/3452359063/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Tailwind CSS - 起手式 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/TailwindCSS/20210605/3452359063/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          Tailwind CSS - 起手式
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-06-05 20:47:03" itemprop="dateCreated datePublished" datetime="2021-06-05T20:47:03+08:00">2021-06-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-06-14 15:56:10" itemprop="dateModified" datetime="2021-06-14T15:56:10+08:00">2021-06-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/TailwindCSS/" itemprop="url" rel="index">
+                    <span itemprop="name">TailwindCSS</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TailwindCSS/20210605/3452359063/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="TailwindCSS/20210605/3452359063/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">如何使用 Tailwind CSS</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://tools.wingzero.tw/assets/upload/1611643654838_0.jpg" alt="tailwindcss"></p>
+<h2 id="使用-CDN-載入-Tailwind-CSS"><a href="#使用-CDN-載入-Tailwind-CSS" class="headerlink" title="使用 CDN 載入 Tailwind CSS"></a>使用 CDN 載入 Tailwind CSS</h2><p>如果想快速使用與把玩一下 Tailwind CSS，官方有提供一個 CDN，直接放到 <code>link</code> 就可以了。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link href="https://unpkg.com/tailwindcss@^<span class="number">2</span>/dist/tailwind.min.css" rel="stylesheet"&gt;</span><br></pre></td></tr></table></figure>
+
+<p>但官方其實不太推薦這種用法，原因如下：</p>
+<p><img src="https://i.imgur.com/KarsOIk.png" alt="use cdn"></p>
+<ol>
+<li>不能自訂義 Tailwind 的預設主題。</li>
+<li>不能使用任何指令，像是 <code>@apply</code>，<code>@variants</code>…等。</li>
+<li>不能啟用其他的 variants，像是 <code>group-focus</code>。</li>
+<li>不能安裝第三方套件。</li>
+<li>不能 tree-shake 未使用到的樣式。</li>
+</ol>
+<p>好的！官方都說五個不能了，如果只想匯入 CDN 這條路應該就僅限於不想客製化網站一途了，那這樣就失去使用 Tailwind 的意義。</p>
+<h2 id="安裝-Tailwind"><a href="#安裝-Tailwind" class="headerlink" title="安裝 Tailwind"></a>安裝 Tailwind</h2><p><a href="https://tailwindcss.com/docs/installation" target="_blank" rel="noopener">官方文件</a>中在不能五大理由下方還有提到一句話：</p>
+<p><img src="https://i.imgur.com/lcHM6lM.png" alt=""></p>
+<p>如果要使用更多 Tailwind，應該要安裝 PostCSS 套件。</p>
+<h3 id="使用-NPM-安裝"><a href="#使用-NPM-安裝" class="headerlink" title="使用 NPM 安裝"></a>使用 NPM 安裝</h3><p>首先先進入開啟好專案的資料夾，然後點選右鍵開啟終端機，這時候會看到路徑已經在自己的資料夾中，</p>
+<p><img src="https://i.imgur.com/2Q2M5z4.png" alt="terminal"></p>
+<p>官方教學使用 NPM 來安裝 Tailwind CSS、PostCSS，還有 autoprefixer 這三個檔案。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install tailwindcss@latest postcss@latest autoprefixer@latest</span><br></pre></td></tr></table></figure>
+
+<p><strong>安裝原因：</strong></p>
+<blockquote>
+<p>Tailwind 不會自動加上瀏覽器前缀詞到產生的 CSS 中，所以瀏覽器無法讀取 CSS，要加上 autoprefixer 這個套件去處理此問題，所以一行指令就三個安裝玩了，輕鬆愉快。</p>
+</blockquote>
+<p>還有提到一個錯誤，但是 v2.0 版本的 Tailwind 依賴於 PostCSS 8，若將 Tailwind 與舊版本的 PostCSS 混合使用，可能會看到以下跳錯訊息：</p>
+<p><code>Error: PostCSS plugin tailwindcss requires PostCSS 8.</code></p>
+<p>這時請安裝 <a href="https://www.tailwindcss.cn/docs/installation#post-css-7" target="_blank" rel="noopener">PostCSS 7</a> 版本，才能兼容。</p>
+<p><strong>安裝 PostCSS 7</strong></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall tailwindcss</span><br><span class="line">npm install tailwindcss@npm:@tailwindcss/postcss7-compat</span><br></pre></td></tr></table></figure>
+
+<p>這時候打開 IDE，會看到目錄中有一個 <code>package.json</code> 檔案，就會看到剛剛裝好的三個套件。</p>
+<p><strong>package.json</strong></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "dependencies": &#123;</span><br><span class="line">    "autoprefixer": "^<span class="number">10</span>.<span class="number">2</span>.<span class="number">6</span>",</span><br><span class="line">    "postcss": "^<span class="number">8</span>.<span class="number">3</span>.<span class="number">0</span>",</span><br><span class="line">    "tailwindcss": "^<span class="number">2</span>.<span class="number">1</span>.<span class="number">4</span>"</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="建立-tailwindcss-config-檔案"><a href="#建立-tailwindcss-config-檔案" class="headerlink" title="建立 tailwindcss.config 檔案"></a>建立 tailwindcss.config 檔案</h2><p>因為我想要自訂義未來 Tailwind 的安裝內容，可以使用 Tailwind 工具生成一份配置文件，此命令工具已經包含在 tailwindcss 內。</p>
+<p>在終端機輸入指令</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx tailwindcss init</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.imgur.com/WNHP5Zo.png" alt="tailwindcss init"></p>
+<p>安裝完成後就會看到有一個 tailwind.config.js 的檔案在目錄底下。</p>
+<p><img src="https://i.imgur.com/UXDIzZn.png" alt="menu"></p>
+<p>點進檔案後就會看到預設的配置內容。</p>
+<p><strong>tailwind.config.js</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  purge: [],</span><br><span class="line">  darkMode: <span class="literal">false</span>, <span class="comment">// or 'media' or 'class'</span></span><br><span class="line">  theme: &#123;</span><br><span class="line">    extend: &#123;&#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  variants: &#123;</span><br><span class="line">    extend: &#123;&#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="新增-Tailwind-到-CSS-中"><a href="#新增-Tailwind-到-CSS-中" class="headerlink" title="新增 Tailwind 到 CSS 中"></a>新增 Tailwind 到 CSS 中</h2><p>在 VSCode 中新增一個 CSS 檔案，命名就如官方推薦的 <code>style.css</code>。(依照專案可自訂義此名字)</p>
+<p>再把 Tailwind 的三個核心複製貼到剛剛新建的 CSS 檔案中。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@tailwind base;</span><br><span class="line">@tailwind components;</span><br><span class="line">@tailwind utilities;</span><br></pre></td></tr></table></figure>
+
+<h3 id="不依賴-PostCSS-使用-Tailwind"><a href="#不依賴-PostCSS-使用-Tailwind" class="headerlink" title="不依賴 PostCSS 使用 Tailwind"></a>不依賴 PostCSS 使用 Tailwind</h3><p>雖然官方強力推薦要搭配 PostCSS，但因為還要去了解 PostCSS 沒有那麼容易，所以為了達到比較無障礙的使用，就不依賴 PostCSS 來使用，可以輸入下方指令，就可以將 Tailwind 編譯成瀏覽器看得懂的 CSS，完成後就可以直接使用 Tailwind 了！</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx tailwindcss build style.css -o tailwind.css</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.imgur.com/yAsShBM.png" alt="tailwindcss"></p>
+<p>看到上方畫面就代表成功囉！</p>
+<h2 id="幫-CSS-瘦身"><a href="#幫-CSS-瘦身" class="headerlink" title="幫 CSS 瘦身"></a>幫 CSS 瘦身</h2><p>承上所示，Tailwind 因為是 Utility 的關係，會把整包檔案匯入，但我可能這次專案沒有用到這麼多的 Utility，如果整包檔案要選染於網頁，效能就會低落，Tailwind 官方文件很貼心也提供可以瘦身的方法，選到 <code>tailwind.config.js</code> 檔案，將我可能會使用到的內容寫在 <code>purge</code> 屬性內，就可以去監聽我哪支檔案有使用到，只會編譯使用的檔案，真的很貼心呢！</p>
+<p><strong>tailwind.config.js</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  purge: &#123;</span><br><span class="line">    enabled: <span class="literal">true</span>,</span><br><span class="line">    content: [<span class="string">"./*.html"</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">  darkMode: <span class="literal">false</span>, <span class="comment">// or 'media' or 'class'</span></span><br><span class="line">  theme: &#123;</span><br><span class="line">    extend: &#123;&#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  variants: &#123;</span><br><span class="line">    extend: &#123;&#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a href="https://tailwindcss.com/docs/installation" target="_blank" rel="noopener">Tailwind 官方文件</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/TailwindCSS/" rel="tag"># TailwindCSS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/TailwindCSS/20210605/1705808851/" rel="prev" title="Tailwind CSS - 選擇該框架的原因">
+      <i class="fa fa-chevron-left"></i> Tailwind CSS - 選擇該框架的原因
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/TailwindCSS/20210607/2331513775/" rel="next" title="Tailwind CSS - 壓縮 Utility 檔案大小 、安裝知能提示與最新版本須知">
+      Tailwind CSS - 壓縮 Utility 檔案大小 、安裝知能提示與最新版本須知 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-CDN-載入-Tailwind-CSS"><span class="nav-number">1.</span> <span class="nav-text">使用 CDN 載入 Tailwind CSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安裝-Tailwind"><span class="nav-number">2.</span> <span class="nav-text">安裝 Tailwind</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-NPM-安裝"><span class="nav-number">2.1.</span> <span class="nav-text">使用 NPM 安裝</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立-tailwindcss-config-檔案"><span class="nav-number">3.</span> <span class="nav-text">建立 tailwindcss.config 檔案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新增-Tailwind-到-CSS-中"><span class="nav-number">4.</span> <span class="nav-text">新增 Tailwind 到 CSS 中</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#不依賴-PostCSS-使用-Tailwind"><span class="nav-number">4.1.</span> <span class="nav-text">不依賴 PostCSS 使用 Tailwind</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#幫-CSS-瘦身"><span class="nav-number">5.</span> <span class="nav-text">幫 CSS 瘦身</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">6.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">235</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hsiangfeng.github.io/" title="https:&#x2F;&#x2F;hsiangfeng.github.io&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gretema.github.io/" title="https:&#x2F;&#x2F;gretema.github.io&#x2F;" rel="noopener" target="_blank">馬格蕾特的前端勇者日誌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wcc723.github.io/" title="https:&#x2F;&#x2F;wcc723.github.io&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/TailwindCSS/20210605/3452359063/",
+            identifier: "TailwindCSS/20210605/3452359063/",
+            title: "Tailwind CSS - 起手式"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

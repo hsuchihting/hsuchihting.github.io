@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="ASP.NET MVC 初步認識">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ASP.NET MVC 筆記 - 認識 MVC 與建立第一個 ASP.NET MVC">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;ASP-NET-MVC&#x2F;20200421&#x2F;3396145742&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="ASP.NET MVC 初步認識">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;www.webpromedya.com&#x2F;wp-content&#x2F;uploads&#x2F;2018&#x2F;08&#x2F;asp-net.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;ithelp.ithome.com.tw&#x2F;upload&#x2F;images&#x2F;20190902&#x2F;20120055S4ugLPlmyF.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;a2wREqp.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;n435d8x.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;LijOuUm.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;nrLNkl5.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;YbMJYPA.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;rztlQtx.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;71udtkg.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;TL3VMg5.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;0B9Cpim.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;kY8lxhT.png">
+<meta property="article:published_time" content="2020-04-21T14:13:16.000Z">
+<meta property="article:modified_time" content="2020-04-28T14:47:46.176Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="ASP.NET MVC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;www.webpromedya.com&#x2F;wp-content&#x2F;uploads&#x2F;2018&#x2F;08&#x2F;asp-net.jpg">
+
+<link rel="canonical" href="https://hsuchihting.github.io/ASP-NET-MVC/20200421/3396145742/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>ASP.NET MVC 筆記 - 認識 MVC 與建立第一個 ASP.NET MVC | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/ASP-NET-MVC/20200421/3396145742/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          ASP.NET MVC 筆記 - 認識 MVC 與建立第一個 ASP.NET MVC
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-04-21 22:13:16" itemprop="dateCreated datePublished" datetime="2020-04-21T22:13:16+08:00">2020-04-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-04-28 22:47:46" itemprop="dateModified" datetime="2020-04-28T22:47:46+08:00">2020-04-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ASP-NET-MVC/" itemprop="url" rel="index">
+                    <span itemprop="name">ASP.NET MVC</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/ASP-NET-MVC/20200421/3396145742/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="ASP-NET-MVC/20200421/3396145742/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">ASP.NET MVC 初步認識</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://www.webpromedya.com/wp-content/uploads/2018/08/asp-net.jpg" alt="image alt"></p>
+<h2 id="什麼是-MVC"><a href="#什麼是-MVC" class="headerlink" title="什麼是 MVC"></a>什麼是 MVC</h2><p>MVC 模式（Model–view–controller）是軟體工程中的一種軟體架構模式，把軟體系統分為三個基本部分：模型（Model）、視圖（View）和控制器（Controller）。不是新技術，而是開發網頁的一種觀念，著重在關注點分離。</p>
+<p>目的是實現一種動態的程式設計，使後續對程式的修改和擴充簡化，並且使程式某一部分的重複利用成為可能。除此之外，此模式透過對複雜度的簡化，使程式結構更加直覺。軟體系統透過對自身基本部分分離的同時也賦予了各個基本部分應有的功能。專業人員可以依據自身的專長分組：</p>
+<ul>
+<li><strong>控制器（Controller）</strong>- 負責轉發請求，對請求進行處理。</li>
+<li><strong>視圖（View）</strong> - 介面設計人員進行圖形介面設計。</li>
+<li><strong>模型（Model）</strong>- 程式設計師編寫程式應有的功能（實現演算法等等）、資料庫專家進行資料管理和資料庫設計(可以實現具體的功能)。</li>
+</ul>
+<h2 id="建立-ASP-NET-MVC"><a href="#建立-ASP-NET-MVC" class="headerlink" title="建立 ASP.NET MVC"></a>建立 ASP.NET MVC</h2><p>ASP.NET 是微軟開發的網頁套件，並搭配 visual studio 2019 編輯器來使用，新手建議環境直接使用 windows，畢竟這整套都是微軟開發的。</p>
+<p>這邊就不介紹編輯器的使用，若有興趣可以看<a href="https://visualstudio.microsoft.com/zh-hant/vs/getting-started/" target="_blank" rel="noopener">官網有教學</a>，下面直接進入 ASP.NET 來建立一個基本的網站。</p>
+<h3 id="建立新專案"><a href="#建立新專案" class="headerlink" title="建立新專案"></a>建立新專案</h3><p>首先開啟 visual studio 2019，選擇「建立新專案」:</p>
+<p><img src="https://ithelp.ithome.com.tw/upload/images/20190902/20120055S4ugLPlmyF.png" alt="建立新專案"></p>
+<h3 id="選擇專案類型"><a href="#選擇專案類型" class="headerlink" title="選擇專案類型"></a>選擇專案類型</h3><p>選擇後會看到很多專案類型可以選，因公司專案是使用 C#，故語言類選擇 C#，平台是 windows，專案類型選擇「ASP.NET Web 應用程式 (.NET Framework)」，</p>
+<p><img src="https://i.imgur.com/a2wREqp.png" alt="選擇專案類型"></p>
+<h3 id="設定專案名稱"><a href="#設定專案名稱" class="headerlink" title="設定專案名稱"></a>設定專案名稱</h3><p>檔案名稱就打容易記得的，沒有特別想法可以使用預設的名稱，儲存位置與架構若沒特別需要可以使用預設值。</p>
+<p><img src="https://i.imgur.com/n435d8x.png" alt="設定專案名稱"></p>
+<h3 id="挑選使用的框架"><a href="#挑選使用的框架" class="headerlink" title="挑選使用的框架"></a>挑選使用的框架</h3><p>選擇 MVC 專案，然後就會開始建立!</p>
+<p><img src="https://i.imgur.com/LijOuUm.png" alt="MVC"></p>
+<h3 id="建立完成"><a href="#建立完成" class="headerlink" title="建立完成"></a>建立完成</h3><p>跑完之後會看到右側有很多的資料夾，並當中會看到 Model、Controller、View 三個主要的資料夾，其餘資料夾都是放套件或是存放資料用。</p>
+<p><img src="https://i.imgur.com/nrLNkl5.png" alt="資料夾"></p>
+<h4 id="Controller-控制器在哪"><a href="#Controller-控制器在哪" class="headerlink" title="Controller 控制器在哪?"></a>Controller 控制器在哪?</h4><p>它位於在 Controller 資料夾內，專案建立時會預設建立 HomeController.cs，稱為 Home 控制器，其中定義了 <code>Index()</code>、<code>About()</code>、<code>Contact()</code> 三個 Action Methods (動作方法)。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> System.Linq;</span><br><span class="line"><span class="keyword">using</span> System.Web;</span><br><span class="line"><span class="keyword">using</span> System.Web.Mvc;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">chartTest.Controllers</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">HomeController</span> : <span class="title">Controller</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> ActionResult <span class="title">Index</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">return</span> View();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> ActionResult <span class="title">About</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            ViewBag.Message = <span class="string">"Your application description page."</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> View();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> ActionResult <span class="title">Contact</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            ViewBag.Message = <span class="string">"Your contact page."</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> View();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Model-在哪"><a href="#Model-在哪" class="headerlink" title="Model 在哪?"></a>Model 在哪?</h4><p>位於 Model 資料夾中，目前為空，因尚未建立任何資料，類別會定義 Properties 屬性，用來存放資料。</p>
+<h4 id="View-在哪"><a href="#View-在哪" class="headerlink" title="View 在哪?"></a>View 在哪?</h4><p>位於 View 資料夾中，內有 <code>Home</code> 跟 <code>Shared</code> 兩個子資料夾，此兩個資料夾是對應 <code>Home</code> 控制器，通常一個 Aciton 方法會對應一個 View 檔案。</p>
+<p><img src="https://i.imgur.com/YbMJYPA.png" alt=""></p>
+<blockquote>
+<p>例如: Index()會對應到一個 <code>Index.cshtml</code>，<code>.cshtml</code> 就是 C# 的 html 檔案。</p>
+</blockquote>
+<h2 id="手動建立-Model、Controller、View"><a href="#手動建立-Model、Controller、View" class="headerlink" title="手動建立 Model、Controller、View"></a>手動建立 Model、Controller、View</h2><p>雖然使用專案可以自動建立 MVC 樣版檔案，但學會自己手動建立，才能證明自己跨入了 MVC 大門。</p>
+<h3 id="建立-Controller"><a href="#建立-Controller" class="headerlink" title="建立 Controller"></a>建立 Controller</h3><p>在 Controller 資料夾上點選【右鍵】、選擇【加入】、選擇【控制器】。</p>
+<p>後會跳出控制器建立選項，選擇【MVC 5 控制器 - 空白】，並自訂控制器名稱，便完成建立了控制器。</p>
+<p><img src="https://i.imgur.com/rztlQtx.png" alt=""></p>
+<p>完成的控制器。</p>
+<p><img src="https://i.imgur.com/71udtkg.png" alt=""></p>
+<h3 id="建立-View"><a href="#建立-View" class="headerlink" title="建立 View"></a>建立 View</h3><p>點開剛剛建立的控制器，會看到有一個 <code>Index()</code> 的 Action。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> System.Linq;</span><br><span class="line"><span class="keyword">using</span> System.Web;</span><br><span class="line"><span class="keyword">using</span> System.Web.Mvc;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">chartTest.Controllers</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">productController</span> : <span class="title">Controller</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// GET: product</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> ActionResult <span class="title">Index</span>(<span class="params"></span>) <span class="comment">// Index 上點右鍵</span></span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">return</span> View();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在其上點選【右鍵】，選擇第一個【新增檢視】選項，檢視名稱維持 Index，範本也維持 Empty，按【加入】即建立完成。</p>
+<blockquote>
+<p>本來有試著修改名稱，但後面卻跳錯找不到 URL，所以建議先按照這裡的設定，熟悉流程。</p>
+</blockquote>
+<p>會看到在 View 資料夾下會產生一個 product 的資料夾，並產生 <code>index.cshtml</code> 檢視檔案，與 <code>index()</code> Action 相對應。</p>
+<p><img src="https://i.imgur.com/TL3VMg5.png" alt=""></p>
+<p>裡面程式碼長這樣。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@&#123;</span><br><span class="line">    ViewBag.Title = <span class="string">"Index"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;h2&gt;Index&lt;/h2&gt;</span><br></pre></td></tr></table></figure>
+
+<p>這時可以象徵性的修改 Index 中的 <code>&lt;h2&gt;</code> 的標題以及加入一張圖片，在按下 <code>F5</code> 會看到原本中間的區塊改變了。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@&#123;</span><br><span class="line">    ViewBag.Title = <span class="string">"Index"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;h2&gt;car&lt;/h2&gt;</span><br><span class="line">&lt;img src=<span class="string">"https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=500&amp;q=60"</span> alt=<span class="string">""</span> /&gt;</span><br></pre></td></tr></table></figure>
+
+<p>F5 預覽頁面。</p>
+<p><img src="https://i.imgur.com/0B9Cpim.png" alt="預覽畫面"></p>
+<h3 id="建立-Model"><a href="#建立-Model" class="headerlink" title="建立 Model"></a>建立 Model</h3><p>在 Model 資料夾點擊【右鍵】、【加入】、【類別】(在最下方)，選擇第一個「類別」並且最下方的命名處命名「Product.cs」、【新增】即建立完成。</p>
+<p><img src="https://i.imgur.com/kY8lxhT.png" alt="類別選單"></p>
+<blockquote>
+<p>Model 檔案可隨意命名，它和 Controller 或 View 名稱沒有約定上的連動關係與限制。</p>
+</blockquote>
+<h4 id="定義-Model-的-Property-屬性"><a href="#定義-Model-的-Property-屬性" class="headerlink" title="定義 Model 的 Property 屬性"></a>定義 Model 的 Property 屬性</h4><p>在 Product 模型中加入 <code>Id</code>、<code>ProductName</code> 和 <code>UnitPrice</code> 三個 Property 屬性，用來存放資料。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> System.Dynamic;</span><br><span class="line"><span class="keyword">using</span> System.Linq;</span><br><span class="line"><span class="keyword">using</span> System.Web;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">chartTest.Models</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">product</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> Id &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">string</span> ProductName &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> UnitPrice &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>參考資料</p>
+<p>網頁程式設計 ASP.NET MVC 5.x 範例完美演繹-第三版(適用 Visual C# 2019/2017)</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ASP-NET-MVC/" rel="tag"># ASP.NET MVC</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/vue-js/20200421/4264825025/" rel="prev" title="Vue 筆記 - 使用 v-bind 動態新增屬性">
+      <i class="fa fa-chevron-left"></i> Vue 筆記 - 使用 v-bind 動態新增屬性
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/vue-js/20200421/2762058618/" rel="next" title="Vue 筆記 - 動態產生多筆資料於網頁上 v-for、v-if">
+      Vue 筆記 - 動態產生多筆資料於網頁上 v-for、v-if <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什麼是-MVC"><span class="nav-number">1.</span> <span class="nav-text">什麼是 MVC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立-ASP-NET-MVC"><span class="nav-number">2.</span> <span class="nav-text">建立 ASP.NET MVC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#建立新專案"><span class="nav-number">2.1.</span> <span class="nav-text">建立新專案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#選擇專案類型"><span class="nav-number">2.2.</span> <span class="nav-text">選擇專案類型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#設定專案名稱"><span class="nav-number">2.3.</span> <span class="nav-text">設定專案名稱</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#挑選使用的框架"><span class="nav-number">2.4.</span> <span class="nav-text">挑選使用的框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建立完成"><span class="nav-number">2.5.</span> <span class="nav-text">建立完成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Controller-控制器在哪"><span class="nav-number">2.5.1.</span> <span class="nav-text">Controller 控制器在哪?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Model-在哪"><span class="nav-number">2.5.2.</span> <span class="nav-text">Model 在哪?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#View-在哪"><span class="nav-number">2.5.3.</span> <span class="nav-text">View 在哪?</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#手動建立-Model、Controller、View"><span class="nav-number">3.</span> <span class="nav-text">手動建立 Model、Controller、View</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#建立-Controller"><span class="nav-number">3.1.</span> <span class="nav-text">建立 Controller</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建立-View"><span class="nav-number">3.2.</span> <span class="nav-text">建立 View</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建立-Model"><span class="nav-number">3.3.</span> <span class="nav-text">建立 Model</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定義-Model-的-Property-屬性"><span class="nav-number">3.3.1.</span> <span class="nav-text">定義 Model 的 Property 屬性</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">235</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hsiangfeng.github.io/" title="https:&#x2F;&#x2F;hsiangfeng.github.io&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gretema.github.io/" title="https:&#x2F;&#x2F;gretema.github.io&#x2F;" rel="noopener" target="_blank">馬格蕾特的前端勇者日誌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wcc723.github.io/" title="https:&#x2F;&#x2F;wcc723.github.io&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/ASP-NET-MVC/20200421/3396145742/",
+            identifier: "ASP-NET-MVC/20200421/3396145742/",
+            title: "ASP.NET MVC 筆記 - 認識 MVC 與建立第一個 ASP.NET MVC"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
