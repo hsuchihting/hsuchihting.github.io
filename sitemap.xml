@@ -2,9 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://hsuchihting.github.io/TailwindCSS/20210622/2922303441/</loc>
+    
+    <lastmod>2021-07-06T15:27:57.110Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hsuchihting.github.io/TailwindCSS/20210607/2331513775/</loc>
+    
+    <lastmod>2021-07-06T15:26:38.411Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hsuchihting.github.io/TailwindCSS/20210605/3452359063/</loc>
+    
+    <lastmod>2021-07-06T15:25:40.803Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://hsuchihting.github.io/angular/20210702/113573135/</loc>
     
-    <lastmod>2021-07-02T15:23:32.738Z</lastmod>
+    <lastmod>2021-07-02T15:26:17.108Z</lastmod>
     
   </url>
   
@@ -58,13 +79,6 @@
   </url>
   
   <url>
-    <loc>https://hsuchihting.github.io/TailwindCSS/20210622/2922303441/</loc>
-    
-    <lastmod>2021-06-22T15:33:05.426Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://hsuchihting.github.io/TailwindCSS/20210620/961026179/</loc>
     
     <lastmod>2021-06-20T15:57:04.272Z</lastmod>
@@ -93,13 +107,6 @@
   </url>
   
   <url>
-    <loc>https://hsuchihting.github.io/TailwindCSS/20210607/2331513775/</loc>
-    
-    <lastmod>2021-06-14T08:00:57.885Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://hsuchihting.github.io/TailwindCSS/20210607/2095338064/</loc>
     
     <lastmod>2021-06-14T07:59:39.446Z</lastmod>
@@ -110,13 +117,6 @@
     <loc>https://hsuchihting.github.io/TailwindCSS/20210607/1535452451/</loc>
     
     <lastmod>2021-06-14T07:58:53.736Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hsuchihting.github.io/TailwindCSS/20210605/3452359063/</loc>
-    
-    <lastmod>2021-06-14T07:56:10.285Z</lastmod>
     
   </url>
   
