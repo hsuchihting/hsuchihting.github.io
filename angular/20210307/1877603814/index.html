@@ -59,7 +59,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;vqAbbQ2.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;ellqdbd.png">
 <meta property="article:published_time" content="2021-03-07T09:31:13.000Z">
-<meta property="article:modified_time" content="2021-03-07T09:35:48.693Z">
+<meta property="article:modified_time" content="2021-08-04T14:35:53.244Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="Angular">
 <meta name="twitter:card" content="summary">
@@ -244,10 +244,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2021-03-07 17:31:13 / 修改時間：17:35:48" itemprop="dateCreated datePublished" datetime="2021-03-07T17:31:13+08:00">2021-03-07</time>
+              <time title="創建時間：2021-03-07 17:31:13" itemprop="dateCreated datePublished" datetime="2021-03-07T17:31:13+08:00">2021-03-07</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-08-04 22:35:53" itemprop="dateModified" datetime="2021-08-04T22:35:53+08:00">2021-08-04</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -335,7 +341,7 @@
 
 <p>並將插頭 <code>&lt;router-outlet&gt;&lt;/router-outlet&gt;</code> 寫在連結的下方，此路由就可以建立好了。</p>
 <p>如法炮製也在 <code>main.component.html</code> 建立路由，並在給予一個點擊事件，點擊後會顯示子頁面內容的文字。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;h2&gt;這是 Main 的頁面&lt;&#x2F;h2&gt;</span><br><span class="line">&lt;a [routerLink]&#x3D;&quot;[&#39;&#x2F;main&#x2F;main-child&#39;]&quot; (click)&#x3D;&quot;childRender()&quot;&gt;顯示子頁面內容&lt;&#x2F;a&gt;</span><br><span class="line">&lt;router-outlet&gt;&lt;&#x2F;router-outlet&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>這是 Main 的頁面<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> [<span class="attr">routerLink</span>]=<span class="string">"['/main/main-child']"</span> (<span class="attr">click</span>)=<span class="string">"childRender()"</span>&gt;</span>顯示子頁面內容<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">router-outlet</span>&gt;</span><span class="tag">&lt;/<span class="name">router-outlet</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>注意：因<strong>子路由</strong>的路徑是相依在<strong>母路徑</strong>的下方，所以連結為 <code>/main/main-child</code>，路徑前面要加上 <code>&quot;/&quot;</code>，路徑名稱跟 component 名稱相同。</li>
@@ -483,7 +489,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">244</span>
+          <span class="site-state-item-count">245</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
