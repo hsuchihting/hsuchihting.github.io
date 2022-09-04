@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="切換版本最佳利器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node.js - 專案必備管理工具 NVM">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;node&#x2F;20220904&#x2F;236203879&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="切換版本最佳利器">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;EZ8vYz9.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;xROvSnb.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;9e4gY19.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;L8EfZDU.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;AytYtZK.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;F8jPsm0.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;7FY1Foe.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;h9of504.png">
+<meta property="article:published_time" content="2022-09-04T05:12:51.000Z">
+<meta property="article:modified_time" content="2022-09-04T05:22:45.340Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="Node.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;EZ8vYz9.png">
+
+<link rel="canonical" href="https://hsuchihting.github.io/node/20220904/236203879/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Node.js - 專案必備管理工具 NVM | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/node/20220904/236203879/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          Node.js - 專案必備管理工具 NVM
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-09-04 13:12:51 / 修改時間：13:22:45" itemprop="dateCreated datePublished" datetime="2022-09-04T13:12:51+08:00">2022-09-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/node/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/node/20220904/236203879/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="node/20220904/236203879/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">切換版本最佳利器</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://i.imgur.com/EZ8vYz9.png" alt="node"></p>
+<p>使用 NVM 已經是 Node.js 開發者必備的工具，它最大的用途在於可以輕鬆切換不同版本的 Node.js，尤其在後端的專案中，團隊需要統一的開發環境時可以切換到同一個版本，避免發生版本不同而出現衝突問題。</p>
+<p>NVM 為 Node Version Manager 的縮寫，顧名思義就是「Node 版本管理控制」，常用的功能包含：</p>
+<ul>
+<li>切換 Node.js 的版本。</li>
+<li>使用特定 Node.js 作為預設啟用環境。</li>
+<li>安裝不同的套件至特定的版本上。</li>
+</ul>
+<h2 id="透過-nvm-安裝-Node-js"><a href="#透過-nvm-安裝-Node-js" class="headerlink" title="透過 nvm 安裝 Node.js"></a>透過 nvm 安裝 Node.js</h2><p>前篇已經知道可以使用 npm 安裝套件了，也知道 npm 是一個 Node.js 預設的管理平台，所以要使用 npm 之前要先安裝 Node.js。</p>
+<h3 id="為什麼要用-nvm-安裝"><a href="#為什麼要用-nvm-安裝" class="headerlink" title="為什麼要用 nvm 安裝"></a>為什麼要用 nvm 安裝</h3><p>這是之前專案踩過的雷點，原本一開始都是透過 node.js 官網下載軟體，但是剛好專案就是遇到 node 版本不同的狀況，所以要去切換版本，但如果是透過官網下載的版本無法直接切換，經前輩指導建議我透過 nvm 下載 Node.js，這樣就可以去切換版本，不管是協作或是未來維護專案都非常好用。</p>
+<blockquote>
+<p>安裝方法可以參考 <a href="https://ithelp.ithome.com.tw/articles/10207177" target="_blank" rel="noopener">nvm - 版本隨你切</a>，此篇就不贅述。</p>
+</blockquote>
+<h2 id="初始化-npm"><a href="#初始化-npm" class="headerlink" title="初始化 npm"></a>初始化 npm</h2><p>安裝 node 後，就可以在終端機輸入 npm init，然後就會需要一連串的確認，最後會問是否確定。</p>
+<p><img src="https://i.imgur.com/xROvSnb.png" alt="init"></p>
+<p>完成後就會出現一個 package.json 檔案。</p>
+<p><img src="https://i.imgur.com/9e4gY19.png" alt="package"></p>
+<h3 id="script-指令"><a href="#script-指令" class="headerlink" title="script 指令"></a>script 指令</h3><p>這個屬性內是可以自訂義想要使用的指令，並且透過 npm run xxxx，並且裡面會 echo 出要的內容。例如我把指令改成 <code>dev</code>，並且 echo 的內容改成 <code>this is tim&#39;s project</code></p>
+<p><img src="https://i.imgur.com/L8EfZDU.png" alt="dev"></p>
+<p>執行指令後，終端機會看到剛剛更改的內容。</p>
+<p><img src="https://i.imgur.com/AytYtZK.png" alt="echo"></p>
+<h2 id="什麼是-package-json"><a href="#什麼是-package-json" class="headerlink" title="什麼是 package.json"></a>什麼是 package.json</h2><p>簡單說就是這整個專案的說明，設定了什麼指令，安裝了什麼套件，都會呈現在這邊，像 dependencies 說明此專案安裝了 <code>tailwindcss</code>，如果我要多安裝一個 jQuery，就參考上方安裝的指令，就會看到我安裝完成了 jQuery，並且所有安裝的套件都會儲存在 node_modules 的資料夾內。</p>
+<p><img src="https://i.imgur.com/F8jPsm0.png" alt="jquery"></p>
+<p>那有安裝，就有移除，所以只要輸入移除的指令即可 <code>npm uninstall xxxx</code>，所以我要移除 jquery，就只要輸入 <code>npm uninstall jquery</code>，jQuery 就被移除了，很方便吧！</p>
+<p><img src="https://i.imgur.com/7FY1Foe.png" alt="uninstall"></p>
+<p>然後再看到 package.json 檔案就會發現 jQuery 不見了。</p>
+<p><img src="https://i.imgur.com/h9of504.png" alt="clear jquery"></p>
+<p>在版本控制的時候，並不會把 <code>node_modules</code> 的資料夾也上傳，因為如果專案很大，安裝的套件多，檔案容量就會很大，光是上傳下載就浪費很多時間，所以這隻檔案就有它的用途了，拿到這隻專案的同事或是自己，只要 <code>package.json</code> 中有紀錄安裝的套件，這時只要輸入 <code>npm i</code>，就會把裡面所有的套件一起安裝完畢，超方便的啦！</p>
+<h3 id="package-lock-json-是什麼"><a href="#package-lock-json-是什麼" class="headerlink" title="package-lock.json 是什麼"></a>package-lock.json 是什麼</h3><p>主要是可以確定協作開發團隊的各套件版本的共同性，不會因為 package.json 的關係，導致不同的人套件版本號不同，在合併分支的時候而產生衝突，所以如果要控管團隊開發套件的版本號，也要把這支檔案合併到版本控制中。</p>
+<p>簡單說就是如果想要大家的套件都安裝最新版本，這支檔案就不需要傳給團隊，反之，如果要限定版本號，就要把支檔案傳給團隊。</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a href="https://www.casper.tw/development/2022/01/10/install-nvm/" target="_blank" rel="noopener">安裝 nvm 環境，Node.js 開發者必學（Windows、Mac 均適用）</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Node-js/" rel="tag"># Node.js</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/node/20220904/197454500/" rel="prev" title="Node.js - V8 引擎">
+      <i class="fa fa-chevron-left"></i> Node.js - V8 引擎
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/node/20220904/838553603/" rel="next" title="Node.js - Hello World！執行 JS 檔案">
+      Node.js - Hello World！執行 JS 檔案 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#透過-nvm-安裝-Node-js"><span class="nav-number">1.</span> <span class="nav-text">透過 nvm 安裝 Node.js</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#為什麼要用-nvm-安裝"><span class="nav-number">1.1.</span> <span class="nav-text">為什麼要用 nvm 安裝</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化-npm"><span class="nav-number">2.</span> <span class="nav-text">初始化 npm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#script-指令"><span class="nav-number">2.1.</span> <span class="nav-text">script 指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什麼是-package-json"><span class="nav-number">3.</span> <span class="nav-text">什麼是 package.json</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#package-lock-json-是什麼"><span class="nav-number">3.1.</span> <span class="nav-text">package-lock.json 是什麼</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">4.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">280</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友站連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://israynotarray.com/" title="https:&#x2F;&#x2F;israynotarray.com&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.casper.tw/" title="https:&#x2F;&#x2F;www.casper.tw&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.miniasp.com/" title="https:&#x2F;&#x2F;blog.miniasp.com&#x2F;" rel="noopener" target="_blank">保哥部落格</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cythilya.github.io/" title="https:&#x2F;&#x2F;cythilya.github.io&#x2F;" rel="noopener" target="_blank">桑莫。夏天</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mtwmt.com/blog/list" title="https:&#x2F;&#x2F;mtwmt.com&#x2F;blog&#x2F;list" rel="noopener" target="_blank">Mandy's Web</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.oxxostudio.tw/" title="https:&#x2F;&#x2F;www.oxxostudio.tw&#x2F;" rel="noopener" target="_blank">OXXO Studio</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/node/20220904/236203879/",
+            identifier: "node/20220904/236203879/",
+            title: "Node.js - 專案必備管理工具 NVM"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
