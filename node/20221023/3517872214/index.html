@@ -58,7 +58,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;Kuoxum3.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;T0qvuMt.png">
 <meta property="article:published_time" content="2022-10-23T15:02:00.000Z">
-<meta property="article:modified_time" content="2022-10-23T15:06:17.493Z">
+<meta property="article:modified_time" content="2022-10-24T13:48:37.527Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="Node.js">
 <meta name="twitter:card" content="summary">
@@ -243,10 +243,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2022-10-23 23:02:00 / 修改時間：23:06:17" itemprop="dateCreated datePublished" datetime="2022-10-23T23:02:00+08:00">2022-10-23</time>
+              <time title="創建時間：2022-10-23 23:02:00" itemprop="dateCreated datePublished" datetime="2022-10-23T23:02:00+08:00">2022-10-23</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2022-10-24 21:48:37" itemprop="dateModified" datetime="2022-10-24T21:48:37+08:00">2022-10-24</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -289,7 +295,7 @@
 <p>經過前面的練習發現 EJS 模板語法，跟使用前端框架的概念有點像，但只是是由後端驅動的，這邊要練習的是，透過統一管理入口的檔案，可以去做不同頁面的切換方式。</p>
 <h2 id="只設定一個-layout-入口"><a href="#只設定一個-layout-入口" class="headerlink" title="只設定一個 layout 入口"></a>只設定一個 layout 入口</h2><p>在 views 資料夾新增一個檔案 <code>layout.ejs</code>，並且在 <code>body</code> 標籤內加入此語法。</p>
 <p><strong>layout.ejs</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang&#x3D;&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;</span><br><span class="line">  &lt;meta http-equiv&#x3D;&quot;X-UA-Compatible&quot; content&#x3D;&quot;IE&#x3D;edge&quot;&gt;</span><br><span class="line">  &lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1.0&quot;&gt;</span><br><span class="line">  &lt;title&gt;EJS Practice&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;% - body %&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>EJS Practice<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">%</span> <span class="attr">-</span> <span class="attr">body</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>如此已經設定一個網頁入口。</p>
 <h2 id="改寫其他頁面內容"><a href="#改寫其他頁面內容" class="headerlink" title="改寫其他頁面內容"></a>改寫其他頁面內容</h2><p>因為在 layout.ejs 已經寫好了一個入口，故其他頁面只要留 body 內的程式碼即可，並在最上方加上</p>
@@ -416,7 +422,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">332</span>
+          <span class="site-state-item-count">333</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
