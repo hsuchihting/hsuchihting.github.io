@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="實作 emit out 功能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue 筆記 - 使用 emit 指定父層元件是否顯示資訊的功能">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;vue-js&#x2F;20230302&#x2F;3427872126&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="實作 emit out 功能">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1530750463537-af1c747d8d73?ixlib&#x3D;rb-4.0.3&amp;ixid&#x3D;MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1174&amp;q&#x3D;80">
+<meta property="article:published_time" content="2023-03-02T14:21:55.000Z">
+<meta property="article:modified_time" content="2023-03-02T14:36:36.453Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="vue.js">
+<meta property="article:tag" content="work">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1530750463537-af1c747d8d73?ixlib&#x3D;rb-4.0.3&amp;ixid&#x3D;MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1174&amp;q&#x3D;80">
+
+<link rel="canonical" href="https://hsuchihting.github.io/vue-js/20230302/3427872126/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Vue 筆記 - 使用 emit 指定父層元件是否顯示資訊的功能 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/vue-js/20230302/3427872126/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          Vue 筆記 - 使用 emit 指定父層元件是否顯示資訊的功能
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2023-03-02 22:21:55 / 修改時間：22:36:36" itemprop="dateCreated datePublished" datetime="2023-03-02T22:21:55+08:00">2023-03-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue-js/" itemprop="url" rel="index">
+                    <span itemprop="name">vue.js</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/vue-js/20230302/3427872126/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="vue-js/20230302/3427872126/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">實作 emit out 功能</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://images.unsplash.com/photo-1530750463537-af1c747d8d73?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1174&q=80" alt="emit"></p>
+<p>本篇記錄專案有一功能為父層頁面需傳資料到 checkbox 的子元件， checkbox 子元件接到資料後判斷到其中一個選項的值，在傳奇值結果到父層，再讓父層取到其值時連動另一個說明文字的子元件是否顯示。</p>
+<h2 id="實際流程"><a href="#實際流程" class="headerlink" title="實際流程"></a>實際流程</h2><ol>
+<li>有兩個元件一個為 checkbox Group 與 Note 元件。</li>
+<li>當選取 checkbox 指定選項時，會把此選項的值傳到父層。</li>
+<li>當說明列表元件取得指定選項的值為 true 時，就會顯示。</li>
+</ol>
+<p>直接看程式碼：<a href="https://stackblitz.com/edit/vue-vzdy7u?file=src/App.vue" target="_blank" rel="noopener">連結</a></p>
+<h2 id="實作流程"><a href="#實作流程" class="headerlink" title="實作流程"></a>實作流程</h2><p>先建立好父子層元件。</p>
+<h3 id="父層元件"><a href="#父層元件" class="headerlink" title="父層元件"></a>父層元件</h3><p><strong>PropsEmitPractice.vue</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;checkbox-group&gt;<span class="xml"><span class="tag">&lt;/<span class="name">checkbox-group</span>&gt;</span></span></span><br><span class="line">    &lt;note&gt;<span class="xml"><span class="tag">&lt;/<span class="name">note</span>&gt;</span></span></span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> CheckboxGroup <span class="keyword">from</span> <span class="string">"@/components/CheckboxGroup.vue"</span>;</span><br><span class="line"><span class="keyword">import</span> Note <span class="keyword">from</span> <span class="string">"@/components/Note.vue"</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  components: &#123; CheckboxGroup, Note &#125;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  mounted() &#123;&#125;,</span><br><span class="line"></span><br><span class="line">  methods: &#123;&#125;,</span><br><span class="line">&#125;;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="子層元件"><a href="#子層元件" class="headerlink" title="子層元件"></a>子層元件</h3><p><strong>checkboxGroup.vue</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"container mx-auto py-4"</span>&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"flex items-center"</span>&gt;</span><br><span class="line">      &lt;div v-<span class="keyword">for</span>=<span class="string">"item in checkboxList"</span> :key=<span class="string">"item"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"px-5 mx-auto flex items-center"</span>&gt;</span><br><span class="line">        &lt;input type=<span class="string">"checkbox"</span>/&gt;</span><br><span class="line">        &lt;p <span class="class"><span class="keyword">class</span></span>=<span class="string">"pl-4 text-xl"</span>&gt;&#123;&#123; item.label &#125;&#125;&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>div&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">export default &#123;</span></span><br><span class="line"><span class="regexp">  data() &#123;</span></span><br><span class="line"><span class="regexp">    return &#123;</span></span><br><span class="line"><span class="regexp">      checkboxItem: [],</span></span><br><span class="line"><span class="regexp">    &#125;;</span></span><br><span class="line"><span class="regexp">  &#125;,</span></span><br><span class="line"><span class="regexp">  computed: &#123;</span></span><br><span class="line"><span class="regexp">    checkboxList() &#123;</span></span><br><span class="line"><span class="regexp">      return [</span></span><br><span class="line"><span class="regexp">        &#123;</span></span><br><span class="line"><span class="regexp">          key: "option 01",</span></span><br><span class="line"><span class="regexp">          value: "option 01",</span></span><br><span class="line"><span class="regexp">        &#125;,</span></span><br><span class="line"><span class="regexp">        &#123;</span></span><br><span class="line"><span class="regexp">          key: "option 02",</span></span><br><span class="line"><span class="regexp">          value: "option 02",</span></span><br><span class="line"><span class="regexp">        &#125;,</span></span><br><span class="line"><span class="regexp">        &#123;</span></span><br><span class="line"><span class="regexp">          key: "option 03",</span></span><br><span class="line"><span class="regexp">          value: "option 03",</span></span><br><span class="line"><span class="regexp">        &#125;,</span></span><br><span class="line"><span class="regexp">        &#123;</span></span><br><span class="line"><span class="regexp">          key: "option 04",</span></span><br><span class="line"><span class="regexp">          value: "option 04",</span></span><br><span class="line"><span class="regexp">        &#125;,</span></span><br><span class="line"><span class="regexp">        &#123;</span></span><br><span class="line"><span class="regexp">          key: "option 05",</span></span><br><span class="line"><span class="regexp">          value: "option 05",</span></span><br><span class="line"><span class="regexp">        &#125;,</span></span><br><span class="line"><span class="regexp">      ];</span></span><br><span class="line"><span class="regexp">    &#125;,</span></span><br><span class="line"><span class="regexp">  &#125;,</span></span><br><span class="line"><span class="regexp">&#125;;</span></span><br><span class="line"><span class="regexp">&lt;/</span>script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Note.vue</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">" container mx-auto bg-gray-100 py-8 px-4"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"space-y-4 text-left"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat</span><br><span class="line">        repellendus, consequuntur cupiditate ut officiis distinctio deserunt</span><br><span class="line">        aliquid excepturi error omnis earum vitae repellat. Sunt ullam ratione,</span><br><span class="line">        fugit earum eligendi magnam!</span><br><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">        Est rerum aliquam non quaerat, et quod facere natus recusandae</span><br><span class="line">        exercitationem voluptates omnis sunt impedit iste optio debitis totam</span><br><span class="line">        magni tempore fugiat quidem, voluptatum inventore, cum molestiae.</span><br><span class="line">        Minima, aspernatur illum?</span><br><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">        Magnam error ut soluta commodi vitae autem, esse modi aliquam minima</span><br><span class="line">        quos voluptas. Officia eos, quod asperiores eum repellat, corrupti velit</span><br><span class="line">        amet culpa temporibus, beatae esse! Cum odit at provident.</span><br><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">        Neque sit, fuga ab repudiandae porro eius fugiat quas. Tenetur doloribus</span><br><span class="line">        est vel molestiae accusamus. Adipisci magnam quas, atque rerum eveniet</span><br><span class="line">        architecto quidem numquam perferendis libero enim iusto soluta</span><br><span class="line">        exercitationem?</span><br><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="actionscript">    name: <span class="string">"note"</span>,</span></span><br><span class="line">  &#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>完成後會得到一個有 checkbox 群組以及說明文字的畫面。</p>
+<p><img src="" alt="Uploading file..._5cbudaa2c"></p>
+<h2 id="實作-checkboxGroup-功能"><a href="#實作-checkboxGroup-功能" class="headerlink" title="實作 checkboxGroup 功能"></a>實作 checkboxGroup 功能</h2><h3 id="先取得-checbox-資料"><a href="#先取得-checbox-資料" class="headerlink" title="先取得 checbox 資料"></a>先取得 checbox 資料</h3><p>在 checkboxGroup 中寫入選取 checkbox 值的方法。<br><strong>checkboxGroup.vue</strong></p>
+<p><strong>template</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> @<span class="attr">click</span>=<span class="string">"toggleCheck(item.key)"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>script</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">  toggleCheck(key) &#123;</span><br><span class="line">    <span class="keyword">const</span> index = <span class="keyword">this</span>.checkboxItem.indexOf(key);</span><br><span class="line">    <span class="keyword">if</span> (index &gt; <span class="number">-1</span>) &#123;</span><br><span class="line">      <span class="keyword">this</span>.checkboxItem.splice(index, <span class="number">1</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>.checkboxItem.push(key);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.$emit(<span class="string">"toggleCheckboxGroup"</span>, <span class="keyword">this</span>.checkboxItem);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>說明：</p>
+<ul>
+<li>透過 indexOf 方法找到 checkboxItem 陣列中的索引。</li>
+<li>當 index 為 -1 時為找不到索引。</li>
+<li>如果 index 大於 -1，也就是在陣列中有找到值，就用 slice 刪掉索引的值，刪除數量為 1 個。</li>
+<li>如果 index 等於 -1，也就是沒有找到值，就用 push 方法加入陣列。</li>
+<li>簡單來說就是根據傳入的值，判斷是否存在在陣列中，若存在就刪除，沒有就加入。</li>
+<li>最後把陣列用 emit 方式傳到父層。<blockquote>
+<p>this.$emit(‘傳出去的方法名稱’, 要傳的資料)</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="回到父層-PropsEmitPractice-來接子層-checkboxGroup-的資料"><a href="#回到父層-PropsEmitPractice-來接子層-checkboxGroup-的資料" class="headerlink" title="回到父層 PropsEmitPractice 來接子層 checkboxGroup 的資料"></a>回到父層 PropsEmitPractice 來接子層 checkboxGroup 的資料</h3><p><strong>PropsEmitPractice.vue</strong></p>
+<p>此時在要接子層資料的地方寫上對應的事件。</p>
+<p><strong>template</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">checkbox-group</span></span></span><br><span class="line"><span class="tag">      @<span class="attr">toggleCheckboxGroup</span>=<span class="string">"getCheckboxGroupData"</span></span></span><br><span class="line"><span class="tag">    &gt;</span><span class="tag">&lt;/<span class="name">checkbox-group</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">note</span> <span class="attr">v-if</span>=<span class="string">"isGetOption04"</span>&gt;</span><span class="tag">&lt;/<span class="name">note</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>script</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">data() &#123;</span><br><span class="line">   <span class="keyword">return</span> &#123;</span><br><span class="line">     isGetOption04: <span class="literal">false</span>,</span><br><span class="line">   &#125;;</span><br><span class="line"> &#125;,</span><br><span class="line"> methods: &#123;</span><br><span class="line">   getCheckboxGroupData(checkboxItemData) &#123;</span><br><span class="line">     <span class="keyword">this</span>.isGetOption04 = checkboxItemData.find(</span><br><span class="line">       (item) =&gt; item === <span class="string">"option 04"</span></span><br><span class="line">     );</span><br><span class="line">   &#125;,</span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a href="https://www.cythilya.tw/2017/05/08/javascript-find-item-in-an-array/" target="_blank" rel="noopener">JavaScript 陣列處理：找東西 - indexOf、$.inArray 與 filter</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/vue-js/" rel="tag"># vue.js</a>
+              <a href="/tags/work/" rel="tag"># work</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/css/20230302/2830282312/" rel="prev" title="CSS 筆記 - 關於列印的那些設定">
+      <i class="fa fa-chevron-left"></i> CSS 筆記 - 關於列印的那些設定
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/javascript/20230302/1619643597/" rel="next" title="JS 筆記 - 將資料改成符合前端要傳送的一些字串方法">
+      JS 筆記 - 將資料改成符合前端要傳送的一些字串方法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#實際流程"><span class="nav-number">1.</span> <span class="nav-text">實際流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#實作流程"><span class="nav-number">2.</span> <span class="nav-text">實作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#父層元件"><span class="nav-number">2.1.</span> <span class="nav-text">父層元件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子層元件"><span class="nav-number">2.2.</span> <span class="nav-text">子層元件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#實作-checkboxGroup-功能"><span class="nav-number">3.</span> <span class="nav-text">實作 checkboxGroup 功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#先取得-checbox-資料"><span class="nav-number">3.1.</span> <span class="nav-text">先取得 checbox 資料</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回到父層-PropsEmitPractice-來接子層-checkboxGroup-的資料"><span class="nav-number">3.2.</span> <span class="nav-text">回到父層 PropsEmitPractice 來接子層 checkboxGroup 的資料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">4.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">338</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友站連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://israynotarray.com/" title="https:&#x2F;&#x2F;israynotarray.com&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.casper.tw/" title="https:&#x2F;&#x2F;www.casper.tw&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.miniasp.com/" title="https:&#x2F;&#x2F;blog.miniasp.com&#x2F;" rel="noopener" target="_blank">保哥部落格</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cythilya.github.io/" title="https:&#x2F;&#x2F;cythilya.github.io&#x2F;" rel="noopener" target="_blank">桑莫。夏天</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mtwmt.com/blog/list" title="https:&#x2F;&#x2F;mtwmt.com&#x2F;blog&#x2F;list" rel="noopener" target="_blank">Mandy's Web</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.oxxostudio.tw/" title="https:&#x2F;&#x2F;www.oxxostudio.tw&#x2F;" rel="noopener" target="_blank">OXXO Studio</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/vue-js/20230302/3427872126/",
+            identifier: "vue-js/20230302/3427872126/",
+            title: "Vue 筆記 - 使用 emit 指定父層元件是否顯示資訊的功能"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
