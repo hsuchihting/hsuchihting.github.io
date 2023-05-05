@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="使用 Vuex 的 Getters 將共用取值給其他元件使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue 筆記 - 將不同頁面的 computed 透過 Getter 整合成共用方法，以及優化過程">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;vue-js&#x2F;20230505&#x2F;151676026&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="使用 Vuex 的 Getters 將共用取值給其他元件使用">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1575470522418-b88b692b8084?ixlib&#x3D;rb-4.0.3&amp;ixid&#x3D;MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1188&amp;q&#x3D;80">
+<meta property="article:published_time" content="2023-05-05T14:15:16.000Z">
+<meta property="article:modified_time" content="2023-05-05T14:29:05.291Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="vue.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1575470522418-b88b692b8084?ixlib&#x3D;rb-4.0.3&amp;ixid&#x3D;MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1188&amp;q&#x3D;80">
+
+<link rel="canonical" href="https://hsuchihting.github.io/vue-js/20230505/151676026/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Vue 筆記 - 將不同頁面的 computed 透過 Getter 整合成共用方法，以及優化過程 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/vue-js/20230505/151676026/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          Vue 筆記 - 將不同頁面的 computed 透過 Getter 整合成共用方法，以及優化過程
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2023-05-05 22:15:16 / 修改時間：22:29:05" itemprop="dateCreated datePublished" datetime="2023-05-05T22:15:16+08:00">2023-05-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue-js/" itemprop="url" rel="index">
+                    <span itemprop="name">vue.js</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/vue-js/20230505/151676026/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="vue-js/20230505/151676026/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">使用 Vuex 的 Getters 將共用取值給其他元件使用</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://images.unsplash.com/photo-1575470522418-b88b692b8084?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1188&q=80" alt="getter"></p>
+<blockquote>
+<p>本篇紀錄專案中遇到的情境，剛好練習一下 Getters 的用法。</p>
+</blockquote>
+<p>此需求情境為當指定條件下則不要顯示折扣優惠的結果，此需求在專案中的三個頁面會出現此狀態。</p>
+<p>首先，有個下拉選單去選取到票卡選項，並且按下送出時，其他頁面要呈現是否有選到票卡的狀態，類似下方程式碼：</p>
+<p><strong>chooseCard.vue</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">v-model</span>=<span class="string">"selectedCard"</span> <span class="attr">type</span>=<span class="string">"text"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">option</span></span></span><br><span class="line"><span class="tag">        <span class="attr">v-for</span>=<span class="string">"item in options"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:key</span>=<span class="string">"item.label"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:value</span>=<span class="string">"item.value"</span></span></span><br><span class="line"><span class="tag">        @<span class="attr">change</span>=<span class="string">"(event) =&gt; (selectedCard = event.target.value)"</span></span></span><br><span class="line"><span class="tag">      &gt;</span></span><br><span class="line">        &#123;&#123;item.label&#125;&#125;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"apply()"</span>&gt;</span>click<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    // 此區顯示是否折扣優惠</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">"isShowCobrandCard"</span>&gt;</span>Discounts<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">import</span> &#123; mapGetters &#125; <span class="keyword">from</span> <span class="string">"vuex"</span>;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line">    data() &#123;</span><br><span class="line"><span class="actionscript">      <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="actionscript">        selectedCard: <span class="string">""</span>,</span></span><br><span class="line">        options: [</span><br><span class="line">          &#123;</span><br><span class="line"><span class="actionscript">            label: <span class="string">"test01"</span>,</span></span><br><span class="line"><span class="actionscript">            value: <span class="string">"test01"</span>,</span></span><br><span class="line">          &#125;,</span><br><span class="line">          &#123;</span><br><span class="line"><span class="actionscript">            label: <span class="string">"test02"</span>,</span></span><br><span class="line"><span class="actionscript">            value: <span class="string">"test02"</span>,</span></span><br><span class="line">          &#125;,</span><br><span class="line">          &#123;</span><br><span class="line"><span class="actionscript">            label: <span class="string">"test03"</span>,</span></span><br><span class="line"><span class="actionscript">            value: <span class="string">"test03"</span>,</span></span><br><span class="line">          &#125;,</span><br><span class="line">        ],</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    computed: &#123;</span><br><span class="line"><span class="actionscript">      ...mapGetters(<span class="string">"ticket"</span>, [<span class="string">"getCobrandCard"</span>]),</span></span><br><span class="line"><span class="actionscript">      <span class="comment">// 是否顯示 icon</span></span></span><br><span class="line">      isShowCobrandCard() &#123;</span><br><span class="line"><span class="actionscript">        <span class="keyword">const</span> excludedCodes = [<span class="string">"A1"</span>, <span class="string">"A2"</span>, <span class="string">"A3"</span>];</span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> getTicketCode = <span class="keyword">this</span>.vxData.map(<span class="function">(<span class="params">item</span>) =&gt;</span></span></span><br><span class="line">          item.ticketCode.substring(0, 2)</span><br><span class="line">        );</span><br><span class="line"><span class="actionscript">        <span class="keyword">const</span> hasNoExcludedCode = getTicketCode.some(</span></span><br><span class="line">          (code) =&gt; !excludedCodes.includes(code)</span><br><span class="line">        );</span><br><span class="line"><span class="actionscript">        <span class="keyword">return</span> hasNoExcludedCode;</span></span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">      apply() &#123;</span><br><span class="line"><span class="actionscript">        <span class="comment">// ...do something</span></span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.$router.push(<span class="string">"/next-page"</span>);</span></span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="多頁使用同個方法"><a href="#多頁使用同個方法" class="headerlink" title="多頁使用同個方法"></a>多頁使用同個方法</h2><p>寫完基本功能後，發現有三頁有使用到此方法，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">   ...mapGetters(<span class="string">'ticket'</span>, [<span class="string">'getCobrandCard'</span>]),</span><br><span class="line">   <span class="comment">// 是否顯示 icon</span></span><br><span class="line">   isShowCobrandCard() &#123;</span><br><span class="line">     <span class="keyword">const</span> excludedCodes = [<span class="string">'A1'</span>, <span class="string">'A2'</span>, <span class="string">'A3'</span>];</span><br><span class="line">     <span class="keyword">const</span> getTicketCode = <span class="keyword">this</span>.vxData.map(<span class="function">(<span class="params">item</span>) =&gt;</span></span><br><span class="line">       item.ticketCode.substring(<span class="number">0</span>, <span class="number">2</span>),</span><br><span class="line">     );</span><br><span class="line">     <span class="keyword">const</span> hasNoExcludedCode = getTicketCode.some(</span><br><span class="line">       (code) =&gt; !excludedCodes.includes(code),</span><br><span class="line">     );</span><br><span class="line">     <span class="keyword">return</span> hasNoExcludedCode;</span><br><span class="line">   &#125;,</span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+
+<h2 id="原本的想法"><a href="#原本的想法" class="headerlink" title="原本的想法"></a>原本的想法</h2><p>一開始想說儲存在 <code>state</code> 中，並下拉選單有變更時，再透過 <code>mutations</code> 的方法寫入，後來改成這樣。</p>
+<p><strong>chooseCard.vue</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">v-model</span>=<span class="string">"selectedCard"</span> <span class="attr">type</span>=<span class="string">"text"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">option</span></span></span><br><span class="line"><span class="tag">        <span class="attr">v-for</span>=<span class="string">"item in options"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:key</span>=<span class="string">"item.label"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:value</span>=<span class="string">"item.value"</span></span></span><br><span class="line"><span class="tag">        @<span class="attr">change</span>=<span class="string">"getCardInfo($event)"</span> //改寫 <span class="attr">change</span></span></span><br><span class="line"><span class="tag">      &gt;</span></span><br><span class="line">        &#123;&#123;item.label&#125;&#125;<span class="tag">&lt;/<span class="name">option</span></span></span><br><span class="line"><span class="tag">      &gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"apply()"</span>&gt;</span>click<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line">     // 此區顯示是否折扣優惠</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">"isShowCobrandCard"</span>&gt;</span>Discounts<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> &#123; mapGetters, mapMutations &#125; <span class="keyword">from</span> <span class="string">'vuex'</span>;</span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line">  data() &#123;</span><br><span class="line"><span class="actionscript">    <span class="keyword">return</span> &#123;</span></span><br><span class="line">      ...略...</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line"><span class="actionscript">    ...mapGetters(<span class="string">'ticket'</span>, [<span class="string">'getCobrandCard'</span>]),</span></span><br><span class="line"><span class="actionscript">    ...mapMutations(<span class="string">'ticket'</span>, [<span class="string">'setHasGetCardInfo'</span>]),</span></span><br><span class="line"><span class="actionscript">    <span class="comment">// 是否顯示 icon</span></span></span><br><span class="line">    isShowCobrandCard() &#123;</span><br><span class="line"><span class="actionscript">      <span class="keyword">const</span> excludedCodes = [<span class="string">'A1'</span>, <span class="string">'A2'</span>, <span class="string">'A3'</span>];</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> getTicketCode = <span class="keyword">this</span>.vxData.map(<span class="function">(<span class="params">item</span>) =&gt;</span></span></span><br><span class="line">        item.ticketCode.substring(0, 2),</span><br><span class="line">      );</span><br><span class="line"><span class="actionscript">      <span class="keyword">const</span> hasNoExcludedCode = getTicketCode.some(</span></span><br><span class="line">        (code) =&gt; !excludedCodes.includes(code),</span><br><span class="line">      );</span><br><span class="line"><span class="actionscript">      <span class="keyword">return</span> hasNoExcludedCode;</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    apply() &#123;</span><br><span class="line"><span class="actionscript">      <span class="comment">// ...do something</span></span></span><br><span class="line"><span class="actionscript">      <span class="keyword">this</span>.$router.push(<span class="string">'/next-page'</span>);</span></span><br><span class="line">    &#125;,</span><br><span class="line"><span class="actionscript">    <span class="comment">// 改成這個方法</span></span></span><br><span class="line">    getCardInfo(e) &#123;</span><br><span class="line"><span class="actionscript">      <span class="keyword">this</span>.selectedCard = e.target.value;</span></span><br><span class="line"><span class="actionscript">      <span class="keyword">this</span>.setHasGetCardInfo(e.target.value);</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="調整過程"><a href="#調整過程" class="headerlink" title="調整過程"></a>調整過程</h3><p>經過跟資深工程師討論後，以操作介面來說可以在按下 <code>apply()</code> 按鈕時再取得卡片的資訊，不然每選一次就更新 <code>state</code>，似乎有點多餘，深感認同。後來就改成這樣。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">v-model</span>=<span class="string">"selectedCard"</span> <span class="attr">type</span>=<span class="string">"text"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">option</span></span></span><br><span class="line"><span class="tag">        <span class="attr">v-for</span>=<span class="string">"item in options"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:key</span>=<span class="string">"item.label"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:value</span>=<span class="string">"item.value"</span></span></span><br><span class="line"><span class="tag">        @<span class="attr">change</span>=<span class="string">"($event) =&gt; (selectedCard = $event.target.value)"</span> // 改回原本寫法</span></span><br><span class="line"><span class="tag">      &gt;</span></span><br><span class="line">         &#123;&#123;item.label&#125;&#125;<span class="tag">&lt;/<span class="name">option</span></span></span><br><span class="line"><span class="tag">      &gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"apply()"</span>&gt;</span>click<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> &#123; mapGetters, mapMutations &#125; <span class="keyword">from</span> <span class="string">'vuex'</span>;</span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line">  data() &#123;</span><br><span class="line"><span class="actionscript">    <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="actionscript">     <span class="comment">// ...略</span></span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line"><span class="actionscript">    ...mapGetters(<span class="string">'ticket'</span>, [<span class="string">'getCobrandCard'</span>]),</span></span><br><span class="line"><span class="actionscript">    ...mapMutations(<span class="string">'ticket'</span>, [<span class="string">'setHasGetCardInfo'</span>]),</span></span><br><span class="line"><span class="actionscript">    <span class="comment">// 是否顯示 icon</span></span></span><br><span class="line">    isShowCobrandCard() &#123;</span><br><span class="line"><span class="actionscript">     <span class="comment">// ...略...</span></span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#125;</span><br><span class="line">  methods: &#123;</span><br><span class="line">    apply() &#123;</span><br><span class="line"><span class="actionscript">      <span class="comment">// ...do something</span></span></span><br><span class="line"><span class="actionscript">      <span class="keyword">this</span>.$router.push(<span class="string">'/next-page'</span>);</span></span><br><span class="line"><span class="actionscript">      <span class="keyword">this</span>.setHasGetCardInfo(<span class="keyword">this</span>.selectedCard); <span class="comment">// 改到這裡</span></span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>此時僅保留 mutations 存取資料的部分。</p>
+<h2 id="使用-Getters-改寫-computed-共同邏輯"><a href="#使用-Getters-改寫-computed-共同邏輯" class="headerlink" title="使用 Getters 改寫 computed 共同邏輯"></a>使用 Getters 改寫 computed 共同邏輯</h2><p>因為這三個頁面的 <code>computed</code> 幾乎都用的 <code>isShowCobrandCard()</code> 取到值，因為專案有使用 Vuex，故資深工程師建議我可以改寫成 Getters，就可以一起共用，也不需要特別把取得卡片的資料寫在 <code>state</code> 儲存，因為是否選到票卡的資料也是直接從 state 某個變數取得的，可以直接從 <code>Getters</code> 取到資料內一起完成。</p>
+<p>這樣連 <code>state</code> 跟 <code>mutations</code> 也都不需要了。</p>
+<h3 id="把-computed-改寫成-Getters"><a href="#把-computed-改寫成-Getters" class="headerlink" title="把 computed 改寫成 Getters"></a>把 computed 改寫成 Getters</h3><p>後來將共用的 <code>computed</code> 改寫在 <code>Getters</code>，程式碼如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">vxIsShowCardInfo(state) &#123;</span><br><span class="line">   <span class="keyword">const</span> &#123; resultDataList &#125; = state;</span><br><span class="line">   <span class="keyword">const</span> excludedCodes = [<span class="string">'A1'</span>, <span class="string">'A2'</span>, <span class="string">'A3'</span>];</span><br><span class="line">   <span class="comment">// 是否有選擇卡片</span></span><br><span class="line">   <span class="keyword">const</span> hasSelectedCard = resultDataList?.every(</span><br><span class="line">     (&#123; selected &#125;) =&gt; selected.option.price.corporate,</span><br><span class="line">   );</span><br><span class="line">   <span class="comment">// 取得票卡前兩碼，ex.A1, A2, A3</span></span><br><span class="line">   <span class="keyword">const</span> ticketCodes = resultDataList?.map(</span><br><span class="line">     (&#123; selected &#125;) =&gt; selected.option.ticketCode.substring(<span class="number">0</span>, <span class="number">2</span>) || [],</span><br><span class="line">   );</span><br><span class="line">   <span class="comment">// 判斷票卡前兩碼是否有包含 A1, A2, A3</span></span><br><span class="line">   <span class="keyword">const</span> hasNoExcludedCode = ticketCodes.some(</span><br><span class="line">     (code) =&gt; !excludedCodes.includes(code),</span><br><span class="line">   );</span><br><span class="line">   <span class="comment">// 用票卡購買來回皆不包含 [A1,A2,A3] 才顯示卡片相關資訊。</span></span><br><span class="line">   <span class="keyword">return</span> hasSelectedCard &amp;&amp; hasNoExcludedCode; <span class="comment">// ture or false</span></span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>Getters 類似 Vue 的 <code>computed</code>，但不同的是，Vue 的 <code>computed</code> 不能傳入參數，但 Getters 是可以帶入參數的，通常第一個會是 <code>state</code>，所以就從這邊取得資料直接做處理。</p>
+<p>說明：</p>
+<ol>
+<li>使用 ES6 的方始取得 <code>state</code> 的變數 <code>resultDataList</code>。</li>
+<li>並且把本次需求，若在指定條件下，陣列中有包含這三個值中的兩個，就不要顯示卡片資訊。</li>
+<li><code>hasSelectedCard</code> 是判斷是否有使用卡片，因為指定條件有單程跟來回，所以使用 <code>every()</code> 去找所有的物件是否有包含 <code>corporate</code>。若沒有使用卡片，物件則不會出現此屬性。</li>
+<li><code>ticketCodes</code> 是把資料重新 map() 成兩筆物件，並找出 <code>ticketCode</code> 只取前兩個字串。</li>
+<li><code>hasNoExcludedCode</code> 是判斷 <code>ticketCodes</code> 裡面是否有包含所指定的代碼，會回傳 true 或 false。</li>
+<li>最後要把 true 或 false 的結果回傳給 <code>vxIsShowCardInfo</code>，並替換掉原本的 <code>isShowCobrandCard</code> 的地方。</li>
+</ol>
+<p>這樣原本有共同使用到這片段程式碼的地方，只要透過 mapGetters，就可以使用這個取值方法。這三頁的程式碼就可以精簡很多，而且吃到的都是同一個邏輯。感謝同事的提點。</p>
+<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>這次優化這個功能遇到了幾個需要學習的地方：</p>
+<ol>
+<li>對於 Getters 沒有這麼熟悉，透過這次練習比較知道 Getters 的使用。</li>
+<li>如果是處理共同資料流的地方，可以先想到 Getters。</li>
+<li>研究流程與取值之間有沒有更好的做法。</li>
+<li>從功能開發到優化的學習，真心感謝資深工程師的提點，有人願意提點該高興，被放生就慘了。</li>
+<li>寫註解要清楚明瞭，至少讓自己在數週或數個月後還可以知道自己在寫什麼。</li>
+<li>Git 協作觀念還要加強，解衝突不要亂解。</li>
+</ol>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a href="https://vuex.vuejs.org/guide/getters.html" target="_blank" rel="noopener">Vuex-Getters</a></li>
+<li><a href="https://medium.com/itsems-frontend/vue-vuex3-getters-6e83a6f7235e" target="_blank" rel="noopener">[Vue] Vuex 是什麼? 怎麼用? — Getters (3/5)</a></li>
+<li><a href="https://ithelp.ithome.com.tw/articles/10228280" target="_blank" rel="noopener">Day29 Vuex Getter 用法介紹</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/vue-js/" rel="tag"># vue.js</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/vue-js/20230426/3616475441/" rel="prev" title="Vue 筆記 - 路由守衛 BeforeRouteEnter 跟 BeforeRouteLeave 實作">
+      <i class="fa fa-chevron-left"></i> Vue 筆記 - 路由守衛 BeforeRouteEnter 跟 BeforeRouteLeave 實作
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#多頁使用同個方法"><span class="nav-number">1.</span> <span class="nav-text">多頁使用同個方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原本的想法"><span class="nav-number">2.</span> <span class="nav-text">原本的想法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#調整過程"><span class="nav-number">2.1.</span> <span class="nav-text">調整過程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-Getters-改寫-computed-共同邏輯"><span class="nav-number">3.</span> <span class="nav-text">使用 Getters 改寫 computed 共同邏輯</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#把-computed-改寫成-Getters"><span class="nav-number">3.1.</span> <span class="nav-text">把 computed 改寫成 Getters</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小結"><span class="nav-number">4.</span> <span class="nav-text">小結</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">5.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">342</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友站連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://israynotarray.com/" title="https:&#x2F;&#x2F;israynotarray.com&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.casper.tw/" title="https:&#x2F;&#x2F;www.casper.tw&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.miniasp.com/" title="https:&#x2F;&#x2F;blog.miniasp.com&#x2F;" rel="noopener" target="_blank">保哥部落格</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cythilya.github.io/" title="https:&#x2F;&#x2F;cythilya.github.io&#x2F;" rel="noopener" target="_blank">桑莫。夏天</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mtwmt.com/blog/list" title="https:&#x2F;&#x2F;mtwmt.com&#x2F;blog&#x2F;list" rel="noopener" target="_blank">Mandy's Web</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.oxxostudio.tw/" title="https:&#x2F;&#x2F;www.oxxostudio.tw&#x2F;" rel="noopener" target="_blank">OXXO Studio</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/vue-js/20230505/151676026/",
+            identifier: "vue-js/20230505/151676026/",
+            title: "Vue 筆記 - 將不同頁面的 computed 透過 Getter 整合成共用方法，以及優化過程"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
