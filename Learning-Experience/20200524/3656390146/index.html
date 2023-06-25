@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="學習前端工程師一年的經歷與過程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="超前部屬的前端工程師學習之路">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;Learning-Experience&#x2F;20200524&#x2F;3656390146&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="學習前端工程師一年的經歷與過程">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1522252234503-e356532cafd5?ixlib&#x3D;rb-1.2.1&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;2125&amp;q&#x3D;80">
+<meta property="article:published_time" content="2020-05-24T07:56:13.000Z">
+<meta property="article:modified_time" content="2020-05-27T15:13:20.128Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="前端學習之路">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1522252234503-e356532cafd5?ixlib&#x3D;rb-1.2.1&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;2125&amp;q&#x3D;80">
+
+<link rel="canonical" href="https://hsuchihting.github.io/Learning-Experience/20200524/3656390146/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>超前部屬的前端工程師學習之路 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/Learning-Experience/20200524/3656390146/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          超前部屬的前端工程師學習之路
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-05-24 15:56:13" itemprop="dateCreated datePublished" datetime="2020-05-24T15:56:13+08:00">2020-05-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-05-27 23:13:20" itemprop="dateModified" datetime="2020-05-27T23:13:20+08:00">2020-05-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning-Experience/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning Experience</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/Learning-Experience/20200524/3656390146/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="Learning-Experience/20200524/3656390146/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">學習前端工程師一年的經歷與過程</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://images.unsplash.com/photo-1522252234503-e356532cafd5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2125&q=80" alt="學習過程"></p>
+<h2 id="開始學習時間"><a href="#開始學習時間" class="headerlink" title="開始學習時間"></a>開始學習時間</h2><p>2019/2/11 註冊六角學院，那時我對前端工程師領域完全沒有接觸，也覺得自己不會走進資訊領域的工作，一直以來都是專研在設計美術，而在行動載具的興起，消費者獲得資訊的行為改變，各產業呈現品牌與宣傳的方式當然也順應潮流，而在這波衝擊中，我一直思考，除了設計美術外，還可以做什麼工作? 所以開始了<a href="https://hsuchihting.github.io/Learning-Experience/20200527/2108866219/">平面設計踏上前端工程師的旅程</a>。</p>
+<h2 id="初期規劃"><a href="#初期規劃" class="headerlink" title="初期規劃"></a>初期規劃</h2><p>我參考了六角學院前端工程師與網頁設計師的差別，承上所述，若不做設計還可以做什麼? 所以我只參考了這兩個部分，加上現實的考量與未來的發展，我選擇了<a href="https://www.hexschool.com/qa/how-to.html" target="_blank" rel="noopener">前端工程師</a>。六角學院規劃了完整的學習地圖，非常適合非本科的朋友來學習，但問題來了：</p>
+<ul>
+<li>在現實與學習的路上該怎麼規劃呢?</li>
+<li>要全職還是兼職學習?</li>
+<li>學習時間與效益怎麼驗收?</li>
+</ul>
+<h2 id="學習路徑"><a href="#學習路徑" class="headerlink" title="學習路徑"></a>學習路徑</h2><p>首先一定是從最基本的 HTML &amp; CSS 開始學習，洧杰老師用 WORD 當開頭，深入淺出的說明，讓我對於 coding 這件事情減少了許多懼怕。一開始身邊的人知道我要開始學習程式，都說邏輯性很重要。他們說得沒錯，但只對一半，因為更重要的是像我正統文組出身，又是受到長期美術教育薰陶的背景，思維要從天馬行空要馬上進入思維邏輯的領域來說，恐懼才是最大的阻礙。</p>
+<h3 id="HTML-CSS-jQuery-RWD-失敗"><a href="#HTML-CSS-jQuery-RWD-失敗" class="headerlink" title="HTML CSS jQuery RWD 失敗"></a>HTML CSS jQuery RWD 失敗</h3><p>首先，我學習完 HTML &amp; CSS 後，大概能真正自己開始撰寫大概只有六成功力，因為知道的內容實在太少，也還是透過以前文組學習的方式，「課本」教我什麼，我只在這個領域練習，還沒有培養自己 google 的能力，就因為累積的不足，進入 jQuery 時，非常吃力，學習到懷疑人生，這時候已經過了兩個月!</p>
+<p>我覺得這樣不行，太撞牆了，而且很沒有成就感，後來停下一天，回想過去學習技能這條路，如今可以上手是什麼方式跟方法，好好思考學習的路徑，什麼才是對我最有幫助且可以有效的提高掌握度。</p>
+<h3 id="HTML-amp-CSS、SCSS、Bootstrap、RWD、JavaScript、jQuery、Vue-js-未完"><a href="#HTML-amp-CSS、SCSS、Bootstrap、RWD、JavaScript、jQuery、Vue-js-未完" class="headerlink" title="HTML &amp; CSS、SCSS、Bootstrap、RWD、JavaScript、jQuery、Vue.js(未完)"></a>HTML &amp; CSS、SCSS、Bootstrap、RWD、JavaScript、jQuery、Vue.js(未完)</h3><p>後來就按照上面的這個路徑，重新學習。沒錯!就是兩個月的東西砍掉重練，因為中間遇到太太生產，從生產到月子中心這一個月的時間，幾乎下班就是到月子中心陪伴與照顧她。只有大概滑滑手機，看看前端領域到底都要具備什麼能力，還有討論相關的主題跟內容，讓我自己不要跟這個領域脫節，等到太太出月子中心，回到家整頓好後，已經是五月底了，所以我可以說從六月重新學習。</p>
+<p>雖然說是重新學習，但走過的路沒有白費，前兩個月所學習的內容還是記得，且重新再看一次課程，也找出當時沒發現的問題還有未釐清的觀念。且透過 SCSS 管理 CSS 後覺得更是如虎天翼，少了重工的困擾，程式碼也更乾淨，再透過 Bootstrap 的架構，在 RWD 上寫起來更是得心應手。</p>
+<p>後來決定先把樣式這部分掌握好，至少在切版上可以在成效上有把握，後面再進行互動的學習。</p>
+<h4 id="JavaScript-的挫折"><a href="#JavaScript-的挫折" class="headerlink" title="JavaScript 的挫折"></a>JavaScript 的挫折</h4><p>後來陸續也參加 F2E 前端修練時光屋的挑戰，iT 鐵人賽 30 天挑戰賽，這段時間是讓我切版成長最快速的時候，經過鐵人賽的洗禮，我覺得在成效上非常好，且是強迫自己 30 天不斷的接觸程式，產生熟悉感，寫起來也比較得心應手，有些語法也因為這樣不需要思考就可以寫出來了。後來進入 JavaScript 學習時，我覺得這個方式可行，所以要用這個方式來學習，但是有一部分我偷懶了，我大概用了兩週的時間把課程「看」完了，天真的以為我應該可以看得懂程式碼就會寫了。結果根本就是不可能！後來痛定思痛花了近兩個月的時間把 JavaScript 分小節，並且每一章節都做筆記，成為我自己查找資料的字典，並且記錄在鐵人賽的部落格上。也因為有自己整理學習的內容與紀錄，讓自己有「印象」自己到底學了什麼。也建立個人的<a href="https://hsuchihting.github.io/">前端技術部落格</a>，後也因為這樣讓我在工作上也很快速地找到我自己的筆記，解決了工作上的困難。</p>
+<h4 id="Vue-js-挫折"><a href="#Vue-js-挫折" class="headerlink" title="Vue.js 挫折"></a>Vue.js 挫折</h4><p>這時已經開始在寫作品了，我跟洧杰老師討論後，他建議我選<a href="https://hsuchihting.github.io/Hotel_booking/hotel_index.html">旅館訂房頁面</a>當作作品來練習，在這個作品中更讓我釐清 JavaScript 如何讓網頁產生互動，也比較清楚網頁元素三劍客的分工與職責內容。我想說那來學習 Vue.js ，看看能不能加速我在開發上的速度與掌握一個框架，但因為 JavaScript 陣列與資料處理的觀念沒有非常清楚，在學習上相對吃力，後來先暫緩，想說先把 JavaScript 基礎弄好。</p>
+<h4 id="實體課程：五倍紅寶石-Vue-js-課程"><a href="#實體課程：五倍紅寶石-Vue-js-課程" class="headerlink" title="實體課程：五倍紅寶石 Vue.js 課程"></a>實體課程：五倍紅寶石 Vue.js 課程</h4><p>剛好看到五倍紅寶石有一個實體課程，授課老師是在前端界有名的老師 Kuro，也是 Vue Taiwan 社團的創辦人，想說透過實體課程的方式，看看自己能否在實體中提升自己的能力，孰不知依然是 JavaScript 的熟練度還不夠高，學起來還是有點吃力，但因為有看過六角學院的 Vue 課程，所以基礎的還更得上，還需要加強的地方是 component 的使用與觀念，可惜我還是沒有學得很好，但如同前面所說，走過的路沒有白費，因為我更知道我要往哪些方向努力!也因為有參加實體課程，也獲得 Kuro 老師的親筆簽書！(書是我自己買的，<a href="https://www.tenlong.com.tw/products/9789864344130" target="_blank" rel="noopener">購書連結</a>)，也在這個月我拿到了 offer。</p>
+<h2 id="學習中的挫折"><a href="#學習中的挫折" class="headerlink" title="學習中的挫折"></a>學習中的挫折</h2><p>說實在，學習程式的過程孤單又挫折，幾乎每天都跟挫折相處，但也是好處，在程式的世界知道自己的微小，也知道自己該怎麼成長，也變得較務實，因為網頁不會說謊，寫了什麼給它，它就老實的回覆你。</p>
+<p>學習跟挫折與孤獨相處，是很重要的。但值得開心的是六角學院的老師跟同學都可以陪伴你，在程式的世界沒有蠢問題，只怕不問問題跟找問題的源頭，更需要一顆研究的心。</p>
+<h2 id="自我挑戰"><a href="#自我挑戰" class="headerlink" title="自我挑戰"></a>自我挑戰</h2><p>透過挑戰，就可以設立里程碑跟目標，也讓自己在失敗中學習，程式寫失敗沒有關係，把 bug 修好就好，不要想要一步登天，在初學就把程式碼的寫得又有條理跟精簡，因為就是知道哪裡寫得亂七八糟，才有機會修正自己的程式碼，還有撰寫思維。享受自我挑戰的樂趣非常重要，以下是我自己經歷的挑戰過程：</p>
+<h3 id="F2E-挑戰失敗"><a href="#F2E-挑戰失敗" class="headerlink" title="F2E 挑戰失敗"></a>F2E 挑戰失敗</h3><p>第一次挑戰 <a href="https://challenge.thef2e.com/" target="_blank" rel="noopener">F2E 前端修練時光屋</a>，那時是寫番茄鐘，挑戰門檻是七天要完成稿件，原本我用平面設計的思維覺得應該是可以的，但我開始挑戰後，光是一個 aside 就讓我卡了七天，最終宣告放棄，也退出這次的挑戰賽，並且知道我超級不足，連一頁都寫不出來，說實在，挫折感比台北 101 還要高！</p>
+<p>一度很想放棄，但我覺得這樣不行，我目標就是要成為前端工程師，這樣的程度是無法踏進這個領域的，所以開始找方法。</p>
+<h3 id="IT-鐵人賽"><a href="#IT-鐵人賽" class="headerlink" title="IT 鐵人賽"></a>IT 鐵人賽</h3><p>透過 30 天的鐵人賽，我參加<a href="https://ithelp.ithome.com.tw/users/20119300/ironman/2600" target="_blank" rel="noopener">自我挑戰組</a>，找了四個主題來寫，讓我自己透過三十天把四個網頁拆分得很細，並且每天記錄過程，讓自己未來可以回顧，現在看起來雖然很粗淺，但這就是當時我的實力，感謝當時堅持的我，讓我切版的能力提升了！後來因為挑戰成功，主辦單位還有寄獎狀跟獎牌到家裡，真是好棒的成長紀錄！</p>
+<h2 id="增廣見聞的地方"><a href="#增廣見聞的地方" class="headerlink" title="增廣見聞的地方"></a>增廣見聞的地方</h2><h3 id="IT-鐵人賽-1"><a href="#IT-鐵人賽-1" class="headerlink" title="IT 鐵人賽"></a>IT 鐵人賽</h3><p>透過鐵人賽，可以看到許多人不同的文章與撰寫的內容，也讓自己增廣見聞與成長！</p>
+<h3 id="研討會"><a href="#研討會" class="headerlink" title="研討會"></a>研討會</h3><p>音樂詩人方文山曾經在一場簽書會說過：「想成為什麼樣的人，先做那個人要做的事情。」，六角學院固定會舉行線上研討會，為了讓自己的思維更貼近前端工程師，我後來幾乎有時間都會參加研討會，真的是秀才不出門，能知前端事。</p>
+<h3 id="F2E-作品"><a href="#F2E-作品" class="headerlink" title="F2E 作品"></a>F2E 作品</h3><p>我選擇旅房訂房網頁後，好好地並專心打磨此作品且練習手刻能力，大概花了我兩個月的時間，終於作了一個算是有點自信可以拿來面試的作品，雖然功能很陽春，但也是透過這個作品讓我程式撰寫能力大幅成長。</p>
+<h3 id="Slack"><a href="#Slack" class="headerlink" title="Slack"></a>Slack</h3><p>非常推薦進入這個 Slack 群，裡面各種高手學長姐，目前有些專案跟觀念也因為這個群組，解決我不少困難與問題。</p>
+<h3 id="FB-社團"><a href="#FB-社團" class="headerlink" title="FB 社團"></a>FB 社團</h3><p>可以看到許多學院優質的活動與課程推廣，也可以看到同學的成長與互相幫助，許多程式碼上的問題，在過來人的建議與分享，自己也獲得很大的成長與進步，原來我的問題，也是別人遇到的問題！更可貴的，真的可以找到互相扶持的朋友！</p>
+<h3 id="身邊的工程師朋友"><a href="#身邊的工程師朋友" class="headerlink" title="身邊的工程師朋友"></a>身邊的工程師朋友</h3><p>感謝上帝的恩典，我因為有幾位讓我詢問的六角學長，在我作品集還有專案上願意讓我問，也剛好身邊有一位資深全端工程師願意在我有問題的時候即時的發問，他也樂意指引我方向解決問題!真是非常感謝你們這一路的陪伴與協助!</p>
+<h3 id="兩位老師"><a href="#兩位老師" class="headerlink" title="兩位老師"></a>兩位老師</h3><p>最重要的，當然就是授課的兩位老師，若沒有你們創立六角學院，我就沒辦法透過最適合我的線上學習，踏進前端工程師的工作，也謝謝你們願意花時間跟分析我學習的方向，還有通話解決我的疑問，也非常謝謝助教 Ray 願意額外在晚上的時間教我如何架設部落格，還有解決我一些前端的問題，真是非常感謝你們無私的奉獻！</p>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>用下面三段話作為這次學習之路的結尾。</p>
+<h3 id="沒有可以複製的方式，只有最適合自己的道路"><a href="#沒有可以複製的方式，只有最適合自己的道路" class="headerlink" title="沒有可以複製的方式，只有最適合自己的道路"></a>沒有可以複製的方式，只有最適合自己的道路</h3><p>可能會在社團看到誰誰誰在幾個月後找到工作，擔心自己是否太慢或是無法踏入該領域，千萬別這麼想，因為這是剛好他找到最適合他的方式來幫助他自己學習，但適合的他不一定適合自己，只要按照自己的步調學習，確定知道，今天的自己比昨天強，這樣就夠了。</p>
+<h3 id="掌握技術熟練度，比預定時間來得重要"><a href="#掌握技術熟練度，比預定時間來得重要" class="headerlink" title="掌握技術熟練度，比預定時間來得重要"></a>掌握技術熟練度，比預定時間來得重要</h3><p>技術的熟練度掌握度多少，其實是騙不了人的，當你面對編輯器的時候就已經有了答案，與其去在意時間，不如在意把握度到底有多少還比較實際一點，不然會兩頭空，挫折感也會超級大！</p>
+<h3 id="沒有最好的決定，是做了決定後做到最好"><a href="#沒有最好的決定，是做了決定後做到最好" class="headerlink" title="沒有最好的決定，是做了決定後做到最好"></a>沒有最好的決定，是做了決定後做到最好</h3><p>所有的決定都不會是完美的，但是既然決定了，就好好走下去，就算面對任何困難，都不能阻止所做的決定，只要這個決定在心裡是踏實的，而且很多理由讓自己無法前進，只是因為自己懼怕與懶惰的藉口，最後也祝福在轉職的路上的朋友，要好好感謝你身邊的家人，因為若沒有他們的支持，也很難走得長遠！</p>
+<p>還有很多要學習的，繼續加油! Be Strong and Courageous, impossible is nothing!</p>
+<p><strong>我喜歡的一段話，與大家分享與自勉：</strong> Think Big, Start Small, Being Now!</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%89%8D%E7%AB%AF%E5%AD%B8%E7%BF%92%E4%B9%8B%E8%B7%AF/" rel="tag"># 前端學習之路</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/javascript/20200518/1372907171/" rel="prev" title="JS 筆記 - 取得與清除 input 的值">
+      <i class="fa fa-chevron-left"></i> JS 筆記 - 取得與清除 input 的值
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/javascript/20200525/4038493766/" rel="next" title="JS 筆記 - for 迴圈，i++、加總、break 的使用">
+      JS 筆記 - for 迴圈，i++、加總、break 的使用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#開始學習時間"><span class="nav-number">1.</span> <span class="nav-text">開始學習時間</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初期規劃"><span class="nav-number">2.</span> <span class="nav-text">初期規劃</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#學習路徑"><span class="nav-number">3.</span> <span class="nav-text">學習路徑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML-CSS-jQuery-RWD-失敗"><span class="nav-number">3.1.</span> <span class="nav-text">HTML CSS jQuery RWD 失敗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML-amp-CSS、SCSS、Bootstrap、RWD、JavaScript、jQuery、Vue-js-未完"><span class="nav-number">3.2.</span> <span class="nav-text">HTML &amp; CSS、SCSS、Bootstrap、RWD、JavaScript、jQuery、Vue.js(未完)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JavaScript-的挫折"><span class="nav-number">3.2.1.</span> <span class="nav-text">JavaScript 的挫折</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Vue-js-挫折"><span class="nav-number">3.2.2.</span> <span class="nav-text">Vue.js 挫折</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#實體課程：五倍紅寶石-Vue-js-課程"><span class="nav-number">3.2.3.</span> <span class="nav-text">實體課程：五倍紅寶石 Vue.js 課程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#學習中的挫折"><span class="nav-number">4.</span> <span class="nav-text">學習中的挫折</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自我挑戰"><span class="nav-number">5.</span> <span class="nav-text">自我挑戰</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#F2E-挑戰失敗"><span class="nav-number">5.1.</span> <span class="nav-text">F2E 挑戰失敗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IT-鐵人賽"><span class="nav-number">5.2.</span> <span class="nav-text">IT 鐵人賽</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增廣見聞的地方"><span class="nav-number">6.</span> <span class="nav-text">增廣見聞的地方</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IT-鐵人賽-1"><span class="nav-number">6.1.</span> <span class="nav-text">IT 鐵人賽</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#研討會"><span class="nav-number">6.2.</span> <span class="nav-text">研討會</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#F2E-作品"><span class="nav-number">6.3.</span> <span class="nav-text">F2E 作品</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Slack"><span class="nav-number">6.4.</span> <span class="nav-text">Slack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FB-社團"><span class="nav-number">6.5.</span> <span class="nav-text">FB 社團</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#身邊的工程師朋友"><span class="nav-number">6.6.</span> <span class="nav-text">身邊的工程師朋友</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#兩位老師"><span class="nav-number">6.7.</span> <span class="nav-text">兩位老師</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#結語"><span class="nav-number">7.</span> <span class="nav-text">結語</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#沒有可以複製的方式，只有最適合自己的道路"><span class="nav-number">7.1.</span> <span class="nav-text">沒有可以複製的方式，只有最適合自己的道路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#掌握技術熟練度，比預定時間來得重要"><span class="nav-number">7.2.</span> <span class="nav-text">掌握技術熟練度，比預定時間來得重要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#沒有最好的決定，是做了決定後做到最好"><span class="nav-number">7.3.</span> <span class="nav-text">沒有最好的決定，是做了決定後做到最好</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">344</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://bmc.link/hsuchihting" title="BuyMeACoffee → https:&#x2F;&#x2F;bmc.link&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>BuyMeACoffee</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友站連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://israynotarray.com/" title="https:&#x2F;&#x2F;israynotarray.com&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.casper.tw/" title="https:&#x2F;&#x2F;www.casper.tw&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.miniasp.com/" title="https:&#x2F;&#x2F;blog.miniasp.com&#x2F;" rel="noopener" target="_blank">保哥部落格</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cythilya.github.io/" title="https:&#x2F;&#x2F;cythilya.github.io&#x2F;" rel="noopener" target="_blank">桑莫。夏天</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mtwmt.com/blog/list" title="https:&#x2F;&#x2F;mtwmt.com&#x2F;blog&#x2F;list" rel="noopener" target="_blank">Mandy's Web</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.oxxostudio.tw/" title="https:&#x2F;&#x2F;www.oxxostudio.tw&#x2F;" rel="noopener" target="_blank">OXXO Studio</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/Learning-Experience/20200524/3656390146/",
+            identifier: "Learning-Experience/20200524/3656390146/",
+            title: "超前部屬的前端工程師學習之路"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

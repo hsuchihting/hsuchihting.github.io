@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="關於 PDF 跟 EDM 常用的列印設定">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS 筆記 - 關於列印的那些設定">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;css&#x2F;20230302&#x2F;2830282312&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="關於 PDF 跟 EDM 常用的列印設定">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1581079289196-67865ea83118?ixlib&#x3D;rb-4.0.3&amp;ixid&#x3D;MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1169&amp;q&#x3D;80">
+<meta property="article:published_time" content="2023-03-02T14:19:22.000Z">
+<meta property="article:modified_time" content="2023-03-02T14:31:45.116Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1581079289196-67865ea83118?ixlib&#x3D;rb-4.0.3&amp;ixid&#x3D;MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1169&amp;q&#x3D;80">
+
+<link rel="canonical" href="https://hsuchihting.github.io/css/20230302/2830282312/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>CSS 筆記 - 關於列印的那些設定 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/css/20230302/2830282312/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          CSS 筆記 - 關於列印的那些設定
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2023-03-02 22:19:22 / 修改時間：22:31:45" itemprop="dateCreated datePublished" datetime="2023-03-02T22:19:22+08:00">2023-03-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/css/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/css/20230302/2830282312/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="css/20230302/2830282312/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">關於 PDF 跟 EDM 常用的列印設定</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://images.unsplash.com/photo-1581079289196-67865ea83118?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80" alt="print"></p>
+<p>目前工作遇到 EDM，也有設定列印的需求，無論從網站或是 PDF，可以透過 CSS print 的設定來調整相關細節，藉此筆記一下。</p>
+<h2 id="列印需求"><a href="#列印需求" class="headerlink" title="列印需求"></a>列印需求</h2><p>本次在專案中的某頁面需要給使用者下載搜尋結果後的 PDF，並要完整呈現 table 中 td 的資訊，不要在列印時被切斷。</p>
+<h2 id="使用-media-print-屬性"><a href="#使用-media-print-屬性" class="headerlink" title="使用 media print 屬性"></a>使用 media print 屬性</h2><p>需在 CSS 中增加 media print 屬性：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@media</span> print &#123;</span><br><span class="line">  ...;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="page-頁面設定"><a href="#page-頁面設定" class="headerlink" title="@page 頁面設定"></a>@page 頁面設定</h3><p><code>size</code> 的預設值為 <code>A4</code>，<code>portrait</code> 為直式。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@media</span> print &#123;</span><br><span class="line">  <span class="keyword">@page</span> &#123;</span><br><span class="line">    <span class="attribute">size</span>: A4 portrait;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其他 size 的相關設定</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@page</span> &#123;</span><br><span class="line">  <span class="attribute">size</span>: portrait; <span class="comment">/* 直向(預設) */</span></span><br><span class="line">  <span class="attribute">size</span>: landscape; <span class="comment">/* 橫向 */</span></span><br><span class="line">  <span class="attribute">size</span>: <span class="number">10cm</span>; <span class="comment">/* 單值則長寬皆為10cm */</span></span><br><span class="line">  <span class="attribute">size</span>: <span class="number">4cm</span> <span class="number">6cm</span>; <span class="comment">/* 寬4cm 高6cm */</span></span><br><span class="line">  <span class="attribute">size</span>: A4; <span class="comment">/* 保留字 */</span></span><br><span class="line">  <span class="attribute">size</span>: A4 landscape; <span class="comment">/* 尺寸/保留字 + 方向 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="本次主角-break-分頁點"><a href="#本次主角-break-分頁點" class="headerlink" title="本次主角 - break 分頁點"></a>本次主角 - break 分頁點</h2><p>相關屬性有三個，皆為分頁斷點設定，分別在是在<code>元素本身</code>、<code>元素前</code>、<code>元素後</code>插入分頁斷點。</p>
+<p>分新舊寫法但目前瀏覽器保留舊寫法並會將舊寫法轉為新寫法。</p>
+<h3 id="屬性寫法"><a href="#屬性寫法" class="headerlink" title="屬性寫法"></a>屬性寫法</h3><table>
+<thead>
+<tr>
+<th>新寫法</th>
+<th>舊寫法</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>break-inside</td>
+<td>page-break-inside</td>
+<td>元素本身</td>
+</tr>
+<tr>
+<td>break-before</td>
+<td>page-break-before</td>
+<td>元素前</td>
+</tr>
+<tr>
+<td>break-after</td>
+<td>page-break-after</td>
+<td>元素後</td>
+</tr>
+</tbody></table>
+<h3 id="break-inside-元素本身斷點"><a href="#break-inside-元素本身斷點" class="headerlink" title="break-inside 元素本身斷點"></a>break-inside 元素本身斷點</h3><table>
+<thead>
+<tr>
+<th>break-inside(新)</th>
+<th>page-break-inside(舊)</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>auto</td>
+<td>auto</td>
+<td>預設，如果需要則會在元素內插入分頁斷點</td>
+</tr>
+<tr>
+<td>avoid</td>
+<td>avoid</td>
+<td>避免在元素內插入分頁斷點</td>
+</tr>
+</tbody></table>
+<h3 id="break-before-元素前斷點"><a href="#break-before-元素前斷點" class="headerlink" title="break-before 元素前斷點"></a>break-before 元素前斷點</h3><table>
+<thead>
+<tr>
+<th>break-before(新)</th>
+<th>page-break-before(舊)</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>auto</td>
+<td>auto</td>
+<td>預設，如果需要則會在元素前插入分頁斷點</td>
+</tr>
+<tr>
+<td>avoid</td>
+<td>avoid</td>
+<td>避免在元素前插入分頁斷點</td>
+</tr>
+<tr>
+<td>page</td>
+<td>always</td>
+<td>在元素前總是插入分頁斷點</td>
+</tr>
+<tr>
+<td>left</td>
+<td>left</td>
+<td>在元素前插入分頁斷點直到它到達一個左手頁面</td>
+</tr>
+<tr>
+<td>right</td>
+<td>right</td>
+<td>在元素前插入分頁斷點直到它到達一個右手頁面</td>
+</tr>
+</tbody></table>
+<h3 id="break-after-元素後斷點"><a href="#break-after-元素後斷點" class="headerlink" title="break-after 元素後斷點"></a>break-after 元素後斷點</h3><table>
+<thead>
+<tr>
+<th>break-after(新)</th>
+<th>page-break-after(舊)</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>auto</td>
+<td>auto</td>
+<td>預設，如果需要則會在元素後插入分頁斷點</td>
+</tr>
+<tr>
+<td>avoid</td>
+<td>avoid</td>
+<td>避免在元素後插入分頁斷點</td>
+</tr>
+<tr>
+<td>page</td>
+<td>always</td>
+<td>在元素後總是插入分頁斷點</td>
+</tr>
+<tr>
+<td>left</td>
+<td>left</td>
+<td>在元素後插入分頁斷點直到到達一個左手頁面</td>
+</tr>
+<tr>
+<td>right</td>
+<td>right</td>
+<td>在元素後插入分頁斷點直到到達一個右手頁面</td>
+</tr>
+</tbody></table>
+<h2 id="關於列印的一些其他設定"><a href="#關於列印的一些其他設定" class="headerlink" title="關於列印的一些其他設定"></a>關於列印的一些其他設定</h2><h3 id="列印用字體單位"><a href="#列印用字體單位" class="headerlink" title="列印用字體單位"></a>列印用字體單位</h3><p>相對於平常 CSS 用的 px、em，針對列印用的尺寸單位推薦使用以下單位：</p>
+<blockquote>
+<p>em、 cm、mm、in、pt、pc、%</p>
+</blockquote>
+<h3 id="orphans-底部保留最小行數"><a href="#orphans-底部保留最小行數" class="headerlink" title="orphans 底部保留最小行數"></a>orphans 底部保留最小行數</h3><p>必須在頁面底部保留的段落的最小行數。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@page</span> &#123;</span><br><span class="line">  <span class="attribute">orphans</span>: <span class="number">3</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="widows-頂部保留最小行數"><a href="#widows-頂部保留最小行數" class="headerlink" title="widows 頂部保留最小行數"></a>widows 頂部保留最小行數</h3><p>必須在頁面頂部保留的段落的最小行數。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@page</span> &#123;</span><br><span class="line">  <span class="attribute">widows</span>: <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="first"><a href="#first" class="headerlink" title=":first"></a>:first</h3><p>列印時的第一頁。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@page</span> <span class="selector-pseudo">:first</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="left-與-right-左手頁面與右手頁面"><a href="#left-與-right-左手頁面與右手頁面" class="headerlink" title=":left 與 :right 左手頁面與右手頁面"></a>:left 與 :right 左手頁面與右手頁面</h3><p>在印雙面文件又需要裝訂時，以橫式文件（由左至右閱讀）來說，正面就要在左側留出血，反面要在右側留出血，<code>:left</code>和 <code>:right</code> 就是為此而生。</p>
+<p>用戶端會自動分別目前印到的頁數為左手頁面或右手頁面，進而去套用 <code>:left</code> 或 <code>:right</code> 的屬性設置。</p>
+<p>要依據文件內容書寫方向自己去判定第一頁為 <code>:left</code> 或 <code>:right</code>。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@page</span> <span class="selector-pseudo">:left</span> &#123;</span><br><span class="line">  <span class="attribute">margin-left</span>: <span class="number">2cm</span>;</span><br><span class="line">  <span class="attribute">margin-right</span>: <span class="number">4cm</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@page</span> <span class="selector-pseudo">:right</span> &#123;</span><br><span class="line">  <span class="attribute">margin-left</span>: <span class="number">4cm</span>;</span><br><span class="line">  <span class="attribute">margin-right</span>: <span class="number">2cm</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="列印顏色"><a href="#列印顏色" class="headerlink" title="列印顏色"></a>列印顏色</h2><p>針對 Chrome 瀏覽器無法列印出顏色的問題解法，假設要把 table 的 th 顏色印出，可在元素中設定其屬性。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">table</span> <span class="selector-tag">th</span> &#123;</span><br><span class="line">  <span class="attribute">-webkit-print-color-adjust</span>: exact <span class="meta">!important</span>;</span><br><span class="line">  <span class="attribute">color-adjust</span>: exact <span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果要強迫列印模式都要把有顏色的地方都印出。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@media</span> print &#123;</span><br><span class="line">  * &#123;</span><br><span class="line">    <span class="attribute">-webkit-print-color-adjust</span>: exact <span class="meta">!important</span>;</span><br><span class="line">    <span class="attribute">color-adjust</span>: exact <span class="meta">!important</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="關於-IE-還好-IE-已經死了"><a href="#關於-IE-還好-IE-已經死了" class="headerlink" title="關於 IE (還好 IE 已經死了)"></a>關於 IE <del>(還好 IE 已經死了)</del></h2><ul>
+<li>IE 不吃 rowspan，若有使用 rowspan 的話，border 會消失不見，印不出來。</li>
+<li>可使用改背景色，或是用硬幹的也可以(像是絕對定位之類的)。</li>
+</ul>
+<blockquote>
+<p>還好我們不用支援 IE。</p>
+</blockquote>
+<p>範例程式碼：<a href="https://codepen.io/hnzxewqw/pen/MWBMpBZ" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/MWBMpBZ</a></p>
+<h2 id="另開視窗顯示-PDF"><a href="#另開視窗顯示-PDF" class="headerlink" title="另開視窗顯示 PDF"></a>另開視窗顯示 PDF</h2><p>會員里程多一個匯出 PDF 檔案功能，需求如下：</p>
+<ol>
+<li>在點擊按鈕後才呼叫 API。</li>
+<li>要在 headers 裡面放入 Authorization。</li>
+<li>後端會回傳一個 PDF 格式檔案，前端使用 Blob 開啟。</li>
+</ol>
+<p>程式碼如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"> beforeDestroy() &#123;</span><br><span class="line">    <span class="keyword">this</span>.objUrlList.forEach(<span class="function">(<span class="params">url</span>) =&gt;</span> URL.revokeObjectURL(url));</span><br><span class="line"> &#125;,</span><br><span class="line"><span class="comment">/** 下載 PDF */</span></span><br><span class="line">    downloadPDF() &#123;</span><br><span class="line">      <span class="keyword">this</span>.$nuxt.$loading.start &amp;&amp; <span class="keyword">this</span>.$nuxt.$loading.start();</span><br><span class="line">      <span class="keyword">const</span> &#123; startDate, endDate, filter &#125; = <span class="keyword">this</span>.requestData;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> apiUrl = <span class="string">`<span class="subst">$&#123;process.env.apiUrl&#125;</span>/apiUrlPath?startDate=<span class="subst">$&#123;startDate&#125;</span>&amp;endDate=<span class="subst">$&#123;endDate&#125;</span>&amp;filter=<span class="subst">$&#123;filter&#125;</span>`</span>;</span><br><span class="line">      <span class="comment">// 從 cookie 取得 accessToken，避免重新整理沒有抓到 token 導致開啟檔案失敗</span></span><br><span class="line">      <span class="keyword">const</span> cookies = <span class="keyword">this</span>.$cookies.get(<span class="string">'memberToken'</span>);</span><br><span class="line">      <span class="comment">// 加入 Authorization 到 headers</span></span><br><span class="line">      <span class="keyword">const</span> option = &#123;</span><br><span class="line">        responseType: <span class="string">'blob'</span>,</span><br><span class="line">        headers: &#123;</span><br><span class="line">          Accept: <span class="string">'application/pdf'</span>,</span><br><span class="line">          <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span>,</span><br><span class="line">          <span class="string">'jx-lang'</span>: <span class="keyword">this</span>.$i18n.locale,</span><br><span class="line">          authorization: <span class="string">`<span class="subst">$&#123;cookies.type&#125;</span> <span class="subst">$&#123;cookies.accessToken&#125;</span>`</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">        methods: <span class="string">'GET'</span>,</span><br><span class="line">      &#125;;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 使用 blob 格式取得 PDF 檔案</span></span><br><span class="line">      fetch(apiUrl, option).then(<span class="keyword">async</span> (res) =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> (res.status === <span class="number">200</span>) &#123;</span><br><span class="line">          <span class="keyword">const</span> blob = <span class="keyword">await</span> res.blob(); <span class="comment">// 加上 await 確保 blob 正確取得</span></span><br><span class="line">          <span class="keyword">const</span> objUrl = URL.createObjectURL(blob);</span><br><span class="line">          <span class="built_in">window</span>.open(objUrl, <span class="string">'_blank'</span>);</span><br><span class="line">          <span class="keyword">this</span>.objUrlList.push(objUrl);</span><br><span class="line">          <span class="keyword">this</span>.$nuxt.$loading.finish &amp;&amp; <span class="keyword">this</span>.$nuxt.$loading.finish();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">const</span> errText = <span class="keyword">await</span> res.json(); <span class="comment">// 加上 await 確保 json 正確取得</span></span><br><span class="line">          <span class="keyword">const</span> &#123; code, details &#125; = errText.message;</span><br><span class="line">          <span class="keyword">if</span> (!details || !details.length) <span class="keyword">return</span>;</span><br><span class="line">          <span class="keyword">this</span>.$nuxt.$emit(<span class="string">'alert'</span>, details, code);</span><br><span class="line">          <span class="keyword">this</span>.$nuxt.$loading.finish &amp;&amp; <span class="keyword">this</span>.$nuxt.$loading.finish();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ul>
+<li><a href="https://penghuachen.github.io/2020/12/10/%E9%80%8F%E9%81%8E-CSS-%E5%88%97%E5%8D%B0-print-%E8%A8%AD%E5%AE%9A%E7%B6%B2%E9%A0%81%E5%88%97%E5%8D%B0%E6%99%82%E7%9A%84%E6%A8%A3%E5%BC%8F/" target="_blank" rel="noopener">透過 CSS 列印(print) 設定網頁列印時的樣式</a></li>
+<li><a href="https://dowyuu.github.io/program/2020/03/13/print-div/" target="_blank" rel="noopener">無須套件！瀏覽器列印特定區塊</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CSS/" rel="tag"># CSS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/vue-js/20230302/4095916244/" rel="prev" title="Vue 筆記 - 展示性元件 VS 容器式元件">
+      <i class="fa fa-chevron-left"></i> Vue 筆記 - 展示性元件 VS 容器式元件
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/vue-js/20230302/3427872126/" rel="next" title="Vue 筆記 - 使用 emit 指定父層元件是否顯示資訊的功能">
+      Vue 筆記 - 使用 emit 指定父層元件是否顯示資訊的功能 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#列印需求"><span class="nav-number">1.</span> <span class="nav-text">列印需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-media-print-屬性"><span class="nav-number">2.</span> <span class="nav-text">使用 media print 屬性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#page-頁面設定"><span class="nav-number">2.1.</span> <span class="nav-text">@page 頁面設定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本次主角-break-分頁點"><span class="nav-number">3.</span> <span class="nav-text">本次主角 - break 分頁點</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#屬性寫法"><span class="nav-number">3.1.</span> <span class="nav-text">屬性寫法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#break-inside-元素本身斷點"><span class="nav-number">3.2.</span> <span class="nav-text">break-inside 元素本身斷點</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#break-before-元素前斷點"><span class="nav-number">3.3.</span> <span class="nav-text">break-before 元素前斷點</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#break-after-元素後斷點"><span class="nav-number">3.4.</span> <span class="nav-text">break-after 元素後斷點</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#關於列印的一些其他設定"><span class="nav-number">4.</span> <span class="nav-text">關於列印的一些其他設定</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#列印用字體單位"><span class="nav-number">4.1.</span> <span class="nav-text">列印用字體單位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#orphans-底部保留最小行數"><span class="nav-number">4.2.</span> <span class="nav-text">orphans 底部保留最小行數</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#widows-頂部保留最小行數"><span class="nav-number">4.3.</span> <span class="nav-text">widows 頂部保留最小行數</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#first"><span class="nav-number">4.4.</span> <span class="nav-text">:first</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#left-與-right-左手頁面與右手頁面"><span class="nav-number">4.5.</span> <span class="nav-text">:left 與 :right 左手頁面與右手頁面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列印顏色"><span class="nav-number">5.</span> <span class="nav-text">列印顏色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#關於-IE-還好-IE-已經死了"><span class="nav-number">6.</span> <span class="nav-text">關於 IE (還好 IE 已經死了)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#另開視窗顯示-PDF"><span class="nav-number">7.</span> <span class="nav-text">另開視窗顯示 PDF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#參考資料"><span class="nav-number">7.1.</span> <span class="nav-text">參考資料</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">344</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://bmc.link/hsuchihting" title="BuyMeACoffee → https:&#x2F;&#x2F;bmc.link&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>BuyMeACoffee</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友站連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://israynotarray.com/" title="https:&#x2F;&#x2F;israynotarray.com&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.casper.tw/" title="https:&#x2F;&#x2F;www.casper.tw&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.miniasp.com/" title="https:&#x2F;&#x2F;blog.miniasp.com&#x2F;" rel="noopener" target="_blank">保哥部落格</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cythilya.github.io/" title="https:&#x2F;&#x2F;cythilya.github.io&#x2F;" rel="noopener" target="_blank">桑莫。夏天</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mtwmt.com/blog/list" title="https:&#x2F;&#x2F;mtwmt.com&#x2F;blog&#x2F;list" rel="noopener" target="_blank">Mandy's Web</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.oxxostudio.tw/" title="https:&#x2F;&#x2F;www.oxxostudio.tw&#x2F;" rel="noopener" target="_blank">OXXO Studio</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/css/20230302/2830282312/",
+            identifier: "css/20230302/2830282312/",
+            title: "CSS 筆記 - 關於列印的那些設定"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

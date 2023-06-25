@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="好用的圖表套件 Chart.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery 筆記 - Chart.js 基本使用">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;jQuery&#x2F;20200327&#x2F;3238077972&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="好用的圖表套件 Chart.js">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1460925895917-afdab827c52f?ixlib&#x3D;rb-1.2.1&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;2004&amp;q&#x3D;80">
+<meta property="article:published_time" content="2020-03-27T13:38:12.000Z">
+<meta property="article:modified_time" content="2020-04-28T14:49:07.846Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="jQuery">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1460925895917-afdab827c52f?ixlib&#x3D;rb-1.2.1&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;2004&amp;q&#x3D;80">
+
+<link rel="canonical" href="https://hsuchihting.github.io/jQuery/20200327/3238077972/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>jQuery 筆記 - Chart.js 基本使用 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/jQuery/20200327/3238077972/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          jQuery 筆記 - Chart.js 基本使用
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-03-27 21:38:12" itemprop="dateCreated datePublished" datetime="2020-03-27T21:38:12+08:00">2020-03-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-04-28 22:49:07" itemprop="dateModified" datetime="2020-04-28T22:49:07+08:00">2020-04-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jQuery/" itemprop="url" rel="index">
+                    <span itemprop="name">jQuery</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/jQuery/20200327/3238077972/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="jQuery/20200327/3238077972/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">好用的圖表套件 Chart.js</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2004&q=80" alt="chart.js"></p>
+<h2 id="Chart-js-簡介"><a href="#Chart-js-簡介" class="headerlink" title="Chart.js 簡介"></a>Chart.js 簡介</h2><p>Chart.js 是一款彈性很高的圖表 JavaScript library，支援八種常見的統計圖表類型，夠將圖表混合在一起使用，也支援動畫的效果，讓我們製作出來的圖表更加精美！Chart.js 可以與 ES6 模塊，純 JavaScript 和模塊加載器一起使用。</p>
+<h2 id="載入-chart-js"><a href="#載入-chart-js" class="headerlink" title="載入 chart.js"></a>載入 chart.js</h2><p>您可以從 <a href="https://github.com/chartjs/Chart.js/releases/tag/v2.9.3" target="_blank" rel="noopener">GitHub</a> 版本下載最新版本的 Chart.js  或使用 <a href="https://cdnjs.com/libraries/Chart.js/" target="_blank" rel="noopener">Chart.js CDN</a>。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/<span class="number">2</span>.<span class="number">9</span>.<span class="number">3</span>/Chart.min.js"&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>要把這一段加在 <code>&lt;head&gt;</code> 標籤中，不然會讀取不到資料，記得也要加入 js 的 <code>&lt;script&gt;</code> 標籤。</p>
+<blockquote>
+<p>因會不定期更新，最新版本請見官網。</p>
+</blockquote>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>把圖表放在 html 中的位置中，並且要用 <code>&lt;canvas&gt;</code> 標籤包住。如下方程式碼。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"chart-area"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>可用 CSS 或是直接在 <code>&lt;canvas&gt;</code> 中加入寬度與高度的設定，但我個人習慣用 CSS 獨立管理，這裡便不贅述。</p>
+<h3 id="綁定-id"><a href="#綁定-id" class="headerlink" title="綁定 id"></a>綁定 id</h3><p>提供四種綁定方式，任擇一即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ctx = <span class="built_in">document</span>.getElementById(<span class="string">'myChart'</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ctx = <span class="built_in">document</span>.getElementById(<span class="string">'myChart'</span>).getContext(<span class="string">'2d'</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ctx = $(<span class="string">'#myChart'</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ctx = <span class="string">'myChart'</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="設定自己的圖表"><a href="#設定自己的圖表" class="headerlink" title="設定自己的圖表"></a>設定自己的圖表</h3><p>放入了位置與綁定了元素，就可以開始定義或創建自己的圖表類型了！以下為官網範例的條形圖，該條形圖顯示了不同顏色的數值表，y 軸從 0 開始。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ctx = <span class="built_in">document</span>.getElementById(<span class="string">'myChart'</span>);</span><br><span class="line"><span class="keyword">var</span> myChart = <span class="keyword">new</span> Chart(ctx, &#123;</span><br><span class="line">  type: <span class="string">'bar'</span>, <span class="comment">//圖表類型</span></span><br><span class="line">  data: &#123;</span><br><span class="line">    <span class="comment">//標題</span></span><br><span class="line">    labels: [<span class="string">'Red'</span>, <span class="string">'Blue'</span>, <span class="string">'Yellow'</span>, <span class="string">'Green'</span>, <span class="string">'Purple'</span>, <span class="string">'Orange'</span>],</span><br><span class="line">    datasets: [&#123;</span><br><span class="line">      label: <span class="string">'# test'</span>, <span class="comment">//標籤</span></span><br><span class="line">      data: [<span class="number">12</span>, <span class="number">19</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">3</span>], <span class="comment">//資料</span></span><br><span class="line">      <span class="comment">//圖表背景色</span></span><br><span class="line">      backgroundColor: [</span><br><span class="line">        <span class="string">'rgba(255, 99, 132, 0.2)'</span>,</span><br><span class="line">        <span class="string">'rgba(54, 162, 235, 0.2)'</span>,</span><br><span class="line">        <span class="string">'rgba(255, 206, 86, 0.2)'</span>,</span><br><span class="line">        <span class="string">'rgba(75, 192, 192, 0.2)'</span>,</span><br><span class="line">        <span class="string">'rgba(153, 102, 255, 0.2)'</span>,</span><br><span class="line">        <span class="string">'rgba(255, 159, 64, 0.2)'</span></span><br><span class="line">      ],</span><br><span class="line">      <span class="comment">//圖表外框線色</span></span><br><span class="line">      borderColor: [</span><br><span class="line">        <span class="string">'rgba(255, 99, 132, 1)'</span>,</span><br><span class="line">        <span class="string">'rgba(54, 162, 235, 1)'</span>,</span><br><span class="line">        <span class="string">'rgba(255, 206, 86, 1)'</span>,</span><br><span class="line">        <span class="string">'rgba(75, 192, 192, 1)'</span>,</span><br><span class="line">        <span class="string">'rgba(153, 102, 255, 1)'</span>,</span><br><span class="line">        <span class="string">'rgba(255, 159, 64, 1)'</span></span><br><span class="line">      ],</span><br><span class="line">      <span class="comment">//外框線寬度</span></span><br><span class="line">      borderWidth: <span class="number">1</span></span><br><span class="line">    &#125;]</span><br><span class="line">  &#125;,</span><br><span class="line">  options: &#123;</span><br><span class="line">    scales: &#123;</span><br><span class="line">      yAxes: [&#123;</span><br><span class="line">        ticks: &#123;</span><br><span class="line">          beginAtZero: <span class="literal">true</span>,</span><br><span class="line">          responsive: <span class="literal">true</span> <span class="comment">//符合響應式</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>codepen <a href="https://codepen.io/hnzxewqw/pen/LYVMNPX" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/LYVMNPX</a></p>
+<h2 id="結合兩個圖表使用"><a href="#結合兩個圖表使用" class="headerlink" title="結合兩個圖表使用"></a>結合兩個圖表使用</h2><p>Chart.js 也支援<a href="https://www.chartjs.org/docs/latest/charts/mixed.html" target="_blank" rel="noopener">混合類型的圖表</a>，能夠將多個 bar chart 跟多個 line chart 放在一起比較；最外層的圖表類型必須設定為 bar，接著在 dataset 的第一個物件後，加上第二個物件，即可插入第二個圖表，例如以下程式碼：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">datasets: [&#123;</span><br><span class="line">     label: <span class="string">'test01'</span>, <span class="comment">//標籤</span></span><br><span class="line">     data: [<span class="number">12</span>, <span class="number">19</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">3</span>], <span class="comment">//資料</span></span><br><span class="line">     <span class="comment">//圖表背景色</span></span><br><span class="line">     backgroundColor: [</span><br><span class="line">       <span class="string">'rgba(255, 99, 132, 0.5)'</span>,</span><br><span class="line">       <span class="string">'rgba(54, 162, 235, 0.5)'</span>,</span><br><span class="line">       <span class="string">'rgba(255, 206, 86, 0.5)'</span>,</span><br><span class="line">       <span class="string">'rgba(75, 192, 192, 0.5)'</span>,</span><br><span class="line">       <span class="string">'rgba(153, 102, 255, 0.5)'</span>,</span><br><span class="line">       <span class="string">'rgba(255, 159, 64, 0.5)'</span></span><br><span class="line">     ],</span><br><span class="line">     <span class="comment">//圖表外框線色</span></span><br><span class="line">     borderColor: [</span><br><span class="line">       <span class="string">'rgba(255, 99, 132, 1)'</span>,</span><br><span class="line">       <span class="string">'rgba(54, 162, 235, 1)'</span>,</span><br><span class="line">       <span class="string">'rgba(255, 206, 86, 1)'</span>,</span><br><span class="line">       <span class="string">'rgba(75, 192, 192, 1)'</span>,</span><br><span class="line">       <span class="string">'rgba(153, 102, 255, 1)'</span>,</span><br><span class="line">       <span class="string">'rgba(255, 159, 64, 1)'</span></span><br><span class="line">     ],</span><br><span class="line">     <span class="comment">//外框線寬度</span></span><br><span class="line">     borderWidth: <span class="number">1</span>, <span class="comment">//從這裡開始加第二筆物件資料</span></span><br><span class="line">   &#125;, &#123;</span><br><span class="line">     type: <span class="string">'line'</span>,</span><br><span class="line">     label: <span class="string">'test02'</span>,</span><br><span class="line">     data: [<span class="number">12</span>, <span class="number">19</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">     borderColor: <span class="string">'rgba(255, 99, 132, 1)'</span>,</span><br><span class="line">     backgroundColor:<span class="string">'rgba(255, 255, 255, 1)'</span></span><br><span class="line">   &#125;]</span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>codepen <a href="https://codepen.io/hnzxewqw/pen/PoqXNYw" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/PoqXNYw</a></p>
+<h2 id="相關選項註記"><a href="#相關選項註記" class="headerlink" title="相關選項註記"></a>相關選項註記</h2><p><a href="https://www.chartjs.org/docs/latest/general/" target="_blank" rel="noopener">常規配置</a></p>
+<p>這些部分描述了可在文檔中其他位置應用的常規配置選項。</p>
+<ul>
+<li><strong>響應式</strong>定義適用於所有圖表的響應式圖表選項。</li>
+<li><strong>設備像素比率</strong>定義顯示像素與渲染像素之間的比率。</li>
+<li><strong>交互</strong>定義了反映懸停圖表元素如何工作的選項。</li>
+<li><strong>選項</strong>可腳本化和可索引的選項語法。</li>
+<li><strong>顏色</strong>定義可接受的顏色值。</li>
+<li><strong>字體</strong>定義各種字體選項。</li>
+<li><strong>性能</strong>為需要效能的應用程式給予提示。</li>
+</ul>
+<blockquote>
+<p>若有翻譯不好的地方還請指教。</p>
+</blockquote>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p><code>datasets</code> 呈現的是 JSON 格式資料，所以對於陣列與物件的用法也要熟悉，在插入資料時比較不會搞混。</p>
+<p>參考資料</p>
+<p><a href="https://www.chartjs.org/docs/latest/" target="_blank" rel="noopener">chart.js 官網</a></p>
+<p><a href="https://ithelp.ithome.com.tw/articles/10194425" target="_blank" rel="noopener">十分鐘學習 Chart.js - 圖表繪製</a></p>
+<p><a href="https://dotblogs.com.tw/wellwind/2016/12/30/front-end-chart-js" target="_blank" rel="noopener">Chart.js - 輕鬆完成資料視覺化</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/jQuery/" rel="tag"># jQuery</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/jQuery/20200326/177388252/" rel="prev" title="jQuery 筆記 - jQuery 基本認識">
+      <i class="fa fa-chevron-left"></i> jQuery 筆記 - jQuery 基本認識
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/javascript/20200331/3067475316/" rel="next" title="JS 筆記 - Object 物件的基本認識">
+      JS 筆記 - Object 物件的基本認識 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chart-js-簡介"><span class="nav-number">1.</span> <span class="nav-text">Chart.js 簡介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#載入-chart-js"><span class="nav-number">2.</span> <span class="nav-text">載入 chart.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用法"><span class="nav-number">3.</span> <span class="nav-text">用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#綁定-id"><span class="nav-number">3.1.</span> <span class="nav-text">綁定 id</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#設定自己的圖表"><span class="nav-number">3.2.</span> <span class="nav-text">設定自己的圖表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#結合兩個圖表使用"><span class="nav-number">4.</span> <span class="nav-text">結合兩個圖表使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相關選項註記"><span class="nav-number">5.</span> <span class="nav-text">相關選項註記</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#心得"><span class="nav-number">6.</span> <span class="nav-text">心得</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">344</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://bmc.link/hsuchihting" title="BuyMeACoffee → https:&#x2F;&#x2F;bmc.link&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>BuyMeACoffee</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友站連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://israynotarray.com/" title="https:&#x2F;&#x2F;israynotarray.com&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.casper.tw/" title="https:&#x2F;&#x2F;www.casper.tw&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.miniasp.com/" title="https:&#x2F;&#x2F;blog.miniasp.com&#x2F;" rel="noopener" target="_blank">保哥部落格</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cythilya.github.io/" title="https:&#x2F;&#x2F;cythilya.github.io&#x2F;" rel="noopener" target="_blank">桑莫。夏天</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mtwmt.com/blog/list" title="https:&#x2F;&#x2F;mtwmt.com&#x2F;blog&#x2F;list" rel="noopener" target="_blank">Mandy's Web</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.oxxostudio.tw/" title="https:&#x2F;&#x2F;www.oxxostudio.tw&#x2F;" rel="noopener" target="_blank">OXXO Studio</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/jQuery/20200327/3238077972/",
+            identifier: "jQuery/20200327/3238077972/",
+            title: "jQuery 筆記 - Chart.js 基本使用"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

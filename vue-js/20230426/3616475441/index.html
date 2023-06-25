@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="在跳轉頁面或頁面更新能夠守住資料變化的守門員">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue 筆記 - 路由守衛 BeforeRouteEnter 跟 BeforeRouteLeave 實作">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;vue-js&#x2F;20230426&#x2F;3616475441&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="在跳轉頁面或頁面更新能夠守住資料變化的守門員">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;rmkiuc7.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;HAfDBe0.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;ZqG7PBA.png">
+<meta property="article:published_time" content="2023-04-26T13:49:35.000Z">
+<meta property="article:modified_time" content="2023-05-03T13:47:33.219Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="vue.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;rmkiuc7.png">
+
+<link rel="canonical" href="https://hsuchihting.github.io/vue-js/20230426/3616475441/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Vue 筆記 - 路由守衛 BeforeRouteEnter 跟 BeforeRouteLeave 實作 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/vue-js/20230426/3616475441/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          Vue 筆記 - 路由守衛 BeforeRouteEnter 跟 BeforeRouteLeave 實作
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2023-04-26 21:49:35" itemprop="dateCreated datePublished" datetime="2023-04-26T21:49:35+08:00">2023-04-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-05-03 21:47:33" itemprop="dateModified" datetime="2023-05-03T21:47:33+08:00">2023-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue-js/" itemprop="url" rel="index">
+                    <span itemprop="name">vue.js</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/vue-js/20230426/3616475441/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="vue-js/20230426/3616475441/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">在跳轉頁面或頁面更新能夠守住資料變化的守門員</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><p>屬於單一元件 component 的 Hooks，分別有以下三種：</p>
+<ul>
+<li>beforeRouteEnter 進入路由之前</li>
+<li>beforeRouteUpdate 更新路由之前</li>
+<li>beforeRouteLeave 離開路由之前</li>
+</ul>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>起手式如下，並依照情境需求使用：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span> ... <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line">    data()&#123;</span><br><span class="line"><span class="actionscript">      <span class="keyword">return</span> &#123;</span></span><br><span class="line">        ...</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"><span class="javascript">    beforeRouteEnter(to, <span class="keyword">from</span>) &#123;</span></span><br><span class="line">     ...</span><br><span class="line">    &#125;,</span><br><span class="line"><span class="javascript">    beforeRouteUpdate(to, <span class="keyword">from</span>) &#123;</span></span><br><span class="line">    ...</span><br><span class="line">      next();</span><br><span class="line">    &#125;,</span><br><span class="line"><span class="javascript">    beforeRouteLeave (to, <span class="keyword">from</span>) &#123;</span></span><br><span class="line"><span class="actionscript">      <span class="comment">// ...</span></span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="beforeRouteEnter-進入路由之前"><a href="#beforeRouteEnter-進入路由之前" class="headerlink" title="beforeRouteEnter 進入路由之前"></a>beforeRouteEnter 進入路由之前</h3><p>提供 <code>to</code> ,<code>from</code>, <code>next</code> 三個參數使用。</p>
+<p>在路由尚未進入該元件時被調用，須注意在這個方法裡面因為還沒有建立物件實體，故無法取得 <code>this</code>，但可以在 <code>next</code> 參數中取得元件實體。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">beforeRouteEnter(to, <span class="keyword">from</span>, next)&#123;</span><br><span class="line"><span class="comment">//從 next 取得物件實體</span></span><br><span class="line"></span><br><span class="line">next(<span class="function"><span class="params">vm</span> =&gt;</span>&#123;</span><br><span class="line"> <span class="comment">// 這邊可以取得物件實體</span></span><br><span class="line">&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>透過開發人員工具可以看到印出的結果，</p>
+<h3 id="to"><a href="#to" class="headerlink" title="to"></a>to</h3><p><img src="https://i.imgur.com/rmkiuc7.png" alt="to"></p>
+<h3 id="from"><a href="#from" class="headerlink" title="from"></a>from</h3><p><img src="https://i.imgur.com/HAfDBe0.png" alt="from"></p>
+<p>從 <code>to</code> 跟 <code>from</code> 都可以看到 <code>fullpath</code> 對應的路徑，以及相關的資訊，像是 <code>matched</code> 就會看到上下頁的內容：</p>
+<h3 id="next"><a href="#next" class="headerlink" title="next"></a>next</h3><p><img src="https://i.imgur.com/ZqG7PBA.png" alt="next"></p>
+<h4 id="實際情境優化"><a href="#實際情境優化" class="headerlink" title="實際情境優化"></a>實際情境優化</h4><p>此是實際情境，我有一頁會員註冊頁要填入姓名的 <code>member-name</code> 頁面，原本的寫法是只要進入此頁就把填寫過的資料清空，但使用情境上其實不友善，因為變成使用者按上一頁的功能鍵時，原本在這頁填寫的內容都被清空，故修改成當我重新進入此頁時，只要路由是從 <code>member-name</code> 來的話，就記錄在 <code>store</code> 裡。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果 path 是 member-name 頁面要保留資料，其他頁面都要清空資料</span></span><br><span class="line"> beforeRouteEnter(to, <span class="keyword">from</span>, next) &#123;</span><br><span class="line">   <span class="keyword">const</span> resultPath = <span class="keyword">from</span>.name.split(<span class="string">'___'</span>)[<span class="number">0</span>];</span><br><span class="line">   next(<span class="function">(<span class="params">vm</span>) =&gt;</span> &#123;</span><br><span class="line">     <span class="keyword">if</span> (resultPath !== <span class="string">'member-name'</span>) &#123;</span><br><span class="line">       vm.$store.commit(<span class="string">`Member/<span class="subst">$&#123;mutations.MEMBER_RESET_NEWMEMBERDATA&#125;</span>`</span>);</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;);</span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+
+<h3 id="beforeRouteUpdate-更新路由之前"><a href="#beforeRouteUpdate-更新路由之前" class="headerlink" title="beforeRouteUpdate 更新路由之前"></a>beforeRouteUpdate 更新路由之前</h3><p>實際上使用是當路由被改變，但使用的元件是同一個時使用。由於只是更新元件內容，但元件本身沒有被銷毀，此時就會觸發 <code>beforeRouteUpdate</code> Hook，方法內的參數與 <code>beforeRouteEnter</code> 大致相同，只是沒有 <code>next()</code> 可以用，但因為元件沒有被銷毀，所以已經可以取得物件實體，可以使用 <code>this</code>，也因為已經有 <code>this</code> 可以使用了，所以也不需要使用 <code>next</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">beforeRouteUpdate (to, <span class="keyword">from</span>) &#123;</span><br><span class="line">  <span class="comment">// just use `this`</span></span><br><span class="line">  <span class="keyword">this</span>.name = to.params.name</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>(這個我實務上還沒遇到過，若有實戰情境會再回頭補上範例)。</p>
+<h3 id="beforeRouteLeave-離開路由之前"><a href="#beforeRouteLeave-離開路由之前" class="headerlink" title="beforeRouteLeave 離開路由之前"></a>beforeRouteLeave 離開路由之前</h3><p>是在離開此元件時會自動調用此 Hook，也是提供 <code>to</code>, <code>from</code> 兩個參數可以使用，大部分使用情境是詢問使用者是否再跳轉到其他路由前使用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">beforeRouteLeave (to, <span class="keyword">from</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> answer = <span class="built_in">window</span>.confirm(<span class="string">'Do you really want to leave? you have unsaved changes!'</span>)</span><br><span class="line">  <span class="keyword">if</span> (!answer) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以使用 <code>next</code> 為選填參數，但要注意的是若指定路由卻沒有做判斷，則會陷入無限循環，例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">beforeRouteLeave(to, <span class="keyword">from</span>, next)&#123;</span><br><span class="line">  <span class="comment">// ...離開路由條件</span></span><br><span class="line">  next(<span class="string">'/home'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>原因是遇到 next(‘/home’) 會中斷當前路由導航，然後會離開此頁面，回到 home 頁面，但因為路由參數 to.path 會一直去導到 home 頁面，導致產生無限循環，所以如果只要前往下一頁，但不指定，就要加上判斷，並且不指定頁面，改寫上方範例後如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">beforeRouteLeave(to, <span class="keyword">from</span>, next)&#123;</span><br><span class="line"><span class="keyword">if</span>(to.fullPath === <span class="string">'/home'</span>)&#123;</span><br><span class="line">    next()</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">     next(<span class="string">'/home'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這樣就不會進入無限循環了。</p>
+<h4 id="實際情境實作"><a href="#實際情境實作" class="headerlink" title="實際情境實作"></a>實際情境實作</h4><p>因從 member-name 頁面回到此頁時，除了填寫資料被清空外，勾選過的選項也沒有被記錄，使用者如果只是想回到這頁修改資料的話，變成要重新勾選，故改成當我離開此元件時，先把勾選過的選項紀錄，並且跳轉到下一個路由。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用 beforeRouteLeave 方法，從 member-name 頁面回到此頁時，保留填寫過的同意條款與年齡的 checkbox 選項。</span></span><br><span class="line"> beforeRouteLeave(to, <span class="keyword">from</span>, next) &#123;</span><br><span class="line">   <span class="keyword">this</span>.$store.commit(</span><br><span class="line">     <span class="string">`Member/<span class="subst">$&#123;mutations.MEMBER_SELECTED_TERMS_AND_CONDITIONS&#125;</span>`</span>,</span><br><span class="line">     <span class="keyword">this</span>.termsAndConditions,</span><br><span class="line">   );</span><br><span class="line">   <span class="keyword">this</span>.$store.commit(<span class="string">`Member/<span class="subst">$&#123;mutations.MEMBER_SELECTED_AGE&#125;</span>`</span>, <span class="keyword">this</span>.age);</span><br><span class="line">   next();</span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+
+<h4 id="關於-next-參數"><a href="#關於-next-參數" class="headerlink" title="關於 next 參數"></a>關於 next 參數</h4><ul>
+<li><code>next()</code>: 不指定路由，直接跳到下一頁。</li>
+<li><code>next(false)</code>: 中斷當前導航，若瀏覽器 URL 改變，URL 路徑會重置到 from 路由對應的路徑。</li>
+<li><code>next(&#39;/&#39;)</code> 或是 <code>next({path: &#39;/&#39;})</code>: 跳轉到不同的路徑，當前導航會被中斷，然後跳轉到一個新的路由。</li>
+<li><code>next(error)</code>: 該路由會被終止並且把錯誤傳給 route.onError() 來使用。</li>
+</ul>
+<h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><p>持續更新中~~<br><a href="https://github.com/hsuchihting/vue_router_demo/tree/master/vue-tailwindcss" target="_blank" rel="noopener">https://github.com/hsuchihting/vue_router_demo/tree/master/vue-tailwindcss</a></p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a href="https://book.vue.tw/CH4/4-4-navigation-guards.html" target="_blank" rel="noopener">重新認識 Vue.js - 4-4 路由守衛（Navigation Guards）</a></li>
+<li><a href="https://router.vuejs.org/zh/guide/advanced/navigation-guards.html" target="_blank" rel="noopener">Vue Router - 導航守衛</a></li>
+<li><a href="https://blog.csdn.net/qq_43248623/article/details/107376400" target="_blank" rel="noopener">vue-router 使用 next()跳转到指定路径时会无限循环</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/vue-js/" rel="tag"># vue.js</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/vue-js/20230415/803775950/" rel="prev" title="Vue 筆記 - Watch 的基礎用法與應用">
+      <i class="fa fa-chevron-left"></i> Vue 筆記 - Watch 的基礎用法與應用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/vue-js/20230505/151676026/" rel="next" title="Vue 筆記 - 將不同頁面的 computed 透過 Getter 整合成共用方法，以及優化過程">
+      Vue 筆記 - 將不同頁面的 computed 透過 Getter 整合成共用方法，以及優化過程 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#簡介"><span class="nav-number">1.</span> <span class="nav-text">簡介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用方法"><span class="nav-number">2.</span> <span class="nav-text">使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#beforeRouteEnter-進入路由之前"><span class="nav-number">2.1.</span> <span class="nav-text">beforeRouteEnter 進入路由之前</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#to"><span class="nav-number">2.2.</span> <span class="nav-text">to</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#from"><span class="nav-number">2.3.</span> <span class="nav-text">from</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next"><span class="nav-number">2.4.</span> <span class="nav-text">next</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#實際情境優化"><span class="nav-number">2.4.1.</span> <span class="nav-text">實際情境優化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#beforeRouteUpdate-更新路由之前"><span class="nav-number">2.5.</span> <span class="nav-text">beforeRouteUpdate 更新路由之前</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#beforeRouteLeave-離開路由之前"><span class="nav-number">2.6.</span> <span class="nav-text">beforeRouteLeave 離開路由之前</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#實際情境實作"><span class="nav-number">2.6.1.</span> <span class="nav-text">實際情境實作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#關於-next-參數"><span class="nav-number">2.6.2.</span> <span class="nav-text">關於 next 參數</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Demo"><span class="nav-number">3.</span> <span class="nav-text">Demo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">4.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">344</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://bmc.link/hsuchihting" title="BuyMeACoffee → https:&#x2F;&#x2F;bmc.link&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>BuyMeACoffee</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友站連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://israynotarray.com/" title="https:&#x2F;&#x2F;israynotarray.com&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.casper.tw/" title="https:&#x2F;&#x2F;www.casper.tw&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.miniasp.com/" title="https:&#x2F;&#x2F;blog.miniasp.com&#x2F;" rel="noopener" target="_blank">保哥部落格</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cythilya.github.io/" title="https:&#x2F;&#x2F;cythilya.github.io&#x2F;" rel="noopener" target="_blank">桑莫。夏天</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mtwmt.com/blog/list" title="https:&#x2F;&#x2F;mtwmt.com&#x2F;blog&#x2F;list" rel="noopener" target="_blank">Mandy's Web</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.oxxostudio.tw/" title="https:&#x2F;&#x2F;www.oxxostudio.tw&#x2F;" rel="noopener" target="_blank">OXXO Studio</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/vue-js/20230426/3616475441/",
+            identifier: "vue-js/20230426/3616475441/",
+            title: "Vue 筆記 - 路由守衛 BeforeRouteEnter 跟 BeforeRouteLeave 實作"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

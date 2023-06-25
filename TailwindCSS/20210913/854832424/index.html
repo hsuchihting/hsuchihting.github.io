@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="卡片互動效果、RWD 顯示、使用 JavaScript 迴圈產生列表內容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TailwindCSS 筆記 - 價目表卡片實戰 - 進階卡片樣式">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;TailwindCSS&#x2F;20210913&#x2F;854832424&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="卡片互動效果、RWD 顯示、使用 JavaScript 迴圈產生列表內容">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;nxwdr4q.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;huPXw2D.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;8Oszqzw.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;iPTBB41.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;Z7a0GPi.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;UqGmrau.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;yDstLla.png">
+<meta property="article:published_time" content="2021-09-13T14:50:34.000Z">
+<meta property="article:modified_time" content="2021-09-13T15:00:06.697Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="TailwindCSS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;nxwdr4q.png">
+
+<link rel="canonical" href="https://hsuchihting.github.io/TailwindCSS/20210913/854832424/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>TailwindCSS 筆記 - 價目表卡片實戰 - 進階卡片樣式 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/TailwindCSS/20210913/854832424/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          TailwindCSS 筆記 - 價目表卡片實戰 - 進階卡片樣式
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-09-13 22:50:34 / 修改時間：23:00:06" itemprop="dateCreated datePublished" datetime="2021-09-13T22:50:34+08:00">2021-09-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/TailwindCSS/" itemprop="url" rel="index">
+                    <span itemprop="name">TailwindCSS</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TailwindCSS/20210913/854832424/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="TailwindCSS/20210913/854832424/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">卡片互動效果、RWD 顯示、使用 JavaScript 迴圈產生列表內容</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://i.imgur.com/nxwdr4q.png" alt="card"></p>
+<p>前篇已經將基本的卡片樣式完成，要繼續完成幾個互動效果，會有以下內容：</p>
+<ol>
+<li>滑鼠經過卡片會有放大效果。</li>
+<li>RWD 效果，PC 版卡片為三欄。</li>
+<li>透過 JS 迴圈方式產生新的卡片。</li>
+</ol>
+<h2 id="增加-hover-的互動效果"><a href="#增加-hover-的互動效果" class="headerlink" title="增加 hover 的互動效果"></a>增加 hover 的互動效果</h2><p>在卡片外層加上以下 class，卡片的程式碼可以參考上一篇內容。<br>因為我要在滑鼠過時卡片有放大效果，所以要使用 hover，並且使用 transition 屬性底下的 scale 縮放效果，這邊選擇 110，也就是 110%，並且加上效果時間，這樣就完成了。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"hover:scale-110 duration-300 "</span>&gt;</span>...card code...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>原本樣式：可以看到左右有明顯間距。</p>
+<p><img src="https://i.imgur.com/huPXw2D.png" alt="before hover"></p>
+<p>滑鼠經過後：間距變小了。</p>
+<p><img src="https://i.imgur.com/8Oszqzw.png" alt="hover card"></p>
+<h2 id="RWD-三欄效果"><a href="#RWD-三欄效果" class="headerlink" title="RWD 三欄效果"></a>RWD 三欄效果</h2><p>TailwindCSS 是單一斷點的手機優先 CSS 框架，所以一開始建構就是手機版，而今天要在 PC 版本實呈現三欄的內容，這時就要在卡片的最外層加上 lg 的尺寸來定義各種 RWD 的效果樣式。</p>
+<p>也就是這邊要往後加上 PC 版樣式的內容。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"mt-8"</span>&gt;</span>... card code...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>加上以下 class，前面都要加上 lg 的尺寸樣式喔！</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span></span></span><br><span class="line"><span class="tag">  <span class="attr">class</span>=<span class="string">"mt-8 lg:grid lg:grid-cols-3 lg:justify-evenly lg:gap-8 lg:w-[1280px] lg:mx-auto"</span></span></span><br><span class="line"><span class="tag">&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>grid：值得一提的是這個 class，也就是使用網格系統，透過官網介紹可以透過網格系統的方式直接定義樣式，省去計算的時間。這邊是使用 <a href="https://tailwindcss.com/docs/grid-template-columns" target="_blank" rel="noopener">Grid Template Columns</a> 的樣式去定義三欄效果。</li>
+</ul>
+<p>用法很簡單，官方文件示範如下：</p>
+<p><img src="https://i.imgur.com/iPTBB41.png" alt="grid"></p>
+<p>使用這個語法 <code>grid-cols-{n}</code>，放入想要分幾欄即可，非常簡單且易懂。</p>
+<blockquote>
+<p>前面要先定義 grid 的樣式才能使用。</p>
+</blockquote>
+<ul>
+<li>justify-evenly：讓卡片等距。</li>
+<li>gap-8：間隔有 2rem。</li>
+</ul>
+<p><img src="https://i.imgur.com/Z7a0GPi.png" alt="gap"></p>
+<p>最後限制寬度為 1280px，並且置中對齊。</p>
+<h2 id="透過-JS-迴圈來跑出複數卡片"><a href="#透過-JS-迴圈來跑出複數卡片" class="headerlink" title="透過 JS 迴圈來跑出複數卡片"></a>透過 JS 迴圈來跑出複數卡片</h2><p>這次透過一個簡單的迴圈方式來渲染可用內容的列表內容，因正式卡片的內容可能數量有多有少，如果少的話做苦工就算了，但如果資料量很大，就不是手工可以解決的事情。</p>
+<h3 id="引入-js-檔案"><a href="#引入-js-檔案" class="headerlink" title="引入 js 檔案"></a>引入 js 檔案</h3><p>這應該不用在贅述。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  ...code...</span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/all.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>js</strong></p>
+<p>建立一個函式，並且先預設呼叫有三個參數，分別是列表一到三，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">renderList</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">renderList(<span class="string">"list1"</span>);</span><br><span class="line">renderList(<span class="string">"list2"</span>);</span><br><span class="line">renderList(<span class="string">"list3"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>此時也在 template 的 <code>ul</code> 上各加上 <code>id</code>，分別為 <code>list1</code>， <code>list2</code> 和 <code>list3</code>。</p>
+<p><strong>html</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"list1"</span> <span class="attr">class</span>=<span class="string">"..."</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="再把要執行的內容寫在函式內"><a href="#再把要執行的內容寫在函式內" class="headerlink" title="再把要執行的內容寫在函式內"></a>再把要執行的內容寫在函式內</h3><ol>
+<li>因執行函式已經有指定其參數，而這個參數為 id 的值，故透過 getElementById 的方式接收參數。</li>
+<li>再用一個變數來存模板語法，就是把 li 的內容複製到這裡來。</li>
+<li>最後再用迴圈組字串。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">renderList</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> listUl = <span class="built_in">document</span>.getElementById(id);</span><br><span class="line">  <span class="keyword">const</span> templateLi = <span class="string">`</span></span><br><span class="line"><span class="string">      &lt;li class="flex items-center mt-4"&gt;</span></span><br><span class="line"><span class="string">        &lt;i class="far fa-check-circle text-green-400"&gt;&lt;/i&gt;</span></span><br><span class="line"><span class="string">         &lt;span</span></span><br><span class="line"><span class="string">             class=" pl-3 text-gray-800 tracking-wide"&gt;免費使用&lt;/span&gt;</span></span><br><span class="line"><span class="string">      &lt;/li&gt;</span></span><br><span class="line"><span class="string">  `</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> str = <span class="string">""</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">    str = str + templateLi;</span><br><span class="line">  &#125;</span><br><span class="line">  listUl.innerHTML = str;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">renderList(<span class="string">"list1"</span>);</span><br><span class="line">renderList(<span class="string">"list2"</span>);</span><br><span class="line">renderList(<span class="string">"list3"</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="在配置檔加上-js-路徑"><a href="#在配置檔加上-js-路徑" class="headerlink" title="在配置檔加上 js 路徑"></a>在配置檔加上 js 路徑</h3><p>因為有寫模板語法在 js 檔案裡，所以要記得加上 js 檔案在配置檔。</p>
+<p><strong>tailwind.config.js</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  mode: <span class="string">"jit"</span>,</span><br><span class="line">  purge: [<span class="string">"./**/*.html"</span>, <span class="string">"./src/**/*.css"</span>, <span class="string">"./js/**/*.js"</span>], <span class="comment">//要加上 JS 的路徑</span></span><br><span class="line">  darkMode: <span class="literal">false</span>, <span class="comment">// or 'media' or 'class'</span></span><br><span class="line">  theme: &#123;</span><br><span class="line">    extend: &#123;&#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  variants: &#123;</span><br><span class="line">    extend: &#123;&#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.imgur.com/UqGmrau.png" alt="render"></p>
+<p>這樣就可以跑出列表了。</p>
+<h3 id="加入判斷微調畫面"><a href="#加入判斷微調畫面" class="headerlink" title="加入判斷微調畫面"></a>加入判斷微調畫面</h3><p>但有發現背景為紫色的卡片中的列表文字是黑色的，這樣看不清楚，所以要加一個判斷讓其變成白色，可以加在模板語法上方。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">renderList</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> listUl = <span class="built_in">document</span>.getElementById(id);</span><br><span class="line">  <span class="keyword">let</span> originColor = <span class="string">"text-green-400"</span>;</span><br><span class="line">  <span class="keyword">if</span> (id === <span class="string">"list2"</span>) &#123;</span><br><span class="line">    originColor = <span class="string">"text-white"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> templateLi = <span class="string">`</span></span><br><span class="line"><span class="string">      &lt;li class="flex items-center mt-4"&gt;</span></span><br><span class="line"><span class="string">        &lt;i class="far fa-check-circle <span class="subst">$&#123;originColor&#125;</span>"&gt;&lt;/i&gt;</span></span><br><span class="line"><span class="string">         &lt;span</span></span><br><span class="line"><span class="string">             class=" pl-3 <span class="subst">$&#123;originColor&#125;</span> tracking-wide"&gt;免費使用&lt;/span&gt;</span></span><br><span class="line"><span class="string">      &lt;/li&gt;</span></span><br><span class="line"><span class="string">  `</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> str = <span class="string">""</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">    str = str + templateLi;</span><br><span class="line">  &#125;</span><br><span class="line">  listUl.innerHTML = str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>設定一個變數存取原本的顏色。</li>
+<li>在寫入判斷當 <code>id</code> 等於 <code>list2</code> 的時候，顏色就改變為白色。</li>
+<li>透過模板語法中帶變數的方式 <code>${param}</code> 的方式帶入原本顏色的位置。</li>
+</ul>
+<p>這樣就完成透過判斷來改變列表內容的文字囉！</p>
+<p><img src="https://i.imgur.com/yDstLla.png" alt="js"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/TailwindCSS/" rel="tag"># TailwindCSS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/TailwindCSS/20210912/32829572/" rel="prev" title="TailwindCSS 筆記 - 價目表卡片實戰 - 基礎卡片樣式">
+      <i class="fa fa-chevron-left"></i> TailwindCSS 筆記 - 價目表卡片實戰 - 基礎卡片樣式
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/TailwindCSS/20210914/4098207222/" rel="next" title="TailwindCSS 筆記 - 價目表卡片實戰 - 登入彈窗開發">
+      TailwindCSS 筆記 - 價目表卡片實戰 - 登入彈窗開發 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#增加-hover-的互動效果"><span class="nav-number">1.</span> <span class="nav-text">增加 hover 的互動效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RWD-三欄效果"><span class="nav-number">2.</span> <span class="nav-text">RWD 三欄效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#透過-JS-迴圈來跑出複數卡片"><span class="nav-number">3.</span> <span class="nav-text">透過 JS 迴圈來跑出複數卡片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引入-js-檔案"><span class="nav-number">3.1.</span> <span class="nav-text">引入 js 檔案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#再把要執行的內容寫在函式內"><span class="nav-number">3.2.</span> <span class="nav-text">再把要執行的內容寫在函式內</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在配置檔加上-js-路徑"><span class="nav-number">3.3.</span> <span class="nav-text">在配置檔加上 js 路徑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加入判斷微調畫面"><span class="nav-number">3.4.</span> <span class="nav-text">加入判斷微調畫面</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">344</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://bmc.link/hsuchihting" title="BuyMeACoffee → https:&#x2F;&#x2F;bmc.link&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>BuyMeACoffee</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友站連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://israynotarray.com/" title="https:&#x2F;&#x2F;israynotarray.com&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.casper.tw/" title="https:&#x2F;&#x2F;www.casper.tw&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.miniasp.com/" title="https:&#x2F;&#x2F;blog.miniasp.com&#x2F;" rel="noopener" target="_blank">保哥部落格</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cythilya.github.io/" title="https:&#x2F;&#x2F;cythilya.github.io&#x2F;" rel="noopener" target="_blank">桑莫。夏天</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mtwmt.com/blog/list" title="https:&#x2F;&#x2F;mtwmt.com&#x2F;blog&#x2F;list" rel="noopener" target="_blank">Mandy's Web</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.oxxostudio.tw/" title="https:&#x2F;&#x2F;www.oxxostudio.tw&#x2F;" rel="noopener" target="_blank">OXXO Studio</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/TailwindCSS/20210913/854832424/",
+            identifier: "TailwindCSS/20210913/854832424/",
+            title: "TailwindCSS 筆記 - 價目表卡片實戰 - 進階卡片樣式"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

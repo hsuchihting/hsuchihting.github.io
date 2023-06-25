@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="這些學會了，可以優雅的建立自己的正則表達式喔！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Regular Expression 正則表達式 - 進階用法">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;regex&#x2F;20220731&#x2F;2418624309&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="這些學會了，可以優雅的建立自己的正則表達式喔！">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;rfUP22n.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;8jQau8J.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;v8Ut4pA.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;2GIpWeO.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;87jOfGe.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;tmLbVGD.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;L4zlktj.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;h9TiFVX.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;8Xb4QxW.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;24d7cs9.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;5QhISbv.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;vuw44eV.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;ehgh4Wz.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;aaSX4i4.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;Cm0A0nT.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;uTbuZUz.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;EzmiJrK.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;M1VUJOg.png">
+<meta property="article:published_time" content="2022-07-31T14:00:19.000Z">
+<meta property="article:modified_time" content="2022-08-01T14:18:30.189Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="RegEx">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;rfUP22n.png">
+
+<link rel="canonical" href="https://hsuchihting.github.io/regex/20220731/2418624309/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Regular Expression 正則表達式 - 進階用法 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/regex/20220731/2418624309/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          Regular Expression 正則表達式 - 進階用法
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-07-31 22:00:19" itemprop="dateCreated datePublished" datetime="2022-07-31T22:00:19+08:00">2022-07-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2022-08-01 22:18:30" itemprop="dateModified" datetime="2022-08-01T22:18:30+08:00">2022-08-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/regex/" itemprop="url" rel="index">
+                    <span itemprop="name">RegEx</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/regex/20220731/2418624309/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="regex/20220731/2418624309/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">這些學會了，可以優雅的建立自己的正則表達式喔！</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>前篇認識了正則表達式基本語法的觀念後，接下來要介紹的是在實戰中常用的幾個用法，使用文字範例如下方假文字：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Lorem ipsum dolor sit amet consectetur</span><br><span class="line">adipisicing elit. Voluptate odit aspernatur veritatis,</span><br><span class="line">quasi asperiores ab consequatur modi quia perspiciatis</span><br><span class="line">ex ipsum ut laborum laboriosam, <span class="built_in">rem</span>, similique ipsam ad?</span><br><span class="line">Necessitatibus, voluptatum!</span><br></pre></td></tr></table></figure>
+
+<p>可使用網路正則表達式網站 <a href="https://regex101.com/" target="_blank" rel="noopener">regex101</a> 一併實作看看，會更清楚喔！</p>
+<h2 id="字元類別-Character-Classes"><a href="#字元類別-Character-Classes" class="headerlink" title="字元類別 (Character Classes)"></a>字元類別 (Character Classes)</h2><h3 id="dot-點"><a href="#dot-點" class="headerlink" title=". dot 點"></a>. dot 點</h3><p>除了斷行以外，其他通通都會匹配。</p>
+<p><img src="https://i.imgur.com/rfUP22n.png" alt="all"></p>
+<h3 id="s-match-space"><a href="#s-match-space" class="headerlink" title="\s match space"></a>\s match space</h3><p>除了字符以外，匹配所有空格。</p>
+<p><img src="https://i.imgur.com/8jQau8J.png" alt="s"></p>
+<h3 id="S-match-string"><a href="#S-match-string" class="headerlink" title="\S match string"></a>\S match string</h3><p>除了空格以外，匹配所有字符。</p>
+<p><img src="https://i.imgur.com/v8Ut4pA.png" alt="S"></p>
+<h3 id="w-匹配所有文字"><a href="#w-匹配所有文字" class="headerlink" title="\w 匹配所有文字"></a>\w 匹配所有文字</h3><p>效果等同於 <code>[a-zA-Z0-9_]</code>，但不能選到特殊符號。</p>
+<p><img src="https://i.imgur.com/2GIpWeO.png" alt="w"></p>
+<h3 id="W-除了文字外都匹配"><a href="#W-除了文字外都匹配" class="headerlink" title="\W 除了文字外都匹配"></a>\W 除了文字外都匹配</h3><p>也就是 <code>[^a-zA-Z0-9_]</code>，\w 的相反效果。</p>
+<p><img src="https://i.imgur.com/87jOfGe.png" alt="W"></p>
+<h3 id="d-匹配所有數字-0-9"><a href="#d-匹配所有數字-0-9" class="headerlink" title="\d 匹配所有數字 0-9"></a>\d 匹配所有數字 0-9</h3><p>效果等同於<code>[0-9]</code>。</p>
+<p><img src="https://i.imgur.com/tmLbVGD.png" alt="d"></p>
+<blockquote>
+<p>原範例沒有數字，在最後面加上數字，才匹配得到。</p>
+</blockquote>
+<h3 id="D-除了數字外都匹配"><a href="#D-除了數字外都匹配" class="headerlink" title="\D 除了數字外都匹配"></a>\D 除了數字外都匹配</h3><p>效果等同於 <code>[^0-9]</code>，\d 的相反效果。</p>
+<p><img src="https://i.imgur.com/L4zlktj.png" alt="D"></p>
+<h3 id="a-z-與-A-Z-匹配大小寫"><a href="#a-z-與-A-Z-匹配大小寫" class="headerlink" title="[a-z] 與 [A-Z] 匹配大小寫"></a>[a-z] 與 [A-Z] 匹配大小寫</h3><ul>
+<li><code>[a-z]</code>：匹配所有小寫字符，數字與符號除外。</li>
+<li><code>[A-Z]</code>：匹配所有大寫字符，數字與符號除外。</li>
+<li><code>[^a-z]</code>：除了小寫字符外，其他都匹配。</li>
+<li><code>[^A-Z]</code>：除了大寫字符外，其他都匹配。</li>
+</ul>
+<h2 id="錨點符號"><a href="#錨點符號" class="headerlink" title="錨點符號"></a>錨點符號</h2><h3 id="b-單字邊界"><a href="#b-單字邊界" class="headerlink" title="\b 單字邊界"></a>\b 單字邊界</h3><p>匹配字符的前後的起末點，除了空白字元與標點符號，以及字串開頭或結尾外，不可再有其他字符。</p>
+<p><img src="https://i.imgur.com/h9TiFVX.png" alt="b"></p>
+<h3 id="B-非單字邊界"><a href="#B-非單字邊界" class="headerlink" title="\B 非單字邊界"></a>\B 非單字邊界</h3><p><code>\b</code> 的相反效果，也就是原本單字邊界沒有匹配到的，都會匹配到。</p>
+<p><img src="https://i.imgur.com/8Xb4QxW.png" alt="B"></p>
+<h2 id="常用的特殊字元"><a href="#常用的特殊字元" class="headerlink" title="常用的特殊字元"></a>常用的特殊字元</h2><ul>
+<li>\n 換行字元。</li>
+<li>\0 null 字元。</li>
+<li>. 因為已經是跳脫字元，所以變成一般的點。</li>
+<li>/ 反斜線。</li>
+</ul>
+<h2 id="1-Backreference-回參考"><a href="#1-Backreference-回參考" class="headerlink" title="\1 Backreference 回參考"></a>\1 Backreference 回參考</h2><p>匹配對稱的字符。</p>
+<p>範例文字如下：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">abc=abc,</span><br><span class="line">def=def</span><br><span class="line">abc=def</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.imgur.com/24d7cs9.png" alt="\1"></p>
+<h2 id="1-替換"><a href="#1-替換" class="headerlink" title="$1 替換"></a>$1 替換</h2><p>主要是把原本的字串替換成要加上的元素。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="built_in">document</span>.querySelector(<span class="string">".str"</span>);</span><br><span class="line"><span class="keyword">let</span> string = <span class="string">"abc=abc"</span>;</span><br><span class="line">str.textContent = string;</span><br><span class="line"><span class="keyword">const</span> regex = <span class="regexp">/(abc)=\1/gm</span>;</span><br><span class="line"><span class="keyword">let</span> replace = <span class="string">"xx$1xx"</span>;</span><br><span class="line"><span class="keyword">let</span> result = string.replace(regex, replace);</span><br><span class="line">str.textContent = result;</span><br></pre></td></tr></table></figure>
+
+<p>點此連結看&gt;&gt;&gt;<a href="https://codepen.io/hnzxewqw/pen/mdxqqqB" target="_blank" rel="noopener">範例效果</a></p>
+<h2 id="左右合樣-Lookaround"><a href="#左右合樣-Lookaround" class="headerlink" title="左右合樣 Lookaround"></a>左右合樣 Lookaround</h2><p>有四種 pattern：</p>
+<ol>
+<li>右合樣 <code>a(?=b)</code></li>
+<li>右不合樣。<code>a(?!b)</code></li>
+<li>左合樣。<code>(?&lt;=b)a</code></li>
+<li>左不合樣。<code>(?&lt;!a)b</code></li>
+</ol>
+<p>以下方字串為例：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">abandon</span><br><span class="line">aboard</span><br><span class="line">absolute</span><br><span class="line">active</span><br><span class="line">add</span><br><span class="line">address</span><br><span class="line">advice</span><br><span class="line">attribute</span><br><span class="line">apple</span><br></pre></td></tr></table></figure>
+
+<p>用來判斷右(左)邊緊接著的字元是否符合比對條件，如果符合條件才會繼續比對下去。</p>
+<h3 id="右合樣、正向肯定預查-Positive-Lookahead"><a href="#右合樣、正向肯定預查-Positive-Lookahead" class="headerlink" title="右合樣、正向肯定預查 Positive Lookahead"></a>右合樣、正向肯定預查 Positive Lookahead</h3><p>如字面所表示，從右邊開始匹配，遇到匹配條件才會成功匹配出結果，否則會跳過。</p>
+<p><img src="https://i.imgur.com/5QhISbv.png" alt="right"></p>
+<p>小括號是群組此匹配條件，問號代表前面的字元可出現 0 到 1 次，匹配條件可有可無，若有只能匹配一次。本次範例匹配條件為在 a 右面要找到 b 才符合匹配條件，並且找到一個 b 就會停止匹配。</p>
+<h3 id="右不合樣、正向否定預查-Negative-Lookahead"><a href="#右不合樣、正向否定預查-Negative-Lookahead" class="headerlink" title="右不合樣、正向否定預查 Negative Lookahead"></a>右不合樣、正向否定預查 Negative Lookahead</h3><p>匹配結果會與右合樣相反。</p>
+<p><img src="https://i.imgur.com/vuw44eV.png" alt="not b"></p>
+<p>a 後面不是 b 的單字字串都會被匹配出來。</p>
+<h3 id="左合樣、反向肯定預查-Positive-Lookbehind"><a href="#左合樣、反向肯定預查-Positive-Lookbehind" class="headerlink" title="左合樣、反向肯定預查 Positive Lookbehind"></a>左合樣、反向肯定預查 Positive Lookbehind</h3><p>從左邊開始匹配，遇到匹配條件才會出現匹配結果，否則會跳過。</p>
+<p><img src="https://i.imgur.com/ehgh4Wz.png" alt="l"></p>
+<p>要找出 b 左邊有 a 的字串才符合匹配條件，並找到一個 a 就停止匹配。</p>
+<h3 id="左不合樣、反向否定預查-Negative-Lookbehind"><a href="#左不合樣、反向否定預查-Negative-Lookbehind" class="headerlink" title="左不合樣、反向否定預查 Negative Lookbehind"></a>左不合樣、反向否定預查 Negative Lookbehind</h3><p>匹配結果與左合樣相反。</p>
+<p><img src="https://i.imgur.com/aaSX4i4.png" alt="not l"></p>
+<blockquote>
+<p>左右合樣匹配條件是不佔空間的，所以比對完條件後會再回到字符起點，再比對第二個條件，也是如此特性，如果複雜又沒有寫好的合樣條件，可能演變成無限迴圈而佔用 CPU 資源，</p>
+</blockquote>
+<h2 id="實戰範例"><a href="#實戰範例" class="headerlink" title="實戰範例"></a>實戰範例</h2><h3 id="驗證密碼的條件"><a href="#驗證密碼的條件" class="headerlink" title="驗證密碼的條件"></a>驗證密碼的條件</h3><ol>
+<li>至少有一個數字</li>
+<li>至少有一個小寫英文字母</li>
+<li>至少有一個大寫英文字母</li>
+<li>字串長度在 6 ~ 30 個字母之間</li>
+</ol>
+<p>正則可以寫成：<code>^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,30}$</code></p>
+<p><img src="https://i.imgur.com/Cm0A0nT.png" alt="example"></p>
+<h3 id="匹配網址"><a href="#匹配網址" class="headerlink" title="匹配網址"></a>匹配網址</h3><p>若網址如下：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">https://<span class="title">www.google.com</span></span></span><br><span class="line"><span class="function"><span class="title">https</span>://<span class="title">www.youtube.com</span></span></span><br><span class="line"><span class="function"><span class="title">http</span>://<span class="title">testweb.com.tw</span></span></span><br><span class="line"><span class="function"><span class="title">https</span>://<span class="title">www.nasa.gov</span></span></span><br></pre></td></tr></table></figure>
+
+<p>正則可寫成：<code>https?:\/\/(www\.)?(\w+)(\.\w+)(\.\w+)?</code></p>
+<p>說明：</p>
+<ol>
+<li>一定會有 http 但不一定會有 S，所以在 s 後面加問號。</li>
+<li>會有冒號與 // 雙斜線符號。</li>
+<li>www. 群組成為匹配條件，但有可能網址沒有此字串，故使用冒號。</li>
+<li>取得中間網址所有字串。</li>
+<li>取得 <code>.</code> 之後所有的字串，也就是 <code>.com</code>, <code>.gov</code> 之類的。</li>
+<li>最後不一定會有國碼字串，故也選到 <code>.</code> 之後所有字串並且給問號代表選填。</li>
+</ol>
+<p><img src="https://i.imgur.com/uTbuZUz.png" alt="ex"></p>
+<h2 id="修飾詞-Flags"><a href="#修飾詞-Flags" class="headerlink" title="修飾詞 Flags"></a>修飾詞 Flags</h2><p>正則表達式引擎有預設規則，可依照不同設定給予不同的修飾詞改變匹配結果。</p>
+<h3 id="g-global-search-全域模式"><a href="#g-global-search-全域模式" class="headerlink" title="g - global search 全域模式"></a>g - global search 全域模式</h3><p>使用全局匹配模式。有時候你會希望重複匹配目標字串多次，使用 <code>g</code> flag 就可以保留 <code>lastIndex</code> 的狀態，讓下一次再匹配時，可以從 <code>lastIndex</code> 的位置開始找起，你就可以遍歷整個文本中的所有可匹配字串，而不是每一次再匹配時都得到一樣的結果 (文本中從頭開始第一個找到的字串)。另外預設上，如果沒有開啟 <code>g</code> flag，Regex 引擎只會返回「第一個」匹配到的字串結果。</p>
+<h3 id="m-multiline-多行模式"><a href="#m-multiline-多行模式" class="headerlink" title="m - multiline 多行模式"></a>m - multiline 多行模式</h3><p>使用多行模式，使 <code>^</code> 和 <code>$</code> 會比對每一行的開頭與結尾，而不是輸入字串的開頭和結尾。</p>
+<h3 id="i-case-insensitive-忽略大小寫"><a href="#i-case-insensitive-忽略大小寫" class="headerlink" title="i - case insensitive 忽略大小寫"></a>i - case insensitive 忽略大小寫</h3><p>使用不區分大小寫的比對方式。</p>
+<h3 id="s-singleline-單行模式"><a href="#s-singleline-單行模式" class="headerlink" title="s - singleline 單行模式"></a>s - singleline 單行模式</h3><p>使用單行模式，使句點 . 會比對每個字元，而不是換行符號 <code>\n</code> 以外的每個字元</p>
+<h2 id="優先權"><a href="#優先權" class="headerlink" title="優先權"></a>優先權</h2><p><img src="https://i.imgur.com/EzmiJrK.png" alt="sort"></p>
+<h2 id="找中文"><a href="#找中文" class="headerlink" title="找中文"></a>找中文</h2><p>正則可以寫：<code>\p{L}</code></p>
+<p><img src="https://i.imgur.com/M1VUJOg.png" alt="chinese"></p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a href="https://www.youtube.com/watch?v=Ex6cCWDwNJU" target="_blank" rel="noopener">深入淺出正則表達式</a></li>
+<li><a href="https://www.fooish.com/regex-regular-expression/syntax.html" target="_blank" rel="noopener">Regex 正規表示法 - 基本語法</a></li>
+<li><a href="https://zh.wikipedia.org/zh-tw/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F" target="_blank" rel="noopener">正規表示法 Wiki</a></li>
+<li><a href="https://blog.miniasp.com/post/2008/05/09/Using-Regular-Expression-to-validate-password" target="_blank" rel="noopener">使用 Regular Expression 驗證密碼複雜度</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/RegEx/" rel="tag"># RegEx</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/regex/20220731/4121487144/" rel="prev" title="Regular Expression 正則表達式 - 初探">
+      <i class="fa fa-chevron-left"></i> Regular Expression 正則表達式 - 初探
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/node/20220903/4148565138/" rel="next" title="Node.js - 簡介">
+      Node.js - 簡介 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#字元類別-Character-Classes"><span class="nav-number">1.</span> <span class="nav-text">字元類別 (Character Classes)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dot-點"><span class="nav-number">1.1.</span> <span class="nav-text">. dot 點</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#s-match-space"><span class="nav-number">1.2.</span> <span class="nav-text">\s match space</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#S-match-string"><span class="nav-number">1.3.</span> <span class="nav-text">\S match string</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#w-匹配所有文字"><span class="nav-number">1.4.</span> <span class="nav-text">\w 匹配所有文字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#W-除了文字外都匹配"><span class="nav-number">1.5.</span> <span class="nav-text">\W 除了文字外都匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#d-匹配所有數字-0-9"><span class="nav-number">1.6.</span> <span class="nav-text">\d 匹配所有數字 0-9</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-除了數字外都匹配"><span class="nav-number">1.7.</span> <span class="nav-text">\D 除了數字外都匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#a-z-與-A-Z-匹配大小寫"><span class="nav-number">1.8.</span> <span class="nav-text">[a-z] 與 [A-Z] 匹配大小寫</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#錨點符號"><span class="nav-number">2.</span> <span class="nav-text">錨點符號</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#b-單字邊界"><span class="nav-number">2.1.</span> <span class="nav-text">\b 單字邊界</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-非單字邊界"><span class="nav-number">2.2.</span> <span class="nav-text">\B 非單字邊界</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用的特殊字元"><span class="nav-number">3.</span> <span class="nav-text">常用的特殊字元</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Backreference-回參考"><span class="nav-number">4.</span> <span class="nav-text">\1 Backreference 回參考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-替換"><span class="nav-number">5.</span> <span class="nav-text">$1 替換</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#左右合樣-Lookaround"><span class="nav-number">6.</span> <span class="nav-text">左右合樣 Lookaround</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#右合樣、正向肯定預查-Positive-Lookahead"><span class="nav-number">6.1.</span> <span class="nav-text">右合樣、正向肯定預查 Positive Lookahead</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#右不合樣、正向否定預查-Negative-Lookahead"><span class="nav-number">6.2.</span> <span class="nav-text">右不合樣、正向否定預查 Negative Lookahead</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#左合樣、反向肯定預查-Positive-Lookbehind"><span class="nav-number">6.3.</span> <span class="nav-text">左合樣、反向肯定預查 Positive Lookbehind</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#左不合樣、反向否定預查-Negative-Lookbehind"><span class="nav-number">6.4.</span> <span class="nav-text">左不合樣、反向否定預查 Negative Lookbehind</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#實戰範例"><span class="nav-number">7.</span> <span class="nav-text">實戰範例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#驗證密碼的條件"><span class="nav-number">7.1.</span> <span class="nav-text">驗證密碼的條件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#匹配網址"><span class="nav-number">7.2.</span> <span class="nav-text">匹配網址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修飾詞-Flags"><span class="nav-number">8.</span> <span class="nav-text">修飾詞 Flags</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#g-global-search-全域模式"><span class="nav-number">8.1.</span> <span class="nav-text">g - global search 全域模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#m-multiline-多行模式"><span class="nav-number">8.2.</span> <span class="nav-text">m - multiline 多行模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#i-case-insensitive-忽略大小寫"><span class="nav-number">8.3.</span> <span class="nav-text">i - case insensitive 忽略大小寫</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#s-singleline-單行模式"><span class="nav-number">8.4.</span> <span class="nav-text">s - singleline 單行模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#優先權"><span class="nav-number">9.</span> <span class="nav-text">優先權</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#找中文"><span class="nav-number">10.</span> <span class="nav-text">找中文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">11.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">344</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://bmc.link/hsuchihting" title="BuyMeACoffee → https:&#x2F;&#x2F;bmc.link&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>BuyMeACoffee</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友站連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://israynotarray.com/" title="https:&#x2F;&#x2F;israynotarray.com&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.casper.tw/" title="https:&#x2F;&#x2F;www.casper.tw&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.miniasp.com/" title="https:&#x2F;&#x2F;blog.miniasp.com&#x2F;" rel="noopener" target="_blank">保哥部落格</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cythilya.github.io/" title="https:&#x2F;&#x2F;cythilya.github.io&#x2F;" rel="noopener" target="_blank">桑莫。夏天</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mtwmt.com/blog/list" title="https:&#x2F;&#x2F;mtwmt.com&#x2F;blog&#x2F;list" rel="noopener" target="_blank">Mandy's Web</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.oxxostudio.tw/" title="https:&#x2F;&#x2F;www.oxxostudio.tw&#x2F;" rel="noopener" target="_blank">OXXO Studio</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/regex/20220731/2418624309/",
+            identifier: "regex/20220731/2418624309/",
+            title: "Regular Expression 正則表達式 - 進階用法"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

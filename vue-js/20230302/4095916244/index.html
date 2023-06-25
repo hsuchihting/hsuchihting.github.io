@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="元件化的開發觀念">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue 筆記 - 展示性元件 VS 容器式元件">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;vue-js&#x2F;20230302&#x2F;4095916244&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="元件化的開發觀念">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1601477575132-df687f64f14c?ixlib&#x3D;rb-4.0.3&amp;ixid&#x3D;MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1170&amp;q&#x3D;80">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;qoQBzWh.png">
+<meta property="article:published_time" content="2023-03-02T14:15:30.000Z">
+<meta property="article:modified_time" content="2023-03-02T14:31:45.130Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="vue.js">
+<meta property="article:tag" content="work">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1601477575132-df687f64f14c?ixlib&#x3D;rb-4.0.3&amp;ixid&#x3D;MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1170&amp;q&#x3D;80">
+
+<link rel="canonical" href="https://hsuchihting.github.io/vue-js/20230302/4095916244/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Vue 筆記 - 展示性元件 VS 容器式元件 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/vue-js/20230302/4095916244/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          Vue 筆記 - 展示性元件 VS 容器式元件
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2023-03-02 22:15:30 / 修改時間：22:31:45" itemprop="dateCreated datePublished" datetime="2023-03-02T22:15:30+08:00">2023-03-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue-js/" itemprop="url" rel="index">
+                    <span itemprop="name">vue.js</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/vue-js/20230302/4095916244/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="vue-js/20230302/4095916244/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">元件化的開發觀念</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://images.unsplash.com/photo-1601477575132-df687f64f14c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="container"></p>
+<p>這篇記錄一下專案上遇到的開發模式，情境是今天有一個 input 的共用元件，會依照不同的條件去修改基礎樣式，在同事的解說下把觀念釐清並筆記。</p>
+<h2 id="展示性元件-Presentation-Component"><a href="#展示性元件-Presentation-Component" class="headerlink" title="展示性元件 Presentation Component"></a>展示性元件 Presentation Component</h2><blockquote>
+<p>主要用途是 UI 的呈現，一般來說都是接收容器式元件或是父層元件的 props 資料，使用展示性元件最大的優勢就是可以重複的使用。</p>
+</blockquote>
+<p>像是本次範例使用的 <code>input</code> 元件。</p>
+<h2 id="容器式元件-Container-Component"><a href="#容器式元件-Container-Component" class="headerlink" title="容器式元件 Container Component"></a>容器式元件 Container Component</h2><blockquote>
+<p>主要是用來接收資料用，並且大部分的情境會有自己的 state 來存放或接收的資料，並且把這些資料傳給展示性元件。</p>
+</blockquote>
+<p>像是本次的範例為許多 <code>input</code> 組成的表單。</p>
+<h2 id="實作"><a href="#實作" class="headerlink" title="實作"></a>實作</h2><h3 id="建立展示性元件"><a href="#建立展示性元件" class="headerlink" title="建立展示性元件"></a>建立展示性元件</h3><p>有上方概念後，在建立一個展示性的 <code>input</code> 元件，此元件的概念式可以再重複使用的，所以不會特別綁定商業邏輯的規則，建立好基本的樣式後，也確認在父層引入後顯示無誤，便建立以下共用屬性。</p>
+<p><strong>CustomInput.vue</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">"type === 'radio' || type === 'checkbox'"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"flex items-center w-full"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span></span></span><br><span class="line"><span class="tag">          <span class="attr">v-model</span>=<span class="string">"currentValue"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">:type</span>=<span class="string">"type"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">:name</span>=<span class="string">"customName"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">class</span>=<span class="string">"px-5 py-2 rounded-md border border-blue-400 active:ring-offset-2 active:ring outline-none"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">:placeholder</span>=<span class="string">"customPlaceholder"</span></span></span><br><span class="line"><span class="tag">        /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"text-base pl-4"</span> <span class="attr">:class</span>=<span class="string">"&#123; ...customWidth &#125;"</span>&gt;</span></span><br><span class="line">          &#123;&#123; customTitle &#125;&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-else-if</span>=<span class="string">"type === 'date'"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:type</span>=<span class="string">"type"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:name</span>=<span class="string">"customName"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">class</span>=<span class="string">"lg:px-5 py-2 rounded-md border border-blue-400 active:ring-offset-2 active:ring outline-none"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:class</span>=<span class="string">"&#123; ...customWidth &#125;"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:disabled</span>=<span class="string">"(currentValue = 'false')"</span></span></span><br><span class="line"><span class="tag">      /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-else</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h3</span> <span class="attr">class</span>=<span class="string">"text-left text-lg pb-2 pt-4"</span> <span class="attr">:class</span>=<span class="string">"&#123; ...customWidth &#125;"</span>&gt;</span></span><br><span class="line">          &#123;&#123; customTitle &#125;&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span></span></span><br><span class="line"><span class="tag">          <span class="attr">v-model</span>=<span class="string">"currentValue"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">:type</span>=<span class="string">"type"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">:name</span>=<span class="string">"customName"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">class</span>=<span class="string">"lg:px-5 py-2 rounded-md border border-blue-400 active:ring-offset-2 active:ring outline-none"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">:class</span>=<span class="string">"&#123; ...customWidth &#125;"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">:placeholder</span>=<span class="string">"customPlaceholder"</span></span></span><br><span class="line"><span class="tag">        /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="actionscript">    name: <span class="string">"CustomInput"</span>,</span></span><br><span class="line">    data() &#123;</span><br><span class="line"><span class="actionscript">      <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="actionscript">        currentValue: <span class="keyword">this</span>.customValue,</span></span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    props: &#123;</span><br><span class="line">      type: &#123;</span><br><span class="line"><span class="javascript">        type: <span class="built_in">String</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">default</span>: <span class="string">"text"</span>,</span></span><br><span class="line">      &#125;,</span><br><span class="line">      customWidth: &#123;</span><br><span class="line"><span class="javascript">        type: <span class="built_in">Object</span>,</span></span><br><span class="line"><span class="javascript">        <span class="keyword">default</span>: <span class="function"><span class="params">()</span> =&gt;</span> (&#123; <span class="string">"w-full"</span>: <span class="literal">true</span> &#125;),</span></span><br><span class="line">      &#125;,</span><br><span class="line">      customTitle: &#123;</span><br><span class="line"><span class="javascript">        type: <span class="built_in">String</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">default</span>: <span class="string">""</span>,</span></span><br><span class="line">      &#125;,</span><br><span class="line">      customPlaceholder: &#123;</span><br><span class="line"><span class="javascript">        type: <span class="built_in">String</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">default</span>: <span class="string">""</span>,</span></span><br><span class="line">      &#125;,</span><br><span class="line">      customName: &#123;</span><br><span class="line"><span class="javascript">        type: <span class="built_in">String</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">default</span>: <span class="string">""</span>,</span></span><br><span class="line">      &#125;,</span><br><span class="line">      customValue: &#123;</span><br><span class="line"><span class="javascript">        type: <span class="built_in">String</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">default</span>: <span class="string">""</span>,</span></span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="容器式元件中引入展示性元件"><a href="#容器式元件中引入展示性元件" class="headerlink" title="容器式元件中引入展示性元件"></a>容器式元件中引入展示性元件</h3><p>也就是引入子元件，要注意的是除了在 <code>template</code> 引入後，也要在 <code>script</code> 引入，</p>
+<p><strong>ComponentView.vue</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">custom-input</span> <span class="attr">:custom-title</span>=<span class="string">"'姓名'"</span> <span class="attr">:custom-placeholder</span>=<span class="string">"'EX:王小明'"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">custom-input</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">import</span> CustomInput <span class="keyword">from</span> <span class="string">"@/components/CustomInput.vue"</span>;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line">    components: &#123; CustomInput &#125;,</span><br><span class="line">  &#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>完成後應該會出現下圖：</p>
+<p><img src="https://i.imgur.com/qoQBzWh.png" alt=""></p>
+<p>之後就可以在容器式元件中改變 type 的類型，逐步客製出想要的表單，並且加上自己想要的樣式，透過基本元件化的方式就可以快速完成表單的設定囉！</p>
+<h2 id="展示性元件要保持高彈性"><a href="#展示性元件要保持高彈性" class="headerlink" title="展示性元件要保持高彈性"></a>展示性元件要保持高彈性</h2><p>這次情境出現兩個元件要合併的呈現的畫面，此時就可以用 <code>props</code> 在展示性元件使用物件的方式把父層的直傳進來，</p>
+<p><strong>CustomInput.vue</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">      &lt;label&gt;</span><br><span class="line">        &lt;h3 <span class="class"><span class="keyword">class</span></span>=<span class="string">"text-left text-lg pb-2 pt-4"</span> :<span class="class"><span class="keyword">class</span></span>=<span class="string">"&#123; ...customWidth &#125;"</span>&gt;</span><br><span class="line">          &#123;&#123; customTitle &#125;&#125;</span><br><span class="line">        &lt;<span class="regexp">/h3&gt;</span></span><br><span class="line"><span class="regexp">        &lt;input</span></span><br><span class="line"><span class="regexp">          v-model="currentValue"</span></span><br><span class="line"><span class="regexp">          :type="type"</span></span><br><span class="line"><span class="regexp">          :name="customName"</span></span><br><span class="line"><span class="regexp">          class="lg:px-5 py-2 rounded-md border border-blue-400 active:ring-offset-2 active:ring outline-none"</span></span><br><span class="line"><span class="regexp">          :class="&#123; ...customWidth &#125;"</span></span><br><span class="line"><span class="regexp">          :placeholder="customPlaceholder"</span></span><br><span class="line"><span class="regexp">        /</span>&gt;</span><br><span class="line">      &lt;<span class="regexp">/label&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">export default&#123;</span></span><br><span class="line"><span class="regexp">props:&#123;</span></span><br><span class="line"><span class="regexp">  customWidth: &#123;</span></span><br><span class="line"><span class="regexp">      type: Object,</span></span><br><span class="line"><span class="regexp">      default: () =&gt; (&#123; "w-full": true &#125;),</span></span><br><span class="line"><span class="regexp">    &#125;,</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">&lt;/</span>scirpt&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>ComponentView.vue</strong></p>
+<p>這邊有一個是否指定日期的功能，透過自訂 <code>:class</code> 的方式，傳到子元件，在樣式上可以透過物件的方式做更高彈性的修改，像這邊範例就是可以自由地修改欄位的寬度。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"lg:grid lg:grid-cols-3 lg:gap-4 py-5"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"lg:flex lg:items-center"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">custom-input</span></span></span><br><span class="line"><span class="tag">      <span class="attr">:type</span>=<span class="string">"'radio'"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">name</span>=<span class="string">"unOrder"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">value</span>=<span class="string">"'false'"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">:custom-title</span>=<span class="string">"'不指定日期'"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">:custom-width</span>=<span class="string">"&#123; 'w-32': true &#125;"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">v-model</span>=<span class="string">"form.radio"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">:customValue</span>=<span class="string">"form.radio"</span></span></span><br><span class="line"><span class="tag">    &gt;</span><span class="tag">&lt;/<span class="name">custom-input</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"lg:flex lg:items-center"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">custom-input</span></span></span><br><span class="line"><span class="tag">      <span class="attr">:type</span>=<span class="string">"'radio'"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">name</span>=<span class="string">"isOrder"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">value</span>=<span class="string">"'true'"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">:custom-title</span>=<span class="string">"'不指定日期'"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">:custom-width</span>=<span class="string">"&#123; 'w-32': true &#125;"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">v-model</span>=<span class="string">"form.radio"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">:customValue</span>=<span class="string">"form.radio"</span></span></span><br><span class="line"><span class="tag">    &gt;</span><span class="tag">&lt;/<span class="name">custom-input</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">custom-input</span></span></span><br><span class="line"><span class="tag">      <span class="attr">:type</span>=<span class="string">"'date'"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">:custom-width</span>=<span class="string">"&#123; 'w-full': true, 'pt-0': true &#125;"</span></span></span><br><span class="line"><span class="tag">    &gt;</span><span class="tag">&lt;/<span class="name">custom-input</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="基礎範例"><a href="#基礎範例" class="headerlink" title="基礎範例"></a>基礎範例</h2><p>連結：<a href="https://stackblitz.com/edit/vue-dyzdwr?file=src%2Fcomponents%2FCustomInput.vue" target="_blank" rel="noopener">https://stackblitz.com/edit/vue-dyzdwr?file=src%2Fcomponents%2FCustomInput.vue</a></p>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>過去開發會依照商業邏輯去設定變數去判定是否為這個需求，大多是用 Boolean 去做判定，但這次學到如果功能越趨複雜，需求越加繁多，在後面就會比較難去擴充功能跟修改樣式了。</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a href="https://github.com/kdchang/reactjs101/blob/master/Ch08/container-presentational-component-.md" target="_blank" rel="noopener">Container 與 Presentational Components 入門</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/vue-js/" rel="tag"># vue.js</a>
+              <a href="/tags/work/" rel="tag"># work</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/work/20221206/2637274221/" rel="prev" title="你可能不知道的阿公級屬性-inputmode">
+      <i class="fa fa-chevron-left"></i> 你可能不知道的阿公級屬性-inputmode
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/css/20230302/2830282312/" rel="next" title="CSS 筆記 - 關於列印的那些設定">
+      CSS 筆記 - 關於列印的那些設定 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#展示性元件-Presentation-Component"><span class="nav-number">1.</span> <span class="nav-text">展示性元件 Presentation Component</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容器式元件-Container-Component"><span class="nav-number">2.</span> <span class="nav-text">容器式元件 Container Component</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#實作"><span class="nav-number">3.</span> <span class="nav-text">實作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#建立展示性元件"><span class="nav-number">3.1.</span> <span class="nav-text">建立展示性元件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器式元件中引入展示性元件"><span class="nav-number">3.2.</span> <span class="nav-text">容器式元件中引入展示性元件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#展示性元件要保持高彈性"><span class="nav-number">4.</span> <span class="nav-text">展示性元件要保持高彈性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基礎範例"><span class="nav-number">5.</span> <span class="nav-text">基礎範例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#結語"><span class="nav-number">6.</span> <span class="nav-text">結語</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">7.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">344</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://bmc.link/hsuchihting" title="BuyMeACoffee → https:&#x2F;&#x2F;bmc.link&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>BuyMeACoffee</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友站連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://israynotarray.com/" title="https:&#x2F;&#x2F;israynotarray.com&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.casper.tw/" title="https:&#x2F;&#x2F;www.casper.tw&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.miniasp.com/" title="https:&#x2F;&#x2F;blog.miniasp.com&#x2F;" rel="noopener" target="_blank">保哥部落格</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cythilya.github.io/" title="https:&#x2F;&#x2F;cythilya.github.io&#x2F;" rel="noopener" target="_blank">桑莫。夏天</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mtwmt.com/blog/list" title="https:&#x2F;&#x2F;mtwmt.com&#x2F;blog&#x2F;list" rel="noopener" target="_blank">Mandy's Web</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.oxxostudio.tw/" title="https:&#x2F;&#x2F;www.oxxostudio.tw&#x2F;" rel="noopener" target="_blank">OXXO Studio</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/vue-js/20230302/4095916244/",
+            identifier: "vue-js/20230302/4095916244/",
+            title: "Vue 筆記 - 展示性元件 VS 容器式元件"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

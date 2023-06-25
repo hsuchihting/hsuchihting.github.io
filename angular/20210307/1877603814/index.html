@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="取得 API 資料與路由跳轉實作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular 筆記 - Router 路由實作串接 API">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;angular&#x2F;20210307&#x2F;1877603814&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="取得 API 資料與路由跳轉實作">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;07vFnCj.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;M09N9QV.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;fB1A2Us.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;vqAbbQ2.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;ellqdbd.png">
+<meta property="article:published_time" content="2021-03-07T09:31:13.000Z">
+<meta property="article:modified_time" content="2021-08-04T14:35:53.244Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="Angular">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;07vFnCj.jpg">
+
+<link rel="canonical" href="https://hsuchihting.github.io/angular/20210307/1877603814/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Angular 筆記 - Router 路由實作串接 API | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/angular/20210307/1877603814/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          Angular 筆記 - Router 路由實作串接 API
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-03-07 17:31:13" itemprop="dateCreated datePublished" datetime="2021-03-07T17:31:13+08:00">2021-03-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-08-04 22:35:53" itemprop="dateModified" datetime="2021-08-04T22:35:53+08:00">2021-08-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/angular/" itemprop="url" rel="index">
+                    <span itemprop="name">Angular</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/angular/20210307/1877603814/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="angular/20210307/1877603814/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">取得 API 資料與路由跳轉實作</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://i.imgur.com/07vFnCj.jpg" alt="router link"></p>
+<p>本篇記錄重新練習路由搭配 RxJS 串接 API 的流程。</p>
+<h2 id="先建立-db-json-數據庫"><a href="#先建立-db-json-數據庫" class="headerlink" title="先建立 db.json 數據庫"></a>先建立 db.json 數據庫</h2><p>建立 API 細節可參考<a href="https://hsuchihting.github.io/javascript/20201030/52463831/">JS 筆記 - 使用 postman 編輯通訊 API</a>完成後要在 <code>package.json</code> 中的 <code>script</code> 屬性中加入 <code>json</code> 指令，這樣日後啟動就不用輸入冗長的程式碼。</p>
+<p><strong>package.json</strong></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">   "ng": "ng",</span><br><span class="line">   "<span class="built_in">start</span>": "ng serve",</span><br><span class="line">   "build": "ng build",</span><br><span class="line">   "test": "ng test",</span><br><span class="line">   "lint": "ng lint",</span><br><span class="line">   "e2e": "ng e2e",</span><br><span class="line">   "json": "json-server --watch db.json --port <span class="number">3000</span>"</span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>在 app 資料夾中建立一個 <code>db.json</code> 檔案，並把資料放在此處，</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "posts": [</span><br><span class="line">    &#123;</span><br><span class="line">      "id": <span class="number">1</span>,</span><br><span class="line">      "name": "tim",</span><br><span class="line">      "height": <span class="number">175</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      "id": <span class="number">2</span>,</span><br><span class="line">      "name": "lena",</span><br><span class="line">      "height": <span class="number">160</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      "id": <span class="number">3</span>,</span><br><span class="line">      "name": "eda",</span><br><span class="line">      "height": <span class="number">155</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      "id": <span class="number">4</span>,</span><br><span class="line">      "name": "mia",</span><br><span class="line">      "height": <span class="number">170</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>這次建立 JSON 檔案發現有兩個套件可以製作 JSON 格式檔案：<br><a href="https://jsonformatter.curiousconcept.com/#" target="_blank" rel="noopener">JSON Formatter &amp; Validator</a> 與 VSCode 套件 <a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode" target="_blank" rel="noopener">Prettier - Code formatter</a></p>
+</blockquote>
+<h2 id="引入-API-到-environment"><a href="#引入-API-到-environment" class="headerlink" title="引入 API 到 environment"></a>引入 API 到 environment</h2><p>找到 environment 資料夾，分別把 API 的路徑放在裡面，之後要串接 API 要從這裡呼叫，算是管理 API 的地方。</p>
+<blockquote>
+<p>兩個檔案都要放入 API 路徑。</p>
+</blockquote>
+<p><img src="https://i.imgur.com/M09N9QV.png" alt="environment"></p>
+<p><strong>environment.ts</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> environment = &#123;</span><br><span class="line">  production: <span class="literal">false</span>,</span><br><span class="line">  apiUrl: <span class="string">"http://localhost:3000"</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>environment.prod.ts</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> environment = &#123;</span><br><span class="line">  production: <span class="literal">true</span>,</span><br><span class="line">  apiUrl: <span class="string">"http://localhost:3000"</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="建立-Model"><a href="#建立-Model" class="headerlink" title="建立 Model"></a>建立 Model</h2><p>因 Angular 是由 TypeScript 開發，好處是透過強型別的特性來制定資料的型別，讓專案的資料內容不會因為 JavaScript 弱型別的判斷而導致資料錯誤。</p>
+<p>先建立一個 model 資料夾，並新增一個名稱是 <code>PersonModel.ts</code> 的 <code>interface</code> 檔案(名稱可自訂義)，裡面放入所要制定的資料型別，</p>
+<p><strong>PersonModel.ts</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> interface PersonModal &#123;</span><br><span class="line">  name: string,</span><br><span class="line">  height: number,</span><br><span class="line">  weight?: number <span class="comment">//資料可放可不放</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="建立路由-router"><a href="#建立路由-router" class="headerlink" title="建立路由 router"></a>建立路由 router</h2><p>先選到 <code>app-routing.module.ts</code> 檔案，並把這次要產生路由建置好。</p>
+<p>而本次路由要建立與需求為：</p>
+<ol>
+<li>登入頁面。</li>
+<li>主頁面。</li>
+<li>主頁面有一個連結，點擊後會出現子頁面的內容。</li>
+<li>若路徑不符則顯示登入頁面。</li>
+</ol>
+<p>所以路由程式碼如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> routes: Routes = [</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">"main"</span>,</span><br><span class="line">    component: MainComponent,</span><br><span class="line">    children: [</span><br><span class="line">      &#123;</span><br><span class="line">        path: <span class="string">"main-child"</span>,</span><br><span class="line">        component: MainChildComponent,</span><br><span class="line">      &#125;,</span><br><span class="line">    ],</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">"login"</span>,</span><br><span class="line">    component: LoginComponent,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">"**"</span>,</span><br><span class="line">    redirectTo: <span class="string">"login"</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<p>建置完成後會自動 <code>import</code> 相關元件與路徑。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; LoginComponent &#125; <span class="keyword">from</span> <span class="string">"./page/login/login.component"</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; MainComponent &#125; <span class="keyword">from</span> <span class="string">"./main/main.component"</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; MainChildComponent &#125; <span class="keyword">from</span> <span class="string">"./main/main-child/main-child.component"</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="建立連結"><a href="#建立連結" class="headerlink" title="建立連結"></a>建立連結</h2><p>事先已經先建立好要連結的 component，如下圖。</p>
+<p><img src="https://i.imgur.com/fB1A2Us.png" alt="view"></p>
+<p><strong>app.component.html</strong><br>在最外層的 <code>app.component.html</code> 建立兩個路由設定好，</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"menu"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> [<span class="attr">routerLink</span>]=<span class="string">"['/login']"</span>&gt;</span>登入<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> [<span class="attr">routerLink</span>]=<span class="string">"['/main']"</span>&gt;</span>主頁面<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>並將插頭 <code>&lt;router-outlet&gt;&lt;/router-outlet&gt;</code> 寫在連結的下方，此路由就可以建立好了。</p>
+<p>如法炮製也在 <code>main.component.html</code> 建立路由，並在給予一個點擊事件，點擊後會顯示子頁面內容的文字。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>這是 Main 的頁面<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> [<span class="attr">routerLink</span>]=<span class="string">"['/main/main-child']"</span> (<span class="attr">click</span>)=<span class="string">"childRender()"</span>&gt;</span>顯示子頁面內容<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">router-outlet</span>&gt;</span><span class="tag">&lt;/<span class="name">router-outlet</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>注意：因<strong>子路由</strong>的路徑是相依在<strong>母路徑</strong>的下方，所以連結為 <code>/main/main-child</code>，路徑前面要加上 <code>&quot;/&quot;</code>，路徑名稱跟 component 名稱相同。</li>
+</ul>
+<h2 id="建立-Service"><a href="#建立-Service" class="headerlink" title="建立 Service"></a>建立 Service</h2><p>在 app 資料夾下方建立一個 service 的資料夾，建立方式可以參考 <a href="https://hsuchihting.github.io/angular/20200913/2155444350/">Angular 筆記 - @injectable 裝飾器與注入 HttpClient 服務元件</a>，在建立一個 main 的資料夾，未來要在 main 使用的 service 方法的內容都可以寫在這個檔案內，以便管理。<br>承上，新增一個 <code>main.service.ts</code> 的檔案。<br><strong>main.service.ts</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; environment &#125; <span class="keyword">from</span> <span class="string">'./../../../environments/environment.prod'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Injectable &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; PersonModal &#125; <span class="keyword">from</span> <span class="string">'src/app/model/PersonModel'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; HttpClient &#125; <span class="keyword">from</span> <span class="string">'@angular/common/http'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Observable &#125; <span class="keyword">from</span> <span class="string">'rxjs'</span>;</span><br><span class="line"><span class="comment">// 以上要記得引入</span></span><br><span class="line"></span><br><span class="line">@Injectable(&#123;</span><br><span class="line">  providedIn: <span class="string">'root'</span>,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">MainService</span> </span>&#123;</span><br><span class="line">  mainUrl = environment.apiUrl;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(private http: HttpClient) &#123;&#125;</span><br><span class="line"></span><br><span class="line">  getMainData(): Observable&lt;PersonModal[]&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.http.get&lt;PersonModal[]&gt;(<span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.mainUrl&#125;</span>/posts`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>說明：</p>
+<ol>
+<li>建立一個 mainUrl 變數來接 environment.apiUrl</li>
+<li>建構是要使用 HttpClient 方法。</li>
+<li>使用 getMainData 方法，並用觀察者物件，其型別表示<code>PersonModal[]</code> 為陣列格式，並用 get 方法來取得資料，取得資料格式也是要符合 <code>PersonModal[]</code>的陣列格式，其 get 方法內的連結用 ES6 的模板語法來寫 <code>${this.mainUrl}/posts</code>，也就是與我們一開始建立 db.json 的 api 路徑相同。</li>
+</ol>
+<h3 id="點擊事件設定"><a href="#點擊事件設定" class="headerlink" title="點擊事件設定"></a>點擊事件設定</h3><p>使用 <code>navigate</code> 方法取得子頁面的路由，navigate 中文為導航，也就是點擊此事件後，會把頁面導航到子路由。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">childRender() &#123;</span><br><span class="line">   <span class="keyword">this</span>.router.navigate([<span class="string">'/main/main-child'</span>]);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="回到主要串接-API-的那一頁"><a href="#回到主要串接-API-的那一頁" class="headerlink" title="回到主要串接 API 的那一頁"></a>回到主要串接 API 的那一頁</h2><p>都設定完成後，就要回到主要串接 API 的那一頁，把功能寫在該頁的 ts 檔案中，也就是 <code>main.component.ts</code>。</p>
+<p>自訂義一個 <code>getAllData()</code> 方法來呼叫 API，Angular 推薦串接 API 的套件為 RxJS，其使用方法基礎寫法為，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.service.get().subscribe();</span><br></pre></td></tr></table></figure>
+
+<p>可以看到是透過 <code>service</code> 的服務元件，然後使用 <code>get</code> 方法，在用一個 <code>subcribe</code>(訂閱) 的方法執行 response 的資料，跟用其他 Promise 的套件與方法有點像，新手入門先這樣記憶，未來可以再深入研究 RxJS 的運作方式。</p>
+<p>此範例取得資料的程式碼為：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">getAllData() &#123;</span><br><span class="line">  <span class="keyword">this</span>.mainService.getMainData().subscribe(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="建構式引入-MainService-跟-Router"><a href="#建構式引入-MainService-跟-Router" class="headerlink" title="建構式引入 MainService 跟 Router"></a>建構式引入 MainService 跟 Router</h3><p>因為要在 <code>main.component.ts</code> 串接 API，要先引入服務元件與路由方法，故在建構式中要引入這兩個方法，程式碼如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constructor</span>(private mainService: MainService, private router: Router) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>並在生命週期 <code>ngOnInit()</code> 中呼叫 <code>getAllData()</code>，才能使用此方法。</p>
+<h3 id="完整程式碼為"><a href="#完整程式碼為" class="headerlink" title="完整程式碼為"></a>完整程式碼為</h3><p><strong>main.component.ts</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; MainService &#125; <span class="keyword">from</span> <span class="string">'./../service/main/main.service'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; AfterContentInit, Component, OnInit &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Router &#125; <span class="keyword">from</span> <span class="string">'@angular/router'</span>;</span><br><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">  selector: <span class="string">'app-main'</span>,</span><br><span class="line">  templateUrl: <span class="string">'./main.component.html'</span>,</span><br><span class="line">  styleUrls: [<span class="string">'./main.component.scss'</span>],</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">MainComponent</span> <span class="title">implements</span> <span class="title">OnInit</span>, <span class="title">AfterContentInit</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(private mainService: MainService, private router: Router) &#123;&#125;</span><br><span class="line"></span><br><span class="line">  ngAfterContentInit(): <span class="keyword">void</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'DOM 渲染完囉!'</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ngOnInit(): <span class="keyword">void</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.getAllData();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  getAllData() &#123;</span><br><span class="line">    <span class="keyword">this</span>.mainService.getMainData().subscribe(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(res);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  childRender() &#123;</span><br><span class="line">    <span class="keyword">this</span>.router.navigate([<span class="string">'/main/main-child'</span>]);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>ngAfterContentInit()</code> 是表示在 DOM 渲染完後才載入 API，這邊使用是在 DOM 渲染前就先載入 API，至於要選哪一個生命週期，就要依專案而定。</p>
+</blockquote>
+<p>這樣就完成 API 串接了。</p>
+<h2 id="檢查是否有正確取得-API"><a href="#檢查是否有正確取得-API" class="headerlink" title="檢查是否有正確取得 API"></a>檢查是否有正確取得 API</h2><p>按下 <code>F12</code> 開發人員工具，選擇到 <code>network</code>，因本範例預設頁面為 login 頁面，故一開始不會看到 API 資料，當選擇到 main 時，就會在 <code>network &gt; preview</code> 看到 posts 這支 API 的名稱囉！</p>
+<p><strong>network</strong></p>
+<p><img src="https://i.imgur.com/vqAbbQ2.png" alt="network"></p>
+<p><strong>console</strong></p>
+<p><img src="https://i.imgur.com/ellqdbd.png" alt="console"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Angular/" rel="tag"># Angular</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/angular/20210304/1004423002/" rel="prev" title="Angular 筆記 - input 與 output">
+      <i class="fa fa-chevron-left"></i> Angular 筆記 - input 與 output
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/angular/20210308/1673013614/" rel="next" title="Angular 筆記 - form 表單基礎實作">
+      Angular 筆記 - form 表單基礎實作 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#先建立-db-json-數據庫"><span class="nav-number">1.</span> <span class="nav-text">先建立 db.json 數據庫</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引入-API-到-environment"><span class="nav-number">2.</span> <span class="nav-text">引入 API 到 environment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立-Model"><span class="nav-number">3.</span> <span class="nav-text">建立 Model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立路由-router"><span class="nav-number">4.</span> <span class="nav-text">建立路由 router</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立連結"><span class="nav-number">5.</span> <span class="nav-text">建立連結</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立-Service"><span class="nav-number">6.</span> <span class="nav-text">建立 Service</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#點擊事件設定"><span class="nav-number">6.1.</span> <span class="nav-text">點擊事件設定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回到主要串接-API-的那一頁"><span class="nav-number">7.</span> <span class="nav-text">回到主要串接 API 的那一頁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#建構式引入-MainService-跟-Router"><span class="nav-number">7.1.</span> <span class="nav-text">建構式引入 MainService 跟 Router</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完整程式碼為"><span class="nav-number">7.2.</span> <span class="nav-text">完整程式碼為</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#檢查是否有正確取得-API"><span class="nav-number">8.</span> <span class="nav-text">檢查是否有正確取得 API</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">344</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://bmc.link/hsuchihting" title="BuyMeACoffee → https:&#x2F;&#x2F;bmc.link&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>BuyMeACoffee</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友站連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://israynotarray.com/" title="https:&#x2F;&#x2F;israynotarray.com&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.casper.tw/" title="https:&#x2F;&#x2F;www.casper.tw&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.miniasp.com/" title="https:&#x2F;&#x2F;blog.miniasp.com&#x2F;" rel="noopener" target="_blank">保哥部落格</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cythilya.github.io/" title="https:&#x2F;&#x2F;cythilya.github.io&#x2F;" rel="noopener" target="_blank">桑莫。夏天</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mtwmt.com/blog/list" title="https:&#x2F;&#x2F;mtwmt.com&#x2F;blog&#x2F;list" rel="noopener" target="_blank">Mandy's Web</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.oxxostudio.tw/" title="https:&#x2F;&#x2F;www.oxxostudio.tw&#x2F;" rel="noopener" target="_blank">OXXO Studio</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/angular/20210307/1877603814/",
+            identifier: "angular/20210307/1877603814/",
+            title: "Angular 筆記 - Router 路由實作串接 API"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

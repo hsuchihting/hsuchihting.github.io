@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="陣列連續技 - forEach、push、filter、find、concat 組出客戶需要的資料格式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 筆記－不同陣列長度處理，並顯示於畫面">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;javascript&#x2F;20220111&#x2F;1558317778&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="陣列連續技 - forEach、push、filter、find、concat 組出客戶需要的資料格式">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
+<meta property="article:published_time" content="2022-01-11T13:33:50.000Z">
+<meta property="article:modified_time" content="2022-01-11T13:44:08.153Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="Angular">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
+
+<link rel="canonical" href="https://hsuchihting.github.io/javascript/20220111/1558317778/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>JS 筆記－不同陣列長度處理，並顯示於畫面 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/javascript/20220111/1558317778/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          JS 筆記－不同陣列長度處理，並顯示於畫面
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-01-11 21:33:50 / 修改時間：21:44:08" itemprop="dateCreated datePublished" datetime="2022-01-11T21:33:50+08:00">2022-01-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/javascript/20220111/1558317778/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="javascript/20220111/1558317778/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">陣列連續技 - forEach、push、filter、find、concat 組出客戶需要的資料格式</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JavaScript%20note-01.jpg?alt=media&token=7bee0261-72ac-4de4-9f5a-f39d58735b7d" alt="JavaScript Note"></p>
+<p>專案中遇到一個陣列方法綜合運用的情境，紀錄一下。<br>資料有兩個陣列，一個是 info、一個是 node，可以看到兩個是不同的長度。</p>
+<h2 id="情境"><a href="#情境" class="headerlink" title="情境"></a>情境</h2><p>使用 Angular8 開發，因要用 D3.js 繪製流程圖，需求主要為 node 作為繪製流程的節點，並且使用 info 呈現目前節點狀態，若 info 沒有資料代表流程上為跑到，但節點要先顯示，有點像購物網站進度條的概念。</p>
+<p>因有許多頁面需要使用到此資料處理邏輯，所以拉出來做共用元件，讓資料丟進來後可以傳給 D3.js 正確顯示。</p>
+<h2 id="資料"><a href="#資料" class="headerlink" title="資料"></a>資料</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">info = [</span><br><span class="line">  &#123;</span><br><span class="line">    now_node: <span class="string">"T01"</span>,</span><br><span class="line">    node_action: <span class="string">"OK"</span>,</span><br><span class="line">    action_date: <span class="string">"2021-12-10"</span>,</span><br><span class="line">    memo: <span class="string">"test"</span>,</span><br><span class="line">    userName: <span class="string">"Tom"</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    now_node: <span class="string">"T02"</span>,</span><br><span class="line">    node_action: <span class="string">"OK"</span>,</span><br><span class="line">    action_date: <span class="string">"2021-12-10"</span>,</span><br><span class="line">    memo: <span class="string">"test"</span>,</span><br><span class="line">    userName: <span class="string">"Mary"</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">node = [</span><br><span class="line">  &#123;</span><br><span class="line">    node: <span class="string">"T01"</span>,</span><br><span class="line">    children: [<span class="string">"T02"</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    node: <span class="string">"T02"</span>,</span><br><span class="line">    children: [<span class="string">"T03"</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    node: <span class="string">"T03"</span>,</span><br><span class="line">    children: [<span class="string">"T04"</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    node: <span class="string">"T04"</span>,</span><br><span class="line">    children: [<span class="string">"T05"</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    node: <span class="string">"T05"</span>,</span><br><span class="line">    children: [<span class="string">"T06"</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    node: <span class="string">"T06"</span>,</span><br><span class="line">    children: [<span class="string">"T07"</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    node: <span class="string">"T07"</span>,</span><br><span class="line">    children: [<span class="string">"T08"</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    node: <span class="string">"T08"</span>,</span><br><span class="line">    children: [<span class="string">"T09"</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    node: <span class="string">"T09"</span>,</span><br><span class="line">    children: [<span class="string">"T10"</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    node: <span class="string">"T10"</span>,</span><br><span class="line">    children: [<span class="string">""</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>命名兩個變數，分別取得資料內容(當作已經打 API 回來的狀態)</li>
+<li>newArr 是等等重組完要用的空陣列。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> node = <span class="keyword">this</span>.node;</span><br><span class="line"><span class="keyword">let</span> info = <span class="keyword">this</span>.info;</span><br><span class="line"><span class="keyword">let</span> newArr: any[] = [];</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用-find-找到屬性欄位"><a href="#使用-find-找到屬性欄位" class="headerlink" title="使用 find 找到屬性欄位"></a>使用 find 找到屬性欄位</h2><ol>
+<li><p>有提到 node 為主要節點，所以先用這個資料用 <code>forEach</code> 遍歷每一筆資料。</p>
+</li>
+<li><p>先找子節點，建立一個子節點的陣列，要來放等等子節點的資料。</p>
+<blockquote>
+<p>原因是陣列資料主節點為主要狀態節點，Children 屬性為下一個節點要去的值，這樣流程才會正確呈現。</p>
+</blockquote>
+</li>
+<li><p>子節點 item.children 跑 forEach 去找出所有的子節點屬性的值。</p>
+</li>
+<li><p>宣告一個 currentChild 子節點結果去儲存 <code>find</code> 的結果，使用 <code>find</code> 去找到 info 的節點 now_node 欄位是否有跟子節點 childrenNameNode 的值一樣，有的話就回傳 true。</p>
+</li>
+</ol>
+<blockquote>
+<p><code>find</code> 方法會找到第一筆相符的條件後，回傳 true，透過 <code>console.log()</code> 去看會發現是一個物件型態。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">node.forEach(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> childrenList: &#123; <span class="attr">node</span>: string, <span class="attr">status</span>: string &#125;[] = [];</span><br><span class="line"></span><br><span class="line">  item.children.forEach(<span class="function">(<span class="params">childrenNodeName</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//*子節點</span></span><br><span class="line">    <span class="keyword">let</span> currentChild = info.find(<span class="function">(<span class="params">list</span>) =&gt;</span> list.now_node === childrenNodeName);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>宣告一個 childStatus 子節點狀態的變數，並且判斷 currentChild 是 <code>truthy</code> 或是 <code>falsy</code>。若為 <code>truthy</code>，就使用 <code>push</code> 把資料放到 childrenList 的陣列中。</li>
+<li>最後需求有規定一個物件格式，所以重新宣告一個 childNode 變數去儲存新的物件格式。</li>
+</ol>
+<blockquote>
+<p><code>!!</code> 兩個驚嘆號是快速讓變數變成布林值的寫法，等價於 <code>new Boolean()。</code></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> childStatus = !!currentChild ? currentChild.node_action : <span class="literal">undefined</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> childNode = &#123;</span><br><span class="line">  node: childrenNodeName,</span><br><span class="line">  status: childStatus ? childStatus : <span class="string">""</span>,</span><br><span class="line">&#125;;</span><br><span class="line">childrenList.push(childNode);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>以上使用了 <code>forEach</code>、<code>find</code>、<code>push</code> 三種方法以及 <code>boolean</code> 值轉換的方式。</p>
+</blockquote>
+<ol start="7">
+<li>主節點的資料整理方式與子節點相同。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> currentMain = info.find(<span class="function">(<span class="params">main</span>) =&gt;</span> main.now_node === item.node);</span><br><span class="line"><span class="keyword">let</span> mainStatus = !!currentMain ? currentMain.node_action : <span class="literal">undefined</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (childrenList.length) &#123;</span><br><span class="line">  <span class="keyword">let</span> mainNode = &#123;</span><br><span class="line">    node: item.node,</span><br><span class="line">    status: mainStatus ? mainStatus : <span class="string">""</span>,</span><br><span class="line">    children: childrenList,</span><br><span class="line">  &#125;;</span><br><span class="line">  newArr.push(mainNode);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最後宣告一個要傳資料到 D3.js 的全域變數 nodeArr，其屬性為空陣列。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nodeArr: any[] = [];</span><br></pre></td></tr></table></figure>
+
+<p>並把剛剛組好的 newArr 賦值給 nodeArr，下面為節點取值的完整程式碼。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> node = <span class="keyword">this</span>.node;</span><br><span class="line"><span class="keyword">let</span> info = <span class="keyword">this</span>.info;</span><br><span class="line"><span class="keyword">let</span> newArr: any[] = [];</span><br><span class="line">node.forEach(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> childrenList: &#123; <span class="attr">node</span>: string, <span class="attr">status</span>: string &#125;[] = [];</span><br><span class="line"></span><br><span class="line">  item.children.forEach(<span class="function">(<span class="params">childrenNodeName</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//*子節點</span></span><br><span class="line">    <span class="keyword">let</span> currentChild = info.find(<span class="function">(<span class="params">list</span>) =&gt;</span> list.now_node === childrenNodeName);</span><br><span class="line">    <span class="keyword">let</span> childStatus = !!currentChild ? currentChild.node_action : <span class="literal">undefined</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> childNode = &#123;</span><br><span class="line">      node: childrenNodeName,</span><br><span class="line">      status: childStatus ? childStatus : <span class="string">""</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">    childrenList.push(childNode);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">//*主節點</span></span><br><span class="line">  <span class="keyword">let</span> currentMain = info.find(<span class="function">(<span class="params">main</span>) =&gt;</span> main.now_node === item.node);</span><br><span class="line">  <span class="keyword">let</span> mainStatus = !!currentMain ? currentMain.node_action : <span class="literal">undefined</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (childrenList.length) &#123;</span><br><span class="line">    <span class="keyword">let</span> mainNode = &#123;</span><br><span class="line">      node: item.node,</span><br><span class="line">      status: mainStatus ? mainStatus : <span class="string">""</span>,</span><br><span class="line">      children: childrenList,</span><br><span class="line">    &#125;;</span><br><span class="line">    newArr.push(mainNode);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">this</span>.nodeArr = newArr;</span><br></pre></td></tr></table></figure>
+
+<h2 id="組出已審核節點資訊"><a href="#組出已審核節點資訊" class="headerlink" title="組出已審核節點資訊"></a>組出已審核節點資訊</h2><p>節點資訊有分成兩種，一種是流程已經跑到會出現資訊，另一個是流程還沒到，雖然有節點，但不會有節點資訊，有點像是購物車狀態，還沒進行到的部分會顯示該筆狀態，但不會有進度資訊。</p>
+<ol>
+<li>宣告一個空陣列變數 infoList，並且用原本資料的 info 去跑 <code>forEach</code>，把每一筆資料的內容抓出來。</li>
+<li>因需求也是要重組一個資訊內容，這邊在宣告一個空陣列 mainInfo，要放入得值可以看到是名稱與日期，所以我需要從 info 資料中取出這兩個資料，使用 <code>push</code> 方法放到 info 陣列中</li>
+<li>宣告一個 nodeName 放節點名稱。</li>
+<li>最後把 nodeInfo 的內容換成新組成的值。</li>
+<li>使用 <code>push</code> 把 nodeInfo 物件依序放入 infoList 的陣列中。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//* 主節點資訊</span></span><br><span class="line"><span class="keyword">let</span> infoList: any[] = [];</span><br><span class="line">info.forEach(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> mainInfo = [];</span><br><span class="line">  info.push(item.userName);</span><br><span class="line">  info.push(item.action_date);</span><br><span class="line">  <span class="keyword">let</span> nodeName = item.now_node;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">this</span>.nodeInfo = &#123;</span><br><span class="line">    node: item.now_node,</span><br><span class="line">    node_name: nodeName ? nodeName : <span class="string">""</span>,</span><br><span class="line">    info: info,</span><br><span class="line">    memo: item.memo ? item.memo : <span class="string">""</span>,</span><br><span class="line">  &#125;;</span><br><span class="line">  infoList.push(<span class="keyword">this</span>.nodeInfo);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="組出未審核的節點資訊"><a href="#組出未審核的節點資訊" class="headerlink" title="組出未審核的節點資訊"></a>組出未審核的節點資訊</h2><ol>
+<li><p>宣告一個空陣列 nodeApplication 存放未審核的節點資訊。</p>
+</li>
+<li><p>因為我已經知道有部分節點是有資訊的，所以我用 <code>filter</code> 去過濾有節點的資料。</p>
+</li>
+<li><p>在宣告一個 infoList 變數去找出節點資訊如果跟過濾後的節點名稱一樣的時候就回傳 true。</p>
+<blockquote>
+<p>這邊發現如果沒有找到節點就會回傳 <code>undefined</code>。</p>
+</blockquote>
+</li>
+<li><p>所以我就判斷當 infoList 是 <code>undefined</code> 的時候，就去組新的資訊內容。</p>
+</li>
+<li><p>最後再把資訊內容 <code>push</code> 到 nodeApplication 陣列中，這樣不管審核流程節點進行到哪裡都會有值。</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> nodeApplication: any[] = [];</span><br><span class="line"><span class="keyword">this</span>.node.filter(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> infoList = <span class="keyword">this</span>.info.find(<span class="function">(<span class="params">info</span>) =&gt;</span> info.now_node === item.node);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (infoList === <span class="literal">undefined</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> nodeInfo = &#123;</span><br><span class="line">      node: item.node,</span><br><span class="line">      node_name: item.node,</span><br><span class="line">      info: [],</span><br><span class="line">      memo: <span class="string">""</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">    nodeApplication.push(nodeInfo);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="合併陣列"><a href="#合併陣列" class="headerlink" title="合併陣列"></a>合併陣列</h2><p>最後將已審核跟未審核的節點資訊使用 <code>concat</code> 的方法(這邊使用解構賦值的寫法)，去賦值在全域的 info 的陣列中。</p>
+<p><strong>concat</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.info = infoList.concat(nodeApplication);</span><br></pre></td></tr></table></figure>
+
+<p><strong>ES6</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.info = [...infoList, ...nodeApplication];</span><br></pre></td></tr></table></figure>
+
+<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>以上就是使用陣列不同的方法整理資料，使用到 <code>forEach</code>、<code>push</code>、<code>filter</code>、<code>find</code>、<code>concat</code> 以及 ES6 解構賦值的寫法。算是透過此專案練習與更熟悉陣列與物件的操作方法。</p>
+<p><a href="https://github.com/hsuchihting/ng_inputOutput" target="_blank" rel="noopener">完整程式碼</a></p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a href="https://wcc723.github.io/javascript/2017/06/29/es6-native-array/" target="_blank" rel="noopener">JavaScript 陣列處理方法 filter(), find(), forEach(), map(), every(), some(), reduce()</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Angular/" rel="tag"># Angular</a>
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/TailwindCSS/20211003/944679405/" rel="prev" title="TailwindCSS 筆記 - 翻轉卡片實戰：TailwindCSS feat CSS">
+      <i class="fa fa-chevron-left"></i> TailwindCSS 筆記 - 翻轉卡片實戰：TailwindCSS feat CSS
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/angular/20220111/3638792186/" rel="next" title="Angular 筆記 - 不同元件傳遞資料實作">
+      Angular 筆記 - 不同元件傳遞資料實作 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#情境"><span class="nav-number">1.</span> <span class="nav-text">情境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#資料"><span class="nav-number">2.</span> <span class="nav-text">資料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-find-找到屬性欄位"><span class="nav-number">3.</span> <span class="nav-text">使用 find 找到屬性欄位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#組出已審核節點資訊"><span class="nav-number">4.</span> <span class="nav-text">組出已審核節點資訊</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#組出未審核的節點資訊"><span class="nav-number">5.</span> <span class="nav-text">組出未審核的節點資訊</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合併陣列"><span class="nav-number">6.</span> <span class="nav-text">合併陣列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小結"><span class="nav-number">7.</span> <span class="nav-text">小結</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">8.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">344</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://bmc.link/hsuchihting" title="BuyMeACoffee → https:&#x2F;&#x2F;bmc.link&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>BuyMeACoffee</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友站連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://israynotarray.com/" title="https:&#x2F;&#x2F;israynotarray.com&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.casper.tw/" title="https:&#x2F;&#x2F;www.casper.tw&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.miniasp.com/" title="https:&#x2F;&#x2F;blog.miniasp.com&#x2F;" rel="noopener" target="_blank">保哥部落格</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cythilya.github.io/" title="https:&#x2F;&#x2F;cythilya.github.io&#x2F;" rel="noopener" target="_blank">桑莫。夏天</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mtwmt.com/blog/list" title="https:&#x2F;&#x2F;mtwmt.com&#x2F;blog&#x2F;list" rel="noopener" target="_blank">Mandy's Web</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.oxxostudio.tw/" title="https:&#x2F;&#x2F;www.oxxostudio.tw&#x2F;" rel="noopener" target="_blank">OXXO Studio</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/javascript/20220111/1558317778/",
+            identifier: "javascript/20220111/1558317778/",
+            title: "JS 筆記－不同陣列長度處理，並顯示於畫面"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="認識變數 variable 與使用方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 筆記 - 認識變數 variable 與使用方法">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;javascript&#x2F;20200208&#x2F;3675098643&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="認識變數 variable 與使用方法">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;2-1.png?alt&#x3D;media&amp;token&#x3D;1446ae99-7b7e-498e-903a-2baa4636fa75">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;2-2.png?alt&#x3D;media&amp;token&#x3D;ead6b977-c4c7-4c55-a8e5-90059331a700">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;2-3.png?alt&#x3D;media&amp;token&#x3D;45dd0919-fe5e-4f2c-b724-be5d7d4a177a">
+<meta property="og:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;2-4.png?alt&#x3D;media&amp;token&#x3D;1a3b1b87-7226-4b1f-8b69-c43e5ce155b0">
+<meta property="article:published_time" content="2020-02-08T13:11:42.000Z">
+<meta property="article:modified_time" content="2020-04-28T14:46:44.361Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;firebasestorage.googleapis.com&#x2F;v0&#x2F;b&#x2F;timpicturespace.appspot.com&#x2F;o&#x2F;JavaScript%20note-01.jpg?alt&#x3D;media&amp;token&#x3D;7bee0261-72ac-4de4-9f5a-f39d58735b7d">
+
+<link rel="canonical" href="https://hsuchihting.github.io/javascript/20200208/3675098643/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>JS 筆記 - 認識變數 variable 與使用方法 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/javascript/20200208/3675098643/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          JS 筆記 - 認識變數 variable 與使用方法
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-02-08 21:11:42" itemprop="dateCreated datePublished" datetime="2020-02-08T21:11:42+08:00">2020-02-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-04-28 22:46:44" itemprop="dateModified" datetime="2020-04-28T22:46:44+08:00">2020-04-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/javascript/20200208/3675098643/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="javascript/20200208/3675098643/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">認識變數 variable 與使用方法</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/JavaScript%20note-01.jpg?alt=media&token=7bee0261-72ac-4de4-9f5a-f39d58735b7d" alt="JavaScript Note"></p>
+<p>在學習 JavaScript 之前，都會聽到一堆專有名詞，結果專有名詞的白話文還是聽不懂，就覺得很可怕，心中產生排斥，但我發現如果心中產生排斥感，就會稍微拒絕學習該領域的東西，經過 HTML &amp; CSS、jQuery、RWD、Sass、Bootstrap4…等課程後，就比較沒這麼排斥這些「專有名詞」，這幾個月在前端領域中不斷的蒐集資料，也慢慢知道幾位大神級人物，這次的學習也有參考 Kuro 大大的在 <a href="http://https://ithelp.ithome.com.tw/users/20065504/ironman/1259" target="_blank" rel="noopener">2018 鐵人賽</a>撰寫成<a href="http://https://www.tenlong.com.tw/products/9789864344130" target="_blank" rel="noopener">書籍</a>的內容搭配<a href="http://https://www.hexschool.com/" target="_blank" rel="noopener">六角學院</a>的<a href="http://https://www.hexschool.com/courses/javascript.html" target="_blank" rel="noopener">課程</a>來看，廣度學習下，比較能知道課程跟書本內容在講什麼了。</p>
+<h2 id="認識變數-Variable"><a href="#認識變數-Variable" class="headerlink" title="認識變數 Variable"></a>認識變數 Variable</h2><p>簡單來說變數是用來儲存資料和進行運算的基本單位，可以將變數想像為一個盒子，用來存放資料。<br>更多詳盡的定義可以看<a href="http://https://ithelp.ithome.com.tw/articles/10190873" target="_blank" rel="noopener">這篇</a></p>
+<h2 id="使用變數"><a href="#使用變數" class="headerlink" title="使用變數"></a>使用變數</h2><p>使用變數時，需要先使用 <code>var</code> 這個語法，告訴電腦說：我現在要宣告一個變數囉!!<br>再來打上想要的<strong>變數名稱</strong>，就會變成這樣 <code>var varName</code>。</p>
+<blockquote>
+<p>EX. </p>
+<ol>
+<li>命名一個變數是<strong>我的名字</strong>，就會這樣寫： <code>var myName =$;</code></li>
+<li>命名一個變數是<strong>號碼</strong>，就會這樣寫：<code>var number = $;</code></li>
+</ol>
+</blockquote>
+<p>變數的命名是<strong>自己定義的</strong>，但建議要有<strong>語意化</strong>，不然哪天回來修改程式碼，又沒有寫註解，就會忘記為什麼會這樣打，然後就會發生恐怖的事情。<br>另外維持一個習慣就是在每個程式碼<strong>結束後</strong>都打上一個<strong>分號</strong>。</p>
+<blockquote>
+<p><em>通常使用變數會在 HTML 中會建立一個 id 來使用。</em></p>
+</blockquote>
+<h2 id="變數的值"><a href="#變數的值" class="headerlink" title="變數的值"></a>變數的值</h2><p>宣告要使用變數，還有命名之後，要給變數一個值，電腦才會知道這個變數的內容是什麼，呈現的內容稱作為<strong>值</strong>：</p>
+<h3 id="Number-數字"><a href="#Number-數字" class="headerlink" title="Number (數字)"></a>Number (數字)</h3><p>也就是一般的數字 <strong>0 ~ 9</strong></p>
+<blockquote>
+<p>沿用上方例子，<code>var number = 8;</code>,文字解釋為，宣告一個變數，其名稱為 number，數字值為 8。</p>
+</blockquote>
+<p>可以使用這段語法將變數名稱呈現在網頁上</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> number = <span class="number">8</span></span><br><span class="line"><span class="comment">//建立變數</span></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'number'</span>).textContent = number</span><br><span class="line"><span class="comment">//透過 textContent 控制 id 的內容，結果要等於變數名稱</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>可參考連結 <a href="https://codepen.io/hnzxewqw/pen/abbXXmX" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/abbXXmX</a></p>
+</blockquote>
+<p><em>對了，可以用變數來做加減乘除喔~</em></p>
+<h3 id="String-字串"><a href="#String-字串" class="headerlink" title="String (字串)"></a>String (字串)</h3><p>也就是文字，打中文也可以，但<strong>建議打英文</strong>，不然如果專案是國際專案，會變成亂碼。<br>打字串的時候要加上<strong>單引號</strong>或<strong>雙引號</strong>，不然電腦會不知道這個值是什麼。</p>
+<blockquote>
+<p>沿用上方例子，<code>var myName = &quot;Tim&quot;;</code>,文字解釋為，宣告一個變數，其名稱為 myName，字串值為 Tim。</p>
+</blockquote>
+<p>可以使用這段語法將變數名稱呈現在網頁上</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myName = <span class="string">"Tim"</span>;</span><br><span class="line"><span class="comment">//建立變數，字串值要加上引號</span></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'myName'</span>).textContent = myName</span><br><span class="line"><span class="comment">//透過 textContent 控制 id 的內容，結果要等於變數名稱</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>可參考連結 <a href="https://codepen.io/hnzxewqw/pen/qBBggaG" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/qBBggaG</a></p>
+</blockquote>
+<h3 id="Boolean-布林"><a href="#Boolean-布林" class="headerlink" title="Boolean (布林)"></a>Boolean (布林)</h3><p>只有兩種值，true 跟 false</p>
+<blockquote>
+<p>可參考連結 <a href="https://codepen.io/hnzxewqw/pen/OJJddpb" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/pen/OJJddpb</a></p>
+</blockquote>
+<p><em>之後使用  if 判斷式會滿常被使用</em></p>
+<h2 id="什麼是-undefined"><a href="#什麼是-undefined" class="headerlink" title="什麼是 undefined"></a>什麼是 undefined</h2><p>還沒有給變數數值的時候會顯示的回傳資料，如果程式碼這樣寫：<code>var number;</code><br>因為沒有給任何定義的數值，所以會回傳 undefined。<br>舉例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> number;</span><br><span class="line"><span class="comment">//沒有給值，所以會是 undefined</span></span><br></pre></td></tr></table></figure>
+<p>或是這樣也是一樣的結果</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(number); <span class="comment">//因為前面沒有變數的值，結果會是 undefined</span></span><br><span class="line"><span class="keyword">var</span> number = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="變數的命名規則"><a href="#變數的命名規則" class="headerlink" title="變數的命名規則"></a>變數的命名規則</h2><h3 id="開頭不能用數字"><a href="#開頭不能用數字" class="headerlink" title="開頭不能用數字"></a>開頭不能用數字</h3><p>宣告變數的名稱若開頭數字，會格式錯誤，如下圖：</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/2-1.png?alt=media&token=1446ae99-7b7e-498e-903a-2baa4636fa75" alt="開頭不能用數字"></p>
+<h3 id="不能包含-或是-等符號"><a href="#不能包含-或是-等符號" class="headerlink" title="不能包含 - 或是 . 等符號"></a>不能包含 - 或是 . 等符號</h3><p>宣告變數的名稱若使用 “-“ 或 “.”，會格式錯誤，如下圖：</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/2-2.png?alt=media&token=ead6b977-c4c7-4c55-a8e5-90059331a700" alt="不能包含 - 或是 . 等符號"></p>
+<h3 id="不能使用-JS-預設的-關鍵字-指令"><a href="#不能使用-JS-預設的-關鍵字-指令" class="headerlink" title="不能使用 JS 預設的 ( 關鍵字 ) 指令"></a>不能使用 JS 預設的 ( 關鍵字 ) 指令</h3><p>JS 在變數中有一些預設的關鍵字，初學者可以當作是預設指令，如果重複預設的關鍵字會格式錯誤，如下圖：<br><em>更多關鍵字可以看<a href="http://https://www.w3schools.com/js/js_reserved.asp" target="_blank" rel="noopener">這裡</a></em></p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/2-3.png?alt=media&token=45dd0919-fe5e-4f2c-b724-be5d7d4a177a" alt="不能使用 JS 預設的 ( 關鍵字 ) 指令"></p>
+<h3 id="有大小寫之分"><a href="#有大小寫之分" class="headerlink" title="有大小寫之分"></a>有大小寫之分</h3><blockquote>
+<p>JavaScript 的語法是有區分大小寫的，也就是說，變數 app 與 App 在 JavaScript 會被認為是兩個不同的變數。<br>如果大小寫弄錯了，在執行變數時會變成找不到資料，如下圖：</p>
+</blockquote>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/timpicturespace.appspot.com/o/2-4.png?alt=media&token=1a3b1b87-7226-4b1f-8b69-c43e5ce155b0" alt="有大小寫之分"></p>
+<h2 id="建議變數名稱要有語意化"><a href="#建議變數名稱要有語意化" class="headerlink" title="建議變數名稱要有語意化"></a>建議變數名稱要有語意化</h2><p>原因是在寫專案當下可能知道自己在幹嘛，但如果之後要維護或修改時，可能就會找不到相對應的程式碼了。</p>
+<p>參考文章 <a href="https://ithelp.ithome.com.tw/articles/10190873" target="_blank" rel="noopener">https://ithelp.ithome.com.tw/articles/10190873</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/javascript/20200206/2494141895/" rel="prev" title="JS 筆記 - 建立 JS 環境、alert、textContent">
+      <i class="fa fa-chevron-left"></i> JS 筆記 - 建立 JS 環境、alert、textContent
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/javascript/20200211/3165847303/" rel="next" title="JS 筆記 - 認識函式 function 與使用">
+      JS 筆記 - 認識函式 function 與使用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#認識變數-Variable"><span class="nav-number">1.</span> <span class="nav-text">認識變數 Variable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用變數"><span class="nav-number">2.</span> <span class="nav-text">使用變數</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#變數的值"><span class="nav-number">3.</span> <span class="nav-text">變數的值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Number-數字"><span class="nav-number">3.1.</span> <span class="nav-text">Number (數字)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#String-字串"><span class="nav-number">3.2.</span> <span class="nav-text">String (字串)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Boolean-布林"><span class="nav-number">3.3.</span> <span class="nav-text">Boolean (布林)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什麼是-undefined"><span class="nav-number">4.</span> <span class="nav-text">什麼是 undefined</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#變數的命名規則"><span class="nav-number">5.</span> <span class="nav-text">變數的命名規則</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#開頭不能用數字"><span class="nav-number">5.1.</span> <span class="nav-text">開頭不能用數字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不能包含-或是-等符號"><span class="nav-number">5.2.</span> <span class="nav-text">不能包含 - 或是 . 等符號</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不能使用-JS-預設的-關鍵字-指令"><span class="nav-number">5.3.</span> <span class="nav-text">不能使用 JS 預設的 ( 關鍵字 ) 指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有大小寫之分"><span class="nav-number">5.4.</span> <span class="nav-text">有大小寫之分</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建議變數名稱要有語意化"><span class="nav-number">6.</span> <span class="nav-text">建議變數名稱要有語意化</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">344</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://bmc.link/hsuchihting" title="BuyMeACoffee → https:&#x2F;&#x2F;bmc.link&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>BuyMeACoffee</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友站連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://israynotarray.com/" title="https:&#x2F;&#x2F;israynotarray.com&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.casper.tw/" title="https:&#x2F;&#x2F;www.casper.tw&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.miniasp.com/" title="https:&#x2F;&#x2F;blog.miniasp.com&#x2F;" rel="noopener" target="_blank">保哥部落格</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cythilya.github.io/" title="https:&#x2F;&#x2F;cythilya.github.io&#x2F;" rel="noopener" target="_blank">桑莫。夏天</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mtwmt.com/blog/list" title="https:&#x2F;&#x2F;mtwmt.com&#x2F;blog&#x2F;list" rel="noopener" target="_blank">Mandy's Web</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.oxxostudio.tw/" title="https:&#x2F;&#x2F;www.oxxostudio.tw&#x2F;" rel="noopener" target="_blank">OXXO Studio</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/javascript/20200208/3675098643/",
+            identifier: "javascript/20200208/3675098643/",
+            title: "JS 筆記 - 認識變數 variable 與使用方法"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

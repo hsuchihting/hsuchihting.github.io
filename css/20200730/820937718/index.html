@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="大記事容易看到的時間軸切版！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS 筆記 - 金魚系列 19 - 時間軸">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;css&#x2F;20200730&#x2F;820937718&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="大記事容易看到的時間軸切版！">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;MzyIW0C.png">
+<meta property="article:published_time" content="2020-07-30T15:23:39.000Z">
+<meta property="article:modified_time" content="2020-07-31T11:23:34.246Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;MzyIW0C.png">
+
+<link rel="canonical" href="https://hsuchihting.github.io/css/20200730/820937718/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>CSS 筆記 - 金魚系列 19 - 時間軸 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/css/20200730/820937718/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          CSS 筆記 - 金魚系列 19 - 時間軸
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-07-30 23:23:39" itemprop="dateCreated datePublished" datetime="2020-07-30T23:23:39+08:00">2020-07-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-07-31 19:23:34" itemprop="dateModified" datetime="2020-07-31T19:23:34+08:00">2020-07-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/css/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/css/20200730/820937718/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="css/20200730/820937718/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">大記事容易看到的時間軸切版！</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://i.imgur.com/MzyIW0C.png" alt="timeline"></p>
+<h2 id="學習重點"><a href="#學習重點" class="headerlink" title="學習重點"></a>學習重點</h2><ul>
+<li>flex 教學</li>
+<li>使用 absolute + margin auto 來達到 CSS 垂直置中效果</li>
+<li>float 教學</li>
+<li>absolute 絕對定位教學</li>
+<li>relative 絕對定位教學</li>
+<li>::before、::after 偽元素</li>
+<li>last-child()、nth-child() 選取器</li>
+</ul>
+<h2 id="HTML-架構"><a href="#HTML-架構" class="headerlink" title="HTML 架構"></a>HTML 架構</h2><ul>
+<li>因為時間軸可以看作清單列表，所以使用 li 來製作。</li>
+<li>要讓時間軸說明文字是可以點擊的，使用 a 連結。</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wrap"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>金魚系列 XIX - 時間軸<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"text"</span>&gt;</span></span><br><span class="line">    圖形地球體育環境模組走進更新時間會員查找組成都能，目光尷尬部落房屋絶對感興趣證券市政府我是微笑移動當時做出，去年力量並非即使最高現金評價既然廠家資料庫，均為部隊尷尬沒有任何機會沒想到左右有限責任公司，招標時期還在提升關鍵能學到，一直也就任何人元素走出，圖。</span><br><span class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"timeline"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h2</span>&gt;</span>時間軸標題<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">          信號儘快看見報導營養現金歷史碩士添加五年色彩學科市政府，兩次避免推廣玩家前面裡面試題同志以上原文日子反覆名字，中學集團教育訓練不承擔運用終於傳播，深刻溫州歲月你怎不來就是模型材料，把他預期品牌都在付出套件此刻畢業生分享完善，笑道詳細內容股份有限公司，很多。</span><br><span class="line">        <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="CSS-樣式"><a href="#CSS-樣式" class="headerlink" title="CSS 樣式"></a>CSS 樣式</h2><ul>
+<li>先把初步的 CSS 樣式寫好。</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.timeline</span> &#123;</span><br><span class="line">  <span class="attribute">padding-top</span>: <span class="number">5%</span>;</span><br><span class="line">   li &#123;</span><br><span class="line">    <span class="selector-tag">padding-top</span>: 25<span class="selector-tag">px</span>;</span><br><span class="line">    <span class="selector-tag">padding-bottom</span>: 25<span class="selector-tag">px</span>;</span><br><span class="line">    <span class="selector-tag">border-radius</span>: 10<span class="selector-tag">px</span>;</span><br><span class="line">    <span class="selector-tag">width</span>: 50%;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="利用-nth-child-控制-li"><a href="#利用-nth-child-控制-li" class="headerlink" title="利用 nth-child() 控制 li"></a>利用 nth-child() 控制 li</h3><ul>
+<li>使用 nth-child() 選取器將 li 的<strong>基數列</strong> (odd) 跟<strong>偶數列</strong> (even) 分成左右兩邊，並推擠 100px 的空間。</li>
+<li>並將 a 連結加入樣式，因為此元素本身是行內元素，若沒有變成區塊元素，不會達到預設的效果。</li>
+<li>使偶數列往下移動 50% 的位置。</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.timeline</span> &#123;</span><br><span class="line">  <span class="attribute">padding-top</span>: <span class="number">5%</span>;</span><br><span class="line">   a &#123;</span><br><span class="line">    display: block; //要改成區塊元素</span><br><span class="line">    <span class="selector-tag">background-color</span>: <span class="selector-id">#ffe033</span>;</span><br><span class="line">    <span class="selector-tag">border</span>: 2<span class="selector-tag">px</span> <span class="selector-tag">solid</span> <span class="selector-id">#fff</span>;</span><br><span class="line">    <span class="selector-tag">padding</span>: 20<span class="selector-tag">px</span>;</span><br><span class="line">    <span class="selector-tag">box-shadow</span>: 0 0 5<span class="selector-tag">px</span> <span class="selector-id">#666</span>;</span><br><span class="line">    <span class="selector-tag">border-radius</span>: 10<span class="selector-tag">px</span>;</span><br><span class="line">    <span class="selector-tag">transition</span>: <span class="selector-tag">all</span> 0<span class="selector-class">.5s</span>;</span><br><span class="line">    &amp;<span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">      <span class="attribute">background-color</span>: <span class="number">#fcea86</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">   <span class="selector-tag">li</span> &#123;</span><br><span class="line">    <span class="attribute">padding-top</span>: <span class="number">25px</span>;</span><br><span class="line">    <span class="attribute">padding-bottom</span>: <span class="number">25px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50%</span>;</span><br><span class="line">       &amp;:nth-child(odd) &#123;</span><br><span class="line">      <span class="selector-tag">float</span>: <span class="selector-tag">left</span>;</span><br><span class="line">      <span class="selector-tag">padding-right</span>: 100<span class="selector-tag">px</span>;&#125;</span><br><span class="line">        &amp;<span class="selector-pseudo">:nth-child(even)</span> &#123;</span><br><span class="line">      <span class="attribute">float</span>: right;</span><br><span class="line">      <span class="attribute">padding-left</span>: <span class="number">100px</span>;</span><br><span class="line">      <span class="attribute">transform</span>: <span class="built_in">translateY</span>(<span class="number">50%</span>);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="在基數列加上時間軸線條"><a href="#在基數列加上時間軸線條" class="headerlink" title="在基數列加上時間軸線條"></a>在基數列加上時間軸線條</h3><ul>
+<li>利用基數列的 li 後方，使用偽元素加上垂直線，並使用絕對定位讓其置中對齊。</li>
+<li>因線條是從 li 產生，所以相對定位在 li。</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&amp;<span class="selector-pseudo">:nth-child(odd)</span> &#123;</span><br><span class="line">     <span class="attribute">float</span>: left;</span><br><span class="line">     <span class="attribute">padding-right</span>: <span class="number">100px</span>;</span><br><span class="line">         &amp;::after &#123;</span><br><span class="line">       <span class="selector-tag">content</span>: "";</span><br><span class="line">       <span class="selector-tag">position</span>: <span class="selector-tag">absolute</span>;</span><br><span class="line">       <span class="selector-tag">top</span>: 0;</span><br><span class="line">       <span class="selector-tag">right</span>: 0;</span><br><span class="line">       <span class="selector-tag">width</span>: 1<span class="selector-tag">px</span>;</span><br><span class="line">       <span class="selector-tag">height</span>: 100%;</span><br><span class="line">       <span class="selector-tag">background-color</span>: <span class="selector-id">#ffffff</span>;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="在時間軸線條上加上圓點與橫線，並使其置中對齊"><a href="#在時間軸線條上加上圓點與橫線，並使其置中對齊" class="headerlink" title="在時間軸線條上加上圓點與橫線，並使其置中對齊"></a>在時間軸線條上加上圓點與橫線，並使其置中對齊</h3><ul>
+<li>使用 li 的建立圓形的偽元素，並使其置中對齊。</li>
+<li>圓點完成後，使之對齊在線上，因為線條是使用基數列產生，所以選取的基數列與偶數列要做對齊。</li>
+<li>讓最後一個 li 的元素的下方區塊只有 50% 的空間。</li>
+<li>發現 li 的偽元素的 ::before 跟 ::after 都用完了，要產生橫線就拿 h2 來用(反正就是沒辦法用 li 就是了)。</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">li</span> &#123;</span><br><span class="line">  <span class="attribute">padding-top</span>: <span class="number">25px</span>;</span><br><span class="line">  <span class="attribute">padding-bottom</span>: <span class="number">25px</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  &amp;::before &#123;</span><br><span class="line">    //圓點</span><br><span class="line">    <span class="selector-tag">content</span>: "";</span><br><span class="line">    <span class="selector-tag">position</span>: <span class="selector-tag">absolute</span>;</span><br><span class="line">    <span class="selector-tag">top</span>: 0;</span><br><span class="line">    <span class="selector-tag">bottom</span>: 0;</span><br><span class="line">    <span class="selector-tag">margin</span>: <span class="selector-tag">auto</span>;</span><br><span class="line">    <span class="selector-tag">width</span>: 20<span class="selector-tag">px</span>;</span><br><span class="line">    <span class="selector-tag">height</span>: 20<span class="selector-tag">px</span>;</span><br><span class="line">    <span class="selector-tag">border-radius</span>: 50%;</span><br><span class="line">    <span class="selector-tag">background-color</span>: <span class="selector-id">#fff</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  &amp;<span class="selector-pseudo">:nth-child(odd)</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line">    <span class="attribute">padding-right</span>: <span class="number">100px</span>;</span><br><span class="line">    &amp; h2::after &#123;</span><br><span class="line">      right: 0; //基數列橫線位置</span><br><span class="line">    &#125;</span><br><span class="line">    &amp;<span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">      content: ""; //繪製基數列橫線</span><br><span class="line">      <span class="selector-tag">position</span>: <span class="selector-tag">absolute</span>;</span><br><span class="line">      <span class="selector-tag">top</span>: 0;</span><br><span class="line">      <span class="selector-tag">right</span>: 0;</span><br><span class="line">      <span class="selector-tag">width</span>: 1<span class="selector-tag">px</span>;</span><br><span class="line">      <span class="selector-tag">height</span>: 100%;</span><br><span class="line">      <span class="selector-tag">background-color</span>: <span class="selector-id">#ffffff</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    &amp;<span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">      right: -10px; //基數列圓點位置</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  &amp;<span class="selector-pseudo">:nth-child(even)</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: right;</span><br><span class="line">    <span class="attribute">padding-left</span>: <span class="number">100px</span>;</span><br><span class="line">    transform: translateY(50%); //偶數列往下移動 50% 空間</span><br><span class="line">    &amp; <span class="selector-tag">h2</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">      left: 0; //偶數列橫線位置</span><br><span class="line">    &#125;</span><br><span class="line">    &amp;<span class="selector-pseudo">:last-child</span> &#123;</span><br><span class="line">      height: 50%; //最後一個偶數列下方空間</span><br><span class="line">    &#125;</span><br><span class="line">    &amp;<span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">      left: -10px; //偶數列圓點位置</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最後細部的樣式就自行設定一下，就完成了！</p>
+<p>CodePen <a href="https://codepen.io/hnzxewqw/full/QWyXVQK" target="_blank" rel="noopener">https://codepen.io/hnzxewqw/full/QWyXVQK</a></p>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>選取器與偽元素的使用固然方便，但對應的順序還需要多練習！</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a href="https://ithelp.ithome.com.tw/articles/10225133" target="_blank" rel="noopener">金魚都能懂的這個網頁畫面怎麼切 : 時間軸怎麼切</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CSS/" rel="tag"># CSS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/css/20200730/2398832915/" rel="prev" title="CSS 筆記 - 金魚系列 18 - 旋轉拼接方塊">
+      <i class="fa fa-chevron-left"></i> CSS 筆記 - 金魚系列 18 - 旋轉拼接方塊
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/css/20200731/3999112309/" rel="next" title="CSS 筆記 - 金魚系列 20 - 不規則邊緣">
+      CSS 筆記 - 金魚系列 20 - 不規則邊緣 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#學習重點"><span class="nav-number">1.</span> <span class="nav-text">學習重點</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML-架構"><span class="nav-number">2.</span> <span class="nav-text">HTML 架構</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS-樣式"><span class="nav-number">3.</span> <span class="nav-text">CSS 樣式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#利用-nth-child-控制-li"><span class="nav-number">3.1.</span> <span class="nav-text">利用 nth-child() 控制 li</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在基數列加上時間軸線條"><span class="nav-number">3.2.</span> <span class="nav-text">在基數列加上時間軸線條</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在時間軸線條上加上圓點與橫線，並使其置中對齊"><span class="nav-number">3.3.</span> <span class="nav-text">在時間軸線條上加上圓點與橫線，並使其置中對齊</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#結語"><span class="nav-number">4.</span> <span class="nav-text">結語</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">5.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">344</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://bmc.link/hsuchihting" title="BuyMeACoffee → https:&#x2F;&#x2F;bmc.link&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>BuyMeACoffee</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友站連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://israynotarray.com/" title="https:&#x2F;&#x2F;israynotarray.com&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.casper.tw/" title="https:&#x2F;&#x2F;www.casper.tw&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.miniasp.com/" title="https:&#x2F;&#x2F;blog.miniasp.com&#x2F;" rel="noopener" target="_blank">保哥部落格</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cythilya.github.io/" title="https:&#x2F;&#x2F;cythilya.github.io&#x2F;" rel="noopener" target="_blank">桑莫。夏天</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mtwmt.com/blog/list" title="https:&#x2F;&#x2F;mtwmt.com&#x2F;blog&#x2F;list" rel="noopener" target="_blank">Mandy's Web</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.oxxostudio.tw/" title="https:&#x2F;&#x2F;www.oxxostudio.tw&#x2F;" rel="noopener" target="_blank">OXXO Studio</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/css/20200730/820937718/",
+            identifier: "css/20200730/820937718/",
+            title: "CSS 筆記 - 金魚系列 19 - 時間軸"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
