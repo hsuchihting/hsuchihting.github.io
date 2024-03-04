@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2019Tim32x32.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/2019Tim16x16.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://hsuchihting.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","Available values":"disqus","active":true,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="現在寫程式都離不開 Copilot 了啦!!!">
+<meta property="og:type" content="article">
+<meta property="og:title" content="讓 Github Copilot 成為最佳幫手">
+<meta property="og:url" content="https:&#x2F;&#x2F;hsuchihting.github.io&#x2F;Learning-Experience&#x2F;20240304&#x2F;597127417&#x2F;index.html">
+<meta property="og:site_name" content="TimCodingBlog">
+<meta property="og:description" content="現在寫程式都離不開 Copilot 了啦!!!">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;camo.githubusercontent.com&#x2F;dd62052cdd7681e41218d242c8c2f74fb5e2d3396f96a322b54f24b83df6df52&#x2F;68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f70726163746963616c6465762f696d6167652f66657463682f732d2d70454d3650587a582d2d2f635f696d616767615f7363616c652c665f6175746f2c666c5f70726f67726573736976652c685f3432302c715f6175746f2c775f313030302f68747470733a2f2f6465762d746f2d75706c6f6164732e73332e616d617a6f6e6177732e636f6d2f75706c6f6164732f61727469636c65732f36336d347072357a6e7a667172716c776e33396b2e706e67">
+<meta property="og:image" content="https:&#x2F;&#x2F;hackmd.io&#x2F;_uploads&#x2F;H19zs8Qpa.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;hackmd.io&#x2F;_uploads&#x2F;Byo2pIXTT.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;hackmd.io&#x2F;_uploads&#x2F;r1ca2Umap.png">
+<meta property="article:published_time" content="2024-03-04T14:41:51.963Z">
+<meta property="article:modified_time" content="2024-03-04T14:43:52.895Z">
+<meta property="article:author" content="Tim Hsu">
+<meta property="article:tag" content="TimCodingBlog">
+<meta property="article:tag" content=" 前端工程師">
+<meta property="article:tag" content=" Frond-end developer">
+<meta property="article:tag" content=" F2E">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;camo.githubusercontent.com&#x2F;dd62052cdd7681e41218d242c8c2f74fb5e2d3396f96a322b54f24b83df6df52&#x2F;68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f70726163746963616c6465762f696d6167652f66657463682f732d2d70454d3650587a582d2d2f635f696d616767615f7363616c652c665f6175746f2c666c5f70726f67726573736976652c685f3432302c715f6175746f2c775f313030302f68747470733a2f2f6465762d746f2d75706c6f6164732e73332e616d617a6f6e6177732e636f6d2f75706c6f6164732f61727469636c65732f36336d347072357a6e7a667172716c776e33396b2e706e67">
+
+<link rel="canonical" href="https://hsuchihting.github.io/Learning-Experience/20240304/597127417/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>讓 Github Copilot 成為最佳幫手 | TimCodingBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154720398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-154720398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TimCodingBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">提姆寫程式</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hsuchihting.github.io/Learning-Experience/20240304/597127417/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2019Tim.jpg">
+      <meta itemprop="name" content="Tim Hsu">
+      <meta itemprop="description" content="提姆的前端筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TimCodingBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          讓 Github Copilot 成為最佳幫手
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2024-03-04 22:41:51 / 修改時間：22:43:52" itemprop="dateCreated datePublished" datetime="2024-03-04T22:41:51+08:00">2024-03-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning-Experience/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning Experience</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/Learning-Experience/20240304/597127417/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="Learning-Experience/20240304/597127417/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">現在寫程式都離不開 Copilot 了啦!!!</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://camo.githubusercontent.com/dd62052cdd7681e41218d242c8c2f74fb5e2d3396f96a322b54f24b83df6df52/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f70726163746963616c6465762f696d6167652f66657463682f732d2d70454d3650587a582d2d2f635f696d616767615f7363616c652c665f6175746f2c666c5f70726f67726573736976652c685f3432302c715f6175746f2c775f313030302f68747470733a2f2f6465762d746f2d75706c6f6164732e73332e616d617a6f6e6177732e636f6d2f75706c6f6164732f61727469636c65732f36336d347072357a6e7a667172716c776e33396b2e706e67" alt=""></p>
+<blockquote>
+<p>2023.12.29 LLM 更新為 GPT-4</p>
+</blockquote>
+<h2 id="套件下載"><a href="#套件下載" class="headerlink" title="套件下載"></a>套件下載</h2><ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=GitHub.copilot" target="_blank" rel="noopener">Github Copilot</a>：主要開發使用，會提供程式碼建議。</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-labs" target="_blank" rel="noopener">Github Copilot Lab</a>：解釋或修改現有程式碼。</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat" target="_blank" rel="noopener">Github Copilot Chat</a>：類似使用網頁 ChatGPT，透過聊天視窗與程式碼進行互動，可產生更完整的程式碼內容。</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-speech" target="_blank" rel="noopener">VS Code Speech</a>:支援在 VS Code 使用英文語音。</li>
+</ul>
+<h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><ol>
+<li>Copilot 是基於基於 OpenAI 加上 GitHub 上大量的原始碼人工智慧技術的開發助手，可以透過開發者輸入的部分程式碼與註解產生相關的程式碼，支援多種程式語言，目前最多的語言是 JavaScript。</li>
+<li>底層是用 python。</li>
+<li>目前所使用的 LLM 模型是 GPT-4。(2023.12.29 更新)</li>
+<li>可透過上下文判斷自動完成程式碼。</li>
+<li>沒有足夠的上下文也可以透過註解提供更完整的上下文，但混亂的上下文會導致無建議產生。</li>
+<li>擅長寫重複的程式碼，減少輸入的時間。</li>
+<li>可自動建立與單元測試程式碼。</li>
+<li>可促進程式碼的可讀性與標準化。</li>
+<li>需要連結 Github 帳戶。</li>
+<li>官方聲稱可以提升 40% 的效率。</li>
+</ol>
+<h2 id="優點"><a href="#優點" class="headerlink" title="優點"></a>優點</h2><ol>
+<li>可以快速生成程式碼，節省部分時間。</li>
+<li>可根據上下文提示，幫助提供更好理解的程式碼與問題。</li>
+<li>提高程式碼品質與效率，「可能」減少錯誤與瑕疵。(但如果提示很爛，回饋程式碼也很爛)</li>
+<li>會一直學習跟進化，會依照專案中的程式碼提供貼近需求的答案。</li>
+</ol>
+<h2 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h2><ol>
+<li>可能存在版權與隱私問題，因為它是透過 Github 程式碼來訓練跟改進模型。</li>
+<li>不見得會真正了解上下文，所以會提供不合理或不安全的程式碼。</li>
+<li>會降低開發人員的手感。</li>
+</ol>
+<h2 id="課金的力量"><a href="#課金的力量" class="headerlink" title="課金的力量"></a>課金的力量</h2><p>註冊此服務要提供信用卡號，可免費使用 30 天，若時間快到了，會先行通知，等到期會開始收費，有官方認證過的教師、學生身份與熱門專案開源者，可以免費使用。</p>
+<p>目前力推商務版跟 Enterprise，使用影片可以參考下方的延伸閱讀第二點。</p>
+<p><img src="https://hackmd.io/_uploads/H19zs8Qpa.png" alt="image"></p>
+<h2 id="輔助鍵-會跟原本-VS-Code-預設快捷鍵衝突"><a href="#輔助鍵-會跟原本-VS-Code-預設快捷鍵衝突" class="headerlink" title="輔助鍵(會跟原本 VS Code 預設快捷鍵衝突)"></a>輔助鍵(會跟原本 VS Code 預設快捷鍵衝突)</h2><ul>
+<li>Ctrl + :arrow_right: 可一步一步確認提供的程式碼</li>
+<li>Alt + [ : 選擇上一個建議。</li>
+<li>Alt + ] : 選擇下一個建議。</li>
+<li>Alt +/ : 呼叫建議。</li>
+<li>tab: 同意此建議。</li>
+<li>Ctrl + Enter (提供建議方法)</li>
+</ul>
+<h2 id="用嘴巴寫-code"><a href="#用嘴巴寫-code" class="headerlink" title="用嘴巴寫 code?"></a>用嘴巴寫 code?</h2><ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=GitHub.heygithub" target="_blank" rel="noopener">GitHub Copilot Voice</a>(目前只有支援英文)</li>
+<li><a href="https://github.com/features/preview/copilot-x" target="_blank" rel="noopener">GitHub Copilot X</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-speech-language-pack-zh-tw" target="_blank" rel="noopener">Chinese (Traditional, Taiwan) language support for VS Code Speech</a></li>
+</ul>
+<h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><h3 id="透過-Github-Copliot-可以完成的功能"><a href="#透過-Github-Copliot-可以完成的功能" class="headerlink" title="透過 Github Copliot 可以完成的功能"></a>透過 Github Copliot 可以完成的功能</h3><ul>
+<li>限制星期六的早上七點到八點才能打卡</li>
+</ul>
+<ul>
+<li>移除項目</li>
+<li>修復 bug</li>
+<li>程式碼中聊天</li>
+<li>新建訂便當系統專案</li>
+<li>建立 firebase</li>
+<li>修改語法或重構</li>
+</ul>
+<h3 id="Github-Copliot-Lab"><a href="#Github-Copliot-Lab" class="headerlink" title="Github Copliot Lab"></a>Github Copliot Lab</h3><p><img src="https://hackmd.io/_uploads/Byo2pIXTT.png" alt="image"></p>
+<ul>
+<li>READBLE: 增加可讀性(好用功能)</li>
+<li>ADD TYPES: 加入型別定義(適用 TS)。</li>
+<li>FIX BUG: 修復臭蟲(部分好用)。</li>
+<li>DEBUG: 找出臭蟲(沒有很好用)。</li>
+<li>CLEAN: 刪除廢 code(很少使用)。</li>
+<li>LIST STEPS: 列出程式碼執行步驟。</li>
+<li>MAKE ROBUST: 建立更強壯的程式碼(想確認有沒有更好的防呆可用)。</li>
+<li>CHUNK:拆分程式碼。</li>
+<li>DOUMENT: 撰寫文件。</li>
+<li>CUSTOM:自訂修改需求。</li>
+</ul>
+<h3 id="GitHub-Copilot-Chat"><a href="#GitHub-Copilot-Chat" class="headerlink" title="GitHub Copilot Chat"></a>GitHub Copilot Chat</h3><ul>
+<li>VSCode 需要 v1.79.0 以上版本。</li>
+</ul>
+<ul>
+<li>功能強大，幾乎可以包辦所有開發的事情。</li>
+<li>可透過 prompt 產生對應的程式碼。</li>
+<li>新功能：<code>@workspace</code> <code>@terminal</code>, <code>@search</code>, <code>@api</code></li>
+<li>好的註解提示 (prompt) 需要非常具體，因電腦只做你告訴它的事，避免講一大串的要解決的流程，它更擅長處理一步一步的命令。沒有具體的提示可能會回應錯誤的結果。</li>
+<li>移到所選取的程式碼按右鍵也可直接使用。</li>
+<li>可直接插入建議後的片段程式碼。</li>
+<li>使用 <code>@workspace</code> 產生新專案並且 work。</li>
+</ul>
+<h3 id="Copilot-Chat-可以完成的工作"><a href="#Copilot-Chat-可以完成的工作" class="headerlink" title="Copilot Chat 可以完成的工作"></a>Copilot Chat 可以完成的工作</h3><ul>
+<li>撰寫各種常見的程式邏輯</li>
+</ul>
+<ul>
+<li>撰寫複雜的正則表示式(Regular Expression)</li>
+<li>將 HTML 轉成 JavaScript 產生 DOM 的程式碼</li>
+<li>撰寫呼叫函式/方法的程式碼</li>
+<li>撰寫特定演算法的程式碼</li>
+<li>撰寫各種複雜 SQL 語句</li>
+<li>撰寫 OpenAPI Spec</li>
+<li>自動生成測試資料</li>
+<li>自動生成測試程式碼</li>
+<li>刪除不要的程式碼</li>
+<li>自動補完程式碼<ul>
+<li>參考現有專案原始碼</li>
+<li>參考現有專案程式碼樣式</li>
+</ul>
+</li>
+</ul>
+<h3 id="支援「原始檔控制」自動產生-PR-commit-message"><a href="#支援「原始檔控制」自動產生-PR-commit-message" class="headerlink" title="支援「原始檔控制」自動產生 PR commit message"></a>支援「原始檔控制」自動產生 PR commit message</h3><p>更動程式後，選擇左方工具列的原始檔控制選項，會在輸入 PR Commit 的欄位右側有個類似星號的圖示，點下去之後，會自動偵測開發者所變動的內容，給予與情境相當的 Commit Message，不會 100% 正確，但可以當作參考，至少不用從頭去想。</p>
+<p><img src="https://hackmd.io/_uploads/r1ca2Umap.png" alt="image"></p>
+<h2 id="使用心得"><a href="#使用心得" class="headerlink" title="使用心得"></a>使用心得</h2><ol>
+<li>大部分的基本功能開發可以透過此套件完成，越訓練會越快速完成。</li>
+<li>商業邏輯部分仍需要靠自己開發，但可透過詢問問題越來越聚焦。</li>
+<li>提問的過程會順便幫忙解釋程式碼與提供建議寫法。</li>
+<li>出入 <code>ctrl+enter</code> 可參考 Copilot 提供的寫法，知道原來還有其他方式，但有時候跑不出來。</li>
+<li>大推 Copilot Chat 的使用。</li>
+<li>正確的提問會大大提高想得到的答案，越明確越好。</li>
+<li>會針對已開啟的檔案交互參考，無法參考整個專案。</li>
+<li>對變數跟函是命名會使用清楚且一致的規則。</li>
+</ol>
+<h2 id="延伸閱讀"><a href="#延伸閱讀" class="headerlink" title="延伸閱讀"></a>延伸閱讀</h2><ul>
+<li><a href="https://useme.medium.com/%E8%83%BD%E7%AF%80%E7%9C%81%E5%9B%9B%E6%88%90%E9%96%8B%E7%99%BC%E6%99%82%E9%96%93%E7%9A%84%E5%B7%A5%E5%85%B7-github-copilot-%E7%9A%84%E4%BB%8B%E7%B4%B9%E8%88%87%E5%BF%83%E5%BE%97%E5%88%86%E4%BA%AB-2a07e8ce8f6d" target="_blank" rel="noopener">能節省四成開發時間的工具？ GitHub Copilot 的介紹與心得分享</a></li>
+<li><a href="https://www.youtube.com/watch?v=-VKyQ6SN41w" target="_blank" rel="noopener">Github Copilit Enterprice</a></li>
+<li><a href="https://www.youtube.com/watch?v=QW9bu2aeQC8" target="_blank" rel="noopener">GitHub Copilot 最佳實務：不要這麼做就對了！</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/vue-js/20230605/1943913399/" rel="prev" title="Vue 筆記 - 取得 Token 並開始倒數計時至登出">
+      <i class="fa fa-chevron-left"></i> Vue 筆記 - 取得 Token 並開始倒數計時至登出
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#套件下載"><span class="nav-number">1.</span> <span class="nav-text">套件下載</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#簡介"><span class="nav-number">2.</span> <span class="nav-text">簡介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#優點"><span class="nav-number">3.</span> <span class="nav-text">優點</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#問題"><span class="nav-number">4.</span> <span class="nav-text">問題</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#課金的力量"><span class="nav-number">5.</span> <span class="nav-text">課金的力量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#輔助鍵-會跟原本-VS-Code-預設快捷鍵衝突"><span class="nav-number">6.</span> <span class="nav-text">輔助鍵(會跟原本 VS Code 預設快捷鍵衝突)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用嘴巴寫-code"><span class="nav-number">7.</span> <span class="nav-text">用嘴巴寫 code?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Demo"><span class="nav-number">8.</span> <span class="nav-text">Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#透過-Github-Copliot-可以完成的功能"><span class="nav-number">8.1.</span> <span class="nav-text">透過 Github Copliot 可以完成的功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Github-Copliot-Lab"><span class="nav-number">8.2.</span> <span class="nav-text">Github Copliot Lab</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub-Copilot-Chat"><span class="nav-number">8.3.</span> <span class="nav-text">GitHub Copilot Chat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Copilot-Chat-可以完成的工作"><span class="nav-number">8.4.</span> <span class="nav-text">Copilot Chat 可以完成的工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#支援「原始檔控制」自動產生-PR-commit-message"><span class="nav-number">8.5.</span> <span class="nav-text">支援「原始檔控制」自動產生 PR commit message</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用心得"><span class="nav-number">9.</span> <span class="nav-text">使用心得</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#延伸閱讀"><span class="nav-number">10.</span> <span class="nav-text">延伸閱讀</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tim Hsu"
+      src="/images/2019Tim.jpg">
+  <p class="site-author-name" itemprop="name">Tim Hsu</p>
+  <div class="site-description" itemprop="description">提姆的前端筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">345</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsuchihting" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/TimWriteCoding/?modal=admin_todo_tour" title="FB → https:&#x2F;&#x2F;www.facebook.com&#x2F;TimWriteCoding&#x2F;?modal&#x3D;admin_todo_tour" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://bmc.link/hsuchihting" title="BuyMeACoffee → https:&#x2F;&#x2F;bmc.link&#x2F;hsuchihting" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>BuyMeACoffee</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友站連結
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://israynotarray.com/" title="https:&#x2F;&#x2F;israynotarray.com&#x2F;" rel="noopener" target="_blank">Welcome.Web.World</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.casper.tw/" title="https:&#x2F;&#x2F;www.casper.tw&#x2F;" rel="noopener" target="_blank">卡斯柏 - 前端沒有極限</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kuro.tw/" title="https:&#x2F;&#x2F;kuro.tw&#x2F;" rel="noopener" target="_blank">Kuro Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fred39392001.coderbridge.io/" title="https:&#x2F;&#x2F;fred39392001.coderbridge.io&#x2F;" rel="noopener" target="_blank">Fred's Coding Life</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.miniasp.com/" title="https:&#x2F;&#x2F;blog.miniasp.com&#x2F;" rel="noopener" target="_blank">保哥部落格</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cythilya.github.io/" title="https:&#x2F;&#x2F;cythilya.github.io&#x2F;" rel="noopener" target="_blank">桑莫。夏天</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mtwmt.com/" title="https:&#x2F;&#x2F;mtwmt.com&#x2F;" rel="noopener" target="_blank">Mandy's Web</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.oxxostudio.tw/" title="https:&#x2F;&#x2F;www.oxxostudio.tw&#x2F;" rel="noopener" target="_blank">OXXO Studio</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsuchihting - 轉載文章請附上原文連結，謝謝！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://TimCodingBlog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://hsuchihting.github.io/Learning-Experience/20240304/597127417/",
+            identifier: "Learning-Experience/20240304/597127417/",
+            title: "讓 Github Copilot 成為最佳幫手"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://TimCodingBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
