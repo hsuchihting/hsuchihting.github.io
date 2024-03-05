@@ -57,8 +57,9 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;hackmd.io&#x2F;_uploads&#x2F;H19zs8Qpa.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;hackmd.io&#x2F;_uploads&#x2F;Byo2pIXTT.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;hackmd.io&#x2F;_uploads&#x2F;r1ca2Umap.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;hackmd.io&#x2F;_uploads&#x2F;SJZ8J2EpT.png">
 <meta property="article:published_time" content="2024-03-04T14:41:51.963Z">
-<meta property="article:modified_time" content="2024-03-04T14:43:52.895Z">
+<meta property="article:modified_time" content="2024-03-05T14:43:14.638Z">
 <meta property="article:author" content="Tim Hsu">
 <meta property="article:tag" content="TimCodingBlog">
 <meta property="article:tag" content=" 前端工程師">
@@ -247,10 +248,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2024-03-04 22:41:51 / 修改時間：22:43:52" itemprop="dateCreated datePublished" datetime="2024-03-04T22:41:51+08:00">2024-03-04</time>
+              <time title="創建時間：2024-03-04 22:41:51" itemprop="dateCreated datePublished" datetime="2024-03-04T22:41:51+08:00">2024-03-04</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2024-03-05 22:43:14" itemprop="dateModified" datetime="2024-03-05T22:43:14+08:00">2024-03-05</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -339,17 +346,22 @@
 <li><a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-speech-language-pack-zh-tw" target="_blank" rel="noopener">Chinese (Traditional, Taiwan) language support for VS Code Speech</a></li>
 </ul>
 <h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><h3 id="透過-Github-Copliot-可以完成的功能"><a href="#透過-Github-Copliot-可以完成的功能" class="headerlink" title="透過 Github Copliot 可以完成的功能"></a>透過 Github Copliot 可以完成的功能</h3><ul>
-<li>限制星期六的早上七點到八點才能打卡</li>
+<li><p>限制星期六的早上七點到八點才能打卡</p>
+</li>
+<li><p>移除項目</p>
+</li>
+<li><p>修復 bug</p>
+</li>
+<li><p>程式碼中聊天</p>
+</li>
+<li><p>新建訂便當系統專案</p>
+</li>
+<li><p>建立 firebase</p>
+</li>
+<li><p>修改語法或重構</p>
+</li>
 </ul>
-<ul>
-<li>移除項目</li>
-<li>修復 bug</li>
-<li>程式碼中聊天</li>
-<li>新建訂便當系統專案</li>
-<li>建立 firebase</li>
-<li>修改語法或重構</li>
-</ul>
-<h3 id="Github-Copliot-Lab"><a href="#Github-Copliot-Lab" class="headerlink" title="Github Copliot Lab"></a>Github Copliot Lab</h3><p><img src="https://hackmd.io/_uploads/Byo2pIXTT.png" alt="image"></p>
+<h3 id="Github-Copliot-Lab-不能用了"><a href="#Github-Copliot-Lab-不能用了" class="headerlink" title="Github Copliot Lab (不能用了)"></a>Github Copliot Lab (不能用了)</h3><p><img src="https://hackmd.io/_uploads/Byo2pIXTT.png" alt="image"></p>
 <ul>
 <li>READBLE: 增加可讀性(好用功能)</li>
 <li>ADD TYPES: 加入型別定義(適用 TS)。</li>
@@ -363,31 +375,46 @@
 <li>CUSTOM:自訂修改需求。</li>
 </ul>
 <h3 id="GitHub-Copilot-Chat"><a href="#GitHub-Copilot-Chat" class="headerlink" title="GitHub Copilot Chat"></a>GitHub Copilot Chat</h3><ul>
-<li>VSCode 需要 v1.79.0 以上版本。</li>
-</ul>
-<ul>
-<li>功能強大，幾乎可以包辦所有開發的事情。</li>
-<li>可透過 prompt 產生對應的程式碼。</li>
-<li>新功能：<code>@workspace</code> <code>@terminal</code>, <code>@search</code>, <code>@api</code></li>
-<li>好的註解提示 (prompt) 需要非常具體，因電腦只做你告訴它的事，避免講一大串的要解決的流程，它更擅長處理一步一步的命令。沒有具體的提示可能會回應錯誤的結果。</li>
-<li>移到所選取的程式碼按右鍵也可直接使用。</li>
-<li>可直接插入建議後的片段程式碼。</li>
-<li>使用 <code>@workspace</code> 產生新專案並且 work。</li>
+<li><p>VSCode 需要 v1.79.0 以上版本。</p>
+</li>
+<li><p>功能強大，幾乎可以包辦所有開發的事情。</p>
+</li>
+<li><p>可透過 prompt 產生對應的程式碼。</p>
+</li>
+<li><p>新功能：<code>@workspace</code> <code>@terminal</code>, <code>@search</code>, <code>@api</code></p>
+</li>
+<li><p>好的註解提示 (prompt) 需要非常具體，因電腦只做你告訴它的事，避免講一大串的要解決的流程，它更擅長處理一步一步的命令。沒有具體的提示可能會回應錯誤的結果。</p>
+</li>
+<li><p>移到所選取的程式碼按右鍵也可直接使用。</p>
+</li>
+<li><p>可直接插入建議後的片段程式碼。</p>
+</li>
+<li><p>使用 <code>@workspace</code> 產生新專案並且 work。</p>
+</li>
 </ul>
 <h3 id="Copilot-Chat-可以完成的工作"><a href="#Copilot-Chat-可以完成的工作" class="headerlink" title="Copilot Chat 可以完成的工作"></a>Copilot Chat 可以完成的工作</h3><ul>
-<li>撰寫各種常見的程式邏輯</li>
-</ul>
+<li><p>撰寫各種常見的程式邏輯</p>
+</li>
+<li><p>撰寫複雜的正則表示式(Regular Expression)</p>
+</li>
+<li><p>將 HTML 轉成 JavaScript 產生 DOM 的程式碼</p>
+</li>
+<li><p>撰寫呼叫函式/方法的程式碼</p>
+</li>
+<li><p>撰寫特定演算法的程式碼</p>
+</li>
+<li><p>撰寫各種複雜 SQL 語句</p>
+</li>
+<li><p>撰寫 OpenAPI Spec</p>
+</li>
+<li><p>自動生成測試資料</p>
+</li>
+<li><p>自動生成測試程式碼</p>
+</li>
+<li><p>刪除不要的程式碼</p>
+</li>
+<li><p>自動補完程式碼</p>
 <ul>
-<li>撰寫複雜的正則表示式(Regular Expression)</li>
-<li>將 HTML 轉成 JavaScript 產生 DOM 的程式碼</li>
-<li>撰寫呼叫函式/方法的程式碼</li>
-<li>撰寫特定演算法的程式碼</li>
-<li>撰寫各種複雜 SQL 語句</li>
-<li>撰寫 OpenAPI Spec</li>
-<li>自動生成測試資料</li>
-<li>自動生成測試程式碼</li>
-<li>刪除不要的程式碼</li>
-<li>自動補完程式碼<ul>
 <li>參考現有專案原始碼</li>
 <li>參考現有專案程式碼樣式</li>
 </ul>
@@ -403,8 +430,14 @@
 <li>大推 Copilot Chat 的使用。</li>
 <li>正確的提問會大大提高想得到的答案，越明確越好。</li>
 <li>會針對已開啟的檔案交互參考，無法參考整個專案。</li>
-<li>對變數跟函是命名會使用清楚且一致的規則。</li>
+<li>對變數跟函式命名會使用清楚且一致的規則。</li>
 </ol>
+<h2 id="不要這樣用-Copilot"><a href="#不要這樣用-Copilot" class="headerlink" title="不要這樣用 Copilot"></a>不要這樣用 Copilot</h2><h3 id="不要完全依賴Copilot"><a href="#不要完全依賴Copilot" class="headerlink" title="不要完全依賴Copilot"></a>不要完全依賴Copilot</h3><p>Copilot 雖然好用，但應視為輔助的開發工具，甚至當一個怎麼問都不會累的同事，不是完全取代開發者，畢竟它只能處理基本跟簡單的程式邏輯，並不能完全代替開發者的知識，因為許多程式牽扯商業邏輯，而且有時候產生的程式碼可能不是最好、最安全的。</p>
+<h3 id="有效使用Copilot工具"><a href="#有效使用Copilot工具" class="headerlink" title="有效使用Copilot工具"></a>有效使用Copilot工具</h3><p>適當地使用 Copilot 的提示功能，避免使用不好的方式，例如直接在註解中提示，雖然 Copilot 會依照註解提供相似的程式碼，但許多時候如果註解寫不好，反而會得到跟預期落差較大的結果，應優先使用內聯對話 (inline chat)，也就是在程式碼中下指令 <code>Ctrl + I</code> 叫出對話框， 或側邊面板 (side panel) 使用 chat 對話，根據情境選擇最適合的提示方式。</p>
+<h3 id="避免重複創建提示"><a href="#避免重複創建提示" class="headerlink" title="避免重複創建提示"></a>避免重複創建提示</h3><p>使用 Copilot 時，利用現有的命令 (斜線命令)，也就是如下圖的方式 來快速解決問題，而不是重複創建提示。</p>
+<p><img src="https://hackmd.io/_uploads/SJZ8J2EpT.png" alt="斜線命令"></p>
+<h3 id="考慮上下文信息"><a href="#考慮上下文信息" class="headerlink" title="考慮上下文信息"></a>考慮上下文信息</h3><p>在使用 Copilot 時，提供清晰明確的上下文資訊或程式碼，可以幫助獲得更相關的解決方案。包括清理不相關的對話、選擇相關程式碼段落等。</p>
+<h3 id="使用反饋功能"><a href="#使用反饋功能" class="headerlink" title="使用反饋功能"></a>使用反饋功能</h3><p>積極使用 Copilot 的反饋 (feedback) 和評分 (rating) 功能，幫助 Copilot 學習並改進，提供更好的代碼建議，如果 Copilot 答對了，也可以讚美它一下。</p>
 <h2 id="延伸閱讀"><a href="#延伸閱讀" class="headerlink" title="延伸閱讀"></a>延伸閱讀</h2><ul>
 <li><a href="https://useme.medium.com/%E8%83%BD%E7%AF%80%E7%9C%81%E5%9B%9B%E6%88%90%E9%96%8B%E7%99%BC%E6%99%82%E9%96%93%E7%9A%84%E5%B7%A5%E5%85%B7-github-copilot-%E7%9A%84%E4%BB%8B%E7%B4%B9%E8%88%87%E5%BF%83%E5%BE%97%E5%88%86%E4%BA%AB-2a07e8ce8f6d" target="_blank" rel="noopener">能節省四成開發時間的工具？ GitHub Copilot 的介紹與心得分享</a></li>
 <li><a href="https://www.youtube.com/watch?v=-VKyQ6SN41w" target="_blank" rel="noopener">Github Copilit Enterprice</a></li>
@@ -495,7 +528,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#套件下載"><span class="nav-number">1.</span> <span class="nav-text">套件下載</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#簡介"><span class="nav-number">2.</span> <span class="nav-text">簡介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#優點"><span class="nav-number">3.</span> <span class="nav-text">優點</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#問題"><span class="nav-number">4.</span> <span class="nav-text">問題</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#課金的力量"><span class="nav-number">5.</span> <span class="nav-text">課金的力量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#輔助鍵-會跟原本-VS-Code-預設快捷鍵衝突"><span class="nav-number">6.</span> <span class="nav-text">輔助鍵(會跟原本 VS Code 預設快捷鍵衝突)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用嘴巴寫-code"><span class="nav-number">7.</span> <span class="nav-text">用嘴巴寫 code?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Demo"><span class="nav-number">8.</span> <span class="nav-text">Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#透過-Github-Copliot-可以完成的功能"><span class="nav-number">8.1.</span> <span class="nav-text">透過 Github Copliot 可以完成的功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Github-Copliot-Lab"><span class="nav-number">8.2.</span> <span class="nav-text">Github Copliot Lab</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub-Copilot-Chat"><span class="nav-number">8.3.</span> <span class="nav-text">GitHub Copilot Chat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Copilot-Chat-可以完成的工作"><span class="nav-number">8.4.</span> <span class="nav-text">Copilot Chat 可以完成的工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#支援「原始檔控制」自動產生-PR-commit-message"><span class="nav-number">8.5.</span> <span class="nav-text">支援「原始檔控制」自動產生 PR commit message</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用心得"><span class="nav-number">9.</span> <span class="nav-text">使用心得</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#延伸閱讀"><span class="nav-number">10.</span> <span class="nav-text">延伸閱讀</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#套件下載"><span class="nav-number">1.</span> <span class="nav-text">套件下載</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#簡介"><span class="nav-number">2.</span> <span class="nav-text">簡介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#優點"><span class="nav-number">3.</span> <span class="nav-text">優點</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#問題"><span class="nav-number">4.</span> <span class="nav-text">問題</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#課金的力量"><span class="nav-number">5.</span> <span class="nav-text">課金的力量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#輔助鍵-會跟原本-VS-Code-預設快捷鍵衝突"><span class="nav-number">6.</span> <span class="nav-text">輔助鍵(會跟原本 VS Code 預設快捷鍵衝突)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用嘴巴寫-code"><span class="nav-number">7.</span> <span class="nav-text">用嘴巴寫 code?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Demo"><span class="nav-number">8.</span> <span class="nav-text">Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#透過-Github-Copliot-可以完成的功能"><span class="nav-number">8.1.</span> <span class="nav-text">透過 Github Copliot 可以完成的功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Github-Copliot-Lab-不能用了"><span class="nav-number">8.2.</span> <span class="nav-text">Github Copliot Lab (不能用了)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub-Copilot-Chat"><span class="nav-number">8.3.</span> <span class="nav-text">GitHub Copilot Chat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Copilot-Chat-可以完成的工作"><span class="nav-number">8.4.</span> <span class="nav-text">Copilot Chat 可以完成的工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#支援「原始檔控制」自動產生-PR-commit-message"><span class="nav-number">8.5.</span> <span class="nav-text">支援「原始檔控制」自動產生 PR commit message</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用心得"><span class="nav-number">9.</span> <span class="nav-text">使用心得</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不要這樣用-Copilot"><span class="nav-number">10.</span> <span class="nav-text">不要這樣用 Copilot</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#不要完全依賴Copilot"><span class="nav-number">10.1.</span> <span class="nav-text">不要完全依賴Copilot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有效使用Copilot工具"><span class="nav-number">10.2.</span> <span class="nav-text">有效使用Copilot工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#避免重複創建提示"><span class="nav-number">10.3.</span> <span class="nav-text">避免重複創建提示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#考慮上下文信息"><span class="nav-number">10.4.</span> <span class="nav-text">考慮上下文信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用反饋功能"><span class="nav-number">10.5.</span> <span class="nav-text">使用反饋功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#延伸閱讀"><span class="nav-number">11.</span> <span class="nav-text">延伸閱讀</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
